@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@chainlink/contracts": "^0.8.0",
+    "@chainlink/contracts-ccip": "^0.7.6",
+    "@openzeppelin/contracts": "^4.9.3",
+    "@truffle/hdwallet-provider": "^2.1.15",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "truffle-plugin-stdjsonin": "github:mhrsalehi/truffle-plugin-stdjsonin"
+  }
+}
