@@ -8,6 +8,8 @@ library Params {
         address gameId;
         string avatar;
         uint256 plan;
+        string email;
+        string website;
     }
 
     struct Plan {

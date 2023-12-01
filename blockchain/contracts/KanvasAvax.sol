@@ -5,7 +5,9 @@ import {Assets} from "./libraries/Assets.sol";
 import {Params} from "./libraries/Params.sol";
 import {IKanvasAvax} from "./interfaces/IKanvasAvax.sol";
 import {IKanvasGame} from "./interfaces/IKanvasGame.sol";
+import {StringJoiner} from "./libraries/StringJoiner.sol";
 
+import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Context} from "@openzeppelin/contracts/utils/Context.sol";
 
@@ -28,29 +30,12 @@ contract KanvasAvax is
     uint256 public constant MAX_TEMPLATES_LEN = 5;
     using Chainlink for Chainlink.Request;
 
+    string private BASE_URL = "";
+
     bytes32 private jobId;
     uint256 private fee;
 
-    event PlanCreated(
-        uint256 planId,
-        string name,
-        uint256 cost,
-        string color,
-        uint256 limit
-    );
-
-    event GameCreated(
-        address gameId,
-        string name,
-        string description,
-        string avatar,
-        uint256 plan,
-        address creator
-    );
-
-    event GameTemplateAdded(uint256 gameId, string template);
-
-    uint256 private _planId = 1;
+    uint256 private _planId;
     mapping(uint256 => Assets.Plan) private _plans;
 
     mapping(address => Assets.Game) private _games;
@@ -69,6 +54,7 @@ contract KanvasAvax is
     }
 
     function createGame(Params.Game memory params) external payable {
+        require(_plans[params.plan].limit != 0, "Invalid plan");
         require(msg.value == _plans[params.plan].cost, "Insufficient funds");
 
         _games[params.gameId] = Assets.Game({
@@ -86,8 +72,22 @@ contract KanvasAvax is
             params.description,
             params.avatar,
             params.plan,
-            _msgSender()
+            _msgSender(),
+            params.email,
+            params.website
         );
+    }
+
+    function addTemplate(string memory params, address gameId) external {
+        address creator = _msgSender();
+
+        Assets.Game storage game = _games[gameId];
+
+        require(game.creator == creator, "UnAuthorized");
+
+        game.templates.push(params);
+
+        emit TemplateAdded(gameId, params);
     }
 
     function _generateUri(
@@ -107,9 +107,20 @@ contract KanvasAvax is
         );
 
         // Set the URL to perform the GET request on
+        // https://server.com/generete/properties/fields/gameid/playerid
         req.add(
             "get",
-            string.concat("https://kanvas.com/generate?fields=", fields)
+            string.concat(
+                BASE_URL,
+                "/",
+                StringJoiner.joinStrings(properties, ","),
+                "/",
+                fields,
+                "/",
+                Strings.toHexString(gameId),
+                "/",
+                Strings.toHexString(playerId)
+            )
         );
 
         // Chainlink nodes 1.0.0 and later support this format
@@ -123,6 +134,10 @@ contract KanvasAvax is
             playerId: playerId,
             fulfilled: false
         });
+    }
+
+    function updateBaseUrl(string memory newBaseUrl) external onlyOwner {
+        BASE_URL = newBaseUrl;
     }
 
     /**
@@ -140,15 +155,10 @@ contract KanvasAvax is
         execute(request.gameId, request.playerId, uri);
     }
 
-    /**
-     * Allow withdraw of Link tokens from the contract
-     */
+    /** Allow withdraw of Link tokens from the contract */
     function withdrawLink() public onlyOwner {
         LinkTokenInterface link = LinkTokenInterface(chainlinkTokenAddress());
-        require(
-            link.transfer(msg.sender, link.balanceOf(address(this))),
-            "Unable to transfer"
-        );
+        link.transfer(msg.sender, link.balanceOf(address(this)));
     }
 
     function _transferTo(
@@ -196,9 +206,10 @@ contract KanvasAvax is
         game._receiveUri(playerId, uri);
     }
 
-    // ============ OWNER FUNCTIONS ============ //
-
+    /** Create plans */
     function createPlan(Params.Plan memory params) external onlyOwner {
+        _planId++;
+
         _plans[_planId] = Assets.Plan({
             name: params.name,
             cost: params.cost,
@@ -213,7 +224,5 @@ contract KanvasAvax is
             params.color,
             params.limit
         );
-
-        _planId++;
     }
 }
