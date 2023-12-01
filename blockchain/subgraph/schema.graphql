@@ -1,0 +1,70 @@
+type ChainlinkCancelled @entity(immutable: true) {
+  id: Bytes!
+  KanvasAvax_id: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ChainlinkFulfilled @entity(immutable: true) {
+  id: Bytes!
+  KanvasAvax_id: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ChainlinkRequested @entity(immutable: true) {
+  id: Bytes!
+  KanvasAvax_id: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type GameCreated @entity(immutable: true) {
+  id: Bytes!
+  gameId: Bytes! # address
+  name: String! # string
+  description: String! # string
+  avatar: String! # string
+  plan: BigInt! # uint256
+  creator: Bytes! # address
+  email: String! # string
+  website: String! # string
+  templates: [TemplateAdded!]! @derivedFrom(field: "game")
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PlanCreated @entity(immutable: true) {
+  id: Bytes!
+  planId: BigInt! # uint256
+  name: String! # string
+  cost: BigInt! # uint256
+  color: String! # string
+  limit: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TemplateAdded @entity(immutable: true) {
+  id: Bytes!
+  gameId: Bytes! # address
+  template: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+  game: GameCreated!
+}

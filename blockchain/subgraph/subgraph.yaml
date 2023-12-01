@@ -1,0 +1,42 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: KanvasAvax
+    network: fuji
+    source:
+      address: "0x8438dFC688bFc7baac6874F890859Eaeb58f9068"
+      abi: KanvasAvax
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ChainlinkCancelled
+        - ChainlinkFulfilled
+        - ChainlinkRequested
+        - GameCreated
+        - OwnershipTransferred
+        - PlanCreated
+        - TemplateAdded
+      abis:
+        - name: KanvasAvax
+          file: ./abis/KanvasAvax.json
+      eventHandlers:
+        - event: ChainlinkCancelled(indexed bytes32)
+          handler: handleChainlinkCancelled
+        - event: ChainlinkFulfilled(indexed bytes32)
+          handler: handleChainlinkFulfilled
+        - event: ChainlinkRequested(indexed bytes32)
+          handler: handleChainlinkRequested
+        - event: GameCreated(address,string,string,string,uint256,address,string,string)
+          handler: handleGameCreated
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PlanCreated(uint256,string,uint256,string,uint256)
+          handler: handlePlanCreated
+        - event: TemplateAdded(address,string)
+          handler: handleTemplateAdded
+      file: ./src/kanvas-avax.ts
