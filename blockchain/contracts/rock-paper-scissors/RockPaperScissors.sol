@@ -6,7 +6,7 @@ import {IKanvasGame} from "../interfaces/IKanvasGame.sol";
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
-contract RockPaperScissor is IKanvasGame, ERC721 {
+contract RockPaperScissors is IKanvasGame, ERC721 {
     uint256 public constant MAX_PROPERTIES_LEN = 20;
 
     string[] private _colors;
@@ -28,9 +28,9 @@ contract RockPaperScissor is IKanvasGame, ERC721 {
     mapping(address => Player) private _players;
 
     constructor(
-        address router
-    ) ERC721("RockPaperScissor", "RPS") IKanvasGame() {
-        kanvas = IKanvasAvax(router);
+        address kanvasRouter
+    ) ERC721("RockPaperScissors", "RPS") IKanvasGame() {
+        kanvas = IKanvasAvax(kanvasRouter);
     }
 
     function createPlayer(address playerId, string memory name) external {
