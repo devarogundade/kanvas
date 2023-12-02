@@ -4,6 +4,10 @@
             <main>
                 <div class="title">
                     <h3>My Games</h3>
+
+                    <RouterLink to="/games/create">
+                        <PrimaryButton :text="'New Game'" />
+                    </RouterLink>
                 </div>
 
                 <div class="games">
@@ -38,12 +42,19 @@
 
 <script setup>
 import { RouterLink } from 'vue-router';
+import PrimaryButton from '../components/PrimaryButton.vue';
 </script>
 
 <style scoped>
 main {
     padding: 60px 0;
     min-height: 800px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .title h3 {
@@ -59,7 +70,7 @@ main {
 }
 
 .game {
-    width: 400px;
+    width: 350px;
     border-radius: 12px;
     overflow: hidden;
     position: relative;
@@ -78,7 +89,7 @@ main {
 }
 
 .game img {
-    height: 200px;
+    height: 240px;
     width: 100%;
     object-fit: cover;
 }

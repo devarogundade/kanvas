@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink } from 'vue-router';
 import PrimaryButton from '../components/PrimaryButton.vue';
 
 </script>
@@ -21,7 +22,9 @@ import PrimaryButton from '../components/PrimaryButton.vue';
               <p>As a game developer, you can integrate Kanvas into your game smart contracts to generate dynamic and
                 customizable NFTs for your players.</p>
 
-              <PrimaryButton :bg="'#fff'" :color="'var(--text-normal)'" :width="'200px'" :text="'Create Game'" />
+              <RouterLink to="/games">
+                <PrimaryButton :bg="'#fff'" :color="'var(--text-normal)'" :width="'200px'" :text="'Create Game'" />
+              </RouterLink>
             </div>
           </div>
 
@@ -35,7 +38,9 @@ import PrimaryButton from '../components/PrimaryButton.vue';
                 customization details.
               </p>
 
-              <PrimaryButton :bg="'#fff'" :color="'var(--text-normal)'" :width="'200px'" :text="'GitHub'" />
+              <a target="_blank" href="https://github.com/devarogundade/kanvas">
+                <PrimaryButton :bg="'#fff'" :color="'var(--text-normal)'" :width="'200px'" :text="'GitHub'" />
+              </a>
             </div>
           </div>
         </div>
@@ -71,7 +76,9 @@ import PrimaryButton from '../components/PrimaryButton.vue';
 
           </div>
 
-          <PrimaryButton :bg="'#fff'" :width="'240px'" :color="'var(--text-normal)'" :text="'Get Started  '" />
+          <RouterLink to="/games">
+            <PrimaryButton :bg="'#fff'" :width="'240px'" :color="'var(--text-normal)'" :text="'Get Started  '" />
+          </RouterLink>
         </div>
       </main>
     </div>

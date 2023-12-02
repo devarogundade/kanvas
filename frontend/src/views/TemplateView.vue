@@ -2,7 +2,7 @@
     <section>
         <div class="app_width">
             <div class="toolbar">
-                <RouterLink to="/games">
+                <RouterLink :to="`/games/${$route.params.id}`">
                     <div class="game">
                         <i class="fi fi-rr-arrow-left" style="color: black;"></i>
                         <img src="https://media.gq-magazine.co.uk/photos/645b5c3c8223a5c3801b8b26/16:9/w_1280,c_limit/100-best-games-hp-b.jpg"
@@ -10,8 +10,6 @@
                         <h3>RockPaperScissors</h3>
                     </div>
                 </RouterLink>
-
-                <p class="id">Template ID: 1</p>
             </div>
             <main>
                 <div class="editor-tools">
