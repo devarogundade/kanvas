@@ -63,7 +63,8 @@ contract KanvasInterop is
     function _generateUri(
         address playerId,
         string[] memory properties,
-        string memory fields
+        string memory fields,
+        uint8 templateId
     ) external override {
         require(properties.length <= MAX_PROPERTIES_LEN, "Too many attributes");
 
@@ -89,7 +90,9 @@ contract KanvasInterop is
                 "/",
                 Strings.toHexString(gameId),
                 "/",
-                Strings.toHexString(playerId)
+                Strings.toHexString(playerId),
+                "/",
+                Strings.toString(templateId)
             )
         );
 

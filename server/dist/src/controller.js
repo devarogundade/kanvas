@@ -8,40 +8,41 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Controller = void 0;
-const web3_1 = __importDefault(require("web3"));
 const graph_1 = require("./graph");
 const postmark_1 = require("postmark");
-const ipfs_http_client_1 = require("ipfs-http-client");
+// import { create as UploadUri } from 'ipfs-http-client';
 const graph = new graph_1.Graph();
 class Controller {
-    generate(properties, fields, gameId, playerId) {
+    generate(properties, fields, gameId, playerId, templateId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                console.log(properties, fields, gameId, playerId);
                 const game = yield this.getGame(gameId);
                 if (game == null)
                     return "";
                 const Json = {
                     name: "Some Nft",
                     description: "About Some Nft",
-                    images: this.getImageNftUri(game, properties, fields, playerId)
+                    images: this.getImageNftUri(game, properties, fields, playerId, templateId)
                 };
-                const auth = 'Basic ' + Buffer.from(process.env.INFURA_PROJECT_ID + ':' + process.env.INFURA_PROJECT_SECRET).toString('base64');
-                /* Create an instance of the client */
-                const client = (0, ipfs_http_client_1.create)({
-                    host: 'ipfs.infura.io',
-                    port: 5001,
-                    protocol: 'https',
-                    headers: {
-                        authorization: auth,
-                    }
-                });
-                const result = yield client.add(JSON.stringify(Json));
-                return result.path;
+                console.log(Json);
+                return "";
+                // const auth = 'Basic ' + Buffer.from(
+                //     process.env.INFURA_PROJECT_ID + ':' + process.env.INFURA_PROJECT_SECRET
+                // ).toString('base64');
+                // /* Create an instance of the client */
+                // const client = UploadUri({
+                //     host: 'ipfs.infura.io',
+                //     port: 5001,
+                //     protocol: 'https',
+                //     headers: {
+                //         authorization: auth,
+                //     }
+                // });
+                // const result = await client.add(JSON.stringify(Json));
+                // return result.path;
             }
             catch (error) {
                 console.error(error);
@@ -63,10 +64,14 @@ class Controller {
                     plan
                     creator
                     email
-                    templates
+                    website
+                    templates {
+                        template
+                    }
                 }
             }
             `);
+                console.log(response);
                 return response.gameCreated;
             }
             catch (error) {
@@ -75,9 +80,8 @@ class Controller {
             }
         });
     }
-    getImageNftUri(game, data, data2, playerId) {
-        const web3 = new web3_1.default();
-        const properties = web3.eth.abi.decodeParameters(['string[]'], data);
+    getImageNftUri(game, data, data2, playerId, templateId) {
+        const properties = this.parseProperties(data);
         console.log('PROPERTIES: ' + properties);
         const fields = this.parseFields(data2);
         console.log('FIELDS: ' + properties);
@@ -93,12 +97,15 @@ class Controller {
         }
         let svg = "";
         fields.forEach(field => {
-            svg = game.templates[0].replace(field, '');
+            svg = game.templates[templateId].template.replace(field, '');
         });
         return this.toBase64(svg);
     }
     parseFields(fields) {
         return fields.split(" ");
+    }
+    parseProperties(fields) {
+        return fields.split(",");
     }
     toBase64(svg) {
         return Buffer.from(svg).toString('base64');

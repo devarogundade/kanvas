@@ -9,6 +9,9 @@ import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
 contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721 {
+    uint8 private constant WIN_NFT_TEMPLATE = 1;
+    uint8 private constant LOST_NFT_TEMPLATE = 2;
+
     uint256 public constant MAX_PROPERTIES_LEN = 20;
 
     uint256 private _tokenId;
@@ -38,14 +41,6 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721 {
 
         player.name = name;
         player.created = true;
-
-        string[] memory properties = new string[](MAX_PROPERTIES_LEN);
-        properties[0] = player.name;
-        properties[1] = Strings.toString(player.points);
-
-        string memory fields = "$player_name$ $player_points$";
-
-        kanvas._generateUri(playerId, properties, fields);
     }
 
     function upgradePlayer(address playerId) external {
@@ -60,7 +55,23 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721 {
 
         string memory fields = "$player_name$ $player_points$";
 
-        kanvas._generateUri(playerId, properties, fields);
+        kanvas._generateUri(playerId, properties, fields, WIN_NFT_TEMPLATE);
+    }
+
+    function downgradePlayer(address playerId) external {
+        Player storage player = _players[playerId];
+        require(player.created, "Create this player first");
+        require(player.points >= 5, "Already defeated :)");
+
+        player.points = player.points - 5;
+
+        string[] memory properties = new string[](MAX_PROPERTIES_LEN);
+        properties[0] = player.name;
+        properties[1] = Strings.toString(player.points);
+
+        string memory fields = "$player_name$ $player_points$";
+
+        kanvas._generateUri(playerId, properties, fields, LOST_NFT_TEMPLATE);
     }
 
     function transferTo(uint64 chainSelector) external {

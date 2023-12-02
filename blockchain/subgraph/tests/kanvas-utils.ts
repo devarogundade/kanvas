@@ -8,7 +8,7 @@ import {
   OwnershipTransferred,
   PlanCreated,
   TemplateAdded
-} from "../generated/KanvasAvax/KanvasAvax"
+} from "../generated/Kanvas/Kanvas"
 
 export function createChainlinkCancelledEvent(id: Bytes): ChainlinkCancelled {
   let chainlinkCancelledEvent = changetype<ChainlinkCancelled>(newMockEvent())

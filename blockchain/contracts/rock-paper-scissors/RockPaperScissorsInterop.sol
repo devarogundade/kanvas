@@ -12,6 +12,9 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
     uint64 private constant AVAX_SELECTOR = 14767482510784806043;
     uint256 public constant MAX_PROPERTIES_LEN = 20;
 
+    uint8 private constant WIN_NFT_TEMPLATE = 1;
+    uint8 private constant LOST_NFT_TEMPLATE = 2;
+
     uint256 private _tokenId;
 
     mapping(uint256 => string) private _tokenURIs;
@@ -50,7 +53,23 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
 
         string memory fields = "$player_name$ $player_points$";
 
-        kanvas._generateUri(playerId, properties, fields);
+        kanvas._generateUri(playerId, properties, fields, WIN_NFT_TEMPLATE);
+    }
+
+    function downgradePlayer(address playerId) external {
+        Player storage player = _players[playerId];
+        require(player.created, "Create this player first");
+        require(player.points >= 5, "Already defeated :)");
+
+        player.points = player.points - 5;
+
+        string[] memory properties = new string[](MAX_PROPERTIES_LEN);
+        properties[0] = player.name;
+        properties[1] = Strings.toString(player.points);
+
+        string memory fields = "$player_name$ $player_points$";
+
+        kanvas._generateUri(playerId, properties, fields, LOST_NFT_TEMPLATE);
     }
 
     function transferTo(uint64 chainSelector) external {

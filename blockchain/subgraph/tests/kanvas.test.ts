@@ -8,9 +8,9 @@ import {
 } from "matchstick-as/assembly/index"
 import { Bytes, Address, BigInt } from "@graphprotocol/graph-ts"
 import { ChainlinkCancelled } from "../generated/schema"
-import { ChainlinkCancelled as ChainlinkCancelledEvent } from "../generated/KanvasAvax/KanvasAvax"
-import { handleChainlinkCancelled } from "../src/kanvas-avax"
-import { createChainlinkCancelledEvent } from "./kanvas-avax-utils"
+import { ChainlinkCancelled as ChainlinkCancelledEvent } from "../generated/Kanvas/Kanvas"
+import { handleChainlinkCancelled } from "../src/kanvas"
+import { createChainlinkCancelledEvent } from "./kanvas-utils"
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0

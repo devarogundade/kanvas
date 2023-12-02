@@ -321,6 +321,16 @@
   },
   {
     "inputs": [
+      { "internalType": "uint64", "name": "chainSelector", "type": "uint64" },
+      { "internalType": "address", "name": "kanvasRouter", "type": "address" }
+    ],
+    "name": "updateInterop",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "bytes32", "name": "requestId", "type": "bytes32" },
       { "internalType": "string", "name": "uri", "type": "string" }
     ],
@@ -339,6 +349,10 @@
   {
     "inputs": [
       { "internalType": "uint64", "name": "chainSelector", "type": "uint64" },
+      { "internalType": "address", "name": "gameId", "type": "address" },
+      { "internalType": "address", "name": "playerId", "type": "address" },
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+      { "internalType": "string", "name": "uri", "type": "string" },
       { "internalType": "bytes", "name": "data", "type": "bytes" }
     ],
     "name": "_transferTo",

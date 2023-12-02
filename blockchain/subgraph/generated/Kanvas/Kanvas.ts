@@ -188,9 +188,9 @@ export class TemplateAdded__Params {
   }
 }
 
-export class KanvasAvax extends ethereum.SmartContract {
-  static bind(address: Address): KanvasAvax {
-    return new KanvasAvax("KanvasAvax", address);
+export class Kanvas extends ethereum.SmartContract {
+  static bind(address: Address): Kanvas {
+    return new Kanvas("Kanvas", address);
   }
 
   MAX_PROPERTIES_LEN(): BigInt {
@@ -607,6 +607,40 @@ export class UpdateBaseUrlCall__Outputs {
   }
 }
 
+export class UpdateInteropCall extends ethereum.Call {
+  get inputs(): UpdateInteropCall__Inputs {
+    return new UpdateInteropCall__Inputs(this);
+  }
+
+  get outputs(): UpdateInteropCall__Outputs {
+    return new UpdateInteropCall__Outputs(this);
+  }
+}
+
+export class UpdateInteropCall__Inputs {
+  _call: UpdateInteropCall;
+
+  constructor(call: UpdateInteropCall) {
+    this._call = call;
+  }
+
+  get chainSelector(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get kanvasRouter(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+}
+
+export class UpdateInteropCall__Outputs {
+  _call: UpdateInteropCall;
+
+  constructor(call: UpdateInteropCall) {
+    this._call = call;
+  }
+}
+
 export class FulfillCall extends ethereum.Call {
   get inputs(): FulfillCall__Inputs {
     return new FulfillCall__Inputs(this);
@@ -688,8 +722,24 @@ export class _transferToCall__Inputs {
     return this._call.inputValues[0].value.toBigInt();
   }
 
+  get gameId(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get playerId(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get tokenId(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
+  }
+
+  get uri(): string {
+    return this._call.inputValues[4].value.toString();
+  }
+
   get data(): Bytes {
-    return this._call.inputValues[1].value.toBytes();
+    return this._call.inputValues[5].value.toBytes();
   }
 }
 

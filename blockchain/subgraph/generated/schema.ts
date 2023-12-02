@@ -54,8 +54,8 @@ export class ChainlinkCancelled extends Entity {
     this.set("id", Value.fromBytes(value));
   }
 
-  get KanvasAvax_id(): Bytes {
-    let value = this.get("KanvasAvax_id");
+  get Kanvas_id(): Bytes {
+    let value = this.get("Kanvas_id");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -63,8 +63,8 @@ export class ChainlinkCancelled extends Entity {
     }
   }
 
-  set KanvasAvax_id(value: Bytes) {
-    this.set("KanvasAvax_id", Value.fromBytes(value));
+  set Kanvas_id(value: Bytes) {
+    this.set("Kanvas_id", Value.fromBytes(value));
   }
 
   get blockNumber(): BigInt {
@@ -150,8 +150,8 @@ export class ChainlinkFulfilled extends Entity {
     this.set("id", Value.fromBytes(value));
   }
 
-  get KanvasAvax_id(): Bytes {
-    let value = this.get("KanvasAvax_id");
+  get Kanvas_id(): Bytes {
+    let value = this.get("Kanvas_id");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -159,8 +159,8 @@ export class ChainlinkFulfilled extends Entity {
     }
   }
 
-  set KanvasAvax_id(value: Bytes) {
-    this.set("KanvasAvax_id", Value.fromBytes(value));
+  set Kanvas_id(value: Bytes) {
+    this.set("Kanvas_id", Value.fromBytes(value));
   }
 
   get blockNumber(): BigInt {
@@ -246,8 +246,8 @@ export class ChainlinkRequested extends Entity {
     this.set("id", Value.fromBytes(value));
   }
 
-  get KanvasAvax_id(): Bytes {
-    let value = this.get("KanvasAvax_id");
+  get Kanvas_id(): Bytes {
+    let value = this.get("Kanvas_id");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -255,8 +255,8 @@ export class ChainlinkRequested extends Entity {
     }
   }
 
-  set KanvasAvax_id(value: Bytes) {
-    this.set("KanvasAvax_id", Value.fromBytes(value));
+  set Kanvas_id(value: Bytes) {
+    this.set("Kanvas_id", Value.fromBytes(value));
   }
 
   get blockNumber(): BigInt {
@@ -444,6 +444,16 @@ export class GameCreated extends Entity {
 
   set website(value: string) {
     this.set("website", Value.fromString(value));
+  }
+
+  get templates(): TemplateAddedLoader {
+    return new TemplateAddedLoader(
+      "GameCreated",
+      this.get("id")!
+        .toBytes()
+        .toHexString(),
+      "templates"
+    );
   }
 
   get blockNumber(): BigInt {
@@ -849,5 +859,36 @@ export class TemplateAdded extends Entity {
 
   set transactionHash(value: Bytes) {
     this.set("transactionHash", Value.fromBytes(value));
+  }
+
+  get game(): Bytes {
+    let value = this.get("game");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set game(value: Bytes) {
+    this.set("game", Value.fromBytes(value));
+  }
+}
+
+export class TemplateAddedLoader extends Entity {
+  _entity: string;
+  _field: string;
+  _id: string;
+
+  constructor(entity: string, id: string, field: string) {
+    super();
+    this._entity = entity;
+    this._id = id;
+    this._field = field;
+  }
+
+  load(): TemplateAdded[] {
+    let value = store.loadRelated(this._entity, this._id, this._field);
+    return changetype<TemplateAdded[]>(value);
   }
 }

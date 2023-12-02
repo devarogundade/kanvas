@@ -5,5 +5,10 @@ interface Game {
     avatar: string;
     creator: string;
     email: string;
-    templates: string[];
+    website: string;
+    templates: Template[];
+}
+
+interface Template {
+    template: string;
 }

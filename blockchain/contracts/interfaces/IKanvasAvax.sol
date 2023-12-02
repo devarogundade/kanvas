@@ -35,6 +35,7 @@ interface IKanvasAvax {
     function _generateUri(
         address playerId,
         string[] memory properties,
-        string memory fields
+        string memory fields,
+        uint8 templateId
     ) external;
 }

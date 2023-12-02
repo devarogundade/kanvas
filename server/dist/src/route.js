@@ -11,13 +11,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Route = void 0;
 const controller_1 = require("./controller");
+const contants_1 = require("./contants");
 const controller = new controller_1.Controller();
 class Route {
     constructor(app, router) {
-        router.get('/generate', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { properties, fields, gameId, playerId } = req.query;
-            const uri = yield controller.generate(properties, fields, gameId, playerId);
-            return res.status(200).send({ uri });
+        router.get('/generate/:properties/:fields/:gameId/:playerId/:templateId', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { properties, fields, gameId, playerId, templateId } = req.params;
+            const uri = yield controller.generate(properties, fields, gameId, playerId, Number(templateId));
+            return res.status(contants_1.OK).send({ uri });
         }));
         app.use('/', router);
     }

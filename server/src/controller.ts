@@ -1,39 +1,44 @@
-import Web3 from 'web3';
 import { Graph } from './graph';
 import { Client, Message } from "postmark";
-import { create } from 'ipfs-http-client';
+// import { create as UploadUri } from 'ipfs-http-client';
 
 const graph = new Graph();
 
 export class Controller {
-    async generate(properties: string, fields: string, gameId: string, playerId: string): Promise<string> {
+    async generate(properties: string, fields: string, gameId: string, playerId: string, templateId: number): Promise<string> {
         try {
+            console.log(properties, fields, gameId, playerId);
+
             const game = await this.getGame(gameId);
             if (game == null) return "";
 
             const Json = {
                 name: "Some Nft",
                 description: "About Some Nft",
-                images: this.getImageNftUri(game, properties, fields, playerId)
+                images: this.getImageNftUri(game, properties, fields, playerId, templateId)
             };
 
-            const auth = 'Basic ' + Buffer.from(
-                process.env.INFURA_PROJECT_ID + ':' + process.env.INFURA_PROJECT_SECRET
-            ).toString('base64');
+            console.log(Json);
 
-            /* Create an instance of the client */
-            const client = create({
-                host: 'ipfs.infura.io',
-                port: 5001,
-                protocol: 'https',
-                headers: {
-                    authorization: auth,
-                }
-            });
+            return "";
 
-            const result = await client.add(JSON.stringify(Json));
+            // const auth = 'Basic ' + Buffer.from(
+            //     process.env.INFURA_PROJECT_ID + ':' + process.env.INFURA_PROJECT_SECRET
+            // ).toString('base64');
 
-            return result.path;
+            // /* Create an instance of the client */
+            // const client = UploadUri({
+            //     host: 'ipfs.infura.io',
+            //     port: 5001,
+            //     protocol: 'https',
+            //     headers: {
+            //         authorization: auth,
+            //     }
+            // });
+
+            // const result = await client.add(JSON.stringify(Json));
+
+            // return result.path;
         } catch (error) {
             console.error(error);
             return "";
@@ -53,10 +58,16 @@ export class Controller {
                     plan
                     creator
                     email
-                    templates
+                    website
+                    templates {
+                        template
+                    }
                 }
             }
             `);
+
+            console.log(response);
+
             return response.gameCreated as Game | null;
         } catch (error) {
             console.error(error);
@@ -64,10 +75,8 @@ export class Controller {
         }
     }
 
-    private getImageNftUri(game: Game, data: string, data2: string, playerId: string): string {
-        const web3 = new Web3();
-
-        const properties: any = web3.eth.abi.decodeParameters(['string[]'], data);
+    private getImageNftUri(game: Game, data: string, data2: string, playerId: string, templateId: number): string {
+        const properties: string[] = this.parseProperties(data);
         console.log('PROPERTIES: ' + properties);
 
         const fields: string[] = this.parseFields(data2);
@@ -92,7 +101,7 @@ export class Controller {
         let svg: string = "";
 
         fields.forEach(field => {
-            svg = game.templates[0].replace(field, '');
+            svg = game.templates[templateId].template.replace(field, '');
         });
 
         return this.toBase64(svg);
@@ -100,6 +109,10 @@ export class Controller {
 
     private parseFields(fields: string): string[] {
         return fields.split(" ");
+    }
+
+    private parseProperties(fields: string): string[] {
+        return fields.split(",");
     }
 
     private toBase64(svg: string): string {

@@ -1,6 +1,6 @@
 specVersion: 0.0.5
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: Kanvas
@@ -23,7 +23,7 @@ dataSources:
         - TemplateAdded
       abis:
         - name: Kanvas
-          file: ./abis/Kanvas.json
+          file: Kanvas\abis\Kanvas.json
       eventHandlers:
         - event: ChainlinkCancelled(indexed bytes32)
           handler: handleChainlinkCancelled
@@ -39,4 +39,4 @@ dataSources:
           handler: handlePlanCreated
         - event: TemplateAdded(address,string)
           handler: handleTemplateAdded
-      file: ./src/kanvas.ts
+      file: Kanvas\Kanvas.wasm

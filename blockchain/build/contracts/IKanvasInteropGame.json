@@ -54,15 +54,15 @@
     "absolutePath": "project:/contracts/interfaces/IKanvasInteropGame.sol",
     "exportedSymbols": {
       "IKanvasInteropGame": [
-        6492
+        6510
       ]
     },
-    "id": 6493,
+    "id": 6511,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 6476,
+        "id": 6494,
         "literals": [
           "solidity",
           "^",
@@ -79,9 +79,9 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 6492,
+        "id": 6510,
         "linearizedBaseContracts": [
-          6492
+          6510
         ],
         "name": "IKanvasInteropGame",
         "nameLocation": "71:18:33",
@@ -89,7 +89,7 @@
         "nodes": [
           {
             "functionSelector": "6d4195fb",
-            "id": 6491,
+            "id": 6509,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -97,17 +97,17 @@
             "nameLocation": "106:12:33",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 6489,
+              "id": 6507,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 6478,
+                  "id": 6496,
                   "mutability": "mutable",
                   "name": "chainSelector",
                   "nameLocation": "136:13:33",
                   "nodeType": "VariableDeclaration",
-                  "scope": 6491,
+                  "scope": 6509,
                   "src": "129:20:33",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -116,7 +116,7 @@
                     "typeString": "uint64"
                   },
                   "typeName": {
-                    "id": 6477,
+                    "id": 6495,
                     "name": "uint64",
                     "nodeType": "ElementaryTypeName",
                     "src": "129:6:33",
@@ -129,12 +129,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 6480,
+                  "id": 6498,
                   "mutability": "mutable",
                   "name": "gameId",
                   "nameLocation": "168:6:33",
                   "nodeType": "VariableDeclaration",
-                  "scope": 6491,
+                  "scope": 6509,
                   "src": "160:14:33",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -143,7 +143,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 6479,
+                    "id": 6497,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "160:7:33",
@@ -157,12 +157,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 6482,
+                  "id": 6500,
                   "mutability": "mutable",
                   "name": "playerId",
                   "nameLocation": "193:8:33",
                   "nodeType": "VariableDeclaration",
-                  "scope": 6491,
+                  "scope": 6509,
                   "src": "185:16:33",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -171,7 +171,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 6481,
+                    "id": 6499,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "185:7:33",
@@ -185,12 +185,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 6484,
+                  "id": 6502,
                   "mutability": "mutable",
                   "name": "tokenId",
                   "nameLocation": "220:7:33",
                   "nodeType": "VariableDeclaration",
-                  "scope": 6491,
+                  "scope": 6509,
                   "src": "212:15:33",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -199,7 +199,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 6483,
+                    "id": 6501,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "212:7:33",
@@ -212,12 +212,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 6486,
+                  "id": 6504,
                   "mutability": "mutable",
                   "name": "uri",
                   "nameLocation": "252:3:33",
                   "nodeType": "VariableDeclaration",
-                  "scope": 6491,
+                  "scope": 6509,
                   "src": "238:17:33",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -226,7 +226,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 6485,
+                    "id": 6503,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "238:6:33",
@@ -239,12 +239,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 6488,
+                  "id": 6506,
                   "mutability": "mutable",
                   "name": "data",
                   "nameLocation": "279:4:33",
                   "nodeType": "VariableDeclaration",
-                  "scope": 6491,
+                  "scope": 6509,
                   "src": "266:17:33",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -253,7 +253,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 6487,
+                    "id": 6505,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "266:5:33",
@@ -268,19 +268,19 @@
               "src": "118:172:33"
             },
             "returnParameters": {
-              "id": 6490,
+              "id": 6508,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "299:0:33"
             },
-            "scope": 6492,
+            "scope": 6510,
             "src": "97:203:33",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 6493,
+        "scope": 6511,
         "src": "61:242:33",
         "usedErrors": []
       }
@@ -293,7 +293,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-12-02T16:02:22.478Z",
+  "updatedAt": "2023-12-02T17:04:40.766Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
