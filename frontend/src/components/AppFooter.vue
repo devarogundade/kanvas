@@ -1,13 +1,18 @@
 <template>
     <section>
         <div class="app_width">
-            <footer></footer>
+            <footer>
+                <RouterLink to="/rockpaperscissors">
+                    <PrimaryButton :text="'Play RockPaperScissors'" />
+                </RouterLink>
+            </footer>
         </div>
     </section>
 </template>
 
 <script setup>
-
+import { RouterLink } from 'vue-router';
+import PrimaryButton from './PrimaryButton.vue';
 </script>
 
 <style scoped>
@@ -20,6 +25,6 @@ footer {
     height: 100px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 </style>

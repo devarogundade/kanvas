@@ -13,10 +13,12 @@
     "pinia": "^2.1.7",
     "vue": "^3.3.4",
     "vue-accessible-color-picker": "^5.0.1",
+    "vue-axios": "^3.5.2",
     "vue-feather": "^2.0.0",
     "vue-feather-icons": "^5.1.0",
     "vue-router": "^4.2.5",
-    "vue3-colorpicker": "^2.2.3"
+    "vue3-colorpicker": "^2.2.3",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.4.0",
