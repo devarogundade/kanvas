@@ -3,9 +3,9 @@ pragma solidity ^0.8.17;
 
 import {Assets} from "./libraries/Assets.sol";
 import {Params} from "./libraries/Params.sol";
-import {IKanvasAvax} from "./interfaces/IKanvasAvax.sol";
-import {IKanvasGame} from "./interfaces/IKanvasGame.sol";
+import {IKanvasInterop} from "./interfaces/IKanvasInterop.sol";
 import {IKanvasInteropGame} from "./interfaces/IKanvasInteropGame.sol";
+import {IKanvasGame} from "./interfaces/IKanvasGame.sol";
 import {StringJoiner} from "./libraries/StringJoiner.sol";
 
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
@@ -17,14 +17,16 @@ import {IRouterClient} from "@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/
 import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
 import {ChainlinkClient, Chainlink, LinkTokenInterface} from "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 
-contract KanvasAvax is
-    IKanvasAvax,
+// ! FOR POLYGON ALONE - HARDCODED VALUES
+
+contract KanvasInterop is
+    IKanvasInterop,
     Context,
     CCIPReceiver,
     ChainlinkClient,
     Ownable
 {
-    uint64 private constant AVAX_SELECTOR = 14767482510784806043;
+    uint64 private constant POLYGON_SELECTOR = 14767482510784806043;
     uint256 public constant MAX_PROPERTIES_LEN = 20;
     uint256 public constant MAX_TEMPLATES_LEN = 5;
     using Chainlink for Chainlink.Request;
@@ -34,10 +36,7 @@ contract KanvasAvax is
     bytes32 private jobId;
     uint256 private fee;
 
-    uint256 private _planId;
-    mapping(uint256 => Assets.Plan) private _plans;
-
-    mapping(address => Assets.Game) private _games;
+    mapping(address => address) private _games;
 
     mapping(bytes32 => Assets.Request) private _requests;
 
@@ -54,38 +53,11 @@ contract KanvasAvax is
         _router = IRouterClient(getRouter());
     }
 
-    function createGame(Params.Game memory params) external payable {
-        require(_plans[params.plan].limit != 0, "Invalid plan");
-        require(msg.value == _plans[params.plan].cost, "Insufficient funds");
-
-        _games[params.gameId] = Assets.Game({
-            name: params.name,
-            description: params.description,
-            avatar: params.avatar,
-            plan: params.plan,
-            creator: _msgSender()
-        });
-
-        emit GameCreated(
-            params.gameId,
-            params.name,
-            params.description,
-            params.avatar,
-            params.plan,
-            _msgSender(),
-            params.email,
-            params.website
-        );
-    }
-
-    function addTemplate(string memory params, address gameId) external {
-        address creator = _msgSender();
-
-        Assets.Game storage game = _games[gameId];
-
-        require(game.creator == creator, "UnAuthorized");
-
-        emit TemplateAdded(gameId, params);
+    function _createGame(
+        uint64 /* chainSelector */,
+        Params.InteropGame memory params
+    ) external override {
+        _games[_msgSender()] = params.gameId;
     }
 
     function _generateUri(
@@ -95,8 +67,8 @@ contract KanvasAvax is
     ) external override {
         require(properties.length <= MAX_PROPERTIES_LEN, "Too many attributes");
 
-        address gameId = _msgSender();
-        require(_games[gameId].creator != address(0), "Game Not Found");
+        address gameId = _games[_msgSender()];
+        require(_games[gameId] != address(0), "Game Not Found");
 
         Chainlink.Request memory req = buildChainlinkRequest(
             jobId,
@@ -155,7 +127,7 @@ contract KanvasAvax is
 
         request.fulfilled = true;
 
-        require(_games[request.gameId].creator != address(0), "Game Not Found");
+        require(_games[request.gameId] != address(0), "Game Not Found");
 
         IKanvasGame game = IKanvasGame(request.gameId);
         game._receiveUri(request.playerId, uri);
@@ -192,12 +164,12 @@ contract KanvasAvax is
         });
 
         // Get the fee required to send the message
-        uint256 fees = _router.getFee(AVAX_SELECTOR, evm2AnyMessage);
+        uint256 fees = _router.getFee(POLYGON_SELECTOR, evm2AnyMessage);
 
         require(msg.value >= fees, "Insufficient fee");
 
         // Send the message through the router and store the returned message ID
-        _router.ccipSend{value: fees}(AVAX_SELECTOR, evm2AnyMessage);
+        _router.ccipSend{value: fees}(POLYGON_SELECTOR, evm2AnyMessage);
     }
 
     // handle a received message
@@ -223,26 +195,6 @@ contract KanvasAvax is
             tokenId,
             uri,
             data
-        );
-    }
-
-    /** Create plans */
-    function createPlan(Params.Plan memory params) external onlyOwner {
-        _planId++;
-
-        _plans[_planId] = Assets.Plan({
-            name: params.name,
-            cost: params.cost,
-            color: params.color,
-            limit: params.limit
-        });
-
-        emit PlanCreated(
-            _planId,
-            params.name,
-            params.cost,
-            params.color,
-            params.limit
         );
     }
 }

@@ -12,6 +12,10 @@ library Params {
         string website;
     }
 
+    struct InteropGame {
+        address gameId;
+    }
+
     struct Plan {
         string name;
         uint256 cost;

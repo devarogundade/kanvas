@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-interface IKanvasAvax {
+import {Params} from "../libraries/Params.sol";
+
+interface IKanvasInterop {
     event PlanCreated(
         uint256 planId,
         string name,
@@ -9,19 +11,6 @@ interface IKanvasAvax {
         string color,
         uint256 limit
     );
-
-    event GameCreated(
-        address gameId,
-        string name,
-        string description,
-        string avatar,
-        uint256 plan,
-        address creator,
-        string email,
-        string website
-    );
-
-    event TemplateAdded(address gameId, string template);
 
     function _transferTo(
         uint64 chainSelector,
@@ -36,5 +25,10 @@ interface IKanvasAvax {
         address playerId,
         string[] memory properties,
         string memory fields
+    ) external;
+
+    function _createGame(
+        uint64 chainSelector,
+        Params.InteropGame memory params
     ) external;
 }

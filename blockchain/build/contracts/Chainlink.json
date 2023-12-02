@@ -15,10 +15,10 @@
     "absolutePath": "@chainlink/contracts/src/v0.8/Chainlink.sol",
     "exportedSymbols": {
       "BufferChainlink": [
-        2170
+        1972
       ],
       "CBORChainlink": [
-        2617
+        2419
       ],
       "Chainlink": [
         522
@@ -46,7 +46,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 523,
-        "sourceUnit": 2618,
+        "sourceUnit": 2420,
         "src": "57:57:5",
         "symbolAliases": [
           {
@@ -55,7 +55,7 @@
               "name": "CBORChainlink",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 2617,
+              "referencedDeclaration": 2419,
               "src": "65:13:5",
               "typeDescriptions": {}
             },
@@ -71,7 +71,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 523,
-        "sourceUnit": 2171,
+        "sourceUnit": 1973,
         "src": "115:61:5",
         "symbolAliases": [
           {
@@ -80,7 +80,7 @@
               "name": "BufferChainlink",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 2170,
+              "referencedDeclaration": 1972,
               "src": "123:15:5",
               "typeDescriptions": {}
             },
@@ -163,7 +163,7 @@
                 "420:13:5"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 2617,
+              "referencedDeclaration": 2419,
               "src": "420:13:5"
             },
             "nodeType": "UsingForDirective",
@@ -179,13 +179,13 @@
                   "454:6:5"
                 ],
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 1656,
+                "referencedDeclaration": 1458,
                 "src": "438:22:5"
               },
-              "referencedDeclaration": 1656,
+              "referencedDeclaration": 1458,
               "src": "438:22:5",
               "typeDescriptions": {
-                "typeIdentifier": "t_struct$_buffer_$1656_storage_ptr",
+                "typeIdentifier": "t_struct$_buffer_$1458_storage_ptr",
                 "typeString": "struct BufferChainlink.buffer"
               }
             }
@@ -315,7 +315,7 @@
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_buffer_$1656_storage_ptr",
+                  "typeIdentifier": "t_struct$_buffer_$1458_storage_ptr",
                   "typeString": "struct BufferChainlink.buffer"
                 },
                 "typeName": {
@@ -329,13 +329,13 @@
                       "597:6:5"
                     ],
                     "nodeType": "IdentifierPath",
-                    "referencedDeclaration": 1656,
+                    "referencedDeclaration": 1458,
                     "src": "581:22:5"
                   },
-                  "referencedDeclaration": 1656,
+                  "referencedDeclaration": 1458,
                   "src": "581:22:5",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_buffer_$1656_storage_ptr",
+                    "typeIdentifier": "t_struct$_buffer_$1458_storage_ptr",
                     "typeString": "struct BufferChainlink.buffer"
                   }
                 },
@@ -382,7 +382,7 @@
                         "referencedDeclaration": 278,
                         "src": "1182:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -402,7 +402,7 @@
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         },
                         {
@@ -415,10 +415,10 @@
                         "name": "BufferChainlink",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2170,
+                        "referencedDeclaration": 1972,
                         "src": "1161:15:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_BufferChainlink_$2170_$",
+                          "typeIdentifier": "t_type$_t_contract$_BufferChainlink_$1972_$",
                           "typeString": "type(library BufferChainlink)"
                         }
                       },
@@ -430,10 +430,10 @@
                       "memberLocation": "1177:4:5",
                       "memberName": "init",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1694,
+                      "referencedDeclaration": 1496,
                       "src": "1161:20:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$_t_uint256_$returns$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$_t_uint256_$returns$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory,uint256) pure returns (struct BufferChainlink.buffer memory)"
                       }
                     },
@@ -449,7 +449,7 @@
                     "src": "1161:49:5",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                      "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                       "typeString": "struct BufferChainlink.buffer memory"
                     }
                   },
@@ -877,7 +877,7 @@
                         "referencedDeclaration": 278,
                         "src": "1675:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -912,7 +912,7 @@
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         },
                         {
@@ -925,10 +925,10 @@
                         "name": "BufferChainlink",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2170,
+                        "referencedDeclaration": 1972,
                         "src": "1654:15:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_BufferChainlink_$2170_$",
+                          "typeIdentifier": "t_type$_t_contract$_BufferChainlink_$1972_$",
                           "typeString": "type(library BufferChainlink)"
                         }
                       },
@@ -940,10 +940,10 @@
                       "memberLocation": "1670:4:5",
                       "memberName": "init",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1694,
+                      "referencedDeclaration": 1496,
                       "src": "1654:20:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$_t_uint256_$returns$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$_t_uint256_$returns$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory,uint256) pure returns (struct BufferChainlink.buffer memory)"
                       }
                     },
@@ -959,7 +959,7 @@
                     "src": "1654:43:5",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                      "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                       "typeString": "struct BufferChainlink.buffer memory"
                     }
                   },
@@ -994,7 +994,7 @@
                         "referencedDeclaration": 278,
                         "src": "1726:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -1014,7 +1014,7 @@
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         },
                         {
@@ -1027,10 +1027,10 @@
                         "name": "BufferChainlink",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2170,
+                        "referencedDeclaration": 1972,
                         "src": "1703:15:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_BufferChainlink_$2170_$",
+                          "typeIdentifier": "t_type$_t_contract$_BufferChainlink_$1972_$",
                           "typeString": "type(library BufferChainlink)"
                         }
                       },
@@ -1042,10 +1042,10 @@
                       "memberLocation": "1719:6:5",
                       "memberName": "append",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1913,
+                      "referencedDeclaration": 1715,
                       "src": "1703:22:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$_t_bytes_memory_ptr_$returns$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$_t_bytes_memory_ptr_$returns$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory,bytes memory) pure returns (struct BufferChainlink.buffer memory)"
                       }
                     },
@@ -1061,7 +1061,7 @@
                     "src": "1703:38:5",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                      "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                       "typeString": "struct BufferChainlink.buffer memory"
                     }
                   },
@@ -1220,7 +1220,7 @@
                         "referencedDeclaration": 278,
                         "src": "2045:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -1232,10 +1232,10 @@
                       "memberLocation": "2054:12:5",
                       "memberName": "encodeString",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2580,
+                      "referencedDeclaration": 2382,
                       "src": "2045:21:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory,string memory) pure"
                       }
                     },
@@ -1306,7 +1306,7 @@
                         "referencedDeclaration": 278,
                         "src": "2077:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -1318,10 +1318,10 @@
                       "memberLocation": "2086:12:5",
                       "memberName": "encodeString",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2580,
+                      "referencedDeclaration": 2382,
                       "src": "2077:21:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory,string memory) pure"
                       }
                     },
@@ -1523,7 +1523,7 @@
                         "referencedDeclaration": 278,
                         "src": "2411:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -1535,10 +1535,10 @@
                       "memberLocation": "2420:12:5",
                       "memberName": "encodeString",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2580,
+                      "referencedDeclaration": 2382,
                       "src": "2411:21:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory,string memory) pure"
                       }
                     },
@@ -1609,7 +1609,7 @@
                         "referencedDeclaration": 278,
                         "src": "2443:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -1621,10 +1621,10 @@
                       "memberLocation": "2452:11:5",
                       "memberName": "encodeBytes",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2481,
+                      "referencedDeclaration": 2283,
                       "src": "2443:20:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$_t_bytes_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$_t_bytes_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory,bytes memory) pure"
                       }
                     },
@@ -1826,7 +1826,7 @@
                         "referencedDeclaration": 278,
                         "src": "2770:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -1838,10 +1838,10 @@
                       "memberLocation": "2779:12:5",
                       "memberName": "encodeString",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2580,
+                      "referencedDeclaration": 2382,
                       "src": "2770:21:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory,string memory) pure"
                       }
                     },
@@ -1912,7 +1912,7 @@
                         "referencedDeclaration": 278,
                         "src": "2802:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -1924,10 +1924,10 @@
                       "memberLocation": "2811:9:5",
                       "memberName": "encodeInt",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2456,
+                      "referencedDeclaration": 2258,
                       "src": "2802:18:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$_t_int256_$returns$__$bound_to$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$_t_int256_$returns$__$bound_to$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory,int256) pure"
                       }
                     },
@@ -2129,7 +2129,7 @@
                         "referencedDeclaration": 278,
                         "src": "3131:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -2141,10 +2141,10 @@
                       "memberLocation": "3140:12:5",
                       "memberName": "encodeString",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2580,
+                      "referencedDeclaration": 2382,
                       "src": "3131:21:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory,string memory) pure"
                       }
                     },
@@ -2215,7 +2215,7 @@
                         "referencedDeclaration": 278,
                         "src": "3163:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -2227,10 +2227,10 @@
                       "memberLocation": "3172:10:5",
                       "memberName": "encodeUInt",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2390,
+                      "referencedDeclaration": 2192,
                       "src": "3163:19:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$_t_uint256_$returns$__$bound_to$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$_t_uint256_$returns$__$bound_to$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory,uint256) pure"
                       }
                     },
@@ -2432,7 +2432,7 @@
                         "referencedDeclaration": 278,
                         "src": "3523:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -2444,10 +2444,10 @@
                       "memberLocation": "3532:12:5",
                       "memberName": "encodeString",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2580,
+                      "referencedDeclaration": 2382,
                       "src": "3523:21:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory,string memory) pure"
                       }
                     },
@@ -2500,7 +2500,7 @@
                         "referencedDeclaration": 278,
                         "src": "3555:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -2512,10 +2512,10 @@
                       "memberLocation": "3564:10:5",
                       "memberName": "startArray",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2592,
+                      "referencedDeclaration": 2394,
                       "src": "3555:19:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory) pure"
                       }
                     },
@@ -2617,7 +2617,7 @@
                               "referencedDeclaration": 278,
                               "src": "3634:8:5",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                                "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                                 "typeString": "struct BufferChainlink.buffer memory"
                               }
                             },
@@ -2629,10 +2629,10 @@
                             "memberLocation": "3643:12:5",
                             "memberName": "encodeString",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2580,
+                            "referencedDeclaration": 2382,
                             "src": "3634:21:5",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1656_memory_ptr_$",
+                              "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$_t_string_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1458_memory_ptr_$",
                               "typeString": "function (struct BufferChainlink.buffer memory,string memory) pure"
                             }
                           },
@@ -2833,7 +2833,7 @@
                         "referencedDeclaration": 278,
                         "src": "3678:8:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                          "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                           "typeString": "struct BufferChainlink.buffer memory"
                         }
                       },
@@ -2845,10 +2845,10 @@
                       "memberLocation": "3687:11:5",
                       "memberName": "endSequence",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2616,
+                      "referencedDeclaration": 2418,
                       "src": "3678:20:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1656_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1656_memory_ptr_$",
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_buffer_$1458_memory_ptr_$returns$__$bound_to$_t_struct$_buffer_$1458_memory_ptr_$",
                         "typeString": "function (struct BufferChainlink.buffer memory) pure"
                       }
                     },
@@ -3020,7 +3020,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-12-01T11:53:29.714Z",
+  "updatedAt": "2023-12-02T16:02:22.385Z",
   "devdoc": {
     "details": "Uses imported CBOR library for encoding to buffer",
     "kind": "dev",

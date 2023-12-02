@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-import {IKanvasAvax} from "../interfaces/IKanvasAvax.sol";
-import {IKanvasGame} from "../interfaces/IKanvasGame.sol";
+import {Params} from "../libraries/Params.sol";
+import {IKanvasInterop} from "../interfaces/IKanvasInterop.sol";
 import {IKanvasInteropGame} from "../interfaces/IKanvasInteropGame.sol";
 
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
-contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721 {
+contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
+    uint64 private constant AVAX_SELECTOR = 14767482510784806043;
     uint256 public constant MAX_PROPERTIES_LEN = 20;
 
     uint256 private _tokenId;
@@ -16,7 +17,7 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721 {
     mapping(uint256 => string) private _tokenURIs;
     mapping(address => uint256) private _playerNfts;
 
-    IKanvasAvax private kanvas;
+    IKanvasInterop private kanvas;
 
     struct Player {
         string name;
@@ -27,25 +28,14 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721 {
     mapping(address => Player) private _players;
 
     constructor(
-        address kanvasRouter
-    ) ERC721("RockPaperScissors", "RPS") IKanvasGame() {
-        kanvas = IKanvasAvax(kanvasRouter);
-    }
-
-    function createPlayer(address playerId, string memory name) external {
-        Player storage player = _players[playerId];
-        require(!player.created, "Player has been created");
-
-        player.name = name;
-        player.created = true;
-
-        string[] memory properties = new string[](MAX_PROPERTIES_LEN);
-        properties[0] = player.name;
-        properties[1] = Strings.toString(player.points);
-
-        string memory fields = "$player_name$ $player_points$";
-
-        kanvas._generateUri(playerId, properties, fields);
+        address kanvasRouter,
+        address sourceGameId
+    ) ERC721("RockPaperScissors", "RPS") IKanvasInteropGame() {
+        kanvas = IKanvasInterop(kanvasRouter);
+        kanvas._createGame(
+            AVAX_SELECTOR,
+            Params.InteropGame({gameId: sourceGameId})
+        );
     }
 
     function upgradePlayer(address playerId) external {
@@ -101,28 +91,5 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721 {
         _players[playerId].points = points;
 
         _playerNfts[playerId] = tokenId;
-    }
-
-    function _receiveUri(address playerId, string memory uri) external {
-        uint256 tokenId = _playerNfts[playerId];
-
-        // this player does not have the game nft
-        if (tokenId == 0) {
-            // mint the game nft for player
-            _tokenId++;
-            tokenId = _tokenId;
-
-            _mint(playerId, tokenId);
-
-            _playerNfts[playerId] = tokenId;
-        }
-
-        _tokenURIs[tokenId] = uri;
-    }
-
-    function tokenURI(
-        uint256 tokenId
-    ) public view virtual override returns (string memory) {
-        return _tokenURIs[tokenId];
     }
 }

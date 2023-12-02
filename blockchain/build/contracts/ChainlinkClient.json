@@ -55,10 +55,10 @@
     "absolutePath": "@chainlink/contracts/src/v0.8/ChainlinkClient.sol",
     "exportedSymbols": {
       "BufferChainlink": [
-        2170
+        1972
       ],
       "CBORChainlink": [
-        2617
+        2419
       ],
       "Chainlink": [
         522
@@ -73,10 +73,10 @@
         1228
       ],
       "ENSResolver_Chainlink": [
-        2627
+        2429
       ],
       "LinkTokenInterface": [
-        1648
+        1450
       ],
       "OperatorInterface": [
         1308
@@ -134,7 +134,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 1116,
-        "sourceUnit": 1649,
+        "sourceUnit": 1451,
         "src": "123:52:6",
         "symbolAliases": [],
         "unitAlias": ""
@@ -182,7 +182,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 1116,
-        "sourceUnit": 2628,
+        "sourceUnit": 2430,
         "src": "318:78:6",
         "symbolAliases": [
           {
@@ -191,7 +191,7 @@
               "name": "ENSResolver",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 2627,
+              "referencedDeclaration": 2429,
               "src": "326:11:6",
               "typeDescriptions": {}
             },
@@ -834,7 +834,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_LinkTokenInterface_$1648",
+              "typeIdentifier": "t_contract$_LinkTokenInterface_$1450",
               "typeString": "contract LinkTokenInterface"
             },
             "typeName": {
@@ -847,13 +847,13 @@
                   "1192:18:6"
                 ],
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 1648,
+                "referencedDeclaration": 1450,
                 "src": "1192:18:6"
               },
-              "referencedDeclaration": 1648,
+              "referencedDeclaration": 1450,
               "src": "1192:18:6",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_LinkTokenInterface_$1648",
+                "typeIdentifier": "t_contract$_LinkTokenInterface_$1450",
                 "typeString": "contract LinkTokenInterface"
               }
             },
@@ -2421,7 +2421,7 @@
                           "referencedDeclaration": 278,
                           "src": "4357:7:6",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                            "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                             "typeString": "struct BufferChainlink.buffer memory"
                           }
                         },
@@ -2433,7 +2433,7 @@
                         "memberLocation": "4365:3:6",
                         "memberName": "buf",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1653,
+                        "referencedDeclaration": 1455,
                         "src": "4357:11:6",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes_memory_ptr",
@@ -3388,7 +3388,7 @@
                           "referencedDeclaration": 278,
                           "src": "6194:7:6",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_buffer_$1656_memory_ptr",
+                            "typeIdentifier": "t_struct$_buffer_$1458_memory_ptr",
                             "typeString": "struct BufferChainlink.buffer memory"
                           }
                         },
@@ -3400,7 +3400,7 @@
                         "memberLocation": "6202:3:6",
                         "memberName": "buf",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1653,
+                        "referencedDeclaration": 1455,
                         "src": "6194:11:6",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes_memory_ptr",
@@ -4087,7 +4087,7 @@
                             "referencedDeclaration": 578,
                             "src": "6959:6:6",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_LinkTokenInterface_$1648",
+                              "typeIdentifier": "t_contract$_LinkTokenInterface_$1450",
                               "typeString": "contract LinkTokenInterface"
                             }
                           },
@@ -4099,7 +4099,7 @@
                           "memberLocation": "6966:15:6",
                           "memberName": "transferAndCall",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 1636,
+                          "referencedDeclaration": 1438,
                           "src": "6959:22:6",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$_t_bytes_memory_ptr_$returns$_t_bool_$",
@@ -5107,7 +5107,7 @@
                       "referencedDeclaration": 578,
                       "src": "8695:6:6",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_LinkTokenInterface_$1648",
+                        "typeIdentifier": "t_contract$_LinkTokenInterface_$1450",
                         "typeString": "contract LinkTokenInterface"
                       }
                     },
@@ -5139,10 +5139,10 @@
                         "name": "LinkTokenInterface",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1648,
+                        "referencedDeclaration": 1450,
                         "src": "8704:18:6",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_LinkTokenInterface_$1648_$",
+                          "typeIdentifier": "t_type$_t_contract$_LinkTokenInterface_$1450_$",
                           "typeString": "type(contract LinkTokenInterface)"
                         }
                       },
@@ -5158,13 +5158,13 @@
                       "src": "8704:31:6",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_LinkTokenInterface_$1648",
+                        "typeIdentifier": "t_contract$_LinkTokenInterface_$1450",
                         "typeString": "contract LinkTokenInterface"
                       }
                     },
                     "src": "8695:40:6",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_LinkTokenInterface_$1648",
+                      "typeIdentifier": "t_contract$_LinkTokenInterface_$1450",
                       "typeString": "contract LinkTokenInterface"
                     }
                   },
@@ -5416,7 +5416,7 @@
                         "referencedDeclaration": 578,
                         "src": "9191:6:6",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_LinkTokenInterface_$1648",
+                          "typeIdentifier": "t_contract$_LinkTokenInterface_$1450",
                           "typeString": "contract LinkTokenInterface"
                         }
                       }
@@ -5424,7 +5424,7 @@
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_contract$_LinkTokenInterface_$1648",
+                          "typeIdentifier": "t_contract$_LinkTokenInterface_$1450",
                           "typeString": "contract LinkTokenInterface"
                         }
                       ],
@@ -6155,7 +6155,7 @@
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_ENSResolver_$2627",
+                        "typeIdentifier": "t_contract$_ENSResolver_$2429",
                         "typeString": "contract ENSResolver"
                       },
                       "typeName": {
@@ -6168,13 +6168,13 @@
                             "10365:21:6"
                           ],
                           "nodeType": "IdentifierPath",
-                          "referencedDeclaration": 2627,
+                          "referencedDeclaration": 2429,
                           "src": "10365:21:6"
                         },
-                        "referencedDeclaration": 2627,
+                        "referencedDeclaration": 2429,
                         "src": "10365:21:6",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_ENSResolver_$2627",
+                          "typeIdentifier": "t_contract$_ENSResolver_$2429",
                           "typeString": "contract ENSResolver"
                         }
                       },
@@ -6261,10 +6261,10 @@
                       "name": "ENSResolver_Chainlink",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2627,
+                      "referencedDeclaration": 2429,
                       "src": "10398:21:6",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_ENSResolver_$2627_$",
+                        "typeIdentifier": "t_type$_t_contract$_ENSResolver_$2429_$",
                         "typeString": "type(contract ENSResolver)"
                       }
                     },
@@ -6280,7 +6280,7 @@
                     "src": "10398:50:6",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ENSResolver_$2627",
+                      "typeIdentifier": "t_contract$_ENSResolver_$2429",
                       "typeString": "contract ENSResolver"
                     }
                   },
@@ -6320,7 +6320,7 @@
                             "referencedDeclaration": 1008,
                             "src": "10472:8:6",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_ENSResolver_$2627",
+                              "typeIdentifier": "t_contract$_ENSResolver_$2429",
                               "typeString": "contract ENSResolver"
                             }
                           },
@@ -6332,7 +6332,7 @@
                           "memberLocation": "10481:4:6",
                           "memberName": "addr",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 2626,
+                          "referencedDeclaration": 2428,
                           "src": "10472:13:6",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_view$_t_bytes32_$returns$_t_address_$",
@@ -6696,7 +6696,7 @@
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_ENSResolver_$2627",
+                        "typeIdentifier": "t_contract$_ENSResolver_$2429",
                         "typeString": "contract ENSResolver"
                       },
                       "typeName": {
@@ -6709,13 +6709,13 @@
                             "10877:21:6"
                           ],
                           "nodeType": "IdentifierPath",
-                          "referencedDeclaration": 2627,
+                          "referencedDeclaration": 2429,
                           "src": "10877:21:6"
                         },
-                        "referencedDeclaration": 2627,
+                        "referencedDeclaration": 2429,
                         "src": "10877:21:6",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_ENSResolver_$2627",
+                          "typeIdentifier": "t_contract$_ENSResolver_$2429",
                           "typeString": "contract ENSResolver"
                         }
                       },
@@ -6802,10 +6802,10 @@
                       "name": "ENSResolver_Chainlink",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2627,
+                      "referencedDeclaration": 2429,
                       "src": "10910:21:6",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_ENSResolver_$2627_$",
+                        "typeIdentifier": "t_type$_t_contract$_ENSResolver_$2429_$",
                         "typeString": "type(contract ENSResolver)"
                       }
                     },
@@ -6821,7 +6821,7 @@
                     "src": "10910:52:6",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ENSResolver_$2627",
+                      "typeIdentifier": "t_contract$_ENSResolver_$2429",
                       "typeString": "contract ENSResolver"
                     }
                   },
@@ -6861,7 +6861,7 @@
                             "referencedDeclaration": 1043,
                             "src": "10987:8:6",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_ENSResolver_$2627",
+                              "typeIdentifier": "t_contract$_ENSResolver_$2429",
                               "typeString": "contract ENSResolver"
                             }
                           },
@@ -6873,7 +6873,7 @@
                           "memberLocation": "10996:4:6",
                           "memberName": "addr",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 2626,
+                          "referencedDeclaration": 2428,
                           "src": "10987:13:6",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_view$_t_bytes32_$returns$_t_address_$",
@@ -7640,7 +7640,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-12-01T11:53:29.720Z",
+  "updatedAt": "2023-12-02T16:02:22.387Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

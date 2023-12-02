@@ -8,7 +8,6 @@ library Assets {
         string description;
         uint256 plan;
         address creator;
-        string[] templates;
     }
 
     struct Request {
