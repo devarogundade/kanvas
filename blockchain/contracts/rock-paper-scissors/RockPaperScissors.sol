@@ -9,8 +9,8 @@ import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
 contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721 {
-    uint8 private constant WIN_NFT_TEMPLATE = 1;
-    uint8 private constant LOST_NFT_TEMPLATE = 2;
+    uint8 private constant WIN_NFT_TEMPLATE = 0;
+    uint8 private constant LOST_NFT_TEMPLATE = 1;
 
     uint256 public constant MAX_PROPERTIES_LEN = 20;
 

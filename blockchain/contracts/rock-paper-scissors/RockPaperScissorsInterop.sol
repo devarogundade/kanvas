@@ -12,8 +12,8 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
     uint64 private constant AVAX_SELECTOR = 14767482510784806043;
     uint256 public constant MAX_PROPERTIES_LEN = 20;
 
-    uint8 private constant WIN_NFT_TEMPLATE = 1;
-    uint8 private constant LOST_NFT_TEMPLATE = 2;
+    uint8 private constant WIN_NFT_TEMPLATE = 0;
+    uint8 private constant LOST_NFT_TEMPLATE = 1;
 
     uint256 private _tokenId;
 
