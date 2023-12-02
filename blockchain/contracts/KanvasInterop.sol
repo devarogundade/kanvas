@@ -26,7 +26,7 @@ contract KanvasInterop is
     ChainlinkClient,
     Ownable
 {
-    uint64 private constant POLYGON_SELECTOR = 14767482510784806043;
+    uint64 private constant POLYGON_SELECTOR = 12532609583862916517;
     uint256 public constant MAX_PROPERTIES_LEN = 20;
     uint256 public constant MAX_TEMPLATES_LEN = 5;
     using Chainlink for Chainlink.Request;
@@ -45,8 +45,8 @@ contract KanvasInterop is
     IRouterClient private _router;
 
     constructor(address receiver) CCIPReceiver(receiver) Ownable() {
-        setChainlinkToken(0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846);
-        setChainlinkOracle(0x022EEA14A6010167ca026B32576D6686dD7e85d2);
+        setChainlinkToken(0x326C977E6efc84E512bB9C30f76E30c160eD06FB);
+        setChainlinkOracle(0x40193c8518BB267228Fc409a613bDbD8eC5a97b3);
         jobId = "7d80a6386ef543a3abb52817f6707e3b";
         fee = (1 * LINK_DIVISIBILITY) / 10;
 
