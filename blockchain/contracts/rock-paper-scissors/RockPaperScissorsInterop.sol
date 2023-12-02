@@ -72,7 +72,7 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
         kanvas._generateUri(playerId, properties, fields, LOST_NFT_TEMPLATE);
     }
 
-    function transferTo(uint64 chainSelector) external {
+    function transferTo(uint64 chainSelector) external payable {
         address playerId = _msgSender();
         uint256 tokenId = _playerNfts[playerId];
 
@@ -87,7 +87,14 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
 
         bytes memory data = abi.encode(player.name, player.points);
 
-        kanvas._transferTo(chainSelector, gameId, playerId, tokenId, uri, data);
+        kanvas._transferTo{value: msg.value}(
+            chainSelector,
+            gameId,
+            playerId,
+            tokenId,
+            uri,
+            data
+        );
     }
 
     function _receiveFrom(

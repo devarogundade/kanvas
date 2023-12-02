@@ -31,7 +31,7 @@ contract KanvasInterop is
     uint256 public constant MAX_TEMPLATES_LEN = 5;
     using Chainlink for Chainlink.Request;
 
-    string private BASE_URL = "";
+    string private constant BASE_URL = "https://kanvas-di5j.onrender.com";
 
     bytes32 private jobId;
     uint256 private fee;
@@ -109,10 +109,6 @@ contract KanvasInterop is
         });
     }
 
-    function updateBaseUrl(string memory newBaseUrl) external onlyOwner {
-        BASE_URL = newBaseUrl;
-    }
-
     function updateInterop(
         uint64 chainSelector,
         address kanvasRouter
@@ -150,8 +146,10 @@ contract KanvasInterop is
         string memory uri,
         bytes memory data
     ) external payable {
+        require(_interops[chainSelector] != address(0), "Chain not supported");
+
         // Create an EVM2AnyMessage struct in memory with necessary information for sending a cross-chain message
-        Client.EVM2AnyMessage memory evm2AnyMessage = Client.EVM2AnyMessage({
+        Client.EVM2AnyMessage memory message = Client.EVM2AnyMessage({
             // ABI-encoded receiver address
             receiver: abi.encode(_interops[chainSelector]),
             // ABI-encoded string message
@@ -167,12 +165,12 @@ contract KanvasInterop is
         });
 
         // Get the fee required to send the message
-        uint256 fees = _router.getFee(POLYGON_SELECTOR, evm2AnyMessage);
+        uint256 fees = _router.getFee(POLYGON_SELECTOR, message);
 
         require(msg.value >= fees, "Insufficient fee");
 
         // Send the message through the router and store the returned message ID
-        _router.ccipSend{value: fees}(POLYGON_SELECTOR, evm2AnyMessage);
+        _router.ccipSend{value: fees}(POLYGON_SELECTOR, message);
     }
 
     // handle a received message
