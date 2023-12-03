@@ -13,7 +13,8 @@ const store = createStore({
     state() {
         return {
             userChoice: "",
-            wallet: null
+            wallet: null,
+            player: null
         };
     },
     getters: {
@@ -27,6 +28,9 @@ const store = createStore({
         },
         setWallet(state, wallet) {
             state.wallet = wallet
+        },
+        setPlayer(state, player) {
+            state.player = player
         }
     },
 });

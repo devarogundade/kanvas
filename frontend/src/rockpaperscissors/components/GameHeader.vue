@@ -2,21 +2,15 @@
     <section>
         <div class="app_width">
             <header>
-                <RouterLink to="/">
+                <RouterLink to="/rockpaperscissors">
                     <div class="logo">
-                        <p>Kanvas</p>
+                        <p>RockPaperScissors</p>
                     </div>
                 </RouterLink>
 
                 <div class="actions">
-                    <RouterLink to="/games" v-if="$route.path == '/'">
-                        <PrimaryButton width="240px" text="Launch App" />
-                    </RouterLink>
-                    <div v-else>
-                        <PrimaryButton width="240px" v-if="!$store.state.wallet" text="Connect Wallet"
-                            @click="connectWallet" />
-                        <PrimaryButton width="240px" v-else :text="$fineAddress($store.state.wallet)" @click="openModel" />
-                    </div>
+                    <PrimaryButton width="240px" v-if="!$store.state.wallet" text="Connect Wallet" @click="connectWallet" />
+                    <PrimaryButton width="240px" v-else :text="$fineAddress($store.state.wallet)" @click="openModel" />
                 </div>
             </header>
         </div>
@@ -25,7 +19,7 @@
 
 <script setup>
 import { RouterLink } from "vue-router";
-import PrimaryButton from "../components/PrimaryButton.vue"
+import PrimaryButton from "../../components/PrimaryButton.vue"
 </script>
 
 <script>

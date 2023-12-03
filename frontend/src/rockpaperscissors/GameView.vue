@@ -1,30 +1,16 @@
 <template>
-    <section class="section_header">
-        <div class="app_width">
-            <header>
-                <RouterLink to="/rockpaperscissors">
-                    <div class="logo">
-                        <p>RockPaperScissors</p>
-                    </div>
-                </RouterLink>
+    <GameHeader />
 
-                <div class="actions">
-                    <RouterLink to="/games">
-                        <PrimaryButton width="240px" text="GitHub" />
-                    </RouterLink>
-                </div>
-            </header>
-        </div>
-    </section>
+    <LoadingBox v-if="!$store.state.player" />
 
-    <section>
+    <section v-else>
         <div class="app_width">
-            <div v-if="player.name == ''" class="create">
+            <div v-if="$store.state.player.name == ''" class="create">
                 <h3>Create Game Account</h3>
 
                 <form>
                     <label for="name">Your Name</label>
-                    <input type="text" v-model="player.name" id="name" required name="name" placeholder="John Doe">
+                    <input type="text" v-model="playerName" id="name" required name="name" placeholder="John Doe">
 
                     <button class="button" type="submit">Create Game</button>
                 </form>
@@ -32,11 +18,11 @@
 
             <div class="play" v-else>
                 <div class="profile">
-                    <h3>Play Game</h3>
+                    <h3>Choose your weapon!</h3>
 
                     <div class="name">
-                        <p>{{ player.name }}</p>
-                        <span>{{ player.points }} points</span>
+                        <p>{{ $store.state.player.name }}</p>
+                        <span>{{ $store.state.player.points }} points</span>
                     </div>
                 </div>
 
@@ -48,32 +34,77 @@
 </template>
 
 <script setup>
-import PrimaryButton from '../components/PrimaryButton.vue';
+import GameHeader from './components/GameHeader.vue';
+import LoadingBox from '../components/LoadingBox.vue';
 import ColdownAnimation from './components/ColdownAnimation.vue';
 import Choice from './components/Choice.vue';
 </script>
 
 <script>
 import { mapMutations } from "vuex";
+import { tryGetPlayerOnAvax, tryCreatePlayer } from "../scripts/rockpaperscissors"
+import { notify } from "../reactives/notify"
+import { watchAccount } from '@wagmi/core'
 export default {
     data() {
         return {
             cooldown: false,
-            player: {
-                name: "",
-                points: 0
-            }
+            creating: false,
+            playerName: ""
         }
     },
+
+    mounted() {
+        this.getPlayer()
+
+        watchAccount((account) => {
+            this.$store.commit('setWallet', account.address)
+            this.getPlayer()
+        })
+    },
+
     methods: {
         ...mapMutations(["setChoice"]),
+
         sendUserAction(choice) {
             this.setChoice(choice);
             this.cooldown = true;
+
             setTimeout(() => {
                 this.$router.push("/rockpaperscissors/result");
             }, 1000);
         },
+
+        createPlayer: async function () {
+            if (this.creating) return
+            this.creating = true
+
+            const transaction = await tryCreatePlayer(this.$store.state.wallet, this.playerName);
+            if (transaction) {
+                notify.push({
+                    title: "Transaction sent ✔️",
+                    description: "Account was created successfully!",
+                    category: "success",
+                    linkTitle: "View Tnx",
+                    linkUrl: "",
+                });
+            }
+            else {
+                notify.push({
+                    title: "Transaction failed ❌",
+                    description: "Please try again!",
+                    category: "error",
+                });
+            }
+
+            this.creating = false
+        },
+
+        getPlayer: async function () {
+            if (!this.$store.state.wallet) return
+            const player = await tryGetPlayerOnAvax(this.$store.state.wallet)
+            this.$store.commit('setPlayer', player)
+        }
     }
 }
 </script>

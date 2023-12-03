@@ -43,12 +43,16 @@ export default {
                 (this.yourChoice === "✂️" && this.opponentChoice === "🧻")
             ) {
                 this.won = true;
+
+                this.upgradePlayer()
             } else if (
                 (this.yourChoice === "🪨" && this.opponentChoice === "🧻") ||
                 (this.yourChoice === "🧻" && this.opponentChoice === "✂️") ||
                 (this.yourChoice === "✂️" && this.opponentChoice === "🪨")
             ) {
                 this.lost = true;
+
+                this.downgradePlayer()
             }
         }
     },
@@ -66,6 +70,14 @@ export default {
         retry() {
             this.$router.push("/rockpaperscissors");
         },
+
+        upgradePlayer: async function () {
+            console.log('upgrade');
+        },
+
+        downgradePlayer: async function () {
+            console.log('downgrade');
+        }
     },
 };
 </script>
