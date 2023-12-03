@@ -2,8 +2,11 @@ import { Express, Response } from 'express';
 import { Request, Router } from 'express';
 import { Controller } from './controller';
 import { OK } from './contants';
+import { RockPaperScissorsController } from './rockpaperscissors';
 
 const controller = new Controller();
+const rpsController = new RockPaperScissorsController();
+
 export class Route {
 
     constructor(app: Express, router: Router) {
@@ -19,6 +22,28 @@ export class Route {
             );
 
             return res.status(OK).send({ uri });
+        });
+
+        router.get('/rockpaperscissors/upgrade/:chainId/:playerId', async (req: Request, res: Response) => {
+            const { chainId, playerId } = req.params;
+
+            const txId = await rpsController.upgradePlayer(
+                Number(chainId) as 43113 | 80001,
+                playerId
+            );
+
+            return res.status(OK).send({ txId });
+        });
+
+        router.get('/rockpaperscissors/downgrade/:chainId/:playerId', async (req: Request, res: Response) => {
+            const { chainId, playerId } = req.params;
+
+            const txId = await rpsController.downgradePlayer(
+                Number(chainId) as 43113 | 80001,
+                playerId
+            );
+
+            return res.status(OK).send({ txId });
         });
 
         router.get('/', (_: Request, res: Response) => {

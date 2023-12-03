@@ -10,6 +10,7 @@ declare global {
             INFURA_PROJECT_SECRET: string;
 
             DEV_EMAIL: string;
+            EVM_PRIVATE_KEY: string;
         }
     }
 }
