@@ -88,6 +88,7 @@ import LoadingBox from '../components/LoadingBox.vue';
 import { fetchGame } from '../scripts/graph';
 import { tryAddTemplate } from "../scripts/kanvas";
 import { upload } from "../scripts/storage";
+import { notify } from "../reactives/notify"
 export default {
     data() {
         return {

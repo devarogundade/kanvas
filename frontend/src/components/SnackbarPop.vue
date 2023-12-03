@@ -60,7 +60,7 @@ export default {
 
 .snackbar {
     width: 580px;
-    background: var(--bg-lightest);
+    background: var(--pr);
     box-shadow: 0px 6px 12px rgba(20, 20, 22, 0.8);
     border-radius: 4px;
     margin-bottom: 25px;
@@ -79,11 +79,11 @@ export default {
 }
 
 .success .indicator {
-    background: var(--pr);
+    background: green;
 }
 
 .error .indicator {
-    background: var(--sm-red);
+    background: red;
 }
 
 .icon {
@@ -94,11 +94,11 @@ export default {
 }
 
 .success .icon {
-    background: var(--pr);
+    background: green;
 }
 
 .error .icon {
-    background: var(--sm-red);
+    background: red;
 }
 
 .close {
@@ -114,7 +114,7 @@ export default {
 
 .texts h3 {
     font-size: 16px;
-    color: var(--text-normal);
+    color: #fff;
 }
 
 .texts p {
@@ -128,7 +128,7 @@ export default {
     display: flex;
     align-items: center;
     gap: 6px;
-    background: var(--bg);
+    background: #fff;
     border-radius: 4px;
     padding: 0 12px;
     height: 30px;
