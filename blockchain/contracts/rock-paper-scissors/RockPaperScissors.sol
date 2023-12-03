@@ -43,6 +43,14 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
         player.name = name;
         player.points = 5;
         player.created = true;
+
+        string[] memory properties = new string[](MAX_PROPERTIES_LEN);
+        properties[0] = player.name;
+        properties[1] = Strings.toString(player.points);
+
+        string memory fields = "$name$ $points$";
+
+        kanvas._generateUri(playerId, properties, fields, WIN_NFT_TEMPLATE);
     }
 
     function getPlayer(address playerId) external view returns (Player memory) {
@@ -60,7 +68,7 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
         properties[0] = player.name;
         properties[1] = Strings.toString(player.points);
 
-        string memory fields = "$player_name$ $player_points$";
+        string memory fields = "$name$ $points$";
 
         kanvas._generateUri(playerId, properties, fields, WIN_NFT_TEMPLATE);
     }
@@ -77,7 +85,7 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
         properties[0] = player.name;
         properties[1] = Strings.toString(player.points);
 
-        string memory fields = "$player_name$ $player_points$";
+        string memory fields = "$name$ $points$";
 
         kanvas._generateUri(playerId, properties, fields, LOST_NFT_TEMPLATE);
     }
