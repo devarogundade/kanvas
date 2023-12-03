@@ -20,6 +20,9 @@ class Route {
             const uri = yield controller.generate(properties, fields, gameId, playerId, Number(templateId));
             return res.status(contants_1.OK).send({ uri });
         }));
+        router.get('/', (_, res) => {
+            return res.send('Kanvas Dynamic Nft Rendering Server. Visit https://kanvas-constellation.netlify.app to learn more about kanvas.');
+        });
         app.use('/', router);
     }
 }

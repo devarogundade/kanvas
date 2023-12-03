@@ -21,6 +21,10 @@ export class Route {
             return res.status(OK).send({ uri });
         });
 
+        router.get('/', (_: Request, res: Response) => {
+            return res.send('Kanvas Dynamic Nft Rendering Server. Visit https://kanvas-constellation.netlify.app to learn more about kanvas.');
+        });
+
         app.use('/', router);
     }
 
