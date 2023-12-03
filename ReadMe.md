@@ -15,9 +15,9 @@ contract RockPaperScissors is IKanvasGame {
 }
 ```
 
-## Include the IKanvasInteropGame for a cross-chain game
+## Include the YourGame for a cross-chain game
 ```solidity
-contract RockPaperScissors is IKanvasGame, IKanvasInteropGame {
+contract RockPaperScissors is IKanvasGame, YourGame {
    constructor(address kanvasRouter) IKanvasGame() {
         kanvas = IKanvasAvax(kanvasRouter);
     }
@@ -31,9 +31,9 @@ interface IKanvasGame {
 }
 ```
 
-## IKanvasInteropGame
+## YourGame
 ```solidity
-interface IKanvasInteropGame {
+interface YourGame {
     function _receiveFrom(
         uint64 chainSelector,
         address gameId,
