@@ -43,6 +43,8 @@ interface IKanvasInteropGame {
 
 ## Generate NFT
 ```solidity
+uint8 NFT_TEMPLATE = 0;
+
 string[] memory properties = new string[](MAX_PROPERTIES_LEN);
 properties[0] = player.name;
 properties[1] = player.points;
