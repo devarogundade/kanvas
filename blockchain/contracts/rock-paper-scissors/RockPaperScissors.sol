@@ -134,7 +134,10 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
         _playerNfts[playerId] = tokenId;
     }
 
-    function _receiveUri(address playerId, string memory uri) external {
+    function _receiveUri(
+        address playerId,
+        string memory uri
+    ) external override {
         uint256 tokenId = _playerNfts[playerId];
 
         // this player does not have the game nft
@@ -145,7 +148,6 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
             tokenId = _tokenId;
 
             _mint(playerId, tokenId);
-
             _playerNfts[playerId] = tokenId;
         }
 

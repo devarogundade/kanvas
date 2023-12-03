@@ -1,8 +1,8 @@
 <template>
-    <div ref="button" :class="`button ${state}`" :style="`width: ${width}; background: ${bg};`">
+    <button :type="type" ref="button" :class="`button ${state}`" :style="`width: ${width}; background: ${bg};`">
         <ProgressBoxWhite class="progress" v-if="progress" />
         <p v-else :style="`color: ${color};`">{{ text }}</p>
-    </div>
+    </button>
 </template>
 
 <script setup>
@@ -11,7 +11,7 @@ import ProgressBoxWhite from './ProgressBoxWhite.vue';
 
 <script>
 export default {
-    props: ['state', 'width', 'bg', 'progress', 'text', 'color'],
+    props: ['state', 'width', 'bg', 'progress', 'text', 'color', 'type'],
 }
 </script>
 

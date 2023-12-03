@@ -1,76 +1,76 @@
 <template>
     <section>
-        <div class="app_width">
-            <div class="toolbar">
-                <RouterLink :to="`/games/${$route.params.id}`">
-                    <div class="game">
-                        <i class="fi fi-rr-arrow-left" style="color: black;"></i>
-                        <img src="https://media.gq-magazine.co.uk/photos/645b5c3c8223a5c3801b8b26/16:9/w_1280,c_limit/100-best-games-hp-b.jpg"
-                            alt="">
-                        <h3>RockPaperScissors</h3>
+        <LoadingBox v-if="fetching" />
+
+        <div class="wrapper">
+            <div class="app_width" v-if="game">
+                <div class="toolbar">
+                    <RouterLink :to="`/games/${$route.params.id}`">
+                        <div class="game">
+                            <i class="fi fi-rr-arrow-left" style="color: black;"></i>
+                            <img :src="game.avatar" alt="">
+                            <h3>{{ game.name }}</h3>
+                        </div>
+                    </RouterLink>
+                </div>
+                <main>
+                    <div class="editor-tools">
+                        <div class="tool-drag">
+                            <i class="fi fi-rr-location-arrow" :style="editor.active == 'selectMode' ? 'color: pink;' : ''"
+                                @click="drag()"></i>
+                        </div>
+                        <div class="tool-undo">
+                            <i class="fi fi-rr-rotate-left" @click="undo()"></i>
+                        </div>
+                        <div class="tool-redo">
+                            <i class="fi fi-rr-rotate-right" @click="redo()"></i>
+                        </div>
+                        <div class="tool-trash">
+                            <i class="fi fi-rr-trash-xmark" @click="deleteEditable()"></i>
+                        </div>
+                        <div class="tool-freeDrawing">
+                            <i class="fi fi-rr-pen-swirl" :style="editor.active == 'freeDrawing' ? 'color: pink;' : ''"
+                                @click="freeDrawing()"></i>
+                        </div>
+                        <div class="tool-addText">
+                            <i class="fi fi-rr-text" :style="editor.active == 'text' ? 'color: pink;' : ''"
+                                @click="addText()"></i>
+                        </div>
+                        <div class="tool-addCircle">
+                            <i class="fi fi-rr-circle" :style="editor.active == 'circle' ? 'color: pink;' : ''"
+                                @click="addCicle()"></i>
+                        </div>
+                        <div class="tool-addSquare">
+                            <i class="fi fi-rr-square" :style="editor.active == 'rect' ? 'color: pink;' : ''"
+                                @click="addSquare()"></i>
+                        </div>
+                        <div class="tool-arrow">
+                            <i class="fi fi-rr-arrow-up-right" :style="editor.active == 'arrow' ? 'color: pink;' : ''"
+                                @click="addArrow()"></i>
+                        </div>
+                        <div class="tool-upload">
+                            <label for="file">
+                                <i class="fi fi-rr-file-import"></i>
+                            </label>
+                            <input type="file" id="file" ref="file" style="display: none;" :v-model="file" accept="image/*"
+                                @change="uploadImg">
+                        </div>
                     </div>
-                </RouterLink>
+                    <div class="canvas">
+                        <Editor :canvasWidth="canvasWidth" :canvasHeight="canvasHeight" ref="editor" />
+                    </div>
+                    <div class="options">
+                        <p>Font Size</p>
+                        <input type="number"
+                            style="margin-bottom: 16px; border: 1px solid #ccc; padding: 8px; outline: none; border-radius: 6px;"
+                            placeholder="0px" v-model="fontSize">
+                        <color-picker v-model:pureColor="pureColor" v-model:gradientColor="gradientColor"
+                            :isWidget="true" />
+                        <br> <br>
+                        <PrimaryButton :progress="saving" :text="'Save Template'" @click="saveImg" />
+                    </div>
+                </main>
             </div>
-            <main>
-                <div class="editor-tools">
-                    <div class="tool-drag">
-                        <i class="fi fi-rr-location-arrow" :style="editor.active == 'selectMode' ? 'color: pink;' : ''"
-                            @click="drag()"></i>
-                    </div>
-                    <div class="tool-undo">
-                        <i class="fi fi-rr-rotate-left" @click="undo()"></i>
-                    </div>
-                    <div class="tool-redo">
-                        <i class="fi fi-rr-rotate-right" @click="redo()"></i>
-                    </div>
-                    <div class="tool-trash">
-                        <i class="fi fi-rr-trash-xmark" @click="deleteEditable()"></i>
-                    </div>
-                    <div class="tool-freeDrawing">
-                        <i class="fi fi-rr-pen-swirl" :style="editor.active == 'freeDrawing' ? 'color: pink;' : ''"
-                            @click="freeDrawing()"></i>
-                    </div>
-                    <div class="tool-addText">
-                        <i class="fi fi-rr-text" :style="editor.active == 'text' ? 'color: pink;' : ''"
-                            @click="addText()"></i>
-                    </div>
-                    <div class="tool-addCircle">
-                        <i class="fi fi-rr-circle" :style="editor.active == 'circle' ? 'color: pink;' : ''"
-                            @click="addCicle()"></i>
-                    </div>
-                    <div class="tool-addSquare">
-                        <i class="fi fi-rr-square" :style="editor.active == 'rect' ? 'color: pink;' : ''"
-                            @click="addSquare()"></i>
-                    </div>
-                    <div class="tool-arrow">
-                        <i class="fi fi-rr-arrow-up-right" :style="editor.active == 'arrow' ? 'color: pink;' : ''"
-                            @click="addArrow()"></i>
-                    </div>
-                    <!-- <div class="tool-crop">
-                        <VueFeather v-if="stateCrop" type="crop" @click="crop()" />
-                        <VueFeather v-else type="crop" @click="applyCrop()" />
-                    </div> -->
-                    <div class="tool-upload">
-                        <label for="file">
-                            <i class="fi fi-rr-file-import"></i>
-                        </label>
-                        <input type="file" id="file" ref="file" style="display: none;" :v-model="file" accept="image/*"
-                            @change="uploadImg">
-                    </div>
-                </div>
-                <div class="canvas">
-                    <Editor :canvasWidth="canvasWidth" :canvasHeight="canvasHeight" ref="editor" />
-                </div>
-                <div class="options">
-                    <p>Font Size</p>
-                    <input type="number"
-                        style="margin-bottom: 16px; border: 1px solid #ccc; padding: 8px; outline: none; border-radius: 6px;"
-                        placeholder="0px" v-model="fontSize">
-                    <color-picker v-model:pureColor="pureColor" v-model:gradientColor="gradientColor" :isWidget="true" />
-                    <br> <br>
-                    <PrimaryButton :text="'Save Template'" @click="saveImg" />
-                </div>
-            </main>
         </div>
     </section>
 </template>
@@ -81,12 +81,18 @@ import { ColorPicker } from "vue3-colorpicker";
 import "vue3-colorpicker/style.css";
 import PrimaryButton from "../components/PrimaryButton.vue";
 import { RouterLink } from "vue-router";
+import LoadingBox from '../components/LoadingBox.vue';
 </script>
   
 <script>
+import { fetchGame } from '../scripts/graph';
+import { tryAddTemplate } from "../scripts/kanvas";
+import { upload } from "../scripts/storage";
 export default {
     data() {
         return {
+            game: null,
+            fetching: true,
             pureColor: 'red',
             gradientColor: 'red',
             canvasWidth: "500",
@@ -97,25 +103,34 @@ export default {
                 mode: "FreeDearaw",
                 active: "selectMode"
             },
-            fontSize: 14
+            fontSize: 14,
+            saving: false
         };
     },
+    mounted() {
+        this.getGame()
+    },
     methods: {
-        undo() {
+        getGame: async function () {
+            this.fetching = true
+            this.game = await fetchGame(this.$route.params.id)
+            this.fetching = false
+        },
+        undo: function () {
             this.$refs.editor.undo();
         },
-        redo() {
+        redo: function () {
             this.$refs.editor.redo();
         },
-        deleteEditable() {
+        deleteEditable: function () {
             this.$refs.editor.clear();
         },
-        freeDrawing() {
+        freeDrawing: function () {
             let customizeFreeDrawing = { stroke: this.pureColor, strokeWidth: "5" };
             this.$refs.editor.set("freeDrawing", customizeFreeDrawing);
             this.editor.active = "freeDrawing";
         },
-        addText() {
+        addText: function () {
             let textModeOptions = {
                 fill: this.pureColor,
                 fontFamily: "Space Grotesk",
@@ -125,39 +140,71 @@ export default {
             this.$refs.editor.set("text", textModeOptions);
             this.editor.active = "text";
         },
-        addCicle() {
+        addCicle: function () {
             let circleModeParams = { fill: this.pureColor };
             this.$refs.editor.set("circle", circleModeParams);
             this.editor.active = "circle";
         },
-        addSquare() {
+        addSquare: function () {
             let customizeRectangle = {
                 fill: this.pureColor
             };
             this.$refs.editor.set("rect", customizeRectangle);
             this.editor.active = "rect";
         },
-        addArrow() {
+        addArrow: function () {
             let customizeArrow = { stroke: this.pureColor, strokeWidth: "2" };
             this.$refs.editor.set("arrow", customizeArrow);
             this.editor.active = "arrow";
         },
-        drag() {
+        drag: function () {
             this.$refs.editor.set("selectMode");
             this.editor.active = "selectMode";
         },
         uploadImg: function (event) {
             this.$refs.editor.uploadImage(event);
         },
-        saveImg() {
-            const svg = this.$refs.editor.saveImage();
-            console.log(svg)
+        saveImg: async function () {
+            if (this.saving) return
+            this.saving = true
+
+            const svgString = this.$refs.editor.saveImage();
+            console.log(svgString);
+
+            const blob = new Blob([svgString], { type: 'image/svg+xml' });
+
+            const url = await upload(blob, `templates/${this.$route.params.id}/${this.game.templates.length}`);
+
+            const transaction = await tryAddTemplate(url, this.$route.params.id);
+            if (transaction) {
+                notify.push({
+                    title: "Transaction sent ✔️",
+                    description: "Template was created successfully!",
+                    category: "success",
+                    linkTitle: "View Tnx",
+                    linkUrl: "",
+                });
+                this.$router.push('/games');
+            }
+            else {
+                notify.push({
+                    title: "Transaction failed ❌",
+                    description: "Please try again!",
+                    category: "error",
+                });
+            }
+
+            this.saving = false
         }
     },
 };
 </script>
   
 <style scoped>
+.wrapper {
+    min-height: 80vh;
+}
+
 .toolbar {
     margin-top: 60px;
     display: flex;

@@ -57,9 +57,16 @@ export function handleChainlinkRequested(event: ChainlinkRequestedEvent): void {
 }
 
 export function handleGameCreated(event: GameCreatedEvent): void {
-  let entity = new GameCreated(
+  let entity = GameCreated.load(
     event.params.gameId
   );
+
+  if (!entity) {
+    entity = new GameCreated(
+      event.params.gameId
+    );
+  }
+
   entity.gameId = event.params.gameId;
   entity.name = event.params.name;
   entity.description = event.params.description;

@@ -13,42 +13,66 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Controller = void 0;
+const https_1 = __importDefault(require("https"));
 const graph_1 = require("./graph");
 const postmark_1 = require("postmark");
-// import { create as UploadUri } from 'ipfs-http-client';
-const https_1 = __importDefault(require("https"));
+const app_1 = require("firebase-admin/app");
+const storage_1 = require("firebase-admin/storage");
+const kanvas_creds_json_1 = __importDefault(require("../kanvas-creds.json"));
+(0, app_1.initializeApp)({
+    credential: (0, app_1.cert)(kanvas_creds_json_1.default),
+    storageBucket: 'kanvas-73a90.appspot.com'
+});
+const bucket = (0, storage_1.getStorage)().bucket();
 const graph = new graph_1.Graph();
 class Controller {
     generate(properties, fields, gameId, playerId, templateId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log('PARAMS', properties, fields, gameId, playerId, templateId);
                 const game = yield this.getGame(gameId);
-                console.log('GAME', game);
-                if (game == null)
+                if (game == null) {
+                    this.sendEmail("Kanvas: Critical Error", `
+                            <ul>
+                                <li>Game Id: ${gameId}</li>
+                                <li>Player Id: ${playerId}</li>
+                                <li>Template Id: ${templateId}</li>
+                                <li>Reason: Game was not found!.</li>
+                            </ul>
+                        `, process.env.DEV_EMAIL, process.env.POSTMARK_FROM);
                     return "";
-                // const imageUri = await this.getImageNftUri(game, properties, fields, playerId, templateId);
-                // const Json = {
-                //     name: "Some Nft",
-                //     description: "About Some Nft",
-                //     images: imageUri
-                // };
-                // console.log(Json);
-                return "";
-                // const auth = 'Basic ' + Buffer.from(
-                //     process.env.INFURA_PROJECT_ID + ':' + process.env.INFURA_PROJECT_SECRET
-                // ).toString('base64');
-                // /* Create an instance of the client */
-                // const client = UploadUri({
-                //     host: 'ipfs.infura.io',
-                //     port: 5001,
-                //     protocol: 'https',
-                //     headers: {
-                //         authorization: auth,
-                //     }
-                // });
-                // const result = await client.add(JSON.stringify(Json));
-                // return result.path;
+                }
+                ;
+                const buffer = yield this.getImageNftUri(game, properties, fields, playerId, templateId);
+                if (buffer == null) {
+                    this.sendEmail(`${game.name} Failed to generate NFT URI`, `
+                        <ul>
+                            <li>Game: ${game.name}</li>
+                            <li>Player Id: ${playerId}</li>
+                            <li>Reason: Failed to generate Nft Uri.</li>
+                        </ul>
+                    `, game.email, process.env.POSTMARK_FROM);
+                    return "";
+                }
+                ;
+                const path = `generated/${game.gameId}/${playerId}.svg`;
+                yield bucket.file(path).save(buffer, {
+                    public: true
+                });
+                const downloadURL = yield (0, storage_1.getDownloadURL)(bucket.file(path));
+                this.sendEmail(`Kanvas: New NFT URI generated on ${game.name}`, `
+                        <ul>
+                            <li>Game: ${game.name}</li>
+                            <li>Player Id: ${playerId}</li>
+                            <li>URI: ${downloadURL}</li>
+                            <li>Reason: Failed to generate Nft Uri.</li>
+                        </ul>
+                    `, game.email, process.env.POSTMARK_FROM);
+                const Metadata = {
+                    name: game.name,
+                    description: game.description,
+                    images: downloadURL
+                };
+                return JSON.stringify(Metadata);
             }
             catch (error) {
                 console.error(error);
@@ -76,7 +100,6 @@ class Controller {
                 }
             }
             `);
-                console.log(response);
                 return response.gameCreated;
             }
             catch (error) {
@@ -88,9 +111,7 @@ class Controller {
     getImageNftUri(game, data, data2, playerId, templateId) {
         return __awaiter(this, void 0, void 0, function* () {
             const properties = this.parseProperties(data);
-            console.log('PROPERTIES: ' + properties);
             const fields = this.parseFields(data2);
-            console.log('FIELDS: ' + properties);
             if (properties.length != fields.length) {
                 this.sendEmail("Failed to generate NFT URI", `
                     <ul>
@@ -99,28 +120,26 @@ class Controller {
                         <li>Reason: The length of your properties and fields are not equal.</li>
                     </ul>
                 `, game.email, process.env.POSTMARK_FROM);
-                return "";
+                return null;
             }
-            let svg = "";
-            const svgContents = yield this.readFile(game.templates[templateId].templateUri);
-            fields.forEach(field => {
-                svg = svgContents.replace(field, '');
-            });
-            return this.toBase64(svg);
+            const buffer = yield this.readFile(game.templates[templateId].templateUri);
+            const svgContents = new TextDecoder('utf-8').decode(buffer);
+            let svgString = "";
+            for (let index = 0; index < properties.length; index++) {
+                svgString = svgContents.replace(fields[index], properties[index]);
+            }
+            return Buffer.from(svgString, 'utf-8');
         });
     }
     parseFields(fields) {
-        return fields.split(" ");
+        return fields.split(" ").filter(prop => prop.trim() !== '');
     }
     parseProperties(fields) {
-        return fields.split(",");
-    }
-    toBase64(svg) {
-        return Buffer.from(svg).toString('base64');
+        return fields.split(",").filter(prop => prop.trim() !== '');
     }
     readFile(uri) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = "";
+            let chunks = Buffer.alloc(0);
             return new Promise((resolve, reject) => {
                 https_1.default.get(uri, {
                     rejectUnauthorized: false
@@ -129,8 +148,12 @@ class Controller {
                         reject(`Failed to download file. Status code: ${response.statusCode}`);
                         return;
                     }
-                    response.on('data', (chunk) => { result += chunk; });
-                    response.on('end', () => { resolve(result); });
+                    response.on('data', (chunk) => {
+                        chunks = Buffer.concat([chunks, chunk]);
+                    });
+                    response.on('end', () => {
+                        resolve(chunks);
+                    });
                 }).on('error', (err) => {
                     reject(new Error(`Error downloading file: ${err.message}`));
                 });

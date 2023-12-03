@@ -1,30 +1,37 @@
 <template>
     <section>
-        <div class="app_width">
-            <main>
-                <div class="toolbars">
-                    <RouterLink :to="`/games`">
-                        <div class="toolbar">
-                            <i class="fi fi-rr-arrow-left" style="color: black;"></i>
-                            <img src="https://media.gq-magazine.co.uk/photos/645b5c3c8223a5c3801b8b26/16:9/w_1280,c_limit/100-best-games-hp-b.jpg"
-                                alt="">
-                            <h3>Templates for RockPaperScissors</h3>
-                        </div>
-                    </RouterLink>
+        <LoadingBox v-if="fetching" />
 
-                    <RouterLink :to="`/games/${$route.params.id}/template`">
-                        <PrimaryButton :text="'New Template'" />
-                    </RouterLink>
-                </div>
+        <div class="wrapper">
+            <div class="app_width" v-if="game">
+                <main>
+                    <div class="toolbars">
+                        <RouterLink :to="`/games`">
+                            <div class="toolbar">
+                                <i class="fi fi-rr-arrow-left" style="color: black;"></i>
+                                <img :src="game.avatar" alt="">
+                                <h3>Templates for {{ game.name }}</h3>
+                            </div>
+                        </RouterLink>
 
-                <div class="games">
-                    <div class="game">
-                        <div class="plan">ID: 1</div>
-                        <img src="https://media.gq-magazine.co.uk/photos/645b5c3c8223a5c3801b8b26/16:9/w_1280,c_limit/100-best-games-hp-b.jpg"
-                            alt="">
+                        <RouterLink :to="`/games/${$route.params.id}/template`">
+                            <PrimaryButton :text="'New Template'" />
+                        </RouterLink>
                     </div>
-                </div>
-            </main>
+
+                    <div class="games">
+                        <div class="game" v-for="template, index in game.templates" :key="index">
+                            <div class="plan">Template Id: {{ index }}</div>
+                            <img :src="template.templateUri" alt="">
+                        </div>
+                    </div>
+
+                    <div class="empty" v-if="game.templates.length == 0">
+                        <img src="/images/empty.png" alt="">
+                        <p>No template found!</p>
+                    </div>
+                </main>
+            </div>
         </div>
     </section>
 </template>
@@ -32,9 +39,36 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import PrimaryButton from '../components/PrimaryButton.vue';
+import LoadingBox from '../components/LoadingBox.vue';
+</script>
+
+<script>
+import { fetchGame } from '../scripts/graph';
+export default {
+    data() {
+        return {
+            game: null,
+            fetching: true,
+        }
+    },
+    mounted() {
+        this.getGame()
+    },
+    methods: {
+        getGame: async function () {
+            this.fetching = true
+            this.game = await fetchGame(this.$route.params.id)
+            this.fetching = false
+        }
+    }
+}
 </script>
 
 <style scoped>
+.wrapper {
+    min-height: 80vh;
+}
+
 .toolbars {
     margin-top: 60px;
     display: flex;

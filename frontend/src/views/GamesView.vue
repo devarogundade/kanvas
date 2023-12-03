@@ -1,5 +1,7 @@
 <template>
     <section>
+        <LoadingBox v-if="fetching" />
+
         <div class="app_width">
             <main>
                 <div class="title">
@@ -10,30 +12,22 @@
                     </RouterLink>
                 </div>
 
-                <div class="games">
-                    <RouterLink to="/games/1">
+                <div class="games" v-if="!fetching">
+                    <RouterLink v-for="game in games" :to="`/games/${game.gameId}`">
                         <div class="game">
-                            <div class="plan">Starter</div>
-                            <img src="https://media.gq-magazine.co.uk/photos/645b5c3c8223a5c3801b8b26/16:9/w_1280,c_limit/100-best-games-hp-b.jpg"
-                                alt="">
+                            <div class="plan">{{ plans[game.plan] }}</div>
+                            <img :src="game.avatar" alt="">
                             <div class="text">
-                                <p class="name">RockPaperScissors</p>
-                                <p class="description">Just a game</p>
+                                <p class="name">{{ game.name }}</p>
+                                <p class="description">{{ game.description }}</p>
                             </div>
                         </div>
                     </RouterLink>
+                </div>
 
-                    <RouterLink to="/games/2">
-                        <div class="game">
-                            <div class="plan">Starter</div>
-                            <img src="https://media.gq-magazine.co.uk/photos/645b5c3c8223a5c3801b8b26/16:9/w_1280,c_limit/100-best-games-hp-b.jpg"
-                                alt="">
-                            <div class="text">
-                                <p class="name">RockPaperScissors</p>
-                                <p class="description">Just a game</p>
-                            </div>
-                        </div>
-                    </RouterLink>
+                <div class="empty" v-if="!fetching && games.length == 0">
+                    <img src="/images/empty.png" alt="">
+                    <p>No game found!</p>
                 </div>
             </main>
         </div>
@@ -43,6 +37,38 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import PrimaryButton from '../components/PrimaryButton.vue';
+import LoadingBox from '../components/LoadingBox.vue';
+</script>
+
+<script>
+import { watchAccount } from '@wagmi/core'
+import { fetchGames } from '../scripts/graph';
+export default {
+    data() {
+        return {
+            games: [],
+            plans: ['', 'Starter', 'Business', 'Enterprise'],
+            fetching: true
+        }
+    },
+
+    mounted() {
+        this.getGames()
+
+        watchAccount((account) => {
+            this.$store.commit('setWallet', account.address)
+            this.getGames()
+        })
+    },
+
+    methods: {
+        getGames: async function () {
+            this.fetching = true
+            this.games = await fetchGames(this.$store.state.wallet)
+            this.fetching = false
+        }
+    }
+}
 </script>
 
 <style scoped>
@@ -63,9 +89,9 @@ main {
 }
 
 .games {
+    gap: 30px;
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
     margin-top: 30px;
 }
 

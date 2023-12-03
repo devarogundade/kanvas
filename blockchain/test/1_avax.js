@@ -71,15 +71,15 @@ const RockPaperScissors = artifacts.require("RockPaperScissors")
 //     })
 // })
 
-contract('RockPaperScissors', async accounts => {
-    it('Create RockPaperScissors Player', async () => {
-        const rockPaperScissors = await RockPaperScissors.deployed()
+// contract('RockPaperScissors', async accounts => {
+//     it('Create RockPaperScissors Player', async () => {
+//         const rockPaperScissors = await RockPaperScissors.deployed()
 
-        const trx = await rockPaperScissors.createPlayer(accounts[0], "Ibrahim")
+//         const trx = await rockPaperScissors.createPlayer(accounts[0], "Ibrahim")
 
-        console.log(trx.tx)
-    })
-})
+//         console.log(trx.tx)
+//     })
+// })
 
 contract('RockPaperScissors', async accounts => {
     it('Create RockPaperScissors Upgrade Player', async () => {

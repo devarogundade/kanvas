@@ -6,66 +6,136 @@
                     <h3>Create New Game</h3>
                 </div>
 
-                <form>
-                    <label for="name">Name</label>
-                    <input type="text" id="name" required name="name" placeholder="Axie Infinity">
+                <form @submit="createGame">
+                    <label for=" name">Name</label>
+                    <input type="text" v-model="game.name" id="name" required name="name" placeholder="Axie Infinity">
 
                     <label for="description">Description</label>
-                    <input type="text" id="description" required name="description"
+                    <input type="text" v-model="game.description" id="description" required name="description"
                         placeholder="A Decentralized Arcade Game">
 
                     <label for="gameId">Game Id</label>
-                    <input type="text" id="gameId" required name="gameId"
+                    <input type="text" v-model="game.gameId" id="gameId" required name="gameId"
                         placeholder="0x909d21baE8be0aD4d35d89129b2a4f2925da7877">
 
                     <label for="email">Email</label>
-                    <input type="email" id="email" required name="email" placeholder="axie@game.com">
+                    <input type="email" v-model="game.email" id="email" required name="email" placeholder="axie@game.com">
 
                     <label for="website">Webiste</label>
-                    <input type="text" id="website" name="website" placeholder="https://axie.infinty">
+                    <input type="text" v-model="game.website" id="website" name="website"
+                        placeholder="https://axie.infinty">
 
                     <label for="avatar">Avatar</label>
                     <div class="avatar">
-                        <input required type="file" style="opacity: 0; cursor: pointer;" accept="image/*">
+                        <input @change="doFile" required type="file" style="opacity: 0; cursor: pointer;" accept="image/*">
                         <i class="fi fi-rr-picture"></i>
                         <img v-show="false" src="" alt="">
                     </div>
 
                     <div class="plans">
-                        <div class="plan plan_active">
+                        <div v-for="plan, index in plans" :key="plan.id" @click="game.plan = plan.planId"
+                            :class="plan.planId == game.plan ? 'plan plan_active' : 'plan'">
                             <p class="name">Starter</p>
                             <ul>
-                                <li>500 Players</li>
-                                <li>3 NFT Templates</li>
+                                <li>{{ limits[index].players }} Players</li>
+                                <li>{{ limits[index].templates }} NFT Templates</li>
                             </ul>
-                            <div class="cost">0 Avax</div>
-                        </div>
-
-                        <div class="plan">
-                            <p class="name">Business</p>
-                            <ul>
-                                <li>5000 Players</li>
-                                <li>10 NFT Templates</li>
-                            </ul>
-                            <div class="cost">5 Avax</div>
-                        </div>
-
-                        <div class="plan">
-                            <p class="name">Enterprise</p>
-                            <ul>
-                                <li>Unlimited Players</li>
-                                <li>50 NFT Templates</li>
-                            </ul>
-                            <div class="cost">50 Avax</div>
+                            <div class="cost">{{ $fromWei(plan.cost) }} Avax</div>
                         </div>
                     </div>
 
-                    <button class="button" type="submit">Create Game</button>
+                    <br> <br>
+
+                    <PrimaryButton :width="'240px'" :progress="creating" :text="'Create Game'" />
                 </form>
             </main>
         </div>
     </section>
 </template>
+
+<script setup>
+import PrimaryButton from '../components/PrimaryButton.vue'
+</script>
+
+<script>
+import { fetchPlans } from '../scripts/graph'
+import { tryCreateGame } from '../scripts/kanvas'
+import { upload } from "../scripts/storage"
+import { notify } from "../reactives/notify"
+export default {
+    data() {
+        return {
+            plans: [],
+            file: null,
+            creating: false,
+            game: {
+                name: "",
+                description: "",
+                gameId: "",
+                avatar: "",
+                email: "",
+                website: "",
+                plan: null
+            },
+            limits: [
+                { players: 500, templates: 3 },
+                { players: 10000, templates: 10 },
+                { players: 'Unlimited', templates: 25 }
+            ]
+        };
+    },
+    mounted() {
+        this.getPlans();
+    },
+    methods: {
+        doFile: function (e) {
+            const files = e.target.files;
+            if (files.length > 0) {
+                this.file = files[0];
+            }
+            else {
+                this.file = null;
+            }
+        },
+        getPlans: async function () {
+            this.plans = await fetchPlans();
+        },
+        createGame: async function (e) {
+            e.preventDefault();
+            if (this.creating) return
+            this.creating = true;
+
+            let avatar = '';
+            if (this.file) {
+                const url = await upload(this.file, `avatars/${this.game.gameId}`);
+                if (url) { avatar = url; }
+            }
+            this.game.avatar = avatar;
+            const transaction = await tryCreateGame(this.game);
+            if (transaction) {
+                notify.push({
+                    title: "Transaction sent ✔️",
+                    description: this.game.name + " was created successfully!",
+                    category: "success",
+                    linkTitle: "View Tnx",
+                    linkUrl: "",
+                });
+                this.$router.push('/games');
+            }
+            else {
+                notify.push({
+                    title: "Transaction failed ❌",
+                    description: "Please try again!",
+                    category: "error",
+                });
+            }
+
+
+            this.creating = false;
+        }
+    }
+}
+</script>
 
 <style scoped>
 main {
@@ -147,7 +217,7 @@ label {
 
 .plan_active {
     background: red;
-    border: none !important;
+    border: 1px red solid;
 }
 
 .plan {
@@ -179,17 +249,5 @@ label {
 
 .plan_active .cost {
     color: #fff;
-}
-
-.button {
-    height: 50px;
-    width: 200px;
-    background: var(--pr);
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 12px;
-    margin-top: 30px;
-    cursor: pointer;
 }
 </style>

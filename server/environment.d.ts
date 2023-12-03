@@ -8,6 +8,8 @@ declare global {
 
             INFURA_PROJECT_ID: string;
             INFURA_PROJECT_SECRET: string;
+
+            DEV_EMAIL: string;
         }
     }
 }

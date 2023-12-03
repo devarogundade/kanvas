@@ -14,6 +14,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 5;
 }
 
 .lds-facebook {
@@ -28,7 +29,7 @@
     position: absolute;
     left: 8px;
     width: 16px;
-    background: var(--pr-light);
+    background: var(--pr);
     animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
 

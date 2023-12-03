@@ -1,48 +1,88 @@
+import https from 'https';
 import { Graph } from './graph';
 import { Client, Message } from "postmark";
-// import { create as UploadUri } from 'ipfs-http-client';
-import https from 'https';
+
+import { initializeApp, cert, ServiceAccount } from 'firebase-admin/app';
+import { getStorage, getDownloadURL } from 'firebase-admin/storage';
+
+import serviceAccount from '../kanvas-creds.json';
+
+initializeApp({
+    credential: cert(serviceAccount as ServiceAccount),
+    storageBucket: 'kanvas-73a90.appspot.com'
+});
+
+const bucket = getStorage().bucket();
 
 const graph = new Graph();
+
 export class Controller {
     async generate(properties: string, fields: string, gameId: string, playerId: string, templateId: number): Promise<string> {
         try {
-            console.log('PARAMS', properties, fields, gameId, playerId, templateId);
-
             const game = await this.getGame(gameId);
-            console.log('GAME', game);
+            if (game == null) {
+                this.sendEmail(
+                    "Kanvas: Critical Error",
+                    `
+                            <ul>
+                                <li>Game Id: ${gameId}</li>
+                                <li>Player Id: ${playerId}</li>
+                                <li>Template Id: ${templateId}</li>
+                                <li>Reason: Game was not found!.</li>
+                            </ul>
+                        `,
+                    process.env.DEV_EMAIL,
+                    process.env.POSTMARK_FROM
+                );
+                return "";
+            };
 
-            if (game == null) return "";
+            const buffer: Buffer | null = await this.getImageNftUri(game, properties, fields, playerId, templateId);
+            if (buffer == null) {
+                this.sendEmail(
+                    `${game.name} Failed to generate NFT URI`,
+                    `
+                        <ul>
+                            <li>Game: ${game.name}</li>
+                            <li>Player Id: ${playerId}</li>
+                            <li>Reason: Failed to generate Nft Uri.</li>
+                        </ul>
+                    `,
+                    game.email,
+                    process.env.POSTMARK_FROM
+                );
+                return "";
+            };
 
-            // const imageUri = await this.getImageNftUri(game, properties, fields, playerId, templateId);
+            const path = `generated/${game.gameId}/${playerId}.svg`;
 
-            // const Json = {
-            //     name: "Some Nft",
-            //     description: "About Some Nft",
-            //     images: imageUri
-            // };
+            await bucket.file(path).save(buffer, {
+                public: true
+            });
 
-            // console.log(Json);
+            const downloadURL = await getDownloadURL(bucket.file(path));
 
-            return "";
+            this.sendEmail(
+                `Kanvas: New NFT URI generated on ${game.name}`,
+                `
+                        <ul>
+                            <li>Game: ${game.name}</li>
+                            <li>Player Id: ${playerId}</li>
+                            <li>URI: ${downloadURL}</li>
+                            <li>Reason: Failed to generate Nft Uri.</li>
+                        </ul>
+                    `,
+                game.email,
+                process.env.POSTMARK_FROM
+            );
 
-            // const auth = 'Basic ' + Buffer.from(
-            //     process.env.INFURA_PROJECT_ID + ':' + process.env.INFURA_PROJECT_SECRET
-            // ).toString('base64');
+            const Metadata = {
+                name: game.name,
+                description: game.description,
+                images: downloadURL
+            };
 
-            // /* Create an instance of the client */
-            // const client = UploadUri({
-            //     host: 'ipfs.infura.io',
-            //     port: 5001,
-            //     protocol: 'https',
-            //     headers: {
-            //         authorization: auth,
-            //     }
-            // });
-
-            // const result = await client.add(JSON.stringify(Json));
-
-            // return result.path;
+            return JSON.stringify(Metadata);
         } catch (error) {
             console.error(error);
             return "";
@@ -69,8 +109,6 @@ export class Controller {
             }
             `);
 
-            console.log(response);
-
             return response.gameCreated as Game | null;
         } catch (error) {
             console.error(error);
@@ -78,12 +116,9 @@ export class Controller {
         }
     }
 
-    private async getImageNftUri(game: Game, data: string, data2: string, playerId: string, templateId: number): Promise<string> {
+    private async getImageNftUri(game: Game, data: string, data2: string, playerId: string, templateId: number): Promise<Buffer | null> {
         const properties: string[] = this.parseProperties(data);
-        console.log('PROPERTIES: ' + properties);
-
         const fields: string[] = this.parseFields(data2);
-        console.log('FIELDS: ' + properties);
 
         if (properties.length != fields.length) {
             this.sendEmail(
@@ -98,34 +133,31 @@ export class Controller {
                 game.email,
                 process.env.POSTMARK_FROM
             );
-            return "";
+            return null;
         }
 
-        let svg: string = "";
+        const buffer: Buffer = await this.readFile(game.templates[templateId].templateUri);
+        const svgContents: string = new TextDecoder('utf-8').decode(buffer);
 
-        const svgContents: string = await this.readFile(game.templates[templateId].templateUri);
+        let svgString: string = "";
 
-        fields.forEach(field => {
-            svg = svgContents.replace(field, '');
-        });
+        for (let index = 0; index < properties.length; index++) {
+            svgString = svgContents.replace(fields[index], properties[index]);
+        }
 
-        return this.toBase64(svg);
+        return Buffer.from(svgString, 'utf-8');
     }
 
     private parseFields(fields: string): string[] {
-        return fields.split(" ");
+        return fields.split(" ").filter(prop => prop.trim() !== '');
     }
 
     private parseProperties(fields: string): string[] {
-        return fields.split(",");
+        return fields.split(",").filter(prop => prop.trim() !== '');
     }
 
-    private toBase64(svg: string): string {
-        return Buffer.from(svg).toString('base64');
-    }
-
-    private async readFile(uri: string): Promise<string> {
-        let result: string = "";
+    private async readFile(uri: string): Promise<Buffer> {
+        let chunks = Buffer.alloc(0);
 
         return new Promise((resolve, reject) => {
             https.get(uri, {
@@ -136,9 +168,13 @@ export class Controller {
                     return;
                 }
 
-                response.on('data', (chunk) => { result += chunk; });
+                response.on('data', (chunk) => {
+                    chunks = Buffer.concat([chunks, chunk]);
+                });
 
-                response.on('end', () => { resolve(result); });
+                response.on('end', () => {
+                    resolve(chunks);
+                });
             }).on('error', (err) => {
                 reject(new Error(`Error downloading file: ${err.message}`));
             });

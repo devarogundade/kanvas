@@ -1,4 +1,4 @@
-type ChainlinkCancelled @entity(immutable: true) {
+type ChainlinkCancelled @entity(immutable: false) {
   id: Bytes!
   Kanvas_id: Bytes! # bytes32
   blockNumber: BigInt!
@@ -6,7 +6,7 @@ type ChainlinkCancelled @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type ChainlinkFulfilled @entity(immutable: true) {
+type ChainlinkFulfilled @entity(immutable: false) {
   id: Bytes!
   Kanvas_id: Bytes! # bytes32
   blockNumber: BigInt!
@@ -14,7 +14,7 @@ type ChainlinkFulfilled @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type ChainlinkRequested @entity(immutable: true) {
+type ChainlinkRequested @entity(immutable: false) {
   id: Bytes!
   Kanvas_id: Bytes! # bytes32
   blockNumber: BigInt!
@@ -22,7 +22,7 @@ type ChainlinkRequested @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type GameCreated @entity(immutable: true) {
+type GameCreated @entity(immutable: false) {
   id: Bytes!
   gameId: Bytes! # address
   name: String! # string
@@ -38,7 +38,7 @@ type GameCreated @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type OwnershipTransferred @entity(immutable: true) {
+type OwnershipTransferred @entity(immutable: false) {
   id: Bytes!
   previousOwner: Bytes! # address
   newOwner: Bytes! # address
@@ -47,7 +47,7 @@ type OwnershipTransferred @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type PlanCreated @entity(immutable: true) {
+type PlanCreated @entity(immutable: false) {
   id: Bytes!
   planId: BigInt! # uint256
   name: String! # string
@@ -59,7 +59,7 @@ type PlanCreated @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type TemplateAdded @entity(immutable: true) {
+type TemplateAdded @entity(immutable: false) {
   id: Bytes!
   gameId: Bytes! # address
   templateUri: String! # string
