@@ -1,11 +1,11 @@
 import Web3 from 'web3';
 
-const RockPaperScissors = require('./abis/RockPaperScissors.json');
-const RockPaperScissorsInterop = require('./abis/RockPaperScissorsInterop.json');
+import RockPaperScissors from './abis/RockPaperScissors.json';
+import RockPaperScissorsInterop from './abis/RockPaperScissorsInterop.json';
 
 const Rpcs = {
     43113: 'https://avalanche-fuji-c-chain.publicnode.com',
-    80001: 'wss://polygon-mumbai-bor.publicnode.com'
+    80001: 'https://polygon-mumbai-bor.publicnode.com'
 };
 
 const privateKey = process.env.EVM_PRIVATE_KEY;
@@ -17,9 +17,10 @@ export class RockPaperScissorsController {
 
             let contract;
             if (chainId == 43113) {
-                contract = new web3.eth.Contract(RockPaperScissors.abi, RockPaperScissors.networks[chainId].address);
+                contract = new web3.eth.Contract((RockPaperScissors as any).abi, RockPaperScissors.networks[chainId].address);
             } else {
-                contract = new web3.eth.Contract(RockPaperScissorsInterop.abi, RockPaperScissorsInterop.networks[chainId].address);
+                return null;
+                // contract = new web3.eth.Contract((RockPaperScissorsInterop as any).abi, RockPaperScissorsInterop.networks[chainId].address);
             }
 
             const account = web3.eth.accounts.privateKeyToAccount(privateKey);
@@ -49,9 +50,10 @@ export class RockPaperScissorsController {
 
             let contract;
             if (chainId == 43113) {
-                contract = new web3.eth.Contract(RockPaperScissors.abi, RockPaperScissors.networks[chainId].address);
+                contract = new web3.eth.Contract((RockPaperScissors as any).abi, RockPaperScissors.networks[chainId].address);
             } else {
-                contract = new web3.eth.Contract(RockPaperScissorsInterop.abi, RockPaperScissorsInterop.networks[chainId].address);
+                return null;
+                // contract = new web3.eth.Contract((RockPaperScissorsInterop as any).abi, RockPaperScissorsInterop.networks[chainId].address);
             }
 
             const account = web3.eth.accounts.privateKeyToAccount(privateKey);

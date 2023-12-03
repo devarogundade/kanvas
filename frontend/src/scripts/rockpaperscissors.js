@@ -1,6 +1,7 @@
 import { readContract, writeContract, waitForTransaction, prepareWriteContract } from '@wagmi/core';
 import { avalancheFuji, polygonMumbai } from "@wagmi/core/chains"
 import RockPaperScissors from '../../abis/RockPaperScissors.json'
+import axios from 'axios'
 
 export async function tryCreatePlayer(wallet, name) {
     try {
@@ -51,39 +52,22 @@ export async function tryGetPlayerOnPolygon(wallet) {
     }
 }
 
-export async function tryUpgradePlayerOnAvax(wallet) {
+export async function tryUpgradePlayer(chainId, wallet) {
     try {
-        return "";
+        const response = await axios.get(`https://kanvas-di5j.onrender.com/rockpaperscissors/upgrade/${chainId}/${wallet}`)
+        return response.data.txId
     } catch (error) {
         console.error(error);
         return null;
     }
 }
 
-export async function tryUpgradePlayerOnPolygon(wallet) {
+export async function tryDowngradePlayer(chainId, wallet) {
     try {
-        return "";
+        const response = await axios.get(`https://kanvas-di5j.onrender.com/rockpaperscissors/downgrade/${chainId}/${wallet}`)
+        return response.data.txId
     } catch (error) {
         console.error(error);
         return null;
     }
 }
-
-export async function tryDowngradePlayerOnAvax(wallet) {
-    try {
-        return "";
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
-
-export async function tryDowngradePlayerOnPolygon(wallet) {
-    try {
-        return "";
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
-

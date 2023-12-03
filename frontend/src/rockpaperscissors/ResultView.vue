@@ -24,6 +24,8 @@ import Versus from "./components/Versus.vue";
 <script>
 import { mapGetters } from "vuex";
 import Versus from "./components/Versus.vue";
+import { tryUpgradePlayer, tryDowngradePlayer } from "../scripts/rockpaperscissors"
+import { getAccount } from "@wagmi/core"
 export default {
     computed: {
         ...mapGetters(["getChoice"]),
@@ -72,11 +74,17 @@ export default {
         },
 
         upgradePlayer: async function () {
-            console.log('upgrade');
+            const account = getAccount()
+            console.log(account);
+            const txId = await tryUpgradePlayer(43113, this.$store.state.wallet)
+            console.log(txId);
         },
 
         downgradePlayer: async function () {
-            console.log('downgrade');
+            const account = getAccount()
+            console.log(account);
+            const txId = await tryDowngradePlayer(43113, this.$store.state.wallet)
+            console.log(txId);
         }
     },
 };
