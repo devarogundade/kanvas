@@ -49,5 +49,5 @@ properties[1] = player.points;
 
 string memory fields = "$name$ $points$";
 
-kanvas._generateUri(playerId, properties, fields, WIN_NFT_TEMPLATE);
+kanvas._generateUri(playerId, properties, fields, NFT_TEMPLATE);
 ```
