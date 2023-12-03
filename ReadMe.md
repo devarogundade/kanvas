@@ -71,3 +71,5 @@ kanvas._generateUri(playerId, properties, fields, NFT_TEMPLATE);
       data
   );
 ```
+
+See full example [here](https://github.com/devarogundade/kanvas/tree/main/blockchain/contracts/rock-paper-scissors)
