@@ -26,6 +26,7 @@ import { mapGetters } from "vuex";
 import Versus from "./components/Versus.vue";
 import { tryUpgradePlayer, tryDowngradePlayer } from "../scripts/rockpaperscissors"
 import { getAccount } from "@wagmi/core"
+import { notify } from "../reactives/notify";
 export default {
     computed: {
         ...mapGetters(["getChoice"]),
@@ -74,17 +75,43 @@ export default {
         },
 
         upgradePlayer: async function () {
-            const account = getAccount()
-            console.log(account);
             const txId = await tryUpgradePlayer(43113, this.$store.state.wallet)
-            console.log(txId);
+            if (txId) {
+                notify.push({
+                    title: "Reward transaction sent ✔️",
+                    description: "You have been upgraded successfully!",
+                    category: "success",
+                    linkTitle: "View Tnx",
+                    linkUrl: `https://testnet.snowtrace.io/tx/${txId}`
+                });
+            }
+            else {
+                notify.push({
+                    title: "Reward transaction failed ❌",
+                    description: "Sorry, we encountered RPC problem!",
+                    category: "error",
+                });
+            }
         },
 
         downgradePlayer: async function () {
-            const account = getAccount()
-            console.log(account);
             const txId = await tryDowngradePlayer(43113, this.$store.state.wallet)
-            console.log(txId);
+            if (txId) {
+                notify.push({
+                    title: "Reward transaction sent ✔️",
+                    description: "You have been downgrade successfully!",
+                    category: "success",
+                    linkTitle: "View Tnx",
+                    linkUrl: `https://testnet.snowtrace.io/tx/${txId}`
+                });
+            }
+            else {
+                notify.push({
+                    title: "Reward transaction failed ❌",
+                    description: "Sorry, we encountered RPC problem!",
+                    category: "error",
+                });
+            }
         }
     },
 };

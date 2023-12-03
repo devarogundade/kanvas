@@ -118,7 +118,7 @@ export default {
                     description: this.game.name + " was created successfully!",
                     category: "success",
                     linkTitle: "View Tnx",
-                    linkUrl: "",
+                    linkUrl: `https://testnet.snowtrace.io/tx/${transaction.transactionHash}`
                 });
                 this.$router.push('/games');
             }
