@@ -1,5 +1,9 @@
 # Kanvas | Create Runtime Customizable NFTs
 
+Unlock boundless creativity in blockchain gaming with Kanvas. Craft dynamic, cross-chain NFTs effortlessly for immersive gaming experiences.
+
+[Devpost](https://devpost.com/software/kanvas-in-game-dynamic-nfts)
+
 ## Extend the IKanvasGame
 ```solidity
 contract RockPaperScissors is IKanvasGame {
