@@ -8,7 +8,6 @@ const controller = new Controller();
 const rpsController = new RockPaperScissorsController();
 
 export class Route {
-
     constructor(app: Express, router: Router) {
         router.get('/generate/:properties/:fields/:gameId/:playerId/:templateId', async (req: Request, res: Response) => {
             const { properties, fields, gameId, playerId, templateId } = req.params;
@@ -52,5 +51,4 @@ export class Route {
 
         app.use('/', router);
     }
-
 }
