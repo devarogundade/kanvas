@@ -3,6 +3,7 @@
 ## Extend the IKanvasGame
 ```solidity
 contract RockPaperScissors is IKanvasGame {
+IKanvasAvax private kanvas;
    constructor(address kanvasRouter) IKanvasGame() {
         kanvas = IKanvasAvax(kanvasRouter);
     }
@@ -12,6 +13,7 @@ contract RockPaperScissors is IKanvasGame {
 ## Include the IKanvasInteropGame for a cross-chain game
 ```solidity
 contract RockPaperScissors is IKanvasGame, IKanvasInteropGame {
+IKanvasAvax private kanvas;
    constructor(address kanvasRouter) IKanvasGame() {
         kanvas = IKanvasAvax(kanvasRouter);
     }
@@ -37,5 +39,15 @@ interface IKanvasInteropGame {
         bytes memory data
     ) external;
 }
+```
 
+## Generate NFT
+```solidity
+string[] memory properties = new string[](MAX_PROPERTIES_LEN);
+        properties[0] = player.name;
+        properties[1] = player.points;
+
+ string memory fields = "$name$ $points$";
+
+ kanvas._generateUri(playerId, properties, fields, WIN_NFT_TEMPLATE);
 ```
