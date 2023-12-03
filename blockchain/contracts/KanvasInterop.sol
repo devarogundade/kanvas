@@ -124,7 +124,7 @@ contract KanvasInterop is
     ) public recordChainlinkFulfillment(requestId) {
         Assets.Request storage request = _requests[requestId];
         require(!request.fulfilled, "Already fulfilled");
-        // require(bytes(uri).length > 0, "Invalid URI");
+        require(bytes(uri).length > 0, "Invalid URI");
 
         request.fulfilled = true;
 
