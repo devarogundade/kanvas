@@ -122,13 +122,19 @@ class Controller {
                 `, game.email, process.env.POSTMARK_FROM);
                 return null;
             }
-            const buffer = yield this.readFile(game.templates[templateId].templateUri);
-            const svgContents = new TextDecoder('utf-8').decode(buffer);
-            let svgString = "";
-            for (let index = 0; index < properties.length; index++) {
-                svgString = svgContents.replace(fields[index], properties[index]);
+            try {
+                const buffer = yield this.readFile(game.templates[templateId].templateUri);
+                const svgContents = new TextDecoder('utf-8').decode(buffer);
+                let svgString = "";
+                for (let index = 0; index < properties.length; index++) {
+                    svgString = svgContents.replace(fields[index], properties[index]);
+                }
+                return Buffer.from(svgString, 'utf-8');
             }
-            return Buffer.from(svgString, 'utf-8');
+            catch (error) {
+                console.error(error);
+                return null;
+            }
         });
     }
     parseFields(fields) {
@@ -162,16 +168,21 @@ class Controller {
     }
     sendEmail(title, text, to, from) {
         return __awaiter(this, void 0, void 0, function* () {
-            const message = {
-                To: to,
-                From: from,
-                Subject: title,
-                HtmlBody: text,
-                TrackOpens: true,
-                MessageStream: "broadcast"
-            };
-            const client = new postmark_1.Client(process.env.POSTMARK_TOKEN);
-            yield client.sendEmail(message);
+            try {
+                const message = {
+                    To: to,
+                    From: from,
+                    Subject: title,
+                    HtmlBody: text,
+                    TrackOpens: true,
+                    MessageStream: "broadcast"
+                };
+                const client = new postmark_1.Client(process.env.POSTMARK_TOKEN);
+                yield client.sendEmail(message);
+            }
+            catch (error) {
+                console.error(error);
+            }
         });
     }
     ;

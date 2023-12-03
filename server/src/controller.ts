@@ -136,16 +136,21 @@ export class Controller {
             return null;
         }
 
-        const buffer: Buffer = await this.readFile(game.templates[templateId].templateUri);
-        const svgContents: string = new TextDecoder('utf-8').decode(buffer);
+        try {
+            const buffer: Buffer = await this.readFile(game.templates[templateId].templateUri);
+            const svgContents: string = new TextDecoder('utf-8').decode(buffer);
 
-        let svgString: string = "";
+            let svgString: string = "";
 
-        for (let index = 0; index < properties.length; index++) {
-            svgString = svgContents.replace(fields[index], properties[index]);
+            for (let index = 0; index < properties.length; index++) {
+                svgString = svgContents.replace(fields[index], properties[index]);
+            }
+
+            return Buffer.from(svgString, 'utf-8');
+        } catch (error) {
+            console.error(error);
+            return null;
         }
-
-        return Buffer.from(svgString, 'utf-8');
     }
 
     private parseFields(fields: string): string[] {
@@ -182,17 +187,21 @@ export class Controller {
     }
 
     private async sendEmail(title: string, text: string, to: string, from: string) {
-        const message: Message = {
-            To: to,
-            From: from,
-            Subject: title,
-            HtmlBody: text,
-            TrackOpens: true,
-            MessageStream: "broadcast"
-        };
+        try {
+            const message: Message = {
+                To: to,
+                From: from,
+                Subject: title,
+                HtmlBody: text,
+                TrackOpens: true,
+                MessageStream: "broadcast"
+            };
 
-        const client = new Client(process.env.POSTMARK_TOKEN);
-        await client.sendEmail(message);
+            const client = new Client(process.env.POSTMARK_TOKEN);
+            await client.sendEmail(message);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
 }
