@@ -10,7 +10,7 @@ contract RockPaperScissors is IKanvasGame {
 ```
 
 ## Include the IKanvasInteropGame for cross-chain game
-```
+```solidity
 contract RockPaperScissors is IKanvasGame, IKanvasInteropGame {
    constructor(address kanvasRouter) IKanvasGame() {
         kanvas = IKanvasAvax(kanvasRouter);
