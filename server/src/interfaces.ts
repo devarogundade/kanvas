@@ -10,5 +10,5 @@ interface Game {
 }
 
 interface Template {
-    template: string;
+    templateUri: string;
 }

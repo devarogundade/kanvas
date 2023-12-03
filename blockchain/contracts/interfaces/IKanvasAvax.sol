@@ -21,7 +21,7 @@ interface IKanvasAvax {
         string website
     );
 
-    event TemplateAdded(address gameId, string template);
+    event TemplateAdded(address gameId, string templateUri);
 
     function _transferTo(
         uint64 chainSelector,

@@ -114,7 +114,7 @@ export function handleTemplateAdded(event: TemplateAddedEvent): void {
     event.transaction.hash.concatI32(event.logIndex.toI32())
   );
   entity.gameId = event.params.gameId;
-  entity.template = event.params.template;
+  entity.templateUri = event.params.templateUri;
   entity.game = event.params.gameId;
 
   entity.blockNumber = event.block.number;

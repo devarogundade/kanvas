@@ -29,7 +29,7 @@ contract KanvasAvax is
     uint256 public constant MAX_TEMPLATES_LEN = 5;
     using Chainlink for Chainlink.Request;
 
-    string private constant BASE_URL = "https://kanvas-di5j.onrender.com";
+    string private constant BASE_URL = "https://kanvas-di5j.onrender.com/generate";
 
     bytes32 private jobId;
     uint256 private fee;
@@ -78,14 +78,14 @@ contract KanvasAvax is
         );
     }
 
-    function addTemplate(string memory params, address gameId) external {
+    function addTemplate(string memory templateUri, address gameId) external {
         address creator = _msgSender();
 
         Assets.Game storage game = _games[gameId];
 
         require(game.creator == creator, "UnAuthorized");
 
-        emit TemplateAdded(gameId, params);
+        emit TemplateAdded(gameId, templateUri);
     }
 
     function _generateUri(

@@ -1,14 +1,22 @@
 [
   {
     "inputs": [
-      { "internalType": "address", "name": "receiver", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "receiver",
+        "type": "address"
+      }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "router", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "router",
+        "type": "address"
+      }
     ],
     "name": "InvalidRouter",
     "type": "error"
@@ -175,7 +183,7 @@
       {
         "indexed": false,
         "internalType": "string",
-        "name": "template",
+        "name": "templateUri",
         "type": "string"
       }
     ],
@@ -185,14 +193,26 @@
   {
     "inputs": [],
     "name": "MAX_PROPERTIES_LEN",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "MAX_TEMPLATES_LEN",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -200,18 +220,38 @@
     "inputs": [
       {
         "components": [
-          { "internalType": "bytes32", "name": "messageId", "type": "bytes32" },
+          {
+            "internalType": "bytes32",
+            "name": "messageId",
+            "type": "bytes32"
+          },
           {
             "internalType": "uint64",
             "name": "sourceChainSelector",
             "type": "uint64"
           },
-          { "internalType": "bytes", "name": "sender", "type": "bytes" },
-          { "internalType": "bytes", "name": "data", "type": "bytes" },
+          {
+            "internalType": "bytes",
+            "name": "sender",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes",
+            "name": "data",
+            "type": "bytes"
+          },
           {
             "components": [
-              { "internalType": "address", "name": "token", "type": "address" },
-              { "internalType": "uint256", "name": "amount", "type": "uint256" }
+              {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+              }
             ],
             "internalType": "struct Client.EVMTokenAmount[]",
             "name": "destTokenAmounts",
@@ -231,14 +271,26 @@
   {
     "inputs": [],
     "name": "getRouter",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "owner",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -251,16 +303,30 @@
   },
   {
     "inputs": [
-      { "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }
+      {
+        "internalType": "bytes4",
+        "name": "interfaceId",
+        "type": "bytes4"
+      }
     ],
     "name": "supportsInterface",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "pure",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "newOwner", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
     ],
     "name": "transferOwnership",
     "outputs": [],
@@ -271,13 +337,41 @@
     "inputs": [
       {
         "components": [
-          { "internalType": "string", "name": "name", "type": "string" },
-          { "internalType": "string", "name": "description", "type": "string" },
-          { "internalType": "address", "name": "gameId", "type": "address" },
-          { "internalType": "string", "name": "avatar", "type": "string" },
-          { "internalType": "uint256", "name": "plan", "type": "uint256" },
-          { "internalType": "string", "name": "email", "type": "string" },
-          { "internalType": "string", "name": "website", "type": "string" }
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "gameId",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "avatar",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "plan",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "website",
+            "type": "string"
+          }
         ],
         "internalType": "struct Params.Game",
         "name": "params",
@@ -291,8 +385,16 @@
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "params", "type": "string" },
-      { "internalType": "address", "name": "gameId", "type": "address" }
+      {
+        "internalType": "string",
+        "name": "params",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "gameId",
+        "type": "address"
+      }
     ],
     "name": "addTemplate",
     "outputs": [],
@@ -301,9 +403,21 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "playerId", "type": "address" },
-      { "internalType": "string[]", "name": "properties", "type": "string[]" },
-      { "internalType": "string", "name": "fields", "type": "string" }
+      {
+        "internalType": "address",
+        "name": "playerId",
+        "type": "address"
+      },
+      {
+        "internalType": "string[]",
+        "name": "properties",
+        "type": "string[]"
+      },
+      {
+        "internalType": "string",
+        "name": "fields",
+        "type": "string"
+      }
     ],
     "name": "_generateUri",
     "outputs": [],
@@ -312,7 +426,11 @@
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "newBaseUrl", "type": "string" }
+      {
+        "internalType": "string",
+        "name": "newBaseUrl",
+        "type": "string"
+      }
     ],
     "name": "updateBaseUrl",
     "outputs": [],
@@ -321,8 +439,16 @@
   },
   {
     "inputs": [
-      { "internalType": "uint64", "name": "chainSelector", "type": "uint64" },
-      { "internalType": "address", "name": "kanvasRouter", "type": "address" }
+      {
+        "internalType": "uint64",
+        "name": "chainSelector",
+        "type": "uint64"
+      },
+      {
+        "internalType": "address",
+        "name": "kanvasRouter",
+        "type": "address"
+      }
     ],
     "name": "updateInterop",
     "outputs": [],
@@ -331,8 +457,16 @@
   },
   {
     "inputs": [
-      { "internalType": "bytes32", "name": "requestId", "type": "bytes32" },
-      { "internalType": "string", "name": "uri", "type": "string" }
+      {
+        "internalType": "bytes32",
+        "name": "requestId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "uri",
+        "type": "string"
+      }
     ],
     "name": "fulfill",
     "outputs": [],
@@ -348,12 +482,36 @@
   },
   {
     "inputs": [
-      { "internalType": "uint64", "name": "chainSelector", "type": "uint64" },
-      { "internalType": "address", "name": "gameId", "type": "address" },
-      { "internalType": "address", "name": "playerId", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-      { "internalType": "string", "name": "uri", "type": "string" },
-      { "internalType": "bytes", "name": "data", "type": "bytes" }
+      {
+        "internalType": "uint64",
+        "name": "chainSelector",
+        "type": "uint64"
+      },
+      {
+        "internalType": "address",
+        "name": "gameId",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "playerId",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "uri",
+        "type": "string"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
     ],
     "name": "_transferTo",
     "outputs": [],
@@ -364,10 +522,26 @@
     "inputs": [
       {
         "components": [
-          { "internalType": "string", "name": "name", "type": "string" },
-          { "internalType": "uint256", "name": "cost", "type": "uint256" },
-          { "internalType": "string", "name": "color", "type": "string" },
-          { "internalType": "uint256", "name": "limit", "type": "uint256" }
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "cost",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "color",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "limit",
+            "type": "uint256"
+          }
         ],
         "internalType": "struct Params.Plan",
         "name": "params",

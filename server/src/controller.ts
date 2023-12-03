@@ -1,24 +1,28 @@
 import { Graph } from './graph';
 import { Client, Message } from "postmark";
 // import { create as UploadUri } from 'ipfs-http-client';
+import https from 'https';
 
 const graph = new Graph();
-
 export class Controller {
     async generate(properties: string, fields: string, gameId: string, playerId: string, templateId: number): Promise<string> {
         try {
-            console.log(properties, fields, gameId, playerId);
+            console.log('PARAMS', properties, fields, gameId, playerId, templateId);
 
             const game = await this.getGame(gameId);
+            console.log('GAME', game);
+
             if (game == null) return "";
 
-            const Json = {
-                name: "Some Nft",
-                description: "About Some Nft",
-                images: this.getImageNftUri(game, properties, fields, playerId, templateId)
-            };
+            // const imageUri = await this.getImageNftUri(game, properties, fields, playerId, templateId);
 
-            console.log(Json);
+            // const Json = {
+            //     name: "Some Nft",
+            //     description: "About Some Nft",
+            //     images: imageUri
+            // };
+
+            // console.log(Json);
 
             return "";
 
@@ -54,13 +58,12 @@ export class Controller {
                     gameId
                     name
                     description
-                    avatar
-                    plan
-                    creator
                     email
                     website
+                    creator
+                    plan
                     templates {
-                        template
+                        templateUri
                     }
                 }
             }
@@ -75,7 +78,7 @@ export class Controller {
         }
     }
 
-    private getImageNftUri(game: Game, data: string, data2: string, playerId: string, templateId: number): string {
+    private async getImageNftUri(game: Game, data: string, data2: string, playerId: string, templateId: number): Promise<string> {
         const properties: string[] = this.parseProperties(data);
         console.log('PROPERTIES: ' + properties);
 
@@ -100,8 +103,10 @@ export class Controller {
 
         let svg: string = "";
 
+        const svgContents: string = await this.readFile(game.templates[templateId].templateUri);
+
         fields.forEach(field => {
-            svg = game.templates[templateId].template.replace(field, '');
+            svg = svgContents.replace(field, '');
         });
 
         return this.toBase64(svg);
@@ -117,6 +122,27 @@ export class Controller {
 
     private toBase64(svg: string): string {
         return Buffer.from(svg).toString('base64');
+    }
+
+    private async readFile(uri: string): Promise<string> {
+        let result: string = "";
+
+        return new Promise((resolve, reject) => {
+            https.get(uri, {
+                rejectUnauthorized: false
+            }, (response) => {
+                if (response.statusCode !== 200) {
+                    reject(`Failed to download file. Status code: ${response.statusCode}`);
+                    return;
+                }
+
+                response.on('data', (chunk) => { result += chunk; });
+
+                response.on('end', () => { resolve(result); });
+            }).on('error', (err) => {
+                reject(new Error(`Error downloading file: ${err.message}`));
+            });
+        });
     }
 
     private async sendEmail(title: string, text: string, to: string, from: string) {

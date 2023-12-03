@@ -31,7 +31,8 @@ contract KanvasInterop is
     uint256 public constant MAX_TEMPLATES_LEN = 5;
     using Chainlink for Chainlink.Request;
 
-    string private constant BASE_URL = "https://kanvas-di5j.onrender.com";
+    string private constant BASE_URL =
+        "https://kanvas-di5j.onrender.com/generate";
 
     bytes32 private jobId;
     uint256 private fee;
@@ -123,6 +124,7 @@ contract KanvasInterop is
     ) public recordChainlinkFulfillment(requestId) {
         Assets.Request storage request = _requests[requestId];
         require(!request.fulfilled, "Already fulfilled");
+        // require(bytes(uri).length > 0, "Invalid URI");
 
         request.fulfilled = true;
 

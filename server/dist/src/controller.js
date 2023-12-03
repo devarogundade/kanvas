@@ -8,26 +8,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Controller = void 0;
 const graph_1 = require("./graph");
 const postmark_1 = require("postmark");
 // import { create as UploadUri } from 'ipfs-http-client';
+const https_1 = __importDefault(require("https"));
 const graph = new graph_1.Graph();
 class Controller {
     generate(properties, fields, gameId, playerId, templateId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log(properties, fields, gameId, playerId);
+                console.log('PARAMS', properties, fields, gameId, playerId, templateId);
                 const game = yield this.getGame(gameId);
+                console.log('GAME', game);
                 if (game == null)
                     return "";
-                const Json = {
-                    name: "Some Nft",
-                    description: "About Some Nft",
-                    images: this.getImageNftUri(game, properties, fields, playerId, templateId)
-                };
-                console.log(Json);
+                // const imageUri = await this.getImageNftUri(game, properties, fields, playerId, templateId);
+                // const Json = {
+                //     name: "Some Nft",
+                //     description: "About Some Nft",
+                //     images: imageUri
+                // };
+                // console.log(Json);
                 return "";
                 // const auth = 'Basic ' + Buffer.from(
                 //     process.env.INFURA_PROJECT_ID + ':' + process.env.INFURA_PROJECT_SECRET
@@ -60,13 +66,12 @@ class Controller {
                     gameId
                     name
                     description
-                    avatar
-                    plan
-                    creator
                     email
                     website
+                    creator
+                    plan
                     templates {
-                        template
+                        templateUri
                     }
                 }
             }
@@ -81,25 +86,28 @@ class Controller {
         });
     }
     getImageNftUri(game, data, data2, playerId, templateId) {
-        const properties = this.parseProperties(data);
-        console.log('PROPERTIES: ' + properties);
-        const fields = this.parseFields(data2);
-        console.log('FIELDS: ' + properties);
-        if (properties.length != fields.length) {
-            this.sendEmail("Failed to generate NFT URI", `
+        return __awaiter(this, void 0, void 0, function* () {
+            const properties = this.parseProperties(data);
+            console.log('PROPERTIES: ' + properties);
+            const fields = this.parseFields(data2);
+            console.log('FIELDS: ' + properties);
+            if (properties.length != fields.length) {
+                this.sendEmail("Failed to generate NFT URI", `
                     <ul>
                         <li>Game: ${game.name}</li>
                         <li>Player Id: ${playerId}</li>
                         <li>Reason: The length of your properties and fields are not equal.</li>
                     </ul>
                 `, game.email, process.env.POSTMARK_FROM);
-            return "";
-        }
-        let svg = "";
-        fields.forEach(field => {
-            svg = game.templates[templateId].template.replace(field, '');
+                return "";
+            }
+            let svg = "";
+            const svgContents = yield this.readFile(game.templates[templateId].templateUri);
+            fields.forEach(field => {
+                svg = svgContents.replace(field, '');
+            });
+            return this.toBase64(svg);
         });
-        return this.toBase64(svg);
     }
     parseFields(fields) {
         return fields.split(" ");
@@ -109,6 +117,25 @@ class Controller {
     }
     toBase64(svg) {
         return Buffer.from(svg).toString('base64');
+    }
+    readFile(uri) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = "";
+            return new Promise((resolve, reject) => {
+                https_1.default.get(uri, {
+                    rejectUnauthorized: false
+                }, (response) => {
+                    if (response.statusCode !== 200) {
+                        reject(`Failed to download file. Status code: ${response.statusCode}`);
+                        return;
+                    }
+                    response.on('data', (chunk) => { result += chunk; });
+                    response.on('end', () => { resolve(result); });
+                }).on('error', (err) => {
+                    reject(new Error(`Error downloading file: ${err.message}`));
+                });
+            });
+        });
     }
     sendEmail(title, text, to, from) {
         return __awaiter(this, void 0, void 0, function* () {

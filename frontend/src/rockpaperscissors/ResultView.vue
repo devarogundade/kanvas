@@ -7,8 +7,8 @@
             <span v-if="won" class="text-9xl">🏆</span>
             <span v-if="lost" class="text-9xl">👎</span>
             <span v-if="equal" class="text-9xl">🔥</span>
-            <h1 v-if="won" class="m-5 text-2xl font-bold text-center">You won !</h1>
-            <h1 v-if="lost" class="m-5 text-2xl font-bold text-center">You lost !</h1>
+            <h1 v-if="won" class="m-5 text-2xl font-bold text-center">You won ! (+5 points)</h1>
+            <h1 v-if="lost" class="m-5 text-2xl font-bold text-center">You lost ! (-1 points)</h1>
             <h1 v-if="equal" class="m-5 text-2xl font-bold text-center">Equal !</h1>
             <button @click="retry" class="bg-white/30 hover:bg-white/40 py-2 rounded-b-xl text-1xl w-full">
                 Retry

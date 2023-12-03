@@ -183,7 +183,7 @@
       {
         "indexed": false,
         "internalType": "string",
-        "name": "template",
+        "name": "templateUri",
         "type": "string"
       }
     ],

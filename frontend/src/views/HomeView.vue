@@ -106,7 +106,8 @@ section {
   margin-top: 100px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 40px;
 }
 
@@ -135,7 +136,8 @@ section {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  width: 550px;
+  width: 600px;
+  max-width: 100%;
   height: 550px;
   border-radius: 12px;
   overflow: hidden;
@@ -163,7 +165,7 @@ section {
 }
 
 .feature:first-child {
-  background-image: url('https://app.infura.io/images/bg-gradient-01.jpg');
+  background-image: url('https://app.infura.io/images/bg-gradient-03.jpg');
 }
 
 .feature:nth-child(2) {

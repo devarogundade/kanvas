@@ -5,10 +5,11 @@ import {Params} from "../libraries/Params.sol";
 import {IKanvasInterop} from "../interfaces/IKanvasInterop.sol";
 import {IKanvasInteropGame} from "../interfaces/IKanvasInteropGame.sol";
 
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
-contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
+contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721, Ownable {
     uint64 private constant AVAX_SELECTOR = 14767482510784806043;
     uint256 public constant MAX_PROPERTIES_LEN = 20;
 
@@ -33,7 +34,7 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
     constructor(
         address kanvasRouter,
         address sourceGameId
-    ) ERC721("RockPaperScissors", "RPS") IKanvasInteropGame() {
+    ) ERC721("RockPaperScissors", "RPS") IKanvasInteropGame() Ownable() {
         kanvas = IKanvasInterop(kanvasRouter);
         kanvas._createGame(
             AVAX_SELECTOR,
@@ -41,7 +42,12 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
         );
     }
 
-    function upgradePlayer(address playerId) external {
+    function getPlayer(address playerId) external view returns (Player memory) {
+        return _players[playerId];
+    }
+
+    /** Increase player points */
+    function upgradePlayer(address playerId) external onlyOwner {
         Player storage player = _players[playerId];
         require(player.created, "Create this player first");
 
@@ -56,12 +62,13 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
         kanvas._generateUri(playerId, properties, fields, WIN_NFT_TEMPLATE);
     }
 
-    function downgradePlayer(address playerId) external {
+    /** Reduce player points */
+    function downgradePlayer(address playerId) external onlyOwner {
         Player storage player = _players[playerId];
         require(player.created, "Create this player first");
-        require(player.points >= 5, "Already defeated :)");
+        require(player.points >= 1, "Already defeated :)");
 
-        player.points = player.points - 5;
+        player.points = player.points - 1;
 
         string[] memory properties = new string[](MAX_PROPERTIES_LEN);
         properties[0] = player.name;
@@ -72,6 +79,7 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
         kanvas._generateUri(playerId, properties, fields, LOST_NFT_TEMPLATE);
     }
 
+    /** Bridge game Nft function */
     function transferTo(uint64 chainSelector) external payable {
         address playerId = _msgSender();
         uint256 tokenId = _playerNfts[playerId];
@@ -79,6 +87,7 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
         _burn(tokenId);
         delete _tokenURIs[tokenId];
 
+        // player will be deleted when they transfer the game NFT
         delete _playerNfts[playerId];
 
         address gameId = address(this);
@@ -87,6 +96,7 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
 
         bytes memory data = abi.encode(player.name, player.points);
 
+        /** Cross chain transfer function */
         kanvas._transferTo{value: msg.value}(
             chainSelector,
             gameId,
@@ -97,6 +107,7 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
         );
     }
 
+    /** Cross chain receiver callback function */
     function _receiveFrom(
         uint64 /* chainSelector */,
         address /* gameId */,
@@ -113,6 +124,7 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721 {
         _mint(playerId, tokenId);
         _tokenURIs[tokenId] = uri;
 
+        // player will be created when they receive the game NFT
         _players[playerId].name = name;
         _players[playerId].points = points;
 

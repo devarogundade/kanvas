@@ -62,7 +62,7 @@ type PlanCreated @entity(immutable: true) {
 type TemplateAdded @entity(immutable: true) {
   id: Bytes!
   gameId: Bytes! # address
-  template: String! # string
+  templateUri: String! # string
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

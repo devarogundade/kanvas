@@ -183,7 +183,7 @@ export class TemplateAdded__Params {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get template(): string {
+  get templateUri(): string {
     return this._event.parameters[1].value.toString();
   }
 }

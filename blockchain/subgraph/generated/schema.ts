@@ -809,8 +809,8 @@ export class TemplateAdded extends Entity {
     this.set("gameId", Value.fromBytes(value));
   }
 
-  get template(): string {
-    let value = this.get("template");
+  get templateUri(): string {
+    let value = this.get("templateUri");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -818,8 +818,8 @@ export class TemplateAdded extends Entity {
     }
   }
 
-  set template(value: string) {
-    this.set("template", Value.fromString(value));
+  set templateUri(value: string) {
+    this.set("templateUri", Value.fromString(value));
   }
 
   get blockNumber(): BigInt {
