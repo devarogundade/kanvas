@@ -6,7 +6,7 @@ Learn more at [Devpost](https://devpost.com/software/kanvas-in-game-dynamic-nfts
 
 ## Extend the IKanvasGame
 ```solidity
-contract YourGane is IKanvasGame {
+contract YourGame is IKanvasGame {
    IKanvasAvax private kanvas;
 
    constructor(address kanvasRouter) IKanvasGame() {
@@ -17,7 +17,7 @@ contract YourGane is IKanvasGame {
 
 ## Include the YourGame for a cross-chain game
 ```solidity
-contract YourGane is IKanvasGame, YourGame {
+contract YourGame is IKanvasGame, YourGame {
    constructor(address kanvasRouter) IKanvasGame() {
         kanvas = IKanvasAvax(kanvasRouter);
     }
