@@ -53,3 +53,17 @@ string memory fields = "$name$ $points$";
 
 kanvas._generateUri(playerId, properties, fields, NFT_TEMPLATE);
 ```
+
+## Bridge NFT
+```solidity
+ bytes memory data = abi.encode(player.name, player.points);
+
+ kanvas._transferTo{value: msg.value}(
+      chainSelector,
+      gameId,
+      playerId,
+      tokenId,
+      uri,
+      data
+  );
+```
