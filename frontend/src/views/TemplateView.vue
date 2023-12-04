@@ -185,7 +185,7 @@ export default {
                     linkTitle: "View Tnx",
                     linkUrl: `https://testnet.snowtrace.io/tx/${transaction.transactionHash}`
                 });
-                this.$router.push('/games');
+                this.$router.push(`/games/${this.$route.params.id}`);
             }
             else {
                 notify.push({
