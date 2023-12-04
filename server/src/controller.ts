@@ -95,7 +95,8 @@ export class Controller {
             const Metadata = {
                 name: game.name,
                 description: game.description,
-                images: downloadURL
+                external_url: game.website,
+                image: downloadURL
             };
 
             return JSON.stringify(Metadata);
