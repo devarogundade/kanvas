@@ -3,6 +3,10 @@ import { avalancheFuji, polygonMumbai } from "@wagmi/core/chains"
 import RockPaperScissors from '../../abis/RockPaperScissors.json'
 import axios from 'axios'
 
+export function gameId(chainId) {
+    return RockPaperScissors.networks[chainId].address;
+}
+
 export async function tryCreatePlayer(wallet, name) {
     try {
         const config = await prepareWriteContract({

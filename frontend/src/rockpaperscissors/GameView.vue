@@ -25,6 +25,11 @@
                     <div class="name">
                         <p>{{ $store.state.player.name }}</p>
                         <span>{{ $store.state.player.points }} points</span>
+                        <a style="display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 14px; border: 1px solid #ccc; border-radius: 6px; padding: 4px 10px;"
+                            target="_blank"
+                            :href="`https://testnets.opensea.io/assets/avalanche-fuji/${gameId(43113)}`">View NFT
+                            <OutIcon />
+                        </a>
                     </div>
                 </div>
 
@@ -40,12 +45,13 @@ import GameHeader from './components/GameHeader.vue';
 import LoadingBox from '../components/LoadingBox.vue';
 import ColdownAnimation from './components/ColdownAnimation.vue';
 import PrimaryButton from '../components/PrimaryButton.vue';
+import OutIcon from '../components/icons/OutIcon.vue';
 import Choice from './components/Choice.vue';
 </script>
 
 <script>
 import { mapMutations } from "vuex";
-import { tryGetPlayerOnAvax, tryCreatePlayer } from "../scripts/rockpaperscissors"
+import { tryGetPlayerOnAvax, tryCreatePlayer, gameId } from "../scripts/rockpaperscissors"
 import { notify } from "../reactives/notify"
 import { watchAccount } from '@wagmi/core'
 export default {

@@ -123,7 +123,7 @@ export class Controller {
                     website
                     creator
                     plan
-                    templates(orderDirection: desc) {
+                    templates(orderDirection: asc, orderBy: blockTimestamp) {
                         templateUri
                     }
                 }
