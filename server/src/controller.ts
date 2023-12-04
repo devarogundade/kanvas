@@ -102,7 +102,7 @@ export class Controller {
                 attributes: attributes
             };
 
-            const metadataPath = `nfts/${game.gameId}/${playerId}.json`;
+            const metadataPath = `metadatas/${game.gameId}/${playerId}.json`;
 
             await bucket.file(metadataPath).save(JSON.stringify(metdata), { public: true });
 
