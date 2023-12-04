@@ -89,13 +89,13 @@ export class Controller {
                 return "";
             };
 
-            const path = `generated/${game.gameId}/${playerId}.png`;
+            const pngPath = `generated/${game.gameId}/${playerId}.png`;
 
-            await bucket.file(path).save(pngBuffer, {
+            await bucket.file(pngPath).save(pngBuffer, {
                 public: true
             });
 
-            const downloadURL = await getDownloadURL(bucket.file(path));
+            const downloadURL = await getDownloadURL(bucket.file(pngPath));
 
             console.log('downloadURL ' + downloadURL);
 
