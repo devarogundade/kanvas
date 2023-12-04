@@ -39,6 +39,7 @@
 import GameHeader from './components/GameHeader.vue';
 import LoadingBox from '../components/LoadingBox.vue';
 import ColdownAnimation from './components/ColdownAnimation.vue';
+import PrimaryButton from '../components/PrimaryButton.vue';
 import Choice from './components/Choice.vue';
 </script>
 
