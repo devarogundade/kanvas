@@ -10,7 +10,7 @@
 
                 <div class="actions">
                     <RouterLink to="/games" v-if="$route.path == '/'">
-                        <PrimaryButton width="240px" text="Launch App" />
+                        <PrimaryButton width="240px" text="Launch dApp" />
                     </RouterLink>
                     <div v-else>
                         <PrimaryButton width="240px" v-if="!$store.state.wallet" text="Connect Wallet"

@@ -9,7 +9,8 @@ import PrimaryButton from '../components/PrimaryButton.vue';
     <div class="app_width">
       <main>
         <div class="hero">
-          <h3>Craft dynamic, cross-chain NFTs effortlessly for immersive gaming experiences.</h3>
+          <h3>On-Chain customizable cross-chain dNFTs for immersive gaming experiences.</h3>
+          <p>A new era for non-fungible tokens.</p>
         </div>
 
         <div class="features">
@@ -17,13 +18,16 @@ import PrimaryButton from '../components/PrimaryButton.vue';
             <div class="bg"></div>
 
             <div class="content">
-              <h3>Get Started</h3>
+              <h3>Kanvas dApp</h3>
 
               <p>As a game developer, you can integrate Kanvas into your game smart contracts to generate dynamic and
-                customizable NFTs for your players.</p>
+                customizable NFTs for your players.
+                <br> <br>
+                Start by crafting your game NFT templates for different stories.
+              </p>
 
               <RouterLink to="/games">
-                <PrimaryButton :bg="'#fff'" :color="'var(--text-normal)'" :width="'200px'" :text="'Create Game'" />
+                <PrimaryButton :bg="'#fff'" :color="'var(--text-normal)'" :width="'200px'" :text="'Launch dApp'" />
               </RouterLink>
             </div>
           </div>
@@ -34,12 +38,14 @@ import PrimaryButton from '../components/PrimaryButton.vue';
             <div class="content">
               <h3>Read The Docs</h3>
 
-              <p>Your smart contracts simply calls the Kanvas smart contract with a bytes payload to specify NFT
-                customization details.
+              <p>Your smart contracts simply calls the Kanvas smart contract with a payload that specifies the NFT
+                customizations and template.
+                <br> <br>
+                And a callback function to receive the generated NFT metadata URI.
               </p>
 
               <a target="_blank" href="https://github.com/devarogundade/kanvas">
-                <PrimaryButton :bg="'#fff'" :color="'var(--text-normal)'" :width="'200px'" :text="'GitHub'" />
+                <PrimaryButton :bg="'#fff'" :color="'var(--text-normal)'" :width="'200px'" :text="'Start Building'" />
               </a>
             </div>
           </div>
@@ -82,7 +88,7 @@ import PrimaryButton from '../components/PrimaryButton.vue';
           </div>
 
           <RouterLink to="/games">
-            <PrimaryButton :bg="'#fff'" :width="'240px'" :color="'var(--text-normal)'" :text="'Get Started  '" />
+            <PrimaryButton :bg="'#fff'" :width="'240px'" :color="'var(--text-normal)'" :text="'Take me there!'" />
           </RouterLink>
         </div>
       </main>
@@ -93,10 +99,9 @@ import PrimaryButton from '../components/PrimaryButton.vue';
 
 <style scoped>
 section {
-  padding: 100px 0;
+  padding-top: 60px;
+  padding-bottom: 100px;
 }
-
-.hero {}
 
 .hero h3 {
   text-align: center;
@@ -104,6 +109,14 @@ section {
   color: var(--text-normal);
   line-height: 80px;
   font-weight: 500;
+}
+
+.hero p {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 30px;
+  font-weight: 700;
+  color: gray;
 }
 
 .features {
@@ -161,10 +174,10 @@ section {
   color: #fff;
   font-size: 24px;
   margin-top: 30px;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
   line-height: 40px;
   z-index: 1;
-  height: 220px;
+  height: 350px;
 }
 
 .feature:hover {

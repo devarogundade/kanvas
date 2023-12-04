@@ -1,6 +1,7 @@
 import https from 'https';
 import { Graph } from './graph';
 import { Client, Message } from "postmark";
+import sharp from 'sharp';
 
 import { initializeApp, cert, ServiceAccount } from 'firebase-admin/app';
 import { getStorage, getDownloadURL } from 'firebase-admin/storage';
@@ -71,9 +72,26 @@ export class Controller {
                 return "";
             };
 
-            const path = `generated/${game.gameId}/${playerId}.svg`;
+            const pngBuffer = await this.convertSvgToPng(buffer);
+            if (pngBuffer == null) {
+                this.sendEmail(
+                    `${game.name} Failed to generate NFT URI`,
+                    `
+                        <ul>
+                            <li>Game: ${game.name}</li>
+                            <li>Player Id: ${playerId}</li>
+                            <li>Reason: Failed to generate Nft Uri as PNG.</li>
+                        </ul>
+                    `,
+                    game.email,
+                    process.env.POSTMARK_FROM
+                );
+                return "";
+            };
 
-            await bucket.file(path).save(buffer, {
+            const path = `generated/${game.gameId}/${playerId}.png`;
+
+            await bucket.file(path).save(pngBuffer, {
                 public: true
             });
 
@@ -247,5 +265,19 @@ export class Controller {
             console.error(error);
         }
     };
+
+    // Function to convert SVG string to PNG buffer
+    private async convertSvgToPng(buffer: Buffer): Promise<Buffer | null> {
+        try {
+            // Use sharp to convert SVG string to PNG buffer
+            const pngBuffer = await sharp(buffer, { density: 300 })
+                .png().toBuffer();
+
+            return pngBuffer;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
 
 }
