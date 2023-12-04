@@ -10,60 +10,6 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
-export class ChainlinkCancelled extends ethereum.Event {
-  get params(): ChainlinkCancelled__Params {
-    return new ChainlinkCancelled__Params(this);
-  }
-}
-
-export class ChainlinkCancelled__Params {
-  _event: ChainlinkCancelled;
-
-  constructor(event: ChainlinkCancelled) {
-    this._event = event;
-  }
-
-  get id(): Bytes {
-    return this._event.parameters[0].value.toBytes();
-  }
-}
-
-export class ChainlinkFulfilled extends ethereum.Event {
-  get params(): ChainlinkFulfilled__Params {
-    return new ChainlinkFulfilled__Params(this);
-  }
-}
-
-export class ChainlinkFulfilled__Params {
-  _event: ChainlinkFulfilled;
-
-  constructor(event: ChainlinkFulfilled) {
-    this._event = event;
-  }
-
-  get id(): Bytes {
-    return this._event.parameters[0].value.toBytes();
-  }
-}
-
-export class ChainlinkRequested extends ethereum.Event {
-  get params(): ChainlinkRequested__Params {
-    return new ChainlinkRequested__Params(this);
-  }
-}
-
-export class ChainlinkRequested__Params {
-  _event: ChainlinkRequested;
-
-  constructor(event: ChainlinkRequested) {
-    this._event = event;
-  }
-
-  get id(): Bytes {
-    return this._event.parameters[0].value.toBytes();
-  }
-}
-
 export class GameCreated extends ethereum.Event {
   get params(): GameCreated__Params {
     return new GameCreated__Params(this);
@@ -166,6 +112,42 @@ export class PlanCreated__Params {
   }
 }
 
+export class RequestFulfilled extends ethereum.Event {
+  get params(): RequestFulfilled__Params {
+    return new RequestFulfilled__Params(this);
+  }
+}
+
+export class RequestFulfilled__Params {
+  _event: RequestFulfilled;
+
+  constructor(event: RequestFulfilled) {
+    this._event = event;
+  }
+
+  get id(): Bytes {
+    return this._event.parameters[0].value.toBytes();
+  }
+}
+
+export class RequestSent extends ethereum.Event {
+  get params(): RequestSent__Params {
+    return new RequestSent__Params(this);
+  }
+}
+
+export class RequestSent__Params {
+  _event: RequestSent;
+
+  constructor(event: RequestSent) {
+    this._event = event;
+  }
+
+  get id(): Bytes {
+    return this._event.parameters[0].value.toBytes();
+  }
+}
+
 export class TemplateAdded extends ethereum.Event {
   get params(): TemplateAdded__Params {
     return new TemplateAdded__Params(this);
@@ -185,6 +167,32 @@ export class TemplateAdded__Params {
 
   get templateUri(): string {
     return this._event.parameters[1].value.toString();
+  }
+}
+
+export class Kanvas__estimateCostInputReqStruct extends ethereum.Tuple {
+  get codeLocation(): i32 {
+    return this[0].toI32();
+  }
+
+  get secretsLocation(): i32 {
+    return this[1].toI32();
+  }
+
+  get language(): i32 {
+    return this[2].toI32();
+  }
+
+  get source(): string {
+    return this[3].toString();
+  }
+
+  get secrets(): Bytes {
+    return this[4].toBytes();
+  }
+
+  get args(): Array<string> {
+    return this[5].toStringArray();
   }
 }
 
@@ -237,6 +245,68 @@ export class Kanvas extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  estimateCost(
+    req: Kanvas__estimateCostInputReqStruct,
+    subscriptionId: BigInt,
+    gasLimit: BigInt,
+    gasPrice: BigInt
+  ): BigInt {
+    let result = super.call(
+      "estimateCost",
+      "estimateCost((uint8,uint8,uint8,string,bytes,string[]),uint64,uint32,uint256):(uint96)",
+      [
+        ethereum.Value.fromTuple(req),
+        ethereum.Value.fromUnsignedBigInt(subscriptionId),
+        ethereum.Value.fromUnsignedBigInt(gasLimit),
+        ethereum.Value.fromUnsignedBigInt(gasPrice)
+      ]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_estimateCost(
+    req: Kanvas__estimateCostInputReqStruct,
+    subscriptionId: BigInt,
+    gasLimit: BigInt,
+    gasPrice: BigInt
+  ): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "estimateCost",
+      "estimateCost((uint8,uint8,uint8,string,bytes,string[]),uint64,uint32,uint256):(uint96)",
+      [
+        ethereum.Value.fromTuple(req),
+        ethereum.Value.fromUnsignedBigInt(subscriptionId),
+        ethereum.Value.fromUnsignedBigInt(gasLimit),
+        ethereum.Value.fromUnsignedBigInt(gasPrice)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  getDONPublicKey(): Bytes {
+    let result = super.call("getDONPublicKey", "getDONPublicKey():(bytes)", []);
+
+    return result[0].toBytes();
+  }
+
+  try_getDONPublicKey(): ethereum.CallResult<Bytes> {
+    let result = super.tryCall(
+      "getDONPublicKey",
+      "getDONPublicKey():(bytes)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
   getRouter(): Address {
@@ -310,8 +380,12 @@ export class ConstructorCall__Inputs {
     this._call = call;
   }
 
-  get receiver(): Address {
+  get ccipReceiver(): Address {
     return this._call.inputValues[0].value.toAddress();
+  }
+
+  get functionOracle(): Address {
+    return this._call.inputValues[1].value.toAddress();
   }
 }
 
@@ -387,6 +461,44 @@ export class CcipReceiveCallMessageDestTokenAmountsStruct extends ethereum.Tuple
   }
 }
 
+export class HandleOracleFulfillmentCall extends ethereum.Call {
+  get inputs(): HandleOracleFulfillmentCall__Inputs {
+    return new HandleOracleFulfillmentCall__Inputs(this);
+  }
+
+  get outputs(): HandleOracleFulfillmentCall__Outputs {
+    return new HandleOracleFulfillmentCall__Outputs(this);
+  }
+}
+
+export class HandleOracleFulfillmentCall__Inputs {
+  _call: HandleOracleFulfillmentCall;
+
+  constructor(call: HandleOracleFulfillmentCall) {
+    this._call = call;
+  }
+
+  get requestId(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
+  }
+
+  get response(): Bytes {
+    return this._call.inputValues[1].value.toBytes();
+  }
+
+  get err(): Bytes {
+    return this._call.inputValues[2].value.toBytes();
+  }
+}
+
+export class HandleOracleFulfillmentCall__Outputs {
+  _call: HandleOracleFulfillmentCall;
+
+  constructor(call: HandleOracleFulfillmentCall) {
+    this._call = call;
+  }
+}
+
 export class RenounceOwnershipCall extends ethereum.Call {
   get inputs(): RenounceOwnershipCall__Inputs {
     return new RenounceOwnershipCall__Inputs(this);
@@ -439,6 +551,96 @@ export class TransferOwnershipCall__Outputs {
   _call: TransferOwnershipCall;
 
   constructor(call: TransferOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class UpdateSourceCodeCall extends ethereum.Call {
+  get inputs(): UpdateSourceCodeCall__Inputs {
+    return new UpdateSourceCodeCall__Inputs(this);
+  }
+
+  get outputs(): UpdateSourceCodeCall__Outputs {
+    return new UpdateSourceCodeCall__Outputs(this);
+  }
+}
+
+export class UpdateSourceCodeCall__Inputs {
+  _call: UpdateSourceCodeCall;
+
+  constructor(call: UpdateSourceCodeCall) {
+    this._call = call;
+  }
+
+  get newSourceCode(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+}
+
+export class UpdateSourceCodeCall__Outputs {
+  _call: UpdateSourceCodeCall;
+
+  constructor(call: UpdateSourceCodeCall) {
+    this._call = call;
+  }
+}
+
+export class UpdateGasLimitCall extends ethereum.Call {
+  get inputs(): UpdateGasLimitCall__Inputs {
+    return new UpdateGasLimitCall__Inputs(this);
+  }
+
+  get outputs(): UpdateGasLimitCall__Outputs {
+    return new UpdateGasLimitCall__Outputs(this);
+  }
+}
+
+export class UpdateGasLimitCall__Inputs {
+  _call: UpdateGasLimitCall;
+
+  constructor(call: UpdateGasLimitCall) {
+    this._call = call;
+  }
+
+  get newLimit(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class UpdateGasLimitCall__Outputs {
+  _call: UpdateGasLimitCall;
+
+  constructor(call: UpdateGasLimitCall) {
+    this._call = call;
+  }
+}
+
+export class UpdateSubscriptionIdCall extends ethereum.Call {
+  get inputs(): UpdateSubscriptionIdCall__Inputs {
+    return new UpdateSubscriptionIdCall__Inputs(this);
+  }
+
+  get outputs(): UpdateSubscriptionIdCall__Outputs {
+    return new UpdateSubscriptionIdCall__Outputs(this);
+  }
+}
+
+export class UpdateSubscriptionIdCall__Inputs {
+  _call: UpdateSubscriptionIdCall;
+
+  constructor(call: UpdateSubscriptionIdCall) {
+    this._call = call;
+  }
+
+  get newSubscriptionId(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class UpdateSubscriptionIdCall__Outputs {
+  _call: UpdateSubscriptionIdCall;
+
+  constructor(call: UpdateSubscriptionIdCall) {
     this._call = call;
   }
 }
@@ -522,7 +724,7 @@ export class AddTemplateCall__Inputs {
     this._call = call;
   }
 
-  get params(): string {
+  get templateUri(): string {
     return this._call.inputValues[0].value.toString();
   }
 
@@ -560,12 +762,16 @@ export class _generateUriCall__Inputs {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get properties(): Array<string> {
+  get props(): Array<string> {
     return this._call.inputValues[1].value.toStringArray();
   }
 
   get fields(): string {
     return this._call.inputValues[2].value.toString();
+  }
+
+  get templateId(): i32 {
+    return this._call.inputValues[3].value.toI32();
   }
 }
 
@@ -573,36 +779,6 @@ export class _generateUriCall__Outputs {
   _call: _generateUriCall;
 
   constructor(call: _generateUriCall) {
-    this._call = call;
-  }
-}
-
-export class UpdateBaseUrlCall extends ethereum.Call {
-  get inputs(): UpdateBaseUrlCall__Inputs {
-    return new UpdateBaseUrlCall__Inputs(this);
-  }
-
-  get outputs(): UpdateBaseUrlCall__Outputs {
-    return new UpdateBaseUrlCall__Outputs(this);
-  }
-}
-
-export class UpdateBaseUrlCall__Inputs {
-  _call: UpdateBaseUrlCall;
-
-  constructor(call: UpdateBaseUrlCall) {
-    this._call = call;
-  }
-
-  get newBaseUrl(): string {
-    return this._call.inputValues[0].value.toString();
-  }
-}
-
-export class UpdateBaseUrlCall__Outputs {
-  _call: UpdateBaseUrlCall;
-
-  constructor(call: UpdateBaseUrlCall) {
     this._call = call;
   }
 }
@@ -637,66 +813,6 @@ export class UpdateInteropCall__Outputs {
   _call: UpdateInteropCall;
 
   constructor(call: UpdateInteropCall) {
-    this._call = call;
-  }
-}
-
-export class FulfillCall extends ethereum.Call {
-  get inputs(): FulfillCall__Inputs {
-    return new FulfillCall__Inputs(this);
-  }
-
-  get outputs(): FulfillCall__Outputs {
-    return new FulfillCall__Outputs(this);
-  }
-}
-
-export class FulfillCall__Inputs {
-  _call: FulfillCall;
-
-  constructor(call: FulfillCall) {
-    this._call = call;
-  }
-
-  get requestId(): Bytes {
-    return this._call.inputValues[0].value.toBytes();
-  }
-
-  get uri(): string {
-    return this._call.inputValues[1].value.toString();
-  }
-}
-
-export class FulfillCall__Outputs {
-  _call: FulfillCall;
-
-  constructor(call: FulfillCall) {
-    this._call = call;
-  }
-}
-
-export class WithdrawLinkCall extends ethereum.Call {
-  get inputs(): WithdrawLinkCall__Inputs {
-    return new WithdrawLinkCall__Inputs(this);
-  }
-
-  get outputs(): WithdrawLinkCall__Outputs {
-    return new WithdrawLinkCall__Outputs(this);
-  }
-}
-
-export class WithdrawLinkCall__Inputs {
-  _call: WithdrawLinkCall;
-
-  constructor(call: WithdrawLinkCall) {
-    this._call = call;
-  }
-}
-
-export class WithdrawLinkCall__Outputs {
-  _call: WithdrawLinkCall;
-
-  constructor(call: WithdrawLinkCall) {
     this._call = call;
   }
 }

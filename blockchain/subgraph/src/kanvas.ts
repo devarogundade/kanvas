@@ -1,60 +1,19 @@
 import {
-  ChainlinkCancelled as ChainlinkCancelledEvent,
-  ChainlinkFulfilled as ChainlinkFulfilledEvent,
-  ChainlinkRequested as ChainlinkRequestedEvent,
   GameCreated as GameCreatedEvent,
   OwnershipTransferred as OwnershipTransferredEvent,
   PlanCreated as PlanCreatedEvent,
+  RequestFulfilled as RequestFulfilledEvent,
+  RequestSent as RequestSentEvent,
   TemplateAdded as TemplateAddedEvent
 } from "../generated/Kanvas/Kanvas";
 import {
-  ChainlinkCancelled,
-  ChainlinkFulfilled,
-  ChainlinkRequested,
   GameCreated,
   OwnershipTransferred,
   PlanCreated,
+  RequestFulfilled,
+  RequestSent,
   TemplateAdded
 } from "../generated/schema";
-
-export function handleChainlinkCancelled(event: ChainlinkCancelledEvent): void {
-  let entity = new ChainlinkCancelled(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.Kanvas_id = event.params.id;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
-
-export function handleChainlinkFulfilled(event: ChainlinkFulfilledEvent): void {
-  let entity = new ChainlinkFulfilled(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.Kanvas_id = event.params.id;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
-
-export function handleChainlinkRequested(event: ChainlinkRequestedEvent): void {
-  let entity = new ChainlinkRequested(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.Kanvas_id = event.params.id;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
 
 export function handleGameCreated(event: GameCreatedEvent): void {
   let entity = GameCreated.load(
@@ -108,6 +67,32 @@ export function handlePlanCreated(event: PlanCreatedEvent): void {
   entity.cost = event.params.cost;
   entity.color = event.params.color;
   entity.limit = event.params.limit;
+
+  entity.blockNumber = event.block.number;
+  entity.blockTimestamp = event.block.timestamp;
+  entity.transactionHash = event.transaction.hash;
+
+  entity.save();
+}
+
+export function handleRequestFulfilled(event: RequestFulfilledEvent): void {
+  let entity = new RequestFulfilled(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  );
+  entity.Kanvas_id = event.params.id;
+
+  entity.blockNumber = event.block.number;
+  entity.blockTimestamp = event.block.timestamp;
+  entity.transactionHash = event.transaction.hash;
+
+  entity.save();
+}
+
+export function handleRequestSent(event: RequestSentEvent): void {
+  let entity = new RequestSent(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  );
+  entity.Kanvas_id = event.params.id;
 
   entity.blockNumber = event.block.number;
   entity.blockTimestamp = event.block.timestamp;

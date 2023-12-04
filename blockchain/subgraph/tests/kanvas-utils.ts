@@ -1,50 +1,13 @@
 import { newMockEvent } from "matchstick-as"
-import { ethereum, Bytes, Address, BigInt } from "@graphprotocol/graph-ts"
+import { ethereum, Address, BigInt, Bytes } from "@graphprotocol/graph-ts"
 import {
-  ChainlinkCancelled,
-  ChainlinkFulfilled,
-  ChainlinkRequested,
   GameCreated,
   OwnershipTransferred,
   PlanCreated,
+  RequestFulfilled,
+  RequestSent,
   TemplateAdded
 } from "../generated/Kanvas/Kanvas"
-
-export function createChainlinkCancelledEvent(id: Bytes): ChainlinkCancelled {
-  let chainlinkCancelledEvent = changetype<ChainlinkCancelled>(newMockEvent())
-
-  chainlinkCancelledEvent.parameters = new Array()
-
-  chainlinkCancelledEvent.parameters.push(
-    new ethereum.EventParam("id", ethereum.Value.fromFixedBytes(id))
-  )
-
-  return chainlinkCancelledEvent
-}
-
-export function createChainlinkFulfilledEvent(id: Bytes): ChainlinkFulfilled {
-  let chainlinkFulfilledEvent = changetype<ChainlinkFulfilled>(newMockEvent())
-
-  chainlinkFulfilledEvent.parameters = new Array()
-
-  chainlinkFulfilledEvent.parameters.push(
-    new ethereum.EventParam("id", ethereum.Value.fromFixedBytes(id))
-  )
-
-  return chainlinkFulfilledEvent
-}
-
-export function createChainlinkRequestedEvent(id: Bytes): ChainlinkRequested {
-  let chainlinkRequestedEvent = changetype<ChainlinkRequested>(newMockEvent())
-
-  chainlinkRequestedEvent.parameters = new Array()
-
-  chainlinkRequestedEvent.parameters.push(
-    new ethereum.EventParam("id", ethereum.Value.fromFixedBytes(id))
-  )
-
-  return chainlinkRequestedEvent
-}
 
 export function createGameCreatedEvent(
   gameId: Address,
@@ -144,9 +107,33 @@ export function createPlanCreatedEvent(
   return planCreatedEvent
 }
 
+export function createRequestFulfilledEvent(id: Bytes): RequestFulfilled {
+  let requestFulfilledEvent = changetype<RequestFulfilled>(newMockEvent())
+
+  requestFulfilledEvent.parameters = new Array()
+
+  requestFulfilledEvent.parameters.push(
+    new ethereum.EventParam("id", ethereum.Value.fromFixedBytes(id))
+  )
+
+  return requestFulfilledEvent
+}
+
+export function createRequestSentEvent(id: Bytes): RequestSent {
+  let requestSentEvent = changetype<RequestSent>(newMockEvent())
+
+  requestSentEvent.parameters = new Array()
+
+  requestSentEvent.parameters.push(
+    new ethereum.EventParam("id", ethereum.Value.fromFixedBytes(id))
+  )
+
+  return requestSentEvent
+}
+
 export function createTemplateAddedEvent(
   gameId: Address,
-  template: string
+  templateUri: string
 ): TemplateAdded {
   let templateAddedEvent = changetype<TemplateAdded>(newMockEvent())
 
@@ -156,7 +143,10 @@ export function createTemplateAddedEvent(
     new ethereum.EventParam("gameId", ethereum.Value.fromAddress(gameId))
   )
   templateAddedEvent.parameters.push(
-    new ethereum.EventParam("template", ethereum.Value.fromString(template))
+    new ethereum.EventParam(
+      "templateUri",
+      ethereum.Value.fromString(templateUri)
+    )
   )
 
   return templateAddedEvent

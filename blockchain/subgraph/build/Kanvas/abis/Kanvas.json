@@ -3,12 +3,32 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "receiver",
+        "name": "ccipReceiver",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "functionOracle",
         "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "EmptyArgs",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "EmptySecrets",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "EmptySource",
+    "type": "error"
   },
   {
     "inputs": [
@@ -22,43 +42,24 @@
     "type": "error"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "bytes32",
-        "name": "id",
-        "type": "bytes32"
-      }
-    ],
-    "name": "ChainlinkCancelled",
-    "type": "event"
+    "inputs": [],
+    "name": "NoInlineSecrets",
+    "type": "error"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "bytes32",
-        "name": "id",
-        "type": "bytes32"
-      }
-    ],
-    "name": "ChainlinkFulfilled",
-    "type": "event"
+    "inputs": [],
+    "name": "RequestIsAlreadyPending",
+    "type": "error"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "bytes32",
-        "name": "id",
-        "type": "bytes32"
-      }
-    ],
-    "name": "ChainlinkRequested",
-    "type": "event"
+    "inputs": [],
+    "name": "RequestIsNotPending",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SenderIsNotRegistry",
+    "type": "error"
   },
   {
     "anonymous": false,
@@ -175,6 +176,32 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "id",
+        "type": "bytes32"
+      }
+    ],
+    "name": "RequestFulfilled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "id",
+        "type": "bytes32"
+      }
+    ],
+    "name": "RequestSent",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": false,
         "internalType": "address",
         "name": "gameId",
@@ -201,7 +228,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -214,7 +242,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -269,6 +298,87 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "enum Functions.Location",
+            "name": "codeLocation",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum Functions.Location",
+            "name": "secretsLocation",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum Functions.CodeLanguage",
+            "name": "language",
+            "type": "uint8"
+          },
+          {
+            "internalType": "string",
+            "name": "source",
+            "type": "string"
+          },
+          {
+            "internalType": "bytes",
+            "name": "secrets",
+            "type": "bytes"
+          },
+          {
+            "internalType": "string[]",
+            "name": "args",
+            "type": "string[]"
+          }
+        ],
+        "internalType": "struct Functions.Request",
+        "name": "req",
+        "type": "tuple"
+      },
+      {
+        "internalType": "uint64",
+        "name": "subscriptionId",
+        "type": "uint64"
+      },
+      {
+        "internalType": "uint32",
+        "name": "gasLimit",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "gasPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "estimateCost",
+    "outputs": [
+      {
+        "internalType": "uint96",
+        "name": "",
+        "type": "uint96"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "getDONPublicKey",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
     "inputs": [],
     "name": "getRouter",
     "outputs": [
@@ -279,6 +389,30 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "requestId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes",
+        "name": "response",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "err",
+        "type": "bytes"
+      }
+    ],
+    "name": "handleOracleFulfillment",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -292,7 +426,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -318,7 +453,8 @@
       }
     ],
     "stateMutability": "pure",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -329,6 +465,45 @@
       }
     ],
     "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "newSourceCode",
+        "type": "string"
+      }
+    ],
+    "name": "updateSourceCode",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "newLimit",
+        "type": "uint32"
+      }
+    ],
+    "name": "updateGasLimit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "newSubscriptionId",
+        "type": "uint64"
+      }
+    ],
+    "name": "updateSubscriptionId",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -381,13 +556,14 @@
     "name": "createGame",
     "outputs": [],
     "stateMutability": "payable",
-    "type": "function"
+    "type": "function",
+    "payable": true
   },
   {
     "inputs": [
       {
         "internalType": "string",
-        "name": "params",
+        "name": "templateUri",
         "type": "string"
       },
       {
@@ -410,29 +586,21 @@
       },
       {
         "internalType": "string[]",
-        "name": "properties",
+        "name": "props",
         "type": "string[]"
       },
       {
         "internalType": "string",
         "name": "fields",
         "type": "string"
+      },
+      {
+        "internalType": "uint8",
+        "name": "templateId",
+        "type": "uint8"
       }
     ],
     "name": "_generateUri",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "newBaseUrl",
-        "type": "string"
-      }
-    ],
-    "name": "updateBaseUrl",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -451,31 +619,6 @@
       }
     ],
     "name": "updateInterop",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "requestId",
-        "type": "bytes32"
-      },
-      {
-        "internalType": "string",
-        "name": "uri",
-        "type": "string"
-      }
-    ],
-    "name": "fulfill",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "withdrawLink",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -516,7 +659,8 @@
     "name": "_transferTo",
     "outputs": [],
     "stateMutability": "payable",
-    "type": "function"
+    "type": "function",
+    "payable": true
   },
   {
     "inputs": [

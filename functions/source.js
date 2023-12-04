@@ -1,21 +1,21 @@
-// @params properties typeof string
-const properties = args[0]
+// @args properties typeof string
+const props = args[0]
 
-// @params fields typeof string
+// @args fields typeof string
 const fields = args[1]
 
-// @params gameId typeof EVMAddress
+// @args gameId typeof EVMAddress
 const gameId = args[2]
 
-// @params playerId typeof EVMAddress
+// @args playerId typeof EVMAddress
 const playerId = args[3]
 
-// @params templateId typeof integer
+// @args templateId typeof integer
 const templateId = args[4]
 
 // Execute the API request (Promise)
 const apiResponse = await Functions.makeHttpRequest({
-    url: `https://kanvas-di5j.onrender.com/generate/${properties}/${fields}/${gameId}/${playerId}/${templateId}`
+    url: `https://kanvas-di5j.onrender.com/generate/${props}/${fields}/${gameId}/${playerId}/${templateId}`
 })
 
 if (apiResponse.error) {
