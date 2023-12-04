@@ -54,7 +54,7 @@ export class Controller {
                 return "";
             }
 
-            const buffer: Buffer | null = await this.getImageNftUri(game, properties, fields, playerId, templateId);
+            const { buffer, attributes } = await this.getImageNftUri(game, properties, fields, playerId, templateId);
             if (buffer == null) {
                 this.sendEmail(
                     `${game.name} Failed to generate NFT URI`,
@@ -79,6 +79,8 @@ export class Controller {
 
             const downloadURL = await getDownloadURL(bucket.file(path));
 
+            console.log('downloadURL ' + downloadURL);
+
             this.sendEmail(
                 `Kanvas: New NFT URI generated on ${game.name}`,
                 `
@@ -92,16 +94,17 @@ export class Controller {
                 process.env.POSTMARK_FROM
             );
 
-            const Metadata = {
+            const metdata: NFTMetadata = {
                 name: game.name,
                 description: game.description,
                 external_url: game.website,
-                image: downloadURL
+                image: downloadURL,
+                attributes: attributes
             };
 
             const metadataPath = `nfts/${game.gameId}/${playerId}.json`;
 
-            await bucket.file(metadataPath).save(JSON.stringify(Metadata), { public: true });
+            await bucket.file(metadataPath).save(JSON.stringify(metdata), { public: true });
 
             return await getDownloadURL(bucket.file(metadataPath));
         } catch (error) {
@@ -137,7 +140,7 @@ export class Controller {
         }
     }
 
-    private async getImageNftUri(game: Game, data: string, data2: string, playerId: string, templateId: number): Promise<Buffer | null> {
+    private async getImageNftUri(game: Game, data: string, data2: string, playerId: string, templateId: number): Promise<{ buffer: Buffer | null, attributes: Attribute[]; }> {
         const properties: string[] = this.parseProperties(data);
         const fields: string[] = this.parseFields(data2);
 
@@ -154,25 +157,41 @@ export class Controller {
                 game.email,
                 process.env.POSTMARK_FROM
             );
-            return null;
+            return { buffer: null, attributes: [] };
         }
 
+        const attributes: Attribute[] = [];
+
         try {
-            const buffer: Buffer = await this.readFile(game.templates[templateId].templateUri);
-            const svgContents: string = new TextDecoder('utf-8').decode(buffer);
+            const svgBuffer: Buffer = await this.readFile(game.templates[templateId].templateUri);
+            const svgContents: string = new TextDecoder('utf-8').decode(svgBuffer);
 
             let svgString: string = "";
 
             for (let index = 0; index < properties.length; index++) {
-                console.log(`replacing ${fields[index]} with ${properties[index]}`);
+                attributes.push({
+                    trait_type: this.transformString(fields[index]),
+                    value: properties[index]
+                });
                 svgString = svgContents.replace(fields[index], properties[index]);
             }
 
-            return Buffer.from(svgString, 'utf-8');
+            const buffer: Buffer = Buffer.from(svgString, 'utf-8');
+            return { buffer, attributes };
         } catch (error) {
             console.error(error);
-            return null;
+            return { buffer: null, attributes: [] };
         }
+    }
+
+    private transformString(inputString: string): string {
+        // Remove leading and trailing dollar signs
+        let cleanedString = inputString.replace(/^\$/, '').replace(/\$$/, '');
+
+        // Capitalize the first letter and lowercase the rest
+        cleanedString = cleanedString.charAt(0).toUpperCase() + cleanedString.slice(1).toLowerCase();
+
+        return cleanedString;
     }
 
     private parseFields(fields: string): string[] {

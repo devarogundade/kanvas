@@ -12,3 +12,16 @@ interface Game {
 interface Template {
     templateUri: string;
 }
+
+interface NFTMetadata {
+    name: string;
+    description: string;
+    external_url: string;
+    image: string;
+    attributes: Attribute[];
+}
+
+interface Attribute {
+    trait_type: string;
+    value: string;
+}
