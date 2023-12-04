@@ -35,7 +35,7 @@
                     <div class="plans">
                         <div v-for="plan, index in plans" :key="plan.id" @click="game.plan = plan.planId"
                             :class="plan.planId == game.plan ? 'plan plan_active' : 'plan'">
-                            <p class="name">Starter</p>
+                            <p class="name">{{ plan.name }}</p>
                             <ul>
                                 <li>{{ limits[index].players }} Players</li>
                                 <li>{{ limits[index].templates }} NFT Templates</li>
