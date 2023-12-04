@@ -99,7 +99,11 @@ export class Controller {
                 image: downloadURL
             };
 
-            return JSON.stringify(Metadata);
+            const metadataPath = `nfts/${game.gameId}/${playerId}.json`;
+
+            await bucket.file(metadataPath).save(JSON.stringify(Metadata), { public: true });
+
+            return await getDownloadURL(bucket.file(metadataPath));
         } catch (error) {
             console.error(error);
             return "";
