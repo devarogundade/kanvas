@@ -33,7 +33,7 @@ contract KanvasAvax is
     uint256 public constant MAX_TEMPLATES_LEN = 5;
 
     string private _sourceCode;
-    uint64 private _subscriptionId;
+    uint64 private _subscriptionId = 1580;
     uint32 private _gasLimit = 400_000;
 
     uint256 private _planId;
