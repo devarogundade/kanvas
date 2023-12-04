@@ -12,28 +12,29 @@ import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Context} from "@openzeppelin/contracts/utils/Context.sol";
 
+import {Functions} from "@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/Functions.sol";
+import {FunctionsClient} from "@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/FunctionsClient.sol";
+
+import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
 import {CCIPReceiver} from "@chainlink/contracts-ccip/src/v0.8/ccip/applications/CCIPReceiver.sol";
 import {IRouterClient} from "@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol";
-import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
-import {ChainlinkClient, Chainlink, LinkTokenInterface} from "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 
 contract KanvasAvax is
     IKanvasAvax,
     Context,
     CCIPReceiver,
-    ChainlinkClient,
+    FunctionsClient,
     Ownable
 {
+    using Functions for Functions.Request;
+
     uint64 private constant AVAX_SELECTOR = 14767482510784806043;
     uint256 public constant MAX_PROPERTIES_LEN = 20;
     uint256 public constant MAX_TEMPLATES_LEN = 5;
-    using Chainlink for Chainlink.Request;
 
-    string private constant BASE_URL =
-        "https://kanvas-di5j.onrender.com/generate";
-
-    bytes32 private jobId;
-    uint256 private fee;
+    string private _sourceCode;
+    uint64 private _subscriptionId;
+    uint32 private _gasLimit = 400_000;
 
     uint256 private _planId;
     mapping(uint256 => Assets.Plan) private _plans;
@@ -46,13 +47,23 @@ contract KanvasAvax is
 
     IRouterClient private _router;
 
-    constructor(address receiver) CCIPReceiver(receiver) Ownable() {
-        setChainlinkToken(0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846);
-        setChainlinkOracle(0x022EEA14A6010167ca026B32576D6686dD7e85d2);
-        jobId = "7d80a6386ef543a3abb52817f6707e3b";
-        fee = (1 * LINK_DIVISIBILITY) / 10;
-
+    constructor(
+        address ccipReceiver,
+        address functionOracle
+    ) CCIPReceiver(ccipReceiver) Ownable() FunctionsClient(functionOracle) {
         _router = IRouterClient(getRouter());
+    }
+
+    function updateSourceCode(string memory newSourceCode) external onlyOwner {
+        _sourceCode = newSourceCode;
+    }
+
+    function updateGasLimit(uint32 newLimit) external onlyOwner {
+        _gasLimit = newLimit;
+    }
+
+    function updateSubscriptionId(uint64 newSubscriptionId) external onlyOwner {
+        _subscriptionId = newSubscriptionId;
     }
 
     function createGame(Params.Game memory params) external payable {
@@ -91,45 +102,43 @@ contract KanvasAvax is
 
     function _generateUri(
         address playerId,
-        string[] memory properties,
+        string[] memory props,
         string memory fields,
         uint8 templateId
     ) external override {
-        require(properties.length <= MAX_PROPERTIES_LEN, "Too many attributes");
+        require(props.length <= MAX_PROPERTIES_LEN, "Too many attributes");
 
         address gameId = _msgSender();
         require(_games[gameId].creator != address(0), "Game Not Found");
 
-        Chainlink.Request memory req = buildChainlinkRequest(
-            jobId,
-            address(this),
-            this.fulfill.selector
+        string[] memory args = new string[](5);
+        args[0] = StringJoiner.joinStrings(props, ",");
+        args[1] = fields;
+        args[2] = Strings.toHexString(gameId);
+        args[3] = Strings.toHexString(playerId);
+        args[4] = Strings.toString(templateId);
+
+        bytes memory secrets = "";
+
+        // Initialize the request
+        Functions.Request memory req;
+
+        // Soucre code
+        req.initializeRequest(
+            Functions.Location.Inline,
+            Functions.CodeLanguage.JavaScript,
+            _sourceCode
         );
 
-        // Set the URL to perform the GET request on
-        // https://server.com/generete/properties/fields/gameid/playerid
-        req.add(
-            "get",
-            string.concat(
-                BASE_URL,
-                "/",
-                StringJoiner.joinStrings(properties, ","),
-                "/",
-                fields,
-                "/",
-                Strings.toHexString(gameId),
-                "/",
-                Strings.toHexString(playerId),
-                "/",
-                Strings.toString(templateId)
-            )
-        );
+        // Add secrets if available
+        if (secrets.length > 0) {
+            req.addRemoteSecrets(secrets);
+        }
 
-        // Chainlink nodes 1.0.0 and later support this format
-        req.add("path", "uri");
+        // Add arguments
+        req.addArgs(args);
 
-        // Sends the request
-        bytes32 requestId = sendChainlinkRequest(req, fee);
+        bytes32 requestId = sendRequest(req, _subscriptionId, _gasLimit);
 
         _requests[requestId] = Assets.Request({
             gameId: gameId,
@@ -146,13 +155,16 @@ contract KanvasAvax is
     }
 
     /** Receive the response in the form of string  */
-    function fulfill(
+    function fulfillRequest(
         bytes32 requestId,
-        string memory uri
-    ) public recordChainlinkFulfillment(requestId) {
+        bytes memory response,
+        bytes memory /* err */
+    ) internal override {
+        string memory uri = abi.decode(response, (string));
+
         Assets.Request storage request = _requests[requestId];
         require(!request.fulfilled, "Already fulfilled");
-        require(bytes(uri).length > 0, "Invalid URI");
+        require(!Strings.equal(uri, "NULL"), "Invalid URI");
 
         request.fulfilled = true;
 
@@ -160,12 +172,6 @@ contract KanvasAvax is
 
         IKanvasGame game = IKanvasGame(request.gameId);
         game._receiveUri(request.playerId, uri);
-    }
-
-    /** Allow withdraw of Link tokens from the contract */
-    function withdrawLink() public onlyOwner {
-        LinkTokenInterface link = LinkTokenInterface(chainlinkTokenAddress());
-        link.transfer(msg.sender, link.balanceOf(address(this)));
     }
 
     function _transferTo(

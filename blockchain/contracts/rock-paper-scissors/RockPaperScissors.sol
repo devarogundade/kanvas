@@ -18,13 +18,13 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
     uint256 private _tokenId;
 
     mapping(uint256 => string) private _tokenURIs;
-    mapping(address => uint256) private _playerNfts;
 
     IKanvasAvax private kanvas;
 
     struct Player {
         string name;
         uint256 points;
+        uint256 tokenId;
         bool created;
     }
 
@@ -41,17 +41,14 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
         address to,
         uint256 tokenId
     ) internal override {
-        Player storage player = _players[to];
+        Player storage newPlayer = _players[to];
         // check if receiver has their own account
-        require(!player.created, "Player has their own account");
+        require(!newPlayer.created, "Player has their own account");
 
-        _playerNfts[to] = tokenId;
+        // create new player account
+        newPlayer = _players[from];
 
-        player.name = _players[from].name;
-        player.points = _players[from].points;
-
-        // delete send accounts
-        delete _playerNfts[from];
+        // delete sender accounts
         delete _players[from];
 
         super._transfer(from, to, tokenId);
@@ -65,15 +62,16 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
         player.points = 5;
         player.created = true;
 
-        string[] memory properties = new string[](MAX_PROPERTIES_LEN);
-        properties[0] = player.name;
-        properties[1] = Strings.toString(player.points);
+        string[] memory props = new string[](MAX_PROPERTIES_LEN);
+        props[0] = player.name;
+        props[1] = Strings.toString(player.points);
 
         string memory fields = "$name$ $points$";
 
-        kanvas._generateUri(playerId, properties, fields, WIN_NFT_TEMPLATE);
+        kanvas._generateUri(playerId, props, fields, WIN_NFT_TEMPLATE);
     }
 
+    // Retsrns the player struct
     function getPlayer(address playerId) external view returns (Player memory) {
         return _players[playerId];
     }
@@ -85,13 +83,13 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
 
         player.points = player.points + 5;
 
-        string[] memory properties = new string[](MAX_PROPERTIES_LEN);
-        properties[0] = player.name;
-        properties[1] = Strings.toString(player.points);
+        string[] memory props = new string[](MAX_PROPERTIES_LEN);
+        props[0] = player.name;
+        props[1] = Strings.toString(player.points);
 
         string memory fields = "$name$ $points$";
 
-        kanvas._generateUri(playerId, properties, fields, WIN_NFT_TEMPLATE);
+        kanvas._generateUri(playerId, props, fields, WIN_NFT_TEMPLATE);
     }
 
     /** Reduce player points */
@@ -102,29 +100,23 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
 
         player.points = player.points - 1;
 
-        string[] memory properties = new string[](MAX_PROPERTIES_LEN);
-        properties[0] = player.name;
-        properties[1] = Strings.toString(player.points);
+        string[] memory props = new string[](MAX_PROPERTIES_LEN);
+        props[0] = player.name;
+        props[1] = Strings.toString(player.points);
 
         string memory fields = "$name$ $points$";
 
-        kanvas._generateUri(playerId, properties, fields, LOST_NFT_TEMPLATE);
+        kanvas._generateUri(playerId, props, fields, LOST_NFT_TEMPLATE);
     }
 
     /** Bridge game Nft function */
     function transferTo(uint64 chainSelector) external payable {
         address playerId = _msgSender();
-        uint256 tokenId = _playerNfts[playerId];
-
-        _burn(tokenId);
-        delete _tokenURIs[tokenId];
-
-        // player will be deleted when they transfer the game NFT
-        delete _playerNfts[playerId];
+        Player memory player = _players[playerId];
+        require(player.created, "Player does not exists");
 
         address gameId = address(this);
-        string memory uri = _tokenURIs[tokenId];
-        Player memory player = _players[playerId];
+        string memory uri = _tokenURIs[player.tokenId];
 
         bytes memory data = abi.encode(player.name, player.points);
 
@@ -133,10 +125,16 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
             chainSelector,
             gameId,
             playerId,
-            tokenId,
+            player.tokenId,
             uri,
             data
         );
+
+        _burn(player.tokenId);
+        delete _tokenURIs[player.tokenId];
+
+        // player will be deleted when they transfer the game NFT
+        delete _players[playerId];
     }
 
     /** Cross chain receiver callback function */
@@ -160,14 +158,17 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
         _players[playerId].name = name;
         _players[playerId].points = points;
 
-        _playerNfts[playerId] = tokenId;
+        _players[playerId].tokenId = tokenId;
     }
 
     function _receiveUri(
         address playerId,
         string memory uri
     ) external override {
-        uint256 tokenId = _playerNfts[playerId];
+        Player storage player = _players[playerId];
+        require(player.created, "Player does not exists");
+
+        uint256 tokenId = player.tokenId;
 
         // this player does not have the game nft
         if (tokenId == 0) {
@@ -177,7 +178,7 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
             tokenId = _tokenId;
 
             _mint(playerId, tokenId);
-            _playerNfts[playerId] = tokenId;
+            player.tokenId = tokenId;
         }
 
         _tokenURIs[tokenId] = uri;

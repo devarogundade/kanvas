@@ -1,0 +1,1528 @@
+{
+  "contractName": "IFunctionsOracle",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "getRegistry",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "registryAddress",
+          "type": "address"
+        }
+      ],
+      "name": "setRegistry",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getThresholdPublicKey",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "thresholdPublicKey",
+          "type": "bytes"
+        }
+      ],
+      "name": "setThresholdPublicKey",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getDONPublicKey",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "donPublicKey",
+          "type": "bytes"
+        }
+      ],
+      "name": "setDONPublicKey",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "node",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "publicKey",
+          "type": "bytes"
+        }
+      ],
+      "name": "setNodePublicKey",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "node",
+          "type": "address"
+        }
+      ],
+      "name": "deleteNodePublicKey",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAllNodePublicKeys",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        },
+        {
+          "internalType": "bytes[]",
+          "name": "",
+          "type": "bytes[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint64",
+              "name": "subscriptionId",
+              "type": "uint64"
+            },
+            {
+              "internalType": "address",
+              "name": "client",
+              "type": "address"
+            },
+            {
+              "internalType": "uint32",
+              "name": "gasLimit",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "gasPrice",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IFunctionsBillingRegistry.RequestBilling",
+          "name": "billing",
+          "type": "tuple"
+        }
+      ],
+      "name": "getRequiredFee",
+      "outputs": [
+        {
+          "internalType": "uint96",
+          "name": "",
+          "type": "uint96"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint64",
+          "name": "subscriptionId",
+          "type": "uint64"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint32",
+          "name": "gasLimit",
+          "type": "uint32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "gasPrice",
+          "type": "uint256"
+        }
+      ],
+      "name": "estimateCost",
+      "outputs": [
+        {
+          "internalType": "uint96",
+          "name": "",
+          "type": "uint96"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint64",
+          "name": "subscriptionId",
+          "type": "uint64"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint32",
+          "name": "gasLimit",
+          "type": "uint32"
+        }
+      ],
+      "name": "sendRequest",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"node\",\"type\":\"address\"}],\"name\":\"deleteNodePublicKey\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"subscriptionId\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"uint32\",\"name\":\"gasLimit\",\"type\":\"uint32\"},{\"internalType\":\"uint256\",\"name\":\"gasPrice\",\"type\":\"uint256\"}],\"name\":\"estimateCost\",\"outputs\":[{\"internalType\":\"uint96\",\"name\":\"\",\"type\":\"uint96\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllNodePublicKeys\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"},{\"internalType\":\"bytes[]\",\"name\":\"\",\"type\":\"bytes[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getDONPublicKey\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRegistry\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"uint64\",\"name\":\"subscriptionId\",\"type\":\"uint64\"},{\"internalType\":\"address\",\"name\":\"client\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"gasLimit\",\"type\":\"uint32\"},{\"internalType\":\"uint256\",\"name\":\"gasPrice\",\"type\":\"uint256\"}],\"internalType\":\"struct IFunctionsBillingRegistry.RequestBilling\",\"name\":\"billing\",\"type\":\"tuple\"}],\"name\":\"getRequiredFee\",\"outputs\":[{\"internalType\":\"uint96\",\"name\":\"\",\"type\":\"uint96\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getThresholdPublicKey\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"subscriptionId\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"uint32\",\"name\":\"gasLimit\",\"type\":\"uint32\"}],\"name\":\"sendRequest\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"donPublicKey\",\"type\":\"bytes\"}],\"name\":\"setDONPublicKey\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"node\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"publicKey\",\"type\":\"bytes\"}],\"name\":\"setNodePublicKey\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"registryAddress\",\"type\":\"address\"}],\"name\":\"setRegistry\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"thresholdPublicKey\",\"type\":\"bytes\"}],\"name\":\"setThresholdPublicKey\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"deleteNodePublicKey(address)\":{\"details\":\"Callable only by contract owner or the node itself\",\"params\":{\"node\":\"node's address\"}},\"estimateCost(uint64,bytes,uint32,uint256)\":{\"params\":{\"data\":\"Encoded Chainlink Functions request data, use FunctionsClient API to encode a request\",\"gasLimit\":\"Gas limit for the fulfillment callback\",\"subscriptionId\":\"A unique subscription ID allocated by billing system, a client can make requests from different contracts referencing the same subscription\"},\"returns\":{\"_0\":\"billedCost Cost in Juels (1e18) of LINK\"}},\"getDONPublicKey()\":{\"details\":\"All nodes on the DON have the corresponding private key needed to decrypt the secrets encrypted with the public key\",\"returns\":{\"_0\":\"publicKey the DON's public key\"}},\"getRegistry()\":{\"returns\":{\"_0\":\"registryAddress The address of Chainlink Functions billing registry contract\"}},\"getRequiredFee(bytes,(uint64,address,uint32,uint256))\":{\"params\":{\"billing\":\"The request's billing configuration\",\"data\":\"Encoded Chainlink Functions request data, use FunctionsClient API to encode a request\"},\"returns\":{\"_0\":\"fee Cost in Juels (1e18) of LINK\"}},\"getThresholdPublicKey()\":{\"details\":\"All nodes on the DON have separate key shares of the threshold decryption key and nodes must participate in a threshold decryption OCR round to decrypt secrets\",\"returns\":{\"_0\":\"thresholdPublicKey the DON's threshold encryption public key\"}},\"sendRequest(uint64,bytes,uint32)\":{\"params\":{\"data\":\"Encoded Chainlink Functions request data, use FunctionsClient API to encode a request\",\"gasLimit\":\"Gas limit for the fulfillment callback\",\"subscriptionId\":\"A unique subscription ID allocated by billing system, a client can make requests from different contracts referencing the same subscription\"},\"returns\":{\"_0\":\"requestId A unique request identifier (unique per DON)\"}},\"setDONPublicKey(bytes)\":{\"details\":\"Used to rotate the key\",\"params\":{\"donPublicKey\":\"The new public key\"}},\"setNodePublicKey(address,bytes)\":{\"details\":\"Callable only by contract owner and DON members\",\"params\":{\"node\":\"node's address\",\"publicKey\":\"node's public key\"}},\"setRegistry(address)\":{\"params\":{\"registryAddress\":\"The new address of Chainlink Functions billing registry contract\"}},\"setThresholdPublicKey(bytes)\":{\"details\":\"Used to rotate the key\",\"params\":{\"thresholdPublicKey\":\"The new public key\"}}},\"title\":\"Chainlink Functions oracle interface.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"deleteNodePublicKey(address)\":{\"notice\":\"Deletes node's public key\"},\"estimateCost(uint64,bytes,uint32,uint256)\":{\"notice\":\"Estimate the total cost that will be charged to a subscription to make a request: gas re-imbursement, plus DON fee, plus Registry fee\"},\"getAllNodePublicKeys()\":{\"notice\":\"Return two arrays of equal size containing DON members' addresses and their corresponding public keys (or empty byte arrays if per-node key is not defined)\"},\"getDONPublicKey()\":{\"notice\":\"Returns the DON's secp256k1 public key that is used to encrypt secrets\"},\"getRegistry()\":{\"notice\":\"Gets the stored billing registry address\"},\"getRequiredFee(bytes,(uint64,address,uint32,uint256))\":{\"notice\":\"Determine the fee charged by the DON that will be split between signing Node Operators for servicing the request\"},\"getThresholdPublicKey()\":{\"notice\":\"Returns the DON's threshold encryption public key used to encrypt secrets\"},\"sendRequest(uint64,bytes,uint32)\":{\"notice\":\"Sends a request (encoded as data) using the provided subscriptionId\"},\"setDONPublicKey(bytes)\":{\"notice\":\"Sets DON's secp256k1 public key used to encrypt secrets\"},\"setNodePublicKey(address,bytes)\":{\"notice\":\"Sets a per-node secp256k1 public key used to encrypt secrets for that node\"},\"setRegistry(address)\":{\"notice\":\"Sets the stored billing registry address\"},\"setThresholdPublicKey(bytes)\":{\"notice\":\"Sets the DON's threshold encryption public key used to encrypt secrets\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/interfaces/IFunctionsOracle.sol\":\"IFunctionsOracle\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/interfaces/IFunctionsBillingRegistry.sol\":{\"keccak256\":\"0x66bf91c68501bf24ddcfea4adbb96fae7934f71d84680f609e6d43ef452d50b4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6a481232bdfdb5c2e088e0968d4974aba3f6657c3fbb96faa60501b17ba55c4d\",\"dweb:/ipfs/QmSoMrpnXuxueGmNNdi7pamSbUVRAU2qBJ2YKEWahwhQG1\"]},\"@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/interfaces/IFunctionsOracle.sol\":{\"keccak256\":\"0x5514f75cbc304b01991973d96e61e65826fdb047e2db699c4f15440594edcc19\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://586c57257e582295b750bde0195e7ad45b82202786701ffff82f936547632343\",\"dweb:/ipfs/QmaZNst1FvAsEBHe7Vr4qxb1bLunGxke4daoL7eRtBcmFM\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.6;\n\nimport {IFunctionsBillingRegistry} from \"./IFunctionsBillingRegistry.sol\";\n\n/**\n * @title Chainlink Functions oracle interface.\n */\ninterface IFunctionsOracle {\n  /**\n   * @notice Gets the stored billing registry address\n   * @return registryAddress The address of Chainlink Functions billing registry contract\n   */\n  function getRegistry() external view returns (address);\n\n  /**\n   * @notice Sets the stored billing registry address\n   * @param registryAddress The new address of Chainlink Functions billing registry contract\n   */\n  function setRegistry(address registryAddress) external;\n\n  /**\n   * @notice Returns the DON's threshold encryption public key used to encrypt secrets\n   * @dev All nodes on the DON have separate key shares of the threshold decryption key\n   * and nodes must participate in a threshold decryption OCR round to decrypt secrets\n   * @return thresholdPublicKey the DON's threshold encryption public key\n   */\n  function getThresholdPublicKey() external view returns (bytes memory);\n\n  /**\n   * @notice Sets the DON's threshold encryption public key used to encrypt secrets\n   * @dev Used to rotate the key\n   * @param thresholdPublicKey The new public key\n   */\n  function setThresholdPublicKey(bytes calldata thresholdPublicKey) external;\n\n  /**\n   * @notice Returns the DON's secp256k1 public key that is used to encrypt secrets\n   * @dev All nodes on the DON have the corresponding private key\n   * needed to decrypt the secrets encrypted with the public key\n   * @return publicKey the DON's public key\n   */\n  function getDONPublicKey() external view returns (bytes memory);\n\n  /**\n   * @notice Sets DON's secp256k1 public key used to encrypt secrets\n   * @dev Used to rotate the key\n   * @param donPublicKey The new public key\n   */\n  function setDONPublicKey(bytes calldata donPublicKey) external;\n\n  /**\n   * @notice Sets a per-node secp256k1 public key used to encrypt secrets for that node\n   * @dev Callable only by contract owner and DON members\n   * @param node node's address\n   * @param publicKey node's public key\n   */\n  function setNodePublicKey(address node, bytes calldata publicKey) external;\n\n  /**\n   * @notice Deletes node's public key\n   * @dev Callable only by contract owner or the node itself\n   * @param node node's address\n   */\n  function deleteNodePublicKey(address node) external;\n\n  /**\n   * @notice Return two arrays of equal size containing DON members' addresses and their corresponding\n   * public keys (or empty byte arrays if per-node key is not defined)\n   */\n  function getAllNodePublicKeys() external view returns (address[] memory, bytes[] memory);\n\n  /**\n   * @notice Determine the fee charged by the DON that will be split between signing Node Operators for servicing the request\n   * @param data Encoded Chainlink Functions request data, use FunctionsClient API to encode a request\n   * @param billing The request's billing configuration\n   * @return fee Cost in Juels (1e18) of LINK\n   */\n  function getRequiredFee(\n    bytes calldata data,\n    IFunctionsBillingRegistry.RequestBilling calldata billing\n  ) external view returns (uint96);\n\n  /**\n   * @notice Estimate the total cost that will be charged to a subscription to make a request: gas re-imbursement, plus DON fee, plus Registry fee\n   * @param subscriptionId A unique subscription ID allocated by billing system,\n   * a client can make requests from different contracts referencing the same subscription\n   * @param data Encoded Chainlink Functions request data, use FunctionsClient API to encode a request\n   * @param gasLimit Gas limit for the fulfillment callback\n   * @return billedCost Cost in Juels (1e18) of LINK\n   */\n  function estimateCost(\n    uint64 subscriptionId,\n    bytes calldata data,\n    uint32 gasLimit,\n    uint256 gasPrice\n  ) external view returns (uint96);\n\n  /**\n   * @notice Sends a request (encoded as data) using the provided subscriptionId\n   * @param subscriptionId A unique subscription ID allocated by billing system,\n   * a client can make requests from different contracts referencing the same subscription\n   * @param data Encoded Chainlink Functions request data, use FunctionsClient API to encode a request\n   * @param gasLimit Gas limit for the fulfillment callback\n   * @return requestId A unique request identifier (unique per DON)\n   */\n  function sendRequest(uint64 subscriptionId, bytes calldata data, uint32 gasLimit) external returns (bytes32);\n}\n",
+  "sourcePath": "@chainlink\\contracts\\src\\v0.8\\functions\\dev\\v0_0_0\\interfaces\\IFunctionsOracle.sol",
+  "ast": {
+    "absolutePath": "@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/interfaces/IFunctionsOracle.sol",
+    "exportedSymbols": {
+      "IFunctionsBillingRegistry": [
+        1006
+      ],
+      "IFunctionsOracle": [
+        1129
+      ]
+    },
+    "id": 1130,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1028,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".6"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:9"
+      },
+      {
+        "absolutePath": "@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/interfaces/IFunctionsBillingRegistry.sol",
+        "file": "./IFunctionsBillingRegistry.sol",
+        "id": 1030,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 1130,
+        "sourceUnit": 1007,
+        "src": "57:74:9",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 1029,
+              "name": "IFunctionsBillingRegistry",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 1006,
+              "src": "65:25:9",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IFunctionsOracle",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 1031,
+          "nodeType": "StructuredDocumentation",
+          "src": "133:55:9",
+          "text": " @title Chainlink Functions oracle interface."
+        },
+        "fullyImplemented": false,
+        "id": 1129,
+        "linearizedBaseContracts": [
+          1129
+        ],
+        "name": "IFunctionsOracle",
+        "nameLocation": "199:16:9",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "documentation": {
+              "id": 1032,
+              "nodeType": "StructuredDocumentation",
+              "src": "220:153:9",
+              "text": " @notice Gets the stored billing registry address\n @return registryAddress The address of Chainlink Functions billing registry contract"
+            },
+            "functionSelector": "5ab1bd53",
+            "id": 1037,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getRegistry",
+            "nameLocation": "385:11:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1033,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "396:2:9"
+            },
+            "returnParameters": {
+              "id": 1036,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1035,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1037,
+                  "src": "422:7:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1034,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "422:7:9",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "421:9:9"
+            },
+            "scope": 1129,
+            "src": "376:55:9",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1038,
+              "nodeType": "StructuredDocumentation",
+              "src": "435:156:9",
+              "text": " @notice Sets the stored billing registry address\n @param registryAddress The new address of Chainlink Functions billing registry contract"
+            },
+            "functionSelector": "a91ee0dc",
+            "id": 1043,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setRegistry",
+            "nameLocation": "603:11:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1041,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1040,
+                  "mutability": "mutable",
+                  "name": "registryAddress",
+                  "nameLocation": "623:15:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1043,
+                  "src": "615:23:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1039,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "615:7:9",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "614:25:9"
+            },
+            "returnParameters": {
+              "id": 1042,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "648:0:9"
+            },
+            "scope": 1129,
+            "src": "594:55:9",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1044,
+              "nodeType": "StructuredDocumentation",
+              "src": "653:345:9",
+              "text": " @notice Returns the DON's threshold encryption public key used to encrypt secrets\n @dev All nodes on the DON have separate key shares of the threshold decryption key\n and nodes must participate in a threshold decryption OCR round to decrypt secrets\n @return thresholdPublicKey the DON's threshold encryption public key"
+            },
+            "functionSelector": "81f1b938",
+            "id": 1049,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getThresholdPublicKey",
+            "nameLocation": "1010:21:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1045,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1031:2:9"
+            },
+            "returnParameters": {
+              "id": 1048,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1047,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1049,
+                  "src": "1057:12:9",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1046,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1057:5:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1056:14:9"
+            },
+            "scope": 1129,
+            "src": "1001:70:9",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1050,
+              "nodeType": "StructuredDocumentation",
+              "src": "1075:176:9",
+              "text": " @notice Sets the DON's threshold encryption public key used to encrypt secrets\n @dev Used to rotate the key\n @param thresholdPublicKey The new public key"
+            },
+            "functionSelector": "083a5466",
+            "id": 1055,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setThresholdPublicKey",
+            "nameLocation": "1263:21:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1053,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1052,
+                  "mutability": "mutable",
+                  "name": "thresholdPublicKey",
+                  "nameLocation": "1300:18:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1055,
+                  "src": "1285:33:9",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1051,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1285:5:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1284:35:9"
+            },
+            "returnParameters": {
+              "id": 1054,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1328:0:9"
+            },
+            "scope": 1129,
+            "src": "1254:75:9",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1056,
+              "nodeType": "StructuredDocumentation",
+              "src": "1333:268:9",
+              "text": " @notice Returns the DON's secp256k1 public key that is used to encrypt secrets\n @dev All nodes on the DON have the corresponding private key\n needed to decrypt the secrets encrypted with the public key\n @return publicKey the DON's public key"
+            },
+            "functionSelector": "d328a91e",
+            "id": 1061,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getDONPublicKey",
+            "nameLocation": "1613:15:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1057,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1628:2:9"
+            },
+            "returnParameters": {
+              "id": 1060,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1059,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1061,
+                  "src": "1654:12:9",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1058,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1654:5:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1653:14:9"
+            },
+            "scope": 1129,
+            "src": "1604:64:9",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1062,
+              "nodeType": "StructuredDocumentation",
+              "src": "1672:155:9",
+              "text": " @notice Sets DON's secp256k1 public key used to encrypt secrets\n @dev Used to rotate the key\n @param donPublicKey The new public key"
+            },
+            "functionSelector": "7f15e166",
+            "id": 1067,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setDONPublicKey",
+            "nameLocation": "1839:15:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1065,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1064,
+                  "mutability": "mutable",
+                  "name": "donPublicKey",
+                  "nameLocation": "1870:12:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1067,
+                  "src": "1855:27:9",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1063,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1855:5:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1854:29:9"
+            },
+            "returnParameters": {
+              "id": 1066,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1892:0:9"
+            },
+            "scope": 1129,
+            "src": "1830:63:9",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1068,
+              "nodeType": "StructuredDocumentation",
+              "src": "1897:227:9",
+              "text": " @notice Sets a per-node secp256k1 public key used to encrypt secrets for that node\n @dev Callable only by contract owner and DON members\n @param node node's address\n @param publicKey node's public key"
+            },
+            "functionSelector": "80756031",
+            "id": 1075,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setNodePublicKey",
+            "nameLocation": "2136:16:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1073,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1070,
+                  "mutability": "mutable",
+                  "name": "node",
+                  "nameLocation": "2161:4:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1075,
+                  "src": "2153:12:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1069,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2153:7:9",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1072,
+                  "mutability": "mutable",
+                  "name": "publicKey",
+                  "nameLocation": "2182:9:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1075,
+                  "src": "2167:24:9",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1071,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2167:5:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2152:40:9"
+            },
+            "returnParameters": {
+              "id": 1074,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2201:0:9"
+            },
+            "scope": 1129,
+            "src": "2127:75:9",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1076,
+              "nodeType": "StructuredDocumentation",
+              "src": "2206:141:9",
+              "text": " @notice Deletes node's public key\n @dev Callable only by contract owner or the node itself\n @param node node's address"
+            },
+            "functionSelector": "26ceabac",
+            "id": 1081,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "deleteNodePublicKey",
+            "nameLocation": "2359:19:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1079,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1078,
+                  "mutability": "mutable",
+                  "name": "node",
+                  "nameLocation": "2387:4:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1081,
+                  "src": "2379:12:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1077,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2379:7:9",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2378:14:9"
+            },
+            "returnParameters": {
+              "id": 1080,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2401:0:9"
+            },
+            "scope": 1129,
+            "src": "2350:52:9",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1082,
+              "nodeType": "StructuredDocumentation",
+              "src": "2406:183:9",
+              "text": " @notice Return two arrays of equal size containing DON members' addresses and their corresponding\n public keys (or empty byte arrays if per-node key is not defined)"
+            },
+            "functionSelector": "53398987",
+            "id": 1091,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getAllNodePublicKeys",
+            "nameLocation": "2601:20:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1083,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2621:2:9"
+            },
+            "returnParameters": {
+              "id": 1090,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1086,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1091,
+                  "src": "2647:16:9",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 1084,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "2647:7:9",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 1085,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2647:9:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1089,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1091,
+                  "src": "2665:14:9",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "bytes[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 1087,
+                      "name": "bytes",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "2665:5:9",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_storage_ptr",
+                        "typeString": "bytes"
+                      }
+                    },
+                    "id": 1088,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2665:7:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                      "typeString": "bytes[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2646:34:9"
+            },
+            "scope": 1129,
+            "src": "2592:89:9",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1092,
+              "nodeType": "StructuredDocumentation",
+              "src": "2685:340:9",
+              "text": " @notice Determine the fee charged by the DON that will be split between signing Node Operators for servicing the request\n @param data Encoded Chainlink Functions request data, use FunctionsClient API to encode a request\n @param billing The request's billing configuration\n @return fee Cost in Juels (1e18) of LINK"
+            },
+            "functionSelector": "f1e14a21",
+            "id": 1102,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getRequiredFee",
+            "nameLocation": "3037:14:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1098,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1094,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "3072:4:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1102,
+                  "src": "3057:19:9",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1093,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3057:5:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1097,
+                  "mutability": "mutable",
+                  "name": "billing",
+                  "nameLocation": "3132:7:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1102,
+                  "src": "3082:57:9",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_RequestBilling_$923_calldata_ptr",
+                    "typeString": "struct IFunctionsBillingRegistry.RequestBilling"
+                  },
+                  "typeName": {
+                    "id": 1096,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 1095,
+                      "name": "IFunctionsBillingRegistry.RequestBilling",
+                      "nameLocations": [
+                        "3082:25:9",
+                        "3108:14:9"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 923,
+                      "src": "3082:40:9"
+                    },
+                    "referencedDeclaration": 923,
+                    "src": "3082:40:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_RequestBilling_$923_storage_ptr",
+                      "typeString": "struct IFunctionsBillingRegistry.RequestBilling"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3051:92:9"
+            },
+            "returnParameters": {
+              "id": 1101,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1100,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1102,
+                  "src": "3167:6:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint96",
+                    "typeString": "uint96"
+                  },
+                  "typeName": {
+                    "id": 1099,
+                    "name": "uint96",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3167:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint96",
+                      "typeString": "uint96"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3166:8:9"
+            },
+            "scope": 1129,
+            "src": "3028:147:9",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1103,
+              "nodeType": "StructuredDocumentation",
+              "src": "3179:544:9",
+              "text": " @notice Estimate the total cost that will be charged to a subscription to make a request: gas re-imbursement, plus DON fee, plus Registry fee\n @param subscriptionId A unique subscription ID allocated by billing system,\n a client can make requests from different contracts referencing the same subscription\n @param data Encoded Chainlink Functions request data, use FunctionsClient API to encode a request\n @param gasLimit Gas limit for the fulfillment callback\n @return billedCost Cost in Juels (1e18) of LINK"
+            },
+            "functionSelector": "d227d245",
+            "id": 1116,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "estimateCost",
+            "nameLocation": "3735:12:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1112,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1105,
+                  "mutability": "mutable",
+                  "name": "subscriptionId",
+                  "nameLocation": "3760:14:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "3753:21:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1104,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3753:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1107,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "3795:4:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "3780:19:9",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1106,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3780:5:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1109,
+                  "mutability": "mutable",
+                  "name": "gasLimit",
+                  "nameLocation": "3812:8:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "3805:15:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint32",
+                    "typeString": "uint32"
+                  },
+                  "typeName": {
+                    "id": 1108,
+                    "name": "uint32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3805:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint32",
+                      "typeString": "uint32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1111,
+                  "mutability": "mutable",
+                  "name": "gasPrice",
+                  "nameLocation": "3834:8:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "3826:16:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1110,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3826:7:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3747:99:9"
+            },
+            "returnParameters": {
+              "id": 1115,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1114,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "3870:6:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint96",
+                    "typeString": "uint96"
+                  },
+                  "typeName": {
+                    "id": 1113,
+                    "name": "uint96",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3870:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint96",
+                      "typeString": "uint96"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3869:8:9"
+            },
+            "scope": 1129,
+            "src": "3726:152:9",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1117,
+              "nodeType": "StructuredDocumentation",
+              "src": "3882:493:9",
+              "text": " @notice Sends a request (encoded as data) using the provided subscriptionId\n @param subscriptionId A unique subscription ID allocated by billing system,\n a client can make requests from different contracts referencing the same subscription\n @param data Encoded Chainlink Functions request data, use FunctionsClient API to encode a request\n @param gasLimit Gas limit for the fulfillment callback\n @return requestId A unique request identifier (unique per DON)"
+            },
+            "functionSelector": "28242b04",
+            "id": 1128,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "sendRequest",
+            "nameLocation": "4387:11:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1124,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1119,
+                  "mutability": "mutable",
+                  "name": "subscriptionId",
+                  "nameLocation": "4406:14:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1128,
+                  "src": "4399:21:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1118,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4399:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1121,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "4437:4:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1128,
+                  "src": "4422:19:9",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1120,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4422:5:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1123,
+                  "mutability": "mutable",
+                  "name": "gasLimit",
+                  "nameLocation": "4450:8:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1128,
+                  "src": "4443:15:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint32",
+                    "typeString": "uint32"
+                  },
+                  "typeName": {
+                    "id": 1122,
+                    "name": "uint32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4443:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint32",
+                      "typeString": "uint32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4398:61:9"
+            },
+            "returnParameters": {
+              "id": 1127,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1126,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1128,
+                  "src": "4478:7:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1125,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4478:7:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4477:9:9"
+            },
+            "scope": 1129,
+            "src": "4378:109:9",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1130,
+        "src": "189:4300:9",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:4458:9"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.11",
+  "updatedAt": "2023-12-04T22:14:09.652Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "deleteNodePublicKey(address)": {
+        "details": "Callable only by contract owner or the node itself",
+        "params": {
+          "node": "node's address"
+        }
+      },
+      "estimateCost(uint64,bytes,uint32,uint256)": {
+        "params": {
+          "data": "Encoded Chainlink Functions request data, use FunctionsClient API to encode a request",
+          "gasLimit": "Gas limit for the fulfillment callback",
+          "subscriptionId": "A unique subscription ID allocated by billing system, a client can make requests from different contracts referencing the same subscription"
+        },
+        "returns": {
+          "_0": "billedCost Cost in Juels (1e18) of LINK"
+        }
+      },
+      "getDONPublicKey()": {
+        "details": "All nodes on the DON have the corresponding private key needed to decrypt the secrets encrypted with the public key",
+        "returns": {
+          "_0": "publicKey the DON's public key"
+        }
+      },
+      "getRegistry()": {
+        "returns": {
+          "_0": "registryAddress The address of Chainlink Functions billing registry contract"
+        }
+      },
+      "getRequiredFee(bytes,(uint64,address,uint32,uint256))": {
+        "params": {
+          "billing": "The request's billing configuration",
+          "data": "Encoded Chainlink Functions request data, use FunctionsClient API to encode a request"
+        },
+        "returns": {
+          "_0": "fee Cost in Juels (1e18) of LINK"
+        }
+      },
+      "getThresholdPublicKey()": {
+        "details": "All nodes on the DON have separate key shares of the threshold decryption key and nodes must participate in a threshold decryption OCR round to decrypt secrets",
+        "returns": {
+          "_0": "thresholdPublicKey the DON's threshold encryption public key"
+        }
+      },
+      "sendRequest(uint64,bytes,uint32)": {
+        "params": {
+          "data": "Encoded Chainlink Functions request data, use FunctionsClient API to encode a request",
+          "gasLimit": "Gas limit for the fulfillment callback",
+          "subscriptionId": "A unique subscription ID allocated by billing system, a client can make requests from different contracts referencing the same subscription"
+        },
+        "returns": {
+          "_0": "requestId A unique request identifier (unique per DON)"
+        }
+      },
+      "setDONPublicKey(bytes)": {
+        "details": "Used to rotate the key",
+        "params": {
+          "donPublicKey": "The new public key"
+        }
+      },
+      "setNodePublicKey(address,bytes)": {
+        "details": "Callable only by contract owner and DON members",
+        "params": {
+          "node": "node's address",
+          "publicKey": "node's public key"
+        }
+      },
+      "setRegistry(address)": {
+        "params": {
+          "registryAddress": "The new address of Chainlink Functions billing registry contract"
+        }
+      },
+      "setThresholdPublicKey(bytes)": {
+        "details": "Used to rotate the key",
+        "params": {
+          "thresholdPublicKey": "The new public key"
+        }
+      }
+    },
+    "title": "Chainlink Functions oracle interface.",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "deleteNodePublicKey(address)": {
+        "notice": "Deletes node's public key"
+      },
+      "estimateCost(uint64,bytes,uint32,uint256)": {
+        "notice": "Estimate the total cost that will be charged to a subscription to make a request: gas re-imbursement, plus DON fee, plus Registry fee"
+      },
+      "getAllNodePublicKeys()": {
+        "notice": "Return two arrays of equal size containing DON members' addresses and their corresponding public keys (or empty byte arrays if per-node key is not defined)"
+      },
+      "getDONPublicKey()": {
+        "notice": "Returns the DON's secp256k1 public key that is used to encrypt secrets"
+      },
+      "getRegistry()": {
+        "notice": "Gets the stored billing registry address"
+      },
+      "getRequiredFee(bytes,(uint64,address,uint32,uint256))": {
+        "notice": "Determine the fee charged by the DON that will be split between signing Node Operators for servicing the request"
+      },
+      "getThresholdPublicKey()": {
+        "notice": "Returns the DON's threshold encryption public key used to encrypt secrets"
+      },
+      "sendRequest(uint64,bytes,uint32)": {
+        "notice": "Sends a request (encoded as data) using the provided subscriptionId"
+      },
+      "setDONPublicKey(bytes)": {
+        "notice": "Sets DON's secp256k1 public key used to encrypt secrets"
+      },
+      "setNodePublicKey(address,bytes)": {
+        "notice": "Sets a per-node secp256k1 public key used to encrypt secrets for that node"
+      },
+      "setRegistry(address)": {
+        "notice": "Sets the stored billing registry address"
+      },
+      "setThresholdPublicKey(bytes)": {
+        "notice": "Sets the DON's threshold encryption public key used to encrypt secrets"
+      }
+    },
+    "version": 1
+  }
+}

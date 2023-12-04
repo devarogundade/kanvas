@@ -23,7 +23,7 @@ interface IKanvasInterop {
 
     function _generateUri(
         address playerId,
-        string[] memory properties,
+        string[] memory props,
         string memory fields,
         uint8 templateId
     ) external;
