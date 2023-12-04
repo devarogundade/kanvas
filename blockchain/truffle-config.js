@@ -12,7 +12,7 @@ module.exports = {
 
   networks: {
     fuji: {
-      provider: () => new HDWalletProvider(MNEMONIC, 'https://endpoints.omniatech.io/v1/avax/fuji/public'),
+      provider: () => new HDWalletProvider(MNEMONIC, 'https://avalanche-fuji-c-chain.publicnode.com'),
       network_id: 43113,
       confirmations: 2,
       timeoutBlocks: 9999999,
