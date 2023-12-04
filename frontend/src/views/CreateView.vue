@@ -29,7 +29,7 @@
                     <div class="avatar">
                         <input @change="doFile" required type="file" style="opacity: 0; cursor: pointer;" accept="image/*">
                         <i class="fi fi-rr-picture"></i>
-                        <img v-show="false" src="" alt="">
+                        <img ref="image" v-show="file" src="" alt="">
                     </div>
 
                     <div class="plans">
@@ -92,6 +92,7 @@ export default {
             const files = e.target.files;
             if (files.length > 0) {
                 this.file = files[0];
+                this.$refs['image'].src = URL.createObjectURL(this.file)
             }
             else {
                 this.file = null;
@@ -103,6 +104,16 @@ export default {
         createGame: async function (e) {
             e.preventDefault();
             if (this.creating) return
+
+            if (this.game.plan == null) {
+                notify.push({
+                    title: "Input error",
+                    description: "Select a plan!",
+                    category: "error",
+                });
+                return
+            }
+
             this.creating = true;
 
             let avatar = '';
