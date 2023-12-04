@@ -17,7 +17,7 @@ export async function fetchGames(wallet) {
 
     const response = await makeRequest(`
     {
-        gameCreateds(where: {creator: "${wallet}"}) {
+        gameCreateds(where: {creator: "${wallet}"}, orderDirection: desc) {
             id
             gameId
             name
@@ -50,7 +50,7 @@ export async function fetchGame(gameId) {
             creator
             avatar
             plan
-            templates {
+            templates(orderDirection: desc) {
                 templateUri
             }
         }
@@ -63,7 +63,7 @@ export async function fetchGame(gameId) {
 export async function fetchPlans() {
     const response = await makeRequest(`
     {
-        planCreateds {
+        planCreateds(orderDirection: desc) {
             id
             planId
             name
