@@ -37,6 +37,23 @@ export class Controller {
                 return "";
             };
 
+            if (templateId >= game.templates.length) {
+                this.sendEmail(
+                    "Kanvas: Critical Error",
+                    `
+                            <ul>
+                                <li>Game Id: ${gameId}</li>
+                                <li>Player Id: ${playerId}</li>
+                                <li>Template Id: ${templateId}</li>
+                                <li>Reason: Invalid template id!.</li>
+                            </ul>
+                        `,
+                    game.email,
+                    process.env.POSTMARK_FROM
+                );
+                return "";
+            }
+
             const buffer: Buffer | null = await this.getImageNftUri(game, properties, fields, playerId, templateId);
             if (buffer == null) {
                 this.sendEmail(
@@ -68,8 +85,7 @@ export class Controller {
                         <ul>
                             <li>Game: ${game.name}</li>
                             <li>Player Id: ${playerId}</li>
-                            <li>URI: ${downloadURL}</li>
-                            <li>Reason: Failed to generate Nft Uri.</li>
+                            <img src="${downloadURL}" />
                         </ul>
                     `,
                 game.email,
