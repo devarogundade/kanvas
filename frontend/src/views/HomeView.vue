@@ -183,9 +183,13 @@ section {
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: #121111;
+  background-image: url('https://img.freepik.com/free-vector/astronaut-alien-planet-far-galaxy_107791-2201.jpg?w=1380&t=st=1701680967~exp=1701681567~hmac=3140c0ad7b6ca1ac587b0d56619db9d2c9e160b2c24ddd93e4e5e85365ba7447');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
   box-shadow: rgba(50, 50, 93, 0.642) 0px 50px 100px -20px, rgba(0, 0, 0, 0.618) 0px 30px 60px -30px;
-  margin-top: 100px;
+  margin-top: 60px;
   border-radius: 12px;
   padding: 40px;
   padding-bottom: 80px;
@@ -210,7 +214,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #282525;
+  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   flex-wrap: wrap;
   color: #fff;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -226,7 +230,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #282525;
+  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   flex-wrap: wrap;
   color: #fff;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -262,8 +266,8 @@ section {
 }
 
 .code .line {
-  height: 1px;
-  background: #fff;
+  height: 3px;
+  background: var(--pr);
   position: absolute;
   transform: translate(-50%, -50%);
   top: 50%;
@@ -275,11 +279,12 @@ section {
 .code .tag {
   padding: 4px 8px;
   border-radius: 12px;
-  background: #fff;
+  background: var(--pr);
   font-size: 14px;
   width: 140px;
   text-align: center;
   z-index: 1;
+  color: #fff;
 }
 
 .chains {
