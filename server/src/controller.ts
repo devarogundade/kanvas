@@ -105,7 +105,7 @@ export class Controller {
                         <ul>
                             <li>Game: ${game.name}</li>
                             <li>Player Id: ${playerId}</li>
-                            <img src="${downloadURL}" />
+                            <img width="200px" src="${downloadURL}" />
                         </ul>
                     `,
                 game.email,
