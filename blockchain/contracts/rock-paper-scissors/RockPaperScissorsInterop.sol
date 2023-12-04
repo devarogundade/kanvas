@@ -42,6 +42,27 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721, Ownable {
         );
     }
 
+    function _transfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal override {
+        Player storage player = _players[to];
+        // check if receiver has their own account
+        require(!player.created, "Player has their own account");
+
+        _playerNfts[to] = tokenId;
+
+        player.name = _players[from].name;
+        player.points = _players[from].points;
+
+        // delete send accounts
+        delete _playerNfts[from];
+        delete _players[from];
+
+        super._transfer(from, to, tokenId);
+    }
+
     function getPlayer(address playerId) external view returns (Player memory) {
         return _players[playerId];
     }

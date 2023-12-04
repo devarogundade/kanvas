@@ -144,39 +144,42 @@ export class Controller {
         const properties: string[] = this.parseProperties(data);
         const fields: string[] = this.parseFields(data2);
 
-        if (properties.length != fields.length) {
-            this.sendEmail(
-                "Failed to generate NFT URI",
-                `
-                    <ul>
-                        <li>Game: ${game.name}</li>
-                        <li>Player Id: ${playerId}</li>
-                        <li>Reason: The length of your properties and fields are not equal.</li>
-                    </ul>
-                `,
-                game.email,
-                process.env.POSTMARK_FROM
-            );
-            return { buffer: null, attributes: [] };
-        }
-
         const attributes: Attribute[] = [];
 
         try {
+            if (fields.length !== properties.length) {
+                this.sendEmail(
+                    "Failed to generate NFT URI",
+                    `
+                        <ul>
+                            <li>Game: ${game.name}</li>
+                            <li>Player Id: ${playerId}</li>
+                            <li>Reason: The length of your properties and fields are not equal.</li>
+                        </ul>
+                    `,
+                    game.email,
+                    process.env.POSTMARK_FROM
+                );
+                return { buffer: null, attributes: [] };
+            }
+
+
             const svgBuffer: Buffer = await this.readFile(game.templates[templateId].templateUri);
-            const svgContents: string = new TextDecoder('utf-8').decode(svgBuffer);
+            let svgContents: string = new TextDecoder('utf-8').decode(svgBuffer);
 
-            let svgString: string = "";
+            for (let index = 0; index < fields.length; index++) {
+                const field = fields[index];
+                const replacement = properties[index];
+                const regex = new RegExp(field, "g");
+                svgContents = svgContents.replace(regex, replacement);
 
-            for (let index = 0; index < properties.length; index++) {
                 attributes.push({
                     trait_type: this.transformString(fields[index]),
                     value: properties[index]
                 });
-                svgString = svgContents.replace(fields[index], properties[index]);
             }
 
-            const buffer: Buffer = Buffer.from(svgString, 'utf-8');
+            const buffer: Buffer = Buffer.from(svgContents, 'utf-8');
             return { buffer, attributes };
         } catch (error) {
             console.error(error);
@@ -186,12 +189,10 @@ export class Controller {
 
     private transformString(inputString: string): string {
         // Remove leading and trailing dollar signs
-        let cleanedString = inputString.replace(/^\$/, '').replace(/\$$/, '');
+        const cleanedString = inputString.replace(/^\$/, '').replace(/\$$/, '');
 
         // Capitalize the first letter and lowercase the rest
-        cleanedString = cleanedString.charAt(0).toUpperCase() + cleanedString.slice(1).toLowerCase();
-
-        return cleanedString;
+        return cleanedString.charAt(0).toUpperCase() + cleanedString.slice(1).toLowerCase();
     }
 
     private parseFields(fields: string): string[] {
