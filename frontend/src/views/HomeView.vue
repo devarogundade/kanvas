@@ -45,32 +45,37 @@ import PrimaryButton from '../components/PrimaryButton.vue';
           </div>
         </div>
 
+        <div class="chains">
+          <img src="/images/chainlink.png" alt="">
+          <p>⚡</p>
+          <img src="/images/avalanche.svg" alt="">
+          <img src="/images/polygon.png" alt="">
+          <img src="/images/bsc.png" alt="">
+        </div>
+
         <div class="code_flex">
           <div class="code">
             <div class="yourgame">
               <h3>Piggy <br> Game</h3>
             </div>
 
-
             <div class="kanvas">
               <h3>Kanvas</h3>
             </div>
-
-
 
             <img class="gif"
               src="https://pyxis.nymag.com/v1/imgs/696/4f8/7b5322246d421f650f7944793b796f36ae-NYM-Ani-Piggy-3-1-b.rhorizontal.w1100.jpg"
               alt="">
 
             <div class="path path1">
-              <div class="tag">bytes('score=10')</div>
-              <div class="tag">api_update(nft)</div>
+              <div class="tag">1️⃣ b({x: 10, y: 25})</div>
+              <div class="tag">2️⃣ chainlink(api)</div>
               <div class="line"></div>
             </div>
 
             <div class="path path2">
-              <div class="tag">uri(string)</div>
-              <div class="tag">uri(string)</div>
+              <div class="tag">4️⃣ _receive(URI)</div>
+              <div class="tag">3️⃣ string(URI)</div>
               <div class="line"></div>
             </div>
 
@@ -109,6 +114,7 @@ section {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 40px;
+  justify-content: center;
 }
 
 
@@ -138,7 +144,7 @@ section {
   background-repeat: no-repeat;
   width: 600px;
   max-width: 100%;
-  height: 550px;
+  min-height: 600px;
   border-radius: 12px;
   overflow: hidden;
   z-index: 1;
@@ -158,6 +164,7 @@ section {
   margin-bottom: 80px;
   line-height: 40px;
   z-index: 1;
+  height: 220px;
 }
 
 .feature:hover {
@@ -182,15 +189,18 @@ section {
   border-radius: 12px;
   padding: 40px;
   padding-bottom: 80px;
+  overflow: hidden;
 }
 
 .code {
   position: relative;
   width: 1200px;
+  max-width: 100%;
   height: 500px;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .code .yourgame {
@@ -201,6 +211,7 @@ section {
   align-items: center;
   justify-content: center;
   background: #282525;
+  flex-wrap: wrap;
   color: #fff;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   z-index: 1;
@@ -216,6 +227,7 @@ section {
   align-items: center;
   justify-content: center;
   background: #282525;
+  flex-wrap: wrap;
   color: #fff;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   z-index: 1;
@@ -238,6 +250,7 @@ section {
   width: 1000px;
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .path1 {
@@ -255,7 +268,8 @@ section {
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  width: 1000px;
+  width: 800px;
+  max-width: 80%;
 }
 
 .code .tag {
@@ -266,5 +280,20 @@ section {
   width: 140px;
   text-align: center;
   z-index: 1;
+}
+
+.chains {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 60px;
+  flex-wrap: wrap;
+}
+
+.chains * {
+  height: 60px;
+  display: flex;
+  align-items: center;
 }
 </style>
