@@ -8,11 +8,13 @@
             <div v-if="$store.state.player.name == ''" class="create">
                 <h3>Create Game Account</h3>
 
-                <form>
+                <form @submit="createPlayer">
                     <label for="name">Your Name</label>
                     <input type="text" v-model="playerName" id="name" required name="name" placeholder="John Doe">
 
-                    <button class="button" type="submit">Create Game</button>
+                    <br> <br>
+
+                    <PrimaryButton :type="'submit'" :progress="creating" :width="'200px'" :text="'Create Game'" />
                 </form>
             </div>
 
@@ -75,7 +77,9 @@ export default {
             }, 1000);
         },
 
-        createPlayer: async function () {
+        createPlayer: async function (e) {
+            e.preventDefault()
+
             if (this.creating) return
             this.creating = true
 
@@ -156,18 +160,6 @@ input {
 
 label {
     margin-top: 16px;
-}
-
-form .button {
-    height: 50px;
-    width: 200px;
-    background: var(--pr);
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 12px;
-    margin-top: 30px;
-    cursor: pointer;
 }
 
 .profile {
