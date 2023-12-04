@@ -93,6 +93,8 @@ export default {
                     linkTitle: "View Tnx",
                     linkUrl: `https://testnet.snowtrace.io/tx/${transaction.transactionHash}`
                 });
+
+                this.getPlayer()
             }
             else {
                 notify.push({
