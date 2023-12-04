@@ -170,8 +170,10 @@ export class Controller {
             for (let index = 0; index < fields.length; index++) {
                 const field = fields[index];
                 const replacement = properties[index];
-                const regex = new RegExp(field, "g");
-                svgContents = svgContents.replace(regex, replacement);
+
+                console.log(field, replacement);
+
+                svgContents = svgContents.replace(field, replacement);
 
                 attributes.push({
                     trait_type: this.transformString(fields[index]),
