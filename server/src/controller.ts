@@ -102,7 +102,7 @@ export class Controller {
                     website
                     creator
                     plan
-                    templates {
+                    templates(orderDirection: desc) {
                         templateUri
                     }
                 }
@@ -143,6 +143,7 @@ export class Controller {
             let svgString: string = "";
 
             for (let index = 0; index < properties.length; index++) {
+                console.log(`replacing ${fields[index]} with ${properties[index]}`);
                 svgString = svgContents.replace(fields[index], properties[index]);
             }
 
