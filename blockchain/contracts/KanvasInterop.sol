@@ -139,12 +139,15 @@ contract KanvasInterop is
             return;
         }
 
-        string memory uri = abi.decode(response, (string));
+        string memory URI = string(response);
 
         Assets.Request storage request = _requests[requestId];
         require(!request.fulfilled, "Already fulfilled");
 
-        if (Strings.equal(uri, "NULL")) {
+        if (
+            keccak256(abi.encodePacked(URI)) ==
+            keccak256(abi.encodePacked("NULL"))
+        ) {
             emit FulfullFailed(requestId, response);
             return;
         }
@@ -154,7 +157,7 @@ contract KanvasInterop is
         require(_games[request.gameId] != address(0), "Game Not Found");
 
         IKanvasGame game = IKanvasGame(request.gameId);
-        game._receiveUri(request.playerId, uri);
+        game._receiveUri(request.playerId, URI);
 
         emit FulfullSuccess(requestId, response);
     }
