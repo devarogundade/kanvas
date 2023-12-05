@@ -12,7 +12,7 @@ module.exports = {
 
   networks: {
     fuji: {
-      provider: () => new HDWalletProvider(MNEMONIC, 'https://rpc.ankr.com/avalanche_fuji'),
+      provider: () => new HDWalletProvider(MNEMONIC, 'https://ava-testnet.public.blastapi.io/ext/bc/C/rpc'),
       network_id: 43113,
       confirmations: 2,
       timeoutBlocks: 9999999,
@@ -29,7 +29,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.17", // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.8.19", // Fetch exact version from solc-bin (default: truffle's version)
       settings: { // See the solidity docs for advice about optimization and evmVersion
         optimizer: {
           // enabled: true,

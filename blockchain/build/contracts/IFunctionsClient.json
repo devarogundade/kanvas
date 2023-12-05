@@ -2,19 +2,6 @@
   "contractName": "IFunctionsClient",
   "abi": [
     {
-      "inputs": [],
-      "name": "getDONPublicKey",
-      "outputs": [
-        {
-          "internalType": "bytes",
-          "name": "",
-          "type": "bytes"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
           "internalType": "bytes32",
@@ -38,7 +25,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"getDONPublicKey\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"requestId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"response\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"err\",\"type\":\"bytes\"}],\"name\":\"handleOracleFulfillment\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"getDONPublicKey()\":{\"details\":\"All Oracles nodes have the corresponding private key needed to decrypt the secrets encrypted with the public key\",\"returns\":{\"_0\":\"publicKey DON's public key\"}},\"handleOracleFulfillment(bytes32,bytes,bytes)\":{\"params\":{\"err\":\"Aggregated error either from the user code or from the execution pipeline. Either response or error parameter will be set, but never both.\",\"requestId\":\"The requestId returned by FunctionsClient.sendRequest().\",\"response\":\"Aggregated response from the user code.\"}}},\"title\":\"Chainlink Functions client interface.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"getDONPublicKey()\":{\"notice\":\"Returns the DON's secp256k1 public key used to encrypt secrets\"},\"handleOracleFulfillment(bytes32,bytes,bytes)\":{\"notice\":\"Chainlink Functions response handler called by the designated transmitter node in an OCR round.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/interfaces/IFunctionsClient.sol\":\"IFunctionsClient\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/interfaces/IFunctionsClient.sol\":{\"keccak256\":\"0x526b2746b68537cafdb03f158eae23e4df6eb66f280b404e2e1afc1dede56391\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://df59c850c6347d322971cb05b3c043ebb3038bf7477cd26bfa540660b008ccfd\",\"dweb:/ipfs/QmXCTwMN9cnYKf1mjfUgDRGNieHS6nkn9CE9fQs6tC6sCx\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"requestId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"response\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"err\",\"type\":\"bytes\"}],\"name\":\"handleOracleFulfillment\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"handleOracleFulfillment(bytes32,bytes,bytes)\":{\"details\":\"Either response or error parameter will be set, but never both.\",\"params\":{\"err\":\"Aggregated error either from the request's source code or from the execution pipeline.\",\"requestId\":\"The requestId returned by FunctionsClient.sendRequest().\",\"response\":\"Aggregated response from the request's source code.\"}}},\"title\":\"Chainlink Functions client interface.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"handleOracleFulfillment(bytes32,bytes,bytes)\":{\"notice\":\"Chainlink Functions response handler called by the Functions Router during fullilment from the designated transmitter node in an OCR round.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/interfaces/IFunctionsClient.sol\":\"IFunctionsClient\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/interfaces/IFunctionsClient.sol\":{\"keccak256\":\"0x6117b82e7c4eec44ce557b0fc8bc1ac5f49e5d160ac6d4485452d6aafdd762ff\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0e0828ef423afef9f6f709bb173a7e3991fe555bf9337a4941d65da525ac4ad3\",\"dweb:/ipfs/QmXz1jHRZFTqdnNxP2tffVQ9NnUE1xgtBMRWuyUrTVY4pm\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -46,29 +33,29 @@
   "deployedGeneratedSources": [],
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.6;\n\n/**\n * @title Chainlink Functions client interface.\n */\ninterface IFunctionsClient {\n  /**\n   * @notice Returns the DON's secp256k1 public key used to encrypt secrets\n   * @dev All Oracles nodes have the corresponding private key\n   * needed to decrypt the secrets encrypted with the public key\n   * @return publicKey DON's public key\n   */\n  function getDONPublicKey() external view returns (bytes memory);\n\n  /**\n   * @notice Chainlink Functions response handler called by the designated transmitter node in an OCR round.\n   * @param requestId The requestId returned by FunctionsClient.sendRequest().\n   * @param response Aggregated response from the user code.\n   * @param err Aggregated error either from the user code or from the execution pipeline.\n   * Either response or error parameter will be set, but never both.\n   */\n  function handleOracleFulfillment(bytes32 requestId, bytes memory response, bytes memory err) external;\n}\n",
-  "sourcePath": "@chainlink\\contracts\\src\\v0.8\\functions\\dev\\v0_0_0\\interfaces\\IFunctionsClient.sol",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.19;\n\n/// @title Chainlink Functions client interface.\ninterface IFunctionsClient {\n  /// @notice Chainlink Functions response handler called by the Functions Router\n  /// during fullilment from the designated transmitter node in an OCR round.\n  /// @param requestId The requestId returned by FunctionsClient.sendRequest().\n  /// @param response Aggregated response from the request's source code.\n  /// @param err Aggregated error either from the request's source code or from the execution pipeline.\n  /// @dev Either response or error parameter will be set, but never both.\n  function handleOracleFulfillment(bytes32 requestId, bytes memory response, bytes memory err) external;\n}\n",
+  "sourcePath": "@chainlink\\contracts\\src\\v0.8\\functions\\dev\\v1_0_0\\interfaces\\IFunctionsClient.sol",
   "ast": {
-    "absolutePath": "@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/interfaces/IFunctionsClient.sol",
+    "absolutePath": "@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/interfaces/IFunctionsClient.sol",
     "exportedSymbols": {
       "IFunctionsClient": [
-        1026
+        267
       ]
     },
-    "id": 1027,
+    "id": 268,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1008,
+        "id": 255,
         "literals": [
           "solidity",
           "^",
           "0.8",
-          ".6"
+          ".19"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:23:8"
+        "src": "32:24:5"
       },
       {
         "abstract": false,
@@ -77,109 +64,48 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 1009,
+          "id": 256,
           "nodeType": "StructuredDocumentation",
-          "src": "57:55:8",
-          "text": " @title Chainlink Functions client interface."
+          "src": "58:49:5",
+          "text": "@title Chainlink Functions client interface."
         },
         "fullyImplemented": false,
-        "id": 1026,
+        "id": 267,
         "linearizedBaseContracts": [
-          1026
+          267
         ],
         "name": "IFunctionsClient",
-        "nameLocation": "123:16:8",
+        "nameLocation": "117:16:5",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "documentation": {
-              "id": 1010,
+              "id": 257,
               "nodeType": "StructuredDocumentation",
-              "src": "144:253:8",
-              "text": " @notice Returns the DON's secp256k1 public key used to encrypt secrets\n @dev All Oracles nodes have the corresponding private key\n needed to decrypt the secrets encrypted with the public key\n @return publicKey DON's public key"
-            },
-            "functionSelector": "d328a91e",
-            "id": 1015,
-            "implemented": false,
-            "kind": "function",
-            "modifiers": [],
-            "name": "getDONPublicKey",
-            "nameLocation": "409:15:8",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 1011,
-              "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "424:2:8"
-            },
-            "returnParameters": {
-              "id": 1014,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 1013,
-                  "mutability": "mutable",
-                  "name": "",
-                  "nameLocation": "-1:-1:-1",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 1015,
-                  "src": "450:12:8",
-                  "stateVariable": false,
-                  "storageLocation": "memory",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_bytes_memory_ptr",
-                    "typeString": "bytes"
-                  },
-                  "typeName": {
-                    "id": 1012,
-                    "name": "bytes",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "450:5:8",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bytes_storage_ptr",
-                      "typeString": "bytes"
-                    }
-                  },
-                  "visibility": "internal"
-                }
-              ],
-              "src": "449:14:8"
-            },
-            "scope": 1026,
-            "src": "400:64:8",
-            "stateMutability": "view",
-            "virtual": false,
-            "visibility": "external"
-          },
-          {
-            "documentation": {
-              "id": 1016,
-              "nodeType": "StructuredDocumentation",
-              "src": "468:418:8",
-              "text": " @notice Chainlink Functions response handler called by the designated transmitter node in an OCR round.\n @param requestId The requestId returned by FunctionsClient.sendRequest().\n @param response Aggregated response from the user code.\n @param err Aggregated error either from the user code or from the execution pipeline.\n Either response or error parameter will be set, but never both."
+              "src": "138:490:5",
+              "text": "@notice Chainlink Functions response handler called by the Functions Router\n during fullilment from the designated transmitter node in an OCR round.\n @param requestId The requestId returned by FunctionsClient.sendRequest().\n @param response Aggregated response from the request's source code.\n @param err Aggregated error either from the request's source code or from the execution pipeline.\n @dev Either response or error parameter will be set, but never both."
             },
             "functionSelector": "0ca76175",
-            "id": 1025,
+            "id": 266,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "handleOracleFulfillment",
-            "nameLocation": "898:23:8",
+            "nameLocation": "640:23:5",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1023,
+              "id": 264,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1018,
+                  "id": 259,
                   "mutability": "mutable",
                   "name": "requestId",
-                  "nameLocation": "930:9:8",
+                  "nameLocation": "672:9:5",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1025,
-                  "src": "922:17:8",
+                  "scope": 266,
+                  "src": "664:17:5",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -187,10 +113,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 1017,
+                    "id": 258,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "922:7:8",
+                    "src": "664:7:5",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -200,13 +126,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1020,
+                  "id": 261,
                   "mutability": "mutable",
                   "name": "response",
-                  "nameLocation": "954:8:8",
+                  "nameLocation": "696:8:5",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1025,
-                  "src": "941:21:8",
+                  "scope": 266,
+                  "src": "683:21:5",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -214,10 +140,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1019,
+                    "id": 260,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "941:5:8",
+                    "src": "683:5:5",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -227,13 +153,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1022,
+                  "id": 263,
                   "mutability": "mutable",
                   "name": "err",
-                  "nameLocation": "977:3:8",
+                  "nameLocation": "719:3:5",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1025,
-                  "src": "964:16:8",
+                  "scope": 266,
+                  "src": "706:16:5",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -241,10 +167,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1021,
+                    "id": 262,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "964:5:8",
+                    "src": "706:5:5",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -253,49 +179,44 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "921:60:8"
+              "src": "663:60:5"
             },
             "returnParameters": {
-              "id": 1024,
+              "id": 265,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "990:0:8"
+              "src": "732:0:5"
             },
-            "scope": 1026,
-            "src": "889:102:8",
+            "scope": 267,
+            "src": "631:102:5",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1027,
-        "src": "113:880:8",
+        "scope": 268,
+        "src": "107:628:5",
         "usedErrors": []
       }
     ],
-    "src": "32:962:8"
+    "src": "32:704:5"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
+    "version": "0.8.19+commit.7dd6d404.Emscripten.clang"
   },
   "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-12-04T22:14:09.650Z",
+  "updatedAt": "2023-12-05T06:57:03.519Z",
   "devdoc": {
     "kind": "dev",
     "methods": {
-      "getDONPublicKey()": {
-        "details": "All Oracles nodes have the corresponding private key needed to decrypt the secrets encrypted with the public key",
-        "returns": {
-          "_0": "publicKey DON's public key"
-        }
-      },
       "handleOracleFulfillment(bytes32,bytes,bytes)": {
+        "details": "Either response or error parameter will be set, but never both.",
         "params": {
-          "err": "Aggregated error either from the user code or from the execution pipeline. Either response or error parameter will be set, but never both.",
+          "err": "Aggregated error either from the request's source code or from the execution pipeline.",
           "requestId": "The requestId returned by FunctionsClient.sendRequest().",
-          "response": "Aggregated response from the user code."
+          "response": "Aggregated response from the request's source code."
         }
       }
     },
@@ -305,11 +226,8 @@
   "userdoc": {
     "kind": "user",
     "methods": {
-      "getDONPublicKey()": {
-        "notice": "Returns the DON's secp256k1 public key used to encrypt secrets"
-      },
       "handleOracleFulfillment(bytes32,bytes,bytes)": {
-        "notice": "Chainlink Functions response handler called by the designated transmitter node in an OCR round."
+        "notice": "Chainlink Functions response handler called by the Functions Router during fullilment from the designated transmitter node in an OCR round."
       }
     },
     "version": 1

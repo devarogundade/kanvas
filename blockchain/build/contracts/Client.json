@@ -15,36 +15,36 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"EVM_EXTRA_ARGS_V1_TAG\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol\":\"Client\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol\":{\"keccak256\":\"0x2fb8e11d517fa5ee213aaab3f4d416155cd2b72d61ba443dbeff6b41d29e9523\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fcdf688dc96619a256fdbddce1a6ceff0f6c57963be267148abdcfd57616725e\",\"dweb:/ipfs/QmVEF1ZER2V86L8CcMYTqt1VwQ4Xw2pa12pNZbb99UkqRT\"]}},\"version\":1}",
-  "bytecode": "0x60e5610052600b82828239805160001a607314610045577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe730000000000000000000000000000000000000000301460806040526004361060335760003560e01c80633ab8c0d0146038575b600080fd5b603e6052565b604051604991906096565b60405180910390f35b6397a657c960e01b81565b60007fffffffff0000000000000000000000000000000000000000000000000000000082169050919050565b609081605d565b82525050565b600060208201905060a960008301846089565b9291505056fea2646970667358221220ce89194bc500ee6e4f0866a72f3e37b807c2249535f8fbb4c333b8f88685ae7f64736f6c63430008110033",
-  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040526004361060335760003560e01c80633ab8c0d0146038575b600080fd5b603e6052565b604051604991906096565b60405180910390f35b6397a657c960e01b81565b60007fffffffff0000000000000000000000000000000000000000000000000000000082169050919050565b609081605d565b82525050565b600060208201905060a960008301846089565b9291505056fea2646970667358221220ce89194bc500ee6e4f0866a72f3e37b807c2249535f8fbb4c333b8f88685ae7f64736f6c63430008110033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"EVM_EXTRA_ARGS_V1_TAG\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol\":\"Client\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol\":{\"keccak256\":\"0x2fb8e11d517fa5ee213aaab3f4d416155cd2b72d61ba443dbeff6b41d29e9523\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fcdf688dc96619a256fdbddce1a6ceff0f6c57963be267148abdcfd57616725e\",\"dweb:/ipfs/QmVEF1ZER2V86L8CcMYTqt1VwQ4Xw2pa12pNZbb99UkqRT\"]}},\"version\":1}",
+  "bytecode": "0x60e5610052600b82828239805160001a607314610045577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe730000000000000000000000000000000000000000301460806040526004361060335760003560e01c80633ab8c0d0146038575b600080fd5b603e6052565b604051604991906096565b60405180910390f35b6397a657c960e01b81565b60007fffffffff0000000000000000000000000000000000000000000000000000000082169050919050565b609081605d565b82525050565b600060208201905060a960008301846089565b9291505056fea264697066735822122083d41894b8899492e61c920140fd753708d1a14ef88e7c516e89527ea02e5e9e64736f6c63430008130033",
+  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040526004361060335760003560e01c80633ab8c0d0146038575b600080fd5b603e6052565b604051604991906096565b60405180910390f35b6397a657c960e01b81565b60007fffffffff0000000000000000000000000000000000000000000000000000000082169050919050565b609081605d565b82525050565b600060208201905060a960008301846089565b9291505056fea264697066735822122083d41894b8899492e61c920140fd753708d1a14ef88e7c516e89527ea02e5e9e64736f6c63430008130033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [
     {
       "ast": {
         "nodeType": "YulBlock",
-        "src": "0:528:35",
+        "src": "0:528:36",
         "statements": [
           {
             "body": {
               "nodeType": "YulBlock",
-              "src": "51:105:35",
+              "src": "51:105:36",
               "statements": [
                 {
                   "nodeType": "YulAssignment",
-                  "src": "61:89:35",
+                  "src": "61:89:36",
                   "value": {
                     "arguments": [
                       {
                         "name": "value",
                         "nodeType": "YulIdentifier",
-                        "src": "76:5:35"
+                        "src": "76:5:36"
                       },
                       {
                         "kind": "number",
                         "nodeType": "YulLiteral",
-                        "src": "83:66:35",
+                        "src": "83:66:36",
                         "type": "",
                         "value": "0xffffffff00000000000000000000000000000000000000000000000000000000"
                       }
@@ -52,16 +52,16 @@
                     "functionName": {
                       "name": "and",
                       "nodeType": "YulIdentifier",
-                      "src": "72:3:35"
+                      "src": "72:3:36"
                     },
                     "nodeType": "YulFunctionCall",
-                    "src": "72:78:35"
+                    "src": "72:78:36"
                   },
                   "variableNames": [
                     {
                       "name": "cleaned",
                       "nodeType": "YulIdentifier",
-                      "src": "61:7:35"
+                      "src": "61:7:36"
                     }
                   ]
                 }
@@ -73,7 +73,7 @@
               {
                 "name": "value",
                 "nodeType": "YulTypedName",
-                "src": "33:5:35",
+                "src": "33:5:36",
                 "type": ""
               }
             ],
@@ -81,16 +81,16 @@
               {
                 "name": "cleaned",
                 "nodeType": "YulTypedName",
-                "src": "43:7:35",
+                "src": "43:7:36",
                 "type": ""
               }
             ],
-            "src": "7:149:35"
+            "src": "7:149:36"
           },
           {
             "body": {
               "nodeType": "YulBlock",
-              "src": "233:52:35",
+              "src": "233:52:36",
               "statements": [
                 {
                   "expression": {
@@ -98,35 +98,35 @@
                       {
                         "name": "pos",
                         "nodeType": "YulIdentifier",
-                        "src": "250:3:35"
+                        "src": "250:3:36"
                       },
                       {
                         "arguments": [
                           {
                             "name": "value",
                             "nodeType": "YulIdentifier",
-                            "src": "272:5:35"
+                            "src": "272:5:36"
                           }
                         ],
                         "functionName": {
                           "name": "cleanup_t_bytes4",
                           "nodeType": "YulIdentifier",
-                          "src": "255:16:35"
+                          "src": "255:16:36"
                         },
                         "nodeType": "YulFunctionCall",
-                        "src": "255:23:35"
+                        "src": "255:23:36"
                       }
                     ],
                     "functionName": {
                       "name": "mstore",
                       "nodeType": "YulIdentifier",
-                      "src": "243:6:35"
+                      "src": "243:6:36"
                     },
                     "nodeType": "YulFunctionCall",
-                    "src": "243:36:35"
+                    "src": "243:36:36"
                   },
                   "nodeType": "YulExpressionStatement",
-                  "src": "243:36:35"
+                  "src": "243:36:36"
                 }
               ]
             },
@@ -136,37 +136,37 @@
               {
                 "name": "value",
                 "nodeType": "YulTypedName",
-                "src": "221:5:35",
+                "src": "221:5:36",
                 "type": ""
               },
               {
                 "name": "pos",
                 "nodeType": "YulTypedName",
-                "src": "228:3:35",
+                "src": "228:3:36",
                 "type": ""
               }
             ],
-            "src": "162:123:35"
+            "src": "162:123:36"
           },
           {
             "body": {
               "nodeType": "YulBlock",
-              "src": "395:130:35",
+              "src": "395:130:36",
               "statements": [
                 {
                   "nodeType": "YulAssignment",
-                  "src": "405:26:35",
+                  "src": "405:26:36",
                   "value": {
                     "arguments": [
                       {
                         "name": "headStart",
                         "nodeType": "YulIdentifier",
-                        "src": "417:9:35"
+                        "src": "417:9:36"
                       },
                       {
                         "kind": "number",
                         "nodeType": "YulLiteral",
-                        "src": "428:2:35",
+                        "src": "428:2:36",
                         "type": "",
                         "value": "32"
                       }
@@ -174,16 +174,16 @@
                     "functionName": {
                       "name": "add",
                       "nodeType": "YulIdentifier",
-                      "src": "413:3:35"
+                      "src": "413:3:36"
                     },
                     "nodeType": "YulFunctionCall",
-                    "src": "413:18:35"
+                    "src": "413:18:36"
                   },
                   "variableNames": [
                     {
                       "name": "tail",
                       "nodeType": "YulIdentifier",
-                      "src": "405:4:35"
+                      "src": "405:4:36"
                     }
                   ]
                 },
@@ -193,19 +193,19 @@
                       {
                         "name": "value0",
                         "nodeType": "YulIdentifier",
-                        "src": "491:6:35"
+                        "src": "491:6:36"
                       },
                       {
                         "arguments": [
                           {
                             "name": "headStart",
                             "nodeType": "YulIdentifier",
-                            "src": "504:9:35"
+                            "src": "504:9:36"
                           },
                           {
                             "kind": "number",
                             "nodeType": "YulLiteral",
-                            "src": "515:1:35",
+                            "src": "515:1:36",
                             "type": "",
                             "value": "0"
                           }
@@ -213,22 +213,22 @@
                         "functionName": {
                           "name": "add",
                           "nodeType": "YulIdentifier",
-                          "src": "500:3:35"
+                          "src": "500:3:36"
                         },
                         "nodeType": "YulFunctionCall",
-                        "src": "500:17:35"
+                        "src": "500:17:36"
                       }
                     ],
                     "functionName": {
                       "name": "abi_encode_t_bytes4_to_t_bytes4_fromStack_library",
                       "nodeType": "YulIdentifier",
-                      "src": "441:49:35"
+                      "src": "441:49:36"
                     },
                     "nodeType": "YulFunctionCall",
-                    "src": "441:77:35"
+                    "src": "441:77:36"
                   },
                   "nodeType": "YulExpressionStatement",
-                  "src": "441:77:35"
+                  "src": "441:77:36"
                 }
               ]
             },
@@ -238,13 +238,13 @@
               {
                 "name": "headStart",
                 "nodeType": "YulTypedName",
-                "src": "367:9:35",
+                "src": "367:9:36",
                 "type": ""
               },
               {
                 "name": "value0",
                 "nodeType": "YulTypedName",
-                "src": "379:6:35",
+                "src": "379:6:36",
                 "type": ""
               }
             ],
@@ -252,22 +252,22 @@
               {
                 "name": "tail",
                 "nodeType": "YulTypedName",
-                "src": "390:4:35",
+                "src": "390:4:36",
                 "type": ""
               }
             ],
-            "src": "291:234:35"
+            "src": "291:234:36"
           }
         ]
       },
       "contents": "{\n\n    function cleanup_t_bytes4(value) -> cleaned {\n        cleaned := and(value, 0xffffffff00000000000000000000000000000000000000000000000000000000)\n    }\n\n    function abi_encode_t_bytes4_to_t_bytes4_fromStack_library(value, pos) {\n        mstore(pos, cleanup_t_bytes4(value))\n    }\n\n    function abi_encode_tuple_t_bytes4__to_t_bytes4__fromStack_library_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_bytes4_to_t_bytes4_fromStack_library(value0,  add(headStart, 0))\n\n    }\n\n}\n",
-      "id": 35,
+      "id": 36,
       "language": "Yul",
       "name": "#utility.yul"
     }
   ],
   "sourceMap": "82:1465:3:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "82:1465:3:-:0;;;;;;;;;;;;;;;;;;;;;;;;1154:57;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;;1201:10;1154:57;;;:::o;7:149:35:-;43:7;83:66;76:5;72:78;61:89;;7:149;;;:::o;162:123::-;255:23;272:5;255:23;:::i;:::-;250:3;243:36;162:123;;:::o;291:234::-;390:4;428:2;417:9;413:18;405:26;;441:77;515:1;504:9;500:17;491:6;441:77;:::i;:::-;291:234;;;;:::o",
+  "deployedSourceMap": "82:1465:3:-:0;;;;;;;;;;;;;;;;;;;;;;;;1154:57;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;;1201:10;1154:57;;;:::o;7:149:36:-;43:7;83:66;76:5;72:78;61:89;;7:149;;;:::o;162:123::-;255:23;272:5;255:23;:::i;:::-;250:3;243:36;162:123;;:::o;291:234::-;390:4;428:2;417:9;413:18;405:26;;441:77;515:1;504:9;500:17;491:6;441:77;:::i;:::-;291:234;;;;:::o",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\n// End consumer library.\nlibrary Client {\n  struct EVMTokenAmount {\n    address token; // token address on the local chain.\n    uint256 amount; // Amount of tokens.\n  }\n\n  struct Any2EVMMessage {\n    bytes32 messageId; // MessageId corresponding to ccipSend on source.\n    uint64 sourceChainSelector; // Source chain selector.\n    bytes sender; // abi.decode(sender) if coming from an EVM chain.\n    bytes data; // payload sent in original message.\n    EVMTokenAmount[] destTokenAmounts; // Tokens and their amounts in their destination chain representation.\n  }\n\n  // If extraArgs is empty bytes, the default is 200k gas limit and strict = false.\n  struct EVM2AnyMessage {\n    bytes receiver; // abi.encode(receiver address) for dest EVM chains\n    bytes data; // Data payload\n    EVMTokenAmount[] tokenAmounts; // Token transfers\n    address feeToken; // Address of feeToken. address(0) means you will send msg.value.\n    bytes extraArgs; // Populate this with _argsToBytes(EVMExtraArgsV1)\n  }\n\n  // extraArgs will evolve to support new features\n  // bytes4(keccak256(\"CCIP EVMExtraArgsV1\"));\n  bytes4 public constant EVM_EXTRA_ARGS_V1_TAG = 0x97a657c9;\n  struct EVMExtraArgsV1 {\n    uint256 gasLimit; // ATTENTION!!! MAX GAS LIMIT 4M FOR BETA TESTING\n    bool strict; // See strict sequencing details below.\n  }\n\n  function _argsToBytes(EVMExtraArgsV1 memory extraArgs) internal pure returns (bytes memory bts) {\n    return abi.encodeWithSelector(EVM_EXTRA_ARGS_V1_TAG, extraArgs);\n  }\n}\n",
   "sourcePath": "@chainlink\\contracts-ccip\\src\\v0.8\\ccip\\libraries\\Client.sol",
   "ast": {
@@ -1012,11 +1012,11 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
+    "version": "0.8.19+commit.7dd6d404.Emscripten.clang"
   },
   "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-12-04T22:14:09.635Z",
+  "updatedAt": "2023-12-05T06:57:03.513Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

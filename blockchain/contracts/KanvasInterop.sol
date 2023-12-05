@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.19;
 
 import {Assets} from "./libraries/Assets.sol";
 import {Params} from "./libraries/Params.sol";
@@ -12,14 +12,12 @@ import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Context} from "@openzeppelin/contracts/utils/Context.sol";
 
-import {Functions} from "@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/Functions.sol";
-import {FunctionsClient} from "@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/FunctionsClient.sol";
+import {FunctionsClient} from "./FunctionsClient.sol";
+import {FunctionsRequest} from "@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/libraries/FunctionsRequest.sol";
 
 import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
 import {CCIPReceiver} from "@chainlink/contracts-ccip/src/v0.8/ccip/applications/CCIPReceiver.sol";
 import {IRouterClient} from "@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol";
-
-// ! FOR POLYGON ALONE - HARDCODED VALUES
 
 contract KanvasInterop is
     IKanvasInterop,
@@ -28,15 +26,17 @@ contract KanvasInterop is
     FunctionsClient,
     Ownable
 {
-    using Functions for Functions.Request;
+    using FunctionsRequest for FunctionsRequest.Request;
 
-    uint64 private constant POLYGON_SELECTOR = 12532609583862916517;
+    uint64 private immutable _chainSelector;
+
     uint256 public constant MAX_PROPERTIES_LEN = 20;
     uint256 public constant MAX_TEMPLATES_LEN = 5;
 
     string private _sourceCode;
     uint64 private _subscriptionId;
-    uint32 private _gasLimit = 400_000;
+    uint32 private _gasLimit;
+    bytes32 private _donId;
 
     mapping(address => address) private _games;
 
@@ -48,9 +48,15 @@ contract KanvasInterop is
 
     constructor(
         address ccipReceiver,
-        address functionOracle
+        address functionOracle,
+        uint64 chainSelector
     ) CCIPReceiver(ccipReceiver) Ownable() FunctionsClient(functionOracle) {
         _router = IRouterClient(getRouter());
+        _chainSelector = chainSelector;
+    }
+
+    function updateDonId(bytes32 newDonId) external onlyOwner {
+        _donId = newDonId;
     }
 
     function updateSourceCode(string memory newSourceCode) external onlyOwner {
@@ -90,27 +96,21 @@ contract KanvasInterop is
         args[3] = Strings.toHexString(playerId);
         args[4] = Strings.toString(templateId);
 
-        bytes memory secrets = "";
-
         // Initialize the request
-        Functions.Request memory req;
+        FunctionsRequest.Request memory req;
 
         // Soucre code
-        req.initializeRequest(
-            Functions.Location.Inline,
-            Functions.CodeLanguage.JavaScript,
-            _sourceCode
-        );
-
-        // Add secrets if available
-        if (secrets.length > 0) {
-            req.addRemoteSecrets(secrets);
-        }
+        req.initializeRequestForInlineJavaScript(_sourceCode);
 
         // Add arguments
-        req.addArgs(args);
+        req.setArgs(args);
 
-        bytes32 requestId = sendRequest(req, _subscriptionId, _gasLimit);
+        bytes32 requestId = _sendRequest(
+            req.encodeCBOR(),
+            _subscriptionId,
+            _gasLimit,
+            _donId
+        );
 
         _requests[requestId] = Assets.Request({
             gameId: gameId,
@@ -173,12 +173,12 @@ contract KanvasInterop is
         });
 
         // Get the fee required to send the message
-        uint256 fees = _router.getFee(POLYGON_SELECTOR, message);
+        uint256 fees = _router.getFee(_chainSelector, message);
 
         require(msg.value >= fees, "Insufficient fee");
 
         // Send the message through the router and store the returned message ID
-        _router.ccipSend{value: fees}(POLYGON_SELECTOR, message);
+        _router.ccipSend{value: fees}(_chainSelector, message);
     }
 
     // handle a received message

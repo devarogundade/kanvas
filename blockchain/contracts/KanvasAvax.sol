@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.19;
 
 import {Assets} from "./libraries/Assets.sol";
 import {Params} from "./libraries/Params.sol";
@@ -12,8 +12,8 @@ import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Context} from "@openzeppelin/contracts/utils/Context.sol";
 
-import {Functions} from "@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/Functions.sol";
-import {FunctionsClient} from "@chainlink/contracts/src/v0.8/functions/dev/v0_0_0/FunctionsClient.sol";
+import {FunctionsClient} from "./FunctionsClient.sol";
+import {FunctionsRequest} from "@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/libraries/FunctionsRequest.sol";
 
 import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
 import {CCIPReceiver} from "@chainlink/contracts-ccip/src/v0.8/ccip/applications/CCIPReceiver.sol";
@@ -26,15 +26,17 @@ contract KanvasAvax is
     FunctionsClient,
     Ownable
 {
-    using Functions for Functions.Request;
+    using FunctionsRequest for FunctionsRequest.Request;
 
     uint64 private constant AVAX_SELECTOR = 14767482510784806043;
     uint256 public constant MAX_PROPERTIES_LEN = 20;
     uint256 public constant MAX_TEMPLATES_LEN = 5;
 
     string private _sourceCode;
+    uint32 private _gasLimit = 70_000;
     uint64 private _subscriptionId = 1580;
-    uint32 private _gasLimit = 400_000;
+    bytes32 private _donId =
+        0x66756e2d6176616c616e6368652d66756a692d31000000000000000000000000;
 
     uint256 private _planId;
     mapping(uint256 => Assets.Plan) private _plans;
@@ -52,6 +54,10 @@ contract KanvasAvax is
         address functionOracle
     ) CCIPReceiver(ccipReceiver) Ownable() FunctionsClient(functionOracle) {
         _router = IRouterClient(getRouter());
+    }
+
+    function updateDonId(bytes32 newDonId) external onlyOwner {
+        _donId = newDonId;
     }
 
     function updateSourceCode(string memory newSourceCode) external onlyOwner {
@@ -118,27 +124,21 @@ contract KanvasAvax is
         args[3] = Strings.toHexString(playerId);
         args[4] = Strings.toString(templateId);
 
-        bytes memory secrets = "";
-
         // Initialize the request
-        Functions.Request memory req;
+        FunctionsRequest.Request memory req;
 
         // Soucre code
-        req.initializeRequest(
-            Functions.Location.Inline,
-            Functions.CodeLanguage.JavaScript,
-            _sourceCode
-        );
-
-        // Add secrets if available
-        if (secrets.length > 0) {
-            req.addRemoteSecrets(secrets);
-        }
+        req.initializeRequestForInlineJavaScript(_sourceCode);
 
         // Add arguments
-        req.addArgs(args);
+        req.setArgs(args);
 
-        bytes32 requestId = sendRequest(req, _subscriptionId, _gasLimit);
+        bytes32 requestId = _sendRequest(
+            req.encodeCBOR(),
+            _subscriptionId,
+            _gasLimit,
+            _donId
+        );
 
         _requests[requestId] = Assets.Request({
             gameId: gameId,

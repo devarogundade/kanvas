@@ -1,0 +1,2007 @@
+{
+  "contractName": "IFunctionsRouter",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "getAllowListId",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "allowListId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "setAllowListId",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAdminFee",
+      "outputs": [
+        {
+          "internalType": "uint72",
+          "name": "adminFee",
+          "type": "uint72"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint64",
+          "name": "subscriptionId",
+          "type": "uint64"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint16",
+          "name": "dataVersion",
+          "type": "uint16"
+        },
+        {
+          "internalType": "uint32",
+          "name": "callbackGasLimit",
+          "type": "uint32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "donId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "sendRequest",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint64",
+          "name": "subscriptionId",
+          "type": "uint64"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint16",
+          "name": "dataVersion",
+          "type": "uint16"
+        },
+        {
+          "internalType": "uint32",
+          "name": "callbackGasLimit",
+          "type": "uint32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "donId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "sendRequestToProposed",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "response",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "err",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint96",
+          "name": "juelsPerGas",
+          "type": "uint96"
+        },
+        {
+          "internalType": "uint96",
+          "name": "costWithoutFulfillment",
+          "type": "uint96"
+        },
+        {
+          "internalType": "address",
+          "name": "transmitter",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "requestId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "coordinator",
+              "type": "address"
+            },
+            {
+              "internalType": "uint96",
+              "name": "estimatedTotalCostJuels",
+              "type": "uint96"
+            },
+            {
+              "internalType": "address",
+              "name": "client",
+              "type": "address"
+            },
+            {
+              "internalType": "uint64",
+              "name": "subscriptionId",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint32",
+              "name": "callbackGasLimit",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint72",
+              "name": "adminFee",
+              "type": "uint72"
+            },
+            {
+              "internalType": "uint72",
+              "name": "donFee",
+              "type": "uint72"
+            },
+            {
+              "internalType": "uint40",
+              "name": "gasOverheadBeforeCallback",
+              "type": "uint40"
+            },
+            {
+              "internalType": "uint40",
+              "name": "gasOverheadAfterCallback",
+              "type": "uint40"
+            },
+            {
+              "internalType": "uint32",
+              "name": "timeoutTimestamp",
+              "type": "uint32"
+            }
+          ],
+          "internalType": "struct FunctionsResponse.Commitment",
+          "name": "commitment",
+          "type": "tuple"
+        }
+      ],
+      "name": "fulfill",
+      "outputs": [
+        {
+          "internalType": "enum FunctionsResponse.FulfillResult",
+          "name": "",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint96",
+          "name": "",
+          "type": "uint96"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint64",
+          "name": "subscriptionId",
+          "type": "uint64"
+        },
+        {
+          "internalType": "uint32",
+          "name": "callbackGasLimit",
+          "type": "uint32"
+        }
+      ],
+      "name": "isValidCallbackGasLimit",
+      "outputs": [],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getContractById",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getProposedContractById",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getProposedContractSet",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        },
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "proposalSetIds",
+          "type": "bytes32[]"
+        },
+        {
+          "internalType": "address[]",
+          "name": "proposalSetAddresses",
+          "type": "address[]"
+        }
+      ],
+      "name": "proposeContractsUpdate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "updateContracts",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "unpause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"response\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"err\",\"type\":\"bytes\"},{\"internalType\":\"uint96\",\"name\":\"juelsPerGas\",\"type\":\"uint96\"},{\"internalType\":\"uint96\",\"name\":\"costWithoutFulfillment\",\"type\":\"uint96\"},{\"internalType\":\"address\",\"name\":\"transmitter\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"requestId\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"coordinator\",\"type\":\"address\"},{\"internalType\":\"uint96\",\"name\":\"estimatedTotalCostJuels\",\"type\":\"uint96\"},{\"internalType\":\"address\",\"name\":\"client\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"subscriptionId\",\"type\":\"uint64\"},{\"internalType\":\"uint32\",\"name\":\"callbackGasLimit\",\"type\":\"uint32\"},{\"internalType\":\"uint72\",\"name\":\"adminFee\",\"type\":\"uint72\"},{\"internalType\":\"uint72\",\"name\":\"donFee\",\"type\":\"uint72\"},{\"internalType\":\"uint40\",\"name\":\"gasOverheadBeforeCallback\",\"type\":\"uint40\"},{\"internalType\":\"uint40\",\"name\":\"gasOverheadAfterCallback\",\"type\":\"uint40\"},{\"internalType\":\"uint32\",\"name\":\"timeoutTimestamp\",\"type\":\"uint32\"}],\"internalType\":\"struct FunctionsResponse.Commitment\",\"name\":\"commitment\",\"type\":\"tuple\"}],\"name\":\"fulfill\",\"outputs\":[{\"internalType\":\"enum FunctionsResponse.FulfillResult\",\"name\":\"\",\"type\":\"uint8\"},{\"internalType\":\"uint96\",\"name\":\"\",\"type\":\"uint96\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAdminFee\",\"outputs\":[{\"internalType\":\"uint72\",\"name\":\"adminFee\",\"type\":\"uint72\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllowListId\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"getContractById\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"getProposedContractById\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProposedContractSet\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"\",\"type\":\"bytes32[]\"},{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"subscriptionId\",\"type\":\"uint64\"},{\"internalType\":\"uint32\",\"name\":\"callbackGasLimit\",\"type\":\"uint32\"}],\"name\":\"isValidCallbackGasLimit\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"proposalSetIds\",\"type\":\"bytes32[]\"},{\"internalType\":\"address[]\",\"name\":\"proposalSetAddresses\",\"type\":\"address[]\"}],\"name\":\"proposeContractsUpdate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"subscriptionId\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"uint16\",\"name\":\"dataVersion\",\"type\":\"uint16\"},{\"internalType\":\"uint32\",\"name\":\"callbackGasLimit\",\"type\":\"uint32\"},{\"internalType\":\"bytes32\",\"name\":\"donId\",\"type\":\"bytes32\"}],\"name\":\"sendRequest\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"subscriptionId\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"uint16\",\"name\":\"dataVersion\",\"type\":\"uint16\"},{\"internalType\":\"uint32\",\"name\":\"callbackGasLimit\",\"type\":\"uint32\"},{\"internalType\":\"bytes32\",\"name\":\"donId\",\"type\":\"bytes32\"}],\"name\":\"sendRequestToProposed\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"allowListId\",\"type\":\"bytes32\"}],\"name\":\"setAllowListId\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unpause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"updateContracts\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"fulfill(bytes,bytes,uint96,uint96,address,(bytes32,address,uint96,address,uint64,uint32,uint72,uint72,uint40,uint40,uint32))\":{\"details\":\"Only callable by the Coordinator contract that is saved in the commitment\",\"params\":{\"commitment\":\"- The parameters of the request that must be held consistent between request and response time\",\"costWithoutFulfillment\":\"- The cost of processing the request (in Juels of LINK ), without fulfillment\",\"err\":\"error from DON consensus\",\"juelsPerGas\":\"- current rate of juels/gas\",\"response\":\"response data from DON consensus\",\"transmitter\":\"- The Node that transmitted the OCR report\"},\"returns\":{\"_0\":\"fulfillResult -\",\"_1\":\"callbackGasCostJuels -\"}},\"getAdminFee()\":{\"returns\":{\"adminFee\":\"adminFee\"}},\"getAllowListId()\":{\"returns\":{\"_0\":\"id - bytes32 id that can be passed to the \\\"getContractById\\\" of the Router\"}},\"getContractById(bytes32)\":{\"params\":{\"id\":\"A bytes32 identifier for the route\"},\"returns\":{\"_0\":\"contract The current contract address\"}},\"getProposedContractById(bytes32)\":{\"params\":{\"id\":\"A bytes32 identifier for the route\"},\"returns\":{\"_0\":\"contract The current or proposed contract address\"}},\"getProposedContractSet()\":{\"returns\":{\"_0\":\"ids The identifiers of the contracts to update\",\"_1\":\"to The addresses of the contracts that will be updated to\"}},\"isValidCallbackGasLimit(uint64,uint32)\":{\"params\":{\"callbackGasLimit\":\"desired callback gas limit\",\"subscriptionId\":\"subscription ID\"}},\"pause()\":{\"details\":\"Puts the system into an emergency stopped state.Only callable by owner\"},\"proposeContractsUpdate(bytes32[],address[])\":{\"details\":\"Only callable by owner\"},\"sendRequest(uint64,bytes,uint16,uint32,bytes32)\":{\"params\":{\"callbackGasLimit\":\"- Gas limit for the fulfillment callback\",\"data\":\"- CBOR encoded Chainlink Functions request data, use FunctionsClient API to encode a request\",\"dataVersion\":\"- Gas limit for the fulfillment callback\",\"donId\":\"- An identifier used to determine which route to send the request along\",\"subscriptionId\":\"- A unique subscription ID allocated by billing system, a client can make requests from different contracts referencing the same subscription\"},\"returns\":{\"_0\":\"requestId - A unique request identifier\"}},\"sendRequestToProposed(uint64,bytes,uint16,uint32,bytes32)\":{\"params\":{\"callbackGasLimit\":\"- Gas limit for the fulfillment callback\",\"data\":\"- CBOR encoded Chainlink Functions request data, use FunctionsClient API to encode a request\",\"dataVersion\":\"- Gas limit for the fulfillment callback\",\"donId\":\"- An identifier used to determine which route to send the request along\",\"subscriptionId\":\"- A unique subscription ID allocated by billing system, a client can make requests from different contracts referencing the same subscription\"},\"returns\":{\"_0\":\"requestId - A unique request identifier\"}},\"unpause()\":{\"details\":\"Takes the system out of an emergency stopped state.Only callable by owner\"},\"updateContracts()\":{\"details\":\"Only callable by owner\"}},\"title\":\"Chainlink Functions Router interface.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"fulfill(bytes,bytes,uint96,uint96,address,(bytes32,address,uint96,address,uint64,uint32,uint72,uint72,uint40,uint40,uint32))\":{\"notice\":\"Fulfill the request by: - calling back the data that the Oracle returned to the client contract - pay the DON for processing the request\"},\"getAdminFee()\":{\"notice\":\"Get the flat fee (in Juels of LINK) that will be paid to the Router owner for operation of the network\"},\"getAllowListId()\":{\"notice\":\"The identifier of the route to retrieve the address of the access control contract The access control contract controls which accounts can manage subscriptions\"},\"getContractById(bytes32)\":{\"notice\":\"Get the current contract given an ID\"},\"getProposedContractById(bytes32)\":{\"notice\":\"Get the proposed next contract given an ID\"},\"getProposedContractSet()\":{\"notice\":\"Return the latest proprosal set\"},\"isValidCallbackGasLimit(uint64,uint32)\":{\"notice\":\"Validate requested gas limit is below the subscription max.\"},\"proposeContractsUpdate(bytes32[],address[])\":{\"notice\":\"Proposes one or more updates to the contract routes\"},\"sendRequest(uint64,bytes,uint16,uint32,bytes32)\":{\"notice\":\"Sends a request using the provided subscriptionId\"},\"sendRequestToProposed(uint64,bytes,uint16,uint32,bytes32)\":{\"notice\":\"Sends a request to the proposed contracts\"},\"setAllowListId(bytes32)\":{\"notice\":\"Set the identifier of the route to retrieve the address of the access control contract The access control contract controls which accounts can manage subscriptions\"},\"updateContracts()\":{\"notice\":\"Updates the current contract routes to the proposed contracts\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/interfaces/IFunctionsRouter.sol\":\"IFunctionsRouter\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/interfaces/IFunctionsRouter.sol\":{\"keccak256\":\"0x44db41e8ff90c2828ca0ada125abc4b411921a86514a4a047fd9fd43ba9d7e08\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c4c3228edc2cff7c55301d3764e54cd7ada6af81ef9aadf8bc116a2c982523d6\",\"dweb:/ipfs/QmXjJQgCu2gvX6QQJ9GC1gEoy3vrmpf1PiRPLqWqKddwRe\"]},\"@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/interfaces/IFunctionsSubscriptions.sol\":{\"keccak256\":\"0xab83613f1bb1cbdbf15fdbb6382259e2b2678bfe5a3a6dab976cdf2337f1f94e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0775cd55699e89e5f3df452de2c2273e00e51d79feb2b0c2d36e856cfeb1bd4b\",\"dweb:/ipfs/QmQDoC1hJhYYEg8SZouhkZ5BgC7mhqn4Ymgo5tvV3iYUgg\"]},\"@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/libraries/FunctionsResponse.sol\":{\"keccak256\":\"0x219b5272fd44aeade22130bb9b57b748950febb2f406d5e813ddaa14cd98147c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a7b1d4d5fd839fb620c7f230a7d9d957bba6efbdec6964362c6603211b902ccc\",\"dweb:/ipfs/QmXAAGcbJP4GSpjBqc9Z8KA5wwdv6Q2FsYZt1LP2GM5AJT\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.19;\n\nimport {FunctionsResponse} from \"../libraries/FunctionsResponse.sol\";\n\n/// @title Chainlink Functions Router interface.\ninterface IFunctionsRouter {\n  /// @notice The identifier of the route to retrieve the address of the access control contract\n  /// The access control contract controls which accounts can manage subscriptions\n  /// @return id - bytes32 id that can be passed to the \"getContractById\" of the Router\n  function getAllowListId() external view returns (bytes32);\n\n  /// @notice Set the identifier of the route to retrieve the address of the access control contract\n  /// The access control contract controls which accounts can manage subscriptions\n  function setAllowListId(bytes32 allowListId) external;\n\n  /// @notice Get the flat fee (in Juels of LINK) that will be paid to the Router owner for operation of the network\n  /// @return adminFee\n  function getAdminFee() external view returns (uint72 adminFee);\n\n  /// @notice Sends a request using the provided subscriptionId\n  /// @param subscriptionId - A unique subscription ID allocated by billing system,\n  /// a client can make requests from different contracts referencing the same subscription\n  /// @param data - CBOR encoded Chainlink Functions request data, use FunctionsClient API to encode a request\n  /// @param dataVersion - Gas limit for the fulfillment callback\n  /// @param callbackGasLimit - Gas limit for the fulfillment callback\n  /// @param donId - An identifier used to determine which route to send the request along\n  /// @return requestId - A unique request identifier\n  function sendRequest(\n    uint64 subscriptionId,\n    bytes calldata data,\n    uint16 dataVersion,\n    uint32 callbackGasLimit,\n    bytes32 donId\n  ) external returns (bytes32);\n\n  /// @notice Sends a request to the proposed contracts\n  /// @param subscriptionId - A unique subscription ID allocated by billing system,\n  /// a client can make requests from different contracts referencing the same subscription\n  /// @param data - CBOR encoded Chainlink Functions request data, use FunctionsClient API to encode a request\n  /// @param dataVersion - Gas limit for the fulfillment callback\n  /// @param callbackGasLimit - Gas limit for the fulfillment callback\n  /// @param donId - An identifier used to determine which route to send the request along\n  /// @return requestId - A unique request identifier\n  function sendRequestToProposed(\n    uint64 subscriptionId,\n    bytes calldata data,\n    uint16 dataVersion,\n    uint32 callbackGasLimit,\n    bytes32 donId\n  ) external returns (bytes32);\n\n  /// @notice Fulfill the request by:\n  /// - calling back the data that the Oracle returned to the client contract\n  /// - pay the DON for processing the request\n  /// @dev Only callable by the Coordinator contract that is saved in the commitment\n  /// @param response response data from DON consensus\n  /// @param err error from DON consensus\n  /// @param juelsPerGas - current rate of juels/gas\n  /// @param costWithoutFulfillment - The cost of processing the request (in Juels of LINK ), without fulfillment\n  /// @param transmitter - The Node that transmitted the OCR report\n  /// @param commitment - The parameters of the request that must be held consistent between request and response time\n  /// @return fulfillResult -\n  /// @return callbackGasCostJuels -\n  function fulfill(\n    bytes memory response,\n    bytes memory err,\n    uint96 juelsPerGas,\n    uint96 costWithoutFulfillment,\n    address transmitter,\n    FunctionsResponse.Commitment memory commitment\n  ) external returns (FunctionsResponse.FulfillResult, uint96);\n\n  /// @notice Validate requested gas limit is below the subscription max.\n  /// @param subscriptionId subscription ID\n  /// @param callbackGasLimit desired callback gas limit\n  function isValidCallbackGasLimit(uint64 subscriptionId, uint32 callbackGasLimit) external view;\n\n  /// @notice Get the current contract given an ID\n  /// @param id A bytes32 identifier for the route\n  /// @return contract The current contract address\n  function getContractById(bytes32 id) external view returns (address);\n\n  /// @notice Get the proposed next contract given an ID\n  /// @param id A bytes32 identifier for the route\n  /// @return contract The current or proposed contract address\n  function getProposedContractById(bytes32 id) external view returns (address);\n\n  /// @notice Return the latest proprosal set\n  /// @return ids The identifiers of the contracts to update\n  /// @return to The addresses of the contracts that will be updated to\n  function getProposedContractSet() external view returns (bytes32[] memory, address[] memory);\n\n  /// @notice Proposes one or more updates to the contract routes\n  /// @dev Only callable by owner\n  function proposeContractsUpdate(bytes32[] memory proposalSetIds, address[] memory proposalSetAddresses) external;\n\n  /// @notice Updates the current contract routes to the proposed contracts\n  /// @dev Only callable by owner\n  function updateContracts() external;\n\n  /// @dev Puts the system into an emergency stopped state.\n  /// @dev Only callable by owner\n  function pause() external;\n\n  /// @dev Takes the system out of an emergency stopped state.\n  /// @dev Only callable by owner\n  function unpause() external;\n}\n",
+  "sourcePath": "@chainlink\\contracts\\src\\v0.8\\functions\\dev\\v1_0_0\\interfaces\\IFunctionsRouter.sol",
+  "ast": {
+    "absolutePath": "@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/interfaces/IFunctionsRouter.sol",
+    "exportedSymbols": {
+      "FunctionsResponse": [
+        1099
+      ],
+      "IFunctionsRouter": [
+        401
+      ]
+    },
+    "id": 402,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 269,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".19"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:24:6"
+      },
+      {
+        "absolutePath": "@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/libraries/FunctionsResponse.sol",
+        "file": "../libraries/FunctionsResponse.sol",
+        "id": 271,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 402,
+        "sourceUnit": 1100,
+        "src": "58:69:6",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 270,
+              "name": "FunctionsResponse",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 1099,
+              "src": "66:17:6",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IFunctionsRouter",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 272,
+          "nodeType": "StructuredDocumentation",
+          "src": "129:49:6",
+          "text": "@title Chainlink Functions Router interface."
+        },
+        "fullyImplemented": false,
+        "id": 401,
+        "linearizedBaseContracts": [
+          401
+        ],
+        "name": "IFunctionsRouter",
+        "nameLocation": "188:16:6",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "documentation": {
+              "id": 273,
+              "nodeType": "StructuredDocumentation",
+              "src": "209:265:6",
+              "text": "@notice The identifier of the route to retrieve the address of the access control contract\n The access control contract controls which accounts can manage subscriptions\n @return id - bytes32 id that can be passed to the \"getContractById\" of the Router"
+            },
+            "functionSelector": "aab396bd",
+            "id": 278,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getAllowListId",
+            "nameLocation": "486:14:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 274,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "500:2:6"
+            },
+            "returnParameters": {
+              "id": 277,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 276,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 278,
+                  "src": "526:7:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 275,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "526:7:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "525:9:6"
+            },
+            "scope": 401,
+            "src": "477:58:6",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 279,
+              "nodeType": "StructuredDocumentation",
+              "src": "539:181:6",
+              "text": "@notice Set the identifier of the route to retrieve the address of the access control contract\n The access control contract controls which accounts can manage subscriptions"
+            },
+            "functionSelector": "ea320e0b",
+            "id": 284,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setAllowListId",
+            "nameLocation": "732:14:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 282,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 281,
+                  "mutability": "mutable",
+                  "name": "allowListId",
+                  "nameLocation": "755:11:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 284,
+                  "src": "747:19:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 280,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "747:7:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "746:21:6"
+            },
+            "returnParameters": {
+              "id": 283,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "776:0:6"
+            },
+            "scope": 401,
+            "src": "723:54:6",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 285,
+              "nodeType": "StructuredDocumentation",
+              "src": "781:137:6",
+              "text": "@notice Get the flat fee (in Juels of LINK) that will be paid to the Router owner for operation of the network\n @return adminFee"
+            },
+            "functionSelector": "2a905ccc",
+            "id": 290,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getAdminFee",
+            "nameLocation": "930:11:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 286,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "941:2:6"
+            },
+            "returnParameters": {
+              "id": 289,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 288,
+                  "mutability": "mutable",
+                  "name": "adminFee",
+                  "nameLocation": "974:8:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 290,
+                  "src": "967:15:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint72",
+                    "typeString": "uint72"
+                  },
+                  "typeName": {
+                    "id": 287,
+                    "name": "uint72",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "967:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint72",
+                      "typeString": "uint72"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "966:17:6"
+            },
+            "scope": 401,
+            "src": "921:63:6",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 291,
+              "nodeType": "StructuredDocumentation",
+              "src": "988:630:6",
+              "text": "@notice Sends a request using the provided subscriptionId\n @param subscriptionId - A unique subscription ID allocated by billing system,\n a client can make requests from different contracts referencing the same subscription\n @param data - CBOR encoded Chainlink Functions request data, use FunctionsClient API to encode a request\n @param dataVersion - Gas limit for the fulfillment callback\n @param callbackGasLimit - Gas limit for the fulfillment callback\n @param donId - An identifier used to determine which route to send the request along\n @return requestId - A unique request identifier"
+            },
+            "functionSelector": "461d2762",
+            "id": 306,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "sendRequest",
+            "nameLocation": "1630:11:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 302,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 293,
+                  "mutability": "mutable",
+                  "name": "subscriptionId",
+                  "nameLocation": "1654:14:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 306,
+                  "src": "1647:21:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 292,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1647:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 295,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "1689:4:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 306,
+                  "src": "1674:19:6",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 294,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1674:5:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 297,
+                  "mutability": "mutable",
+                  "name": "dataVersion",
+                  "nameLocation": "1706:11:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 306,
+                  "src": "1699:18:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  },
+                  "typeName": {
+                    "id": 296,
+                    "name": "uint16",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1699:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint16",
+                      "typeString": "uint16"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 299,
+                  "mutability": "mutable",
+                  "name": "callbackGasLimit",
+                  "nameLocation": "1730:16:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 306,
+                  "src": "1723:23:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint32",
+                    "typeString": "uint32"
+                  },
+                  "typeName": {
+                    "id": 298,
+                    "name": "uint32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1723:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint32",
+                      "typeString": "uint32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 301,
+                  "mutability": "mutable",
+                  "name": "donId",
+                  "nameLocation": "1760:5:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 306,
+                  "src": "1752:13:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 300,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1752:7:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1641:128:6"
+            },
+            "returnParameters": {
+              "id": 305,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 304,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 306,
+                  "src": "1788:7:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 303,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1788:7:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1787:9:6"
+            },
+            "scope": 401,
+            "src": "1621:176:6",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 307,
+              "nodeType": "StructuredDocumentation",
+              "src": "1801:622:6",
+              "text": "@notice Sends a request to the proposed contracts\n @param subscriptionId - A unique subscription ID allocated by billing system,\n a client can make requests from different contracts referencing the same subscription\n @param data - CBOR encoded Chainlink Functions request data, use FunctionsClient API to encode a request\n @param dataVersion - Gas limit for the fulfillment callback\n @param callbackGasLimit - Gas limit for the fulfillment callback\n @param donId - An identifier used to determine which route to send the request along\n @return requestId - A unique request identifier"
+            },
+            "functionSelector": "41db4ca3",
+            "id": 322,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "sendRequestToProposed",
+            "nameLocation": "2435:21:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 318,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 309,
+                  "mutability": "mutable",
+                  "name": "subscriptionId",
+                  "nameLocation": "2469:14:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 322,
+                  "src": "2462:21:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 308,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2462:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 311,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "2504:4:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 322,
+                  "src": "2489:19:6",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 310,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2489:5:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 313,
+                  "mutability": "mutable",
+                  "name": "dataVersion",
+                  "nameLocation": "2521:11:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 322,
+                  "src": "2514:18:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  },
+                  "typeName": {
+                    "id": 312,
+                    "name": "uint16",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2514:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint16",
+                      "typeString": "uint16"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 315,
+                  "mutability": "mutable",
+                  "name": "callbackGasLimit",
+                  "nameLocation": "2545:16:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 322,
+                  "src": "2538:23:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint32",
+                    "typeString": "uint32"
+                  },
+                  "typeName": {
+                    "id": 314,
+                    "name": "uint32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2538:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint32",
+                      "typeString": "uint32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 317,
+                  "mutability": "mutable",
+                  "name": "donId",
+                  "nameLocation": "2575:5:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 322,
+                  "src": "2567:13:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 316,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2567:7:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2456:128:6"
+            },
+            "returnParameters": {
+              "id": 321,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 320,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 322,
+                  "src": "2603:7:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 319,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2603:7:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2602:9:6"
+            },
+            "scope": 401,
+            "src": "2426:186:6",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 323,
+              "nodeType": "StructuredDocumentation",
+              "src": "2616:763:6",
+              "text": "@notice Fulfill the request by:\n - calling back the data that the Oracle returned to the client contract\n - pay the DON for processing the request\n @dev Only callable by the Coordinator contract that is saved in the commitment\n @param response response data from DON consensus\n @param err error from DON consensus\n @param juelsPerGas - current rate of juels/gas\n @param costWithoutFulfillment - The cost of processing the request (in Juels of LINK ), without fulfillment\n @param transmitter - The Node that transmitted the OCR report\n @param commitment - The parameters of the request that must be held consistent between request and response time\n @return fulfillResult -\n @return callbackGasCostJuels -"
+            },
+            "functionSelector": "33060529",
+            "id": 344,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "fulfill",
+            "nameLocation": "3391:7:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 337,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 325,
+                  "mutability": "mutable",
+                  "name": "response",
+                  "nameLocation": "3417:8:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 344,
+                  "src": "3404:21:6",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 324,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3404:5:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 327,
+                  "mutability": "mutable",
+                  "name": "err",
+                  "nameLocation": "3444:3:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 344,
+                  "src": "3431:16:6",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 326,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3431:5:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 329,
+                  "mutability": "mutable",
+                  "name": "juelsPerGas",
+                  "nameLocation": "3460:11:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 344,
+                  "src": "3453:18:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint96",
+                    "typeString": "uint96"
+                  },
+                  "typeName": {
+                    "id": 328,
+                    "name": "uint96",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3453:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint96",
+                      "typeString": "uint96"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 331,
+                  "mutability": "mutable",
+                  "name": "costWithoutFulfillment",
+                  "nameLocation": "3484:22:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 344,
+                  "src": "3477:29:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint96",
+                    "typeString": "uint96"
+                  },
+                  "typeName": {
+                    "id": 330,
+                    "name": "uint96",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3477:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint96",
+                      "typeString": "uint96"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 333,
+                  "mutability": "mutable",
+                  "name": "transmitter",
+                  "nameLocation": "3520:11:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 344,
+                  "src": "3512:19:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 332,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3512:7:6",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 336,
+                  "mutability": "mutable",
+                  "name": "commitment",
+                  "nameLocation": "3573:10:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 344,
+                  "src": "3537:46:6",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Commitment_$1098_memory_ptr",
+                    "typeString": "struct FunctionsResponse.Commitment"
+                  },
+                  "typeName": {
+                    "id": 335,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 334,
+                      "name": "FunctionsResponse.Commitment",
+                      "nameLocations": [
+                        "3537:17:6",
+                        "3555:10:6"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 1098,
+                      "src": "3537:28:6"
+                    },
+                    "referencedDeclaration": 1098,
+                    "src": "3537:28:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Commitment_$1098_storage_ptr",
+                      "typeString": "struct FunctionsResponse.Commitment"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3398:189:6"
+            },
+            "returnParameters": {
+              "id": 343,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 340,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 344,
+                  "src": "3606:31:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_FulfillResult_$1075",
+                    "typeString": "enum FunctionsResponse.FulfillResult"
+                  },
+                  "typeName": {
+                    "id": 339,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 338,
+                      "name": "FunctionsResponse.FulfillResult",
+                      "nameLocations": [
+                        "3606:17:6",
+                        "3624:13:6"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 1075,
+                      "src": "3606:31:6"
+                    },
+                    "referencedDeclaration": 1075,
+                    "src": "3606:31:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_FulfillResult_$1075",
+                      "typeString": "enum FunctionsResponse.FulfillResult"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 342,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 344,
+                  "src": "3639:6:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint96",
+                    "typeString": "uint96"
+                  },
+                  "typeName": {
+                    "id": 341,
+                    "name": "uint96",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3639:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint96",
+                      "typeString": "uint96"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3605:41:6"
+            },
+            "scope": 401,
+            "src": "3382:265:6",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 345,
+              "nodeType": "StructuredDocumentation",
+              "src": "3651:172:6",
+              "text": "@notice Validate requested gas limit is below the subscription max.\n @param subscriptionId subscription ID\n @param callbackGasLimit desired callback gas limit"
+            },
+            "functionSelector": "10fc49c1",
+            "id": 352,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isValidCallbackGasLimit",
+            "nameLocation": "3835:23:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 350,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 347,
+                  "mutability": "mutable",
+                  "name": "subscriptionId",
+                  "nameLocation": "3866:14:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 352,
+                  "src": "3859:21:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 346,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3859:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 349,
+                  "mutability": "mutable",
+                  "name": "callbackGasLimit",
+                  "nameLocation": "3889:16:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 352,
+                  "src": "3882:23:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint32",
+                    "typeString": "uint32"
+                  },
+                  "typeName": {
+                    "id": 348,
+                    "name": "uint32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3882:6:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint32",
+                      "typeString": "uint32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3858:48:6"
+            },
+            "returnParameters": {
+              "id": 351,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3920:0:6"
+            },
+            "scope": 401,
+            "src": "3826:95:6",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 353,
+              "nodeType": "StructuredDocumentation",
+              "src": "3925:151:6",
+              "text": "@notice Get the current contract given an ID\n @param id A bytes32 identifier for the route\n @return contract The current contract address"
+            },
+            "functionSelector": "a9c9a918",
+            "id": 360,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getContractById",
+            "nameLocation": "4088:15:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 356,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 355,
+                  "mutability": "mutable",
+                  "name": "id",
+                  "nameLocation": "4112:2:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 360,
+                  "src": "4104:10:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 354,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4104:7:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4103:12:6"
+            },
+            "returnParameters": {
+              "id": 359,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 358,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 360,
+                  "src": "4139:7:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 357,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4139:7:6",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4138:9:6"
+            },
+            "scope": 401,
+            "src": "4079:69:6",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 361,
+              "nodeType": "StructuredDocumentation",
+              "src": "4152:169:6",
+              "text": "@notice Get the proposed next contract given an ID\n @param id A bytes32 identifier for the route\n @return contract The current or proposed contract address"
+            },
+            "functionSelector": "6a2215de",
+            "id": 368,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getProposedContractById",
+            "nameLocation": "4333:23:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 364,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 363,
+                  "mutability": "mutable",
+                  "name": "id",
+                  "nameLocation": "4365:2:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 368,
+                  "src": "4357:10:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 362,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4357:7:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4356:12:6"
+            },
+            "returnParameters": {
+              "id": 367,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 366,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 368,
+                  "src": "4392:7:6",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 365,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4392:7:6",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4391:9:6"
+            },
+            "scope": 401,
+            "src": "4324:77:6",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 369,
+              "nodeType": "StructuredDocumentation",
+              "src": "4405:176:6",
+              "text": "@notice Return the latest proprosal set\n @return ids The identifiers of the contracts to update\n @return to The addresses of the contracts that will be updated to"
+            },
+            "functionSelector": "badc3eb6",
+            "id": 378,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getProposedContractSet",
+            "nameLocation": "4593:22:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 370,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "4615:2:6"
+            },
+            "returnParameters": {
+              "id": 377,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 373,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 378,
+                  "src": "4641:16:6",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes32_$dyn_memory_ptr",
+                    "typeString": "bytes32[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 371,
+                      "name": "bytes32",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "4641:7:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "id": 372,
+                    "nodeType": "ArrayTypeName",
+                    "src": "4641:9:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                      "typeString": "bytes32[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 376,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 378,
+                  "src": "4659:16:6",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 374,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "4659:7:6",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 375,
+                    "nodeType": "ArrayTypeName",
+                    "src": "4659:9:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4640:36:6"
+            },
+            "scope": 401,
+            "src": "4584:93:6",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 379,
+              "nodeType": "StructuredDocumentation",
+              "src": "4681:97:6",
+              "text": "@notice Proposes one or more updates to the contract routes\n @dev Only callable by owner"
+            },
+            "functionSelector": "3e871e4d",
+            "id": 388,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "proposeContractsUpdate",
+            "nameLocation": "4790:22:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 386,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 382,
+                  "mutability": "mutable",
+                  "name": "proposalSetIds",
+                  "nameLocation": "4830:14:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 388,
+                  "src": "4813:31:6",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes32_$dyn_memory_ptr",
+                    "typeString": "bytes32[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 380,
+                      "name": "bytes32",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "4813:7:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "id": 381,
+                    "nodeType": "ArrayTypeName",
+                    "src": "4813:9:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                      "typeString": "bytes32[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 385,
+                  "mutability": "mutable",
+                  "name": "proposalSetAddresses",
+                  "nameLocation": "4863:20:6",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 388,
+                  "src": "4846:37:6",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 383,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "4846:7:6",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 384,
+                    "nodeType": "ArrayTypeName",
+                    "src": "4846:9:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4812:72:6"
+            },
+            "returnParameters": {
+              "id": 387,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "4893:0:6"
+            },
+            "scope": 401,
+            "src": "4781:113:6",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 389,
+              "nodeType": "StructuredDocumentation",
+              "src": "4898:107:6",
+              "text": "@notice Updates the current contract routes to the proposed contracts\n @dev Only callable by owner"
+            },
+            "functionSelector": "b734c0f4",
+            "id": 392,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "updateContracts",
+            "nameLocation": "5017:15:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 390,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "5032:2:6"
+            },
+            "returnParameters": {
+              "id": 391,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "5043:0:6"
+            },
+            "scope": 401,
+            "src": "5008:36:6",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 393,
+              "nodeType": "StructuredDocumentation",
+              "src": "5048:91:6",
+              "text": "@dev Puts the system into an emergency stopped state.\n @dev Only callable by owner"
+            },
+            "functionSelector": "8456cb59",
+            "id": 396,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "pause",
+            "nameLocation": "5151:5:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 394,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "5156:2:6"
+            },
+            "returnParameters": {
+              "id": 395,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "5167:0:6"
+            },
+            "scope": 401,
+            "src": "5142:26:6",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 397,
+              "nodeType": "StructuredDocumentation",
+              "src": "5172:94:6",
+              "text": "@dev Takes the system out of an emergency stopped state.\n @dev Only callable by owner"
+            },
+            "functionSelector": "3f4ba83a",
+            "id": 400,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "unpause",
+            "nameLocation": "5278:7:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 398,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "5285:2:6"
+            },
+            "returnParameters": {
+              "id": 399,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "5296:0:6"
+            },
+            "scope": 401,
+            "src": "5269:28:6",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 402,
+        "src": "178:5121:6",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:5268:6"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.19+commit.7dd6d404.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.11",
+  "updatedAt": "2023-12-05T06:57:03.522Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "fulfill(bytes,bytes,uint96,uint96,address,(bytes32,address,uint96,address,uint64,uint32,uint72,uint72,uint40,uint40,uint32))": {
+        "details": "Only callable by the Coordinator contract that is saved in the commitment",
+        "params": {
+          "commitment": "- The parameters of the request that must be held consistent between request and response time",
+          "costWithoutFulfillment": "- The cost of processing the request (in Juels of LINK ), without fulfillment",
+          "err": "error from DON consensus",
+          "juelsPerGas": "- current rate of juels/gas",
+          "response": "response data from DON consensus",
+          "transmitter": "- The Node that transmitted the OCR report"
+        },
+        "returns": {
+          "_0": "fulfillResult -",
+          "_1": "callbackGasCostJuels -"
+        }
+      },
+      "getAdminFee()": {
+        "returns": {
+          "adminFee": "adminFee"
+        }
+      },
+      "getAllowListId()": {
+        "returns": {
+          "_0": "id - bytes32 id that can be passed to the \"getContractById\" of the Router"
+        }
+      },
+      "getContractById(bytes32)": {
+        "params": {
+          "id": "A bytes32 identifier for the route"
+        },
+        "returns": {
+          "_0": "contract The current contract address"
+        }
+      },
+      "getProposedContractById(bytes32)": {
+        "params": {
+          "id": "A bytes32 identifier for the route"
+        },
+        "returns": {
+          "_0": "contract The current or proposed contract address"
+        }
+      },
+      "getProposedContractSet()": {
+        "returns": {
+          "_0": "ids The identifiers of the contracts to update",
+          "_1": "to The addresses of the contracts that will be updated to"
+        }
+      },
+      "isValidCallbackGasLimit(uint64,uint32)": {
+        "params": {
+          "callbackGasLimit": "desired callback gas limit",
+          "subscriptionId": "subscription ID"
+        }
+      },
+      "pause()": {
+        "details": "Puts the system into an emergency stopped state.Only callable by owner"
+      },
+      "proposeContractsUpdate(bytes32[],address[])": {
+        "details": "Only callable by owner"
+      },
+      "sendRequest(uint64,bytes,uint16,uint32,bytes32)": {
+        "params": {
+          "callbackGasLimit": "- Gas limit for the fulfillment callback",
+          "data": "- CBOR encoded Chainlink Functions request data, use FunctionsClient API to encode a request",
+          "dataVersion": "- Gas limit for the fulfillment callback",
+          "donId": "- An identifier used to determine which route to send the request along",
+          "subscriptionId": "- A unique subscription ID allocated by billing system, a client can make requests from different contracts referencing the same subscription"
+        },
+        "returns": {
+          "_0": "requestId - A unique request identifier"
+        }
+      },
+      "sendRequestToProposed(uint64,bytes,uint16,uint32,bytes32)": {
+        "params": {
+          "callbackGasLimit": "- Gas limit for the fulfillment callback",
+          "data": "- CBOR encoded Chainlink Functions request data, use FunctionsClient API to encode a request",
+          "dataVersion": "- Gas limit for the fulfillment callback",
+          "donId": "- An identifier used to determine which route to send the request along",
+          "subscriptionId": "- A unique subscription ID allocated by billing system, a client can make requests from different contracts referencing the same subscription"
+        },
+        "returns": {
+          "_0": "requestId - A unique request identifier"
+        }
+      },
+      "unpause()": {
+        "details": "Takes the system out of an emergency stopped state.Only callable by owner"
+      },
+      "updateContracts()": {
+        "details": "Only callable by owner"
+      }
+    },
+    "title": "Chainlink Functions Router interface.",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "fulfill(bytes,bytes,uint96,uint96,address,(bytes32,address,uint96,address,uint64,uint32,uint72,uint72,uint40,uint40,uint32))": {
+        "notice": "Fulfill the request by: - calling back the data that the Oracle returned to the client contract - pay the DON for processing the request"
+      },
+      "getAdminFee()": {
+        "notice": "Get the flat fee (in Juels of LINK) that will be paid to the Router owner for operation of the network"
+      },
+      "getAllowListId()": {
+        "notice": "The identifier of the route to retrieve the address of the access control contract The access control contract controls which accounts can manage subscriptions"
+      },
+      "getContractById(bytes32)": {
+        "notice": "Get the current contract given an ID"
+      },
+      "getProposedContractById(bytes32)": {
+        "notice": "Get the proposed next contract given an ID"
+      },
+      "getProposedContractSet()": {
+        "notice": "Return the latest proprosal set"
+      },
+      "isValidCallbackGasLimit(uint64,uint32)": {
+        "notice": "Validate requested gas limit is below the subscription max."
+      },
+      "proposeContractsUpdate(bytes32[],address[])": {
+        "notice": "Proposes one or more updates to the contract routes"
+      },
+      "sendRequest(uint64,bytes,uint16,uint32,bytes32)": {
+        "notice": "Sends a request using the provided subscriptionId"
+      },
+      "sendRequestToProposed(uint64,bytes,uint16,uint32,bytes32)": {
+        "notice": "Sends a request to the proposed contracts"
+      },
+      "setAllowListId(bytes32)": {
+        "notice": "Set the identifier of the route to retrieve the address of the access control contract The access control contract controls which accounts can manage subscriptions"
+      },
+      "updateContracts()": {
+        "notice": "Updates the current contract routes to the proposed contracts"
+      }
+    },
+    "version": 1
+  }
+}
