@@ -12,7 +12,7 @@ module.exports = {
 
   networks: {
     fuji: {
-      provider: () => new HDWalletProvider(MNEMONIC, 'https://ava-testnet.public.blastapi.io/ext/bc/C/rpc'),
+      provider: () => new HDWalletProvider(MNEMONIC, 'https://api.avax-test.network/ext/bc/C/rpc'),
       network_id: 43113,
       confirmations: 2,
       timeoutBlocks: 9999999,

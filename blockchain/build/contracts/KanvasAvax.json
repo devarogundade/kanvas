@@ -44658,12 +44658,12 @@
       "links": {
         "StringJoiner": "0x9fE0c1a8948B78e9a6351a6f93a2A1A7d7c74F20"
       },
-      "address": "0x9E3F1f5E24c8533CE3FE30a75CE438406128b4e2",
-      "transactionHash": "0x5db9c1d0c6b338e29e931084864f2ee15b1a38d60f1edca07c9daea42616b9a6"
+      "address": "0x60bd686ceec8Aa4818bA6790fAC249443df674A6",
+      "transactionHash": "0x518881087932edca08d3c77a3ec5e9d3a9d42bc0280fbfd580c77a48a72bde94"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-12-05T10:16:21.371Z",
+  "updatedAt": "2023-12-05T10:39:53.020Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

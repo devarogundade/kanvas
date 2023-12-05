@@ -6,9 +6,9 @@ dataSources:
     name: Kanvas
     network: fuji
     source:
-      address: "0xb463370ceE8484d154bB4BB43c41aC609808F387"
+      address: "0x60bd686ceec8Aa4818bA6790fAC249443df674A6"
       abi: Kanvas
-      startBlock: 28321122
+      startBlock: 28322825
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
