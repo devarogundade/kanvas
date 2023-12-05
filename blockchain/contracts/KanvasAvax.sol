@@ -33,7 +33,7 @@ contract KanvasAvax is
     uint256 public constant MAX_TEMPLATES_LEN = 5;
 
     string private _sourceCode;
-    uint32 private _gasLimit = 70_000;
+    uint32 private _gasLimit = 300_000;
     uint64 private _subscriptionId = 1580;
     bytes32 private _donId =
         0x66756e2d6176616c616e6368652d66756a692d31000000000000000000000000;
@@ -169,31 +169,17 @@ contract KanvasAvax is
             return;
         }
 
-        string memory URI = string(response);
-
         Assets.Request storage request = _requests[requestId];
         require(!request.fulfilled, "Already fulfilled");
-
-        if (
-            keccak256(abi.encodePacked(URI)) ==
-            keccak256(abi.encodePacked("NULL"))
-        ) {
-            emit FulfullFailed(requestId, response);
-            return;
-        }
 
         request.fulfilled = true;
 
         require(_games[request.gameId].creator != address(0), "Game Not Found");
 
         IKanvasGame game = IKanvasGame(request.gameId);
-        game._receiveUri(request.playerId, URI);
+        game._receiveUri(request.playerId, string(response));
 
         emit FulfullSuccess(requestId, response);
-    }
-
-    function test(bytes memory response) external pure returns (string memory) {
-        return string(response);
     }
 
     function _transferTo(

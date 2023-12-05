@@ -150,4 +150,17 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721, Ownable {
 
         _players[playerId].tokenId = tokenId;
     }
+
+    function _receiveUri(
+        address playerId,
+        string memory uri
+    ) external override {
+        _tokenURIs[_players[playerId].tokenId] = uri;
+    }
+
+    function tokenURI(
+        uint256 tokenId
+    ) public view virtual override returns (string memory) {
+        return _tokenURIs[tokenId];
+    }
 }

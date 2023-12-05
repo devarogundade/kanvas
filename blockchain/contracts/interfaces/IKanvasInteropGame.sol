@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-interface IKanvasInteropGame {
+import {IKanvasGame} from "./IKanvasGame.sol";
+
+interface IKanvasInteropGame is IKanvasGame {
     function _receiveFrom(
         uint64 chainSelector,
         address gameId,

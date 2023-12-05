@@ -1,25 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
+import {IKanvasAvax} from "./IKanvasAvax.sol";
 import {Params} from "../libraries/Params.sol";
 
-interface IKanvasInterop {
-    event RequestSent(bytes32 requestId, address gameId);
-
-    event FulfullFailed(bytes32 requestId, bytes err);
-
-    event FulfullSuccess(bytes32 requestId, bytes response);
-
-    event OCRResponse(bytes32 indexed requestId, bytes result, bytes err);
-
-    event PlanCreated(
-        uint256 planId,
-        string name,
-        uint256 cost,
-        string color,
-        uint256 limit
-    );
-
+interface IKanvasInterop is IKanvasAvax {
     function _transferTo(
         uint64 chainSelector,
         address gameId,
@@ -28,13 +13,6 @@ interface IKanvasInterop {
         string memory uri,
         bytes memory data
     ) external payable;
-
-    function _generateUri(
-        address playerId,
-        string[] memory props,
-        string memory fields,
-        uint8 templateId
-    ) external;
 
     function _createGame(
         uint64 chainSelector,

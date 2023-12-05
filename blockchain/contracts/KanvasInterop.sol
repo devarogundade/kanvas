@@ -5,7 +5,7 @@ import {Assets} from "./libraries/Assets.sol";
 import {Params} from "./libraries/Params.sol";
 import {IKanvasInterop} from "./interfaces/IKanvasInterop.sol";
 import {IKanvasInteropGame} from "./interfaces/IKanvasInteropGame.sol";
-import {IKanvasGame} from "./interfaces/IKanvasGame.sol";
+import {IKanvasInteropGame} from "./interfaces/IKanvasInteropGame.sol";
 import {StringJoiner} from "./libraries/StringJoiner.sol";
 
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
@@ -35,7 +35,7 @@ contract KanvasInterop is
 
     string private _sourceCode;
     uint64 private _subscriptionId;
-    uint32 private _gasLimit;
+    uint32 private _gasLimit = 300_000;
     bytes32 private _donId;
 
     mapping(address => address) private _games;
@@ -139,25 +139,15 @@ contract KanvasInterop is
             return;
         }
 
-        string memory URI = string(response);
-
         Assets.Request storage request = _requests[requestId];
         require(!request.fulfilled, "Already fulfilled");
-
-        if (
-            keccak256(abi.encodePacked(URI)) ==
-            keccak256(abi.encodePacked("NULL"))
-        ) {
-            emit FulfullFailed(requestId, response);
-            return;
-        }
 
         request.fulfilled = true;
 
         require(_games[request.gameId] != address(0), "Game Not Found");
 
-        IKanvasGame game = IKanvasGame(request.gameId);
-        game._receiveUri(request.playerId, URI);
+        IKanvasInteropGame game = IKanvasInteropGame(request.gameId);
+        game._receiveUri(request.playerId, string(response));
 
         emit FulfullSuccess(requestId, response);
     }

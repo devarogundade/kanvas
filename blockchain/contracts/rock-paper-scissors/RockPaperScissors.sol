@@ -62,6 +62,11 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
         player.points = 5;
         player.created = true;
 
+        uint256 tokenId = _tokenId++;
+
+        _mint(playerId, tokenId);
+        player.tokenId = tokenId;
+
         string[] memory props = new string[](MAX_PROPERTIES_LEN);
         props[0] = player.name;
         props[1] = Strings.toString(player.points);
@@ -165,23 +170,7 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
         address playerId,
         string memory uri
     ) external override {
-        Player storage player = _players[playerId];
-        require(player.created, "Player does not exists");
-
-        uint256 tokenId = player.tokenId;
-
-        // this player does not have the game nft
-        if (tokenId == 0) {
-            _tokenId++;
-
-            // mint the game Nft for player
-            tokenId = _tokenId;
-
-            _mint(playerId, tokenId);
-            player.tokenId = tokenId;
-        }
-
-        _tokenURIs[tokenId] = uri;
+        _tokenURIs[_players[playerId].tokenId] = uri;
     }
 
     function tokenURI(
