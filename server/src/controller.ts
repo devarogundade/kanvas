@@ -15,7 +15,7 @@ initializeApp({
 
 const bucket = getStorage().bucket();
 
-const NULL: string = "NULL";
+const NULL: string = "https://firebasestorage.googleapis.com/v0/b/kanvas-73a90.appspot.com/o/generated%2F0xb352fd34b747dadbf37cd57ef74dd1950b6f1c91%2F0x909d21bae8be0ad4d35d89129b2a4f2925da7877.png?alt=media&token=8b87a0dd-015b-44ae-9938-432958";
 
 const graph = new Graph();
 
