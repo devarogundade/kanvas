@@ -169,24 +169,28 @@ contract KanvasAvax is
             return;
         }
 
-        string memory uri = string(response);
+        // string memory URI = string(response);
 
         Assets.Request storage request = _requests[requestId];
         require(!request.fulfilled, "Already fulfilled");
 
-        if (Strings.equal(uri, "NULL")) {
-            emit FulfullFailed(requestId, response);
-            return;
-        }
+        // if (Strings.equal(URI, "NULL")) {
+        // emit FulfullFailed(requestId, response);
+        // return;
+        // }
 
         request.fulfilled = true;
 
         require(_games[request.gameId].creator != address(0), "Game Not Found");
 
         IKanvasGame game = IKanvasGame(request.gameId);
-        game._receiveUri(request.playerId, uri);
+        game._receiveUri(request.playerId, "");
 
         emit FulfullSuccess(requestId, response);
+    }
+
+    function test(bytes memory response) external pure returns (string memory) {
+        return string(response);
     }
 
     function _transferTo(
