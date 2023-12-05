@@ -22,6 +22,8 @@ export class Route {
                 Number(templateId)
             );
 
+            console.log('RESPONSE ' + uri);
+
             return res.status(OK).send({ uri });
         });
 
