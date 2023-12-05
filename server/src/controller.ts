@@ -15,6 +15,8 @@ initializeApp({
 
 const bucket = getStorage().bucket();
 
+const NULL: string = "NULL";
+
 const graph = new Graph();
 
 export class Controller {
@@ -35,7 +37,7 @@ export class Controller {
                     process.env.DEV_EMAIL,
                     process.env.POSTMARK_FROM
                 );
-                return "";
+                return NULL;
             };
 
             if (templateId >= game.templates.length) {
@@ -52,7 +54,7 @@ export class Controller {
                     game.email,
                     process.env.POSTMARK_FROM
                 );
-                return "";
+                return NULL;
             }
 
             const { buffer, attributes } = await this.getImageNftUri(game, properties, fields, playerId, templateId);
@@ -69,7 +71,7 @@ export class Controller {
                     game.email,
                     process.env.POSTMARK_FROM
                 );
-                return "";
+                return NULL;
             };
 
             const pngBuffer = await this.convertSvgToPng(buffer);
@@ -86,7 +88,7 @@ export class Controller {
                     game.email,
                     process.env.POSTMARK_FROM
                 );
-                return "";
+                return NULL;
             };
 
             const pngPath = `generated/${game.gameId}/${playerId}.png`;
@@ -127,7 +129,7 @@ export class Controller {
             return await getDownloadURL(bucket.file(metadataPath));
         } catch (error) {
             console.error(error);
-            return "";
+            return NULL;
         }
     }
 

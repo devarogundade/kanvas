@@ -12,6 +12,8 @@ export class Route {
         router.get('/generate/:properties/:fields/:gameId/:playerId/:templateId', async (req: Request, res: Response) => {
             const { properties, fields, gameId, playerId, templateId } = req.params;
 
+            console.log(properties, fields, gameId, playerId, templateId);
+
             const uri = await controller.generate(
                 properties as string,
                 fields as string,
