@@ -6,7 +6,7 @@ dataSources:
     name: Kanvas
     network: fuji
     source:
-      address: "0x8183aC349964A4E20F60534150CAdFFbbB253e44"
+      address: "0xb463370ceE8484d154bB4BB43c41aC609808F387"
       abi: Kanvas
       startBlock: 28318463
     mapping:

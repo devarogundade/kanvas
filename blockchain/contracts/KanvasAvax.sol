@@ -164,29 +164,29 @@ contract KanvasAvax is
     ) internal override {
         emit OCRResponse(requestId, response, err);
 
-        if (err.length > 0) {
-            emit FulfullFailed(requestId, err);
-            return;
-        }
+        // if (err.length > 0) {
+        //     emit FulfullFailed(requestId, err);
+        //     return;
+        // }
 
-        string memory uri = abi.decode(response, (string));
+        // string memory uri = abi.decode(response, (string));
 
-        Assets.Request storage request = _requests[requestId];
-        require(!request.fulfilled, "Already fulfilled");
+        // Assets.Request storage request = _requests[requestId];
+        // require(!request.fulfilled, "Already fulfilled");
 
-        if (Strings.equal(uri, "NULL")) {
-            emit FulfullFailed(requestId, response);
-            return;
-        }
+        // if (Strings.equal(uri, "NULL")) {
+        //     emit FulfullFailed(requestId, response);
+        //     return;
+        // }
 
-        request.fulfilled = true;
+        // request.fulfilled = true;
 
-        require(_games[request.gameId].creator != address(0), "Game Not Found");
+        // require(_games[request.gameId].creator != address(0), "Game Not Found");
 
-        IKanvasGame game = IKanvasGame(request.gameId);
-        game._receiveUri(request.playerId, uri);
+        // IKanvasGame game = IKanvasGame(request.gameId);
+        // game._receiveUri(request.playerId, uri);
 
-        emit FulfullSuccess(requestId, response);
+        // emit FulfullSuccess(requestId, response);
     }
 
     function _transferTo(
