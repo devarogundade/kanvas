@@ -2,6 +2,14 @@
 pragma solidity ^0.8.19;
 
 interface IKanvasAvax {
+    event RequestSent(bytes32 requestId, address gameId);
+
+    event FulfullFailed(bytes32 requestId, bytes err);
+
+    event FulfullSuccess(bytes32 requestId, bytes response);
+
+    event OCRResponse(bytes32 indexed requestId, bytes result, bytes err);
+
     event PlanCreated(
         uint256 planId,
         string name,

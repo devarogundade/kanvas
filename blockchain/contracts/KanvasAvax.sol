@@ -145,6 +145,8 @@ contract KanvasAvax is
             playerId: playerId,
             fulfilled: false
         });
+
+        emit RequestSent(requestId, gameId);
     }
 
     function updateInterop(
@@ -158,13 +160,24 @@ contract KanvasAvax is
     function fulfillRequest(
         bytes32 requestId,
         bytes memory response,
-        bytes memory /* err */
+        bytes memory err
     ) internal override {
+        emit OCRResponse(requestId, response, err);
+
+        if (err.length > 0) {
+            emit FulfullFailed(requestId, err);
+            return;
+        }
+
         string memory uri = abi.decode(response, (string));
 
         Assets.Request storage request = _requests[requestId];
         require(!request.fulfilled, "Already fulfilled");
-        require(!Strings.equal(uri, "NULL"), "Invalid URI");
+
+        if (Strings.equal(uri, "NULL")) {
+            emit FulfullFailed(requestId, response);
+            return;
+        }
 
         request.fulfilled = true;
 
@@ -172,6 +185,8 @@ contract KanvasAvax is
 
         IKanvasGame game = IKanvasGame(request.gameId);
         game._receiveUri(request.playerId, uri);
+
+        emit FulfullSuccess(requestId, response);
     }
 
     function _transferTo(
