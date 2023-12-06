@@ -22,4 +22,11 @@ library Assets {
         string color;
         uint256 limit;
     }
+
+    enum EventType {
+        GENERATE_URI,
+        RECEIVE_URI,
+        TRANSFER_TO,
+        RECEIVE_FROM
+    }
 }

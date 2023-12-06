@@ -5,7 +5,7 @@ import {
   RequestFulfilled as RequestFulfilledEvent,
   RequestSent as RequestSentEvent,
   TemplateAdded as TemplateAddedEvent
-} from "../generated/Kanvas/Kanvas";
+} from "./blockchain/subgraph/generated/Kanvas/Kanvas";
 import {
   GameCreated,
   OwnershipTransferred,
@@ -13,7 +13,7 @@ import {
   RequestFulfilled,
   RequestSent,
   TemplateAdded
-} from "../generated/schema";
+} from "./blockchain/subgraph/generated/schema";
 
 export function handleGameCreated(event: GameCreatedEvent): void {
   let entity = GameCreated.load(

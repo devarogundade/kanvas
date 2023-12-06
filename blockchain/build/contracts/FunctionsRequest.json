@@ -44,27 +44,27 @@
     {
       "ast": {
         "nodeType": "YulBlock",
-        "src": "0:468:36",
+        "src": "0:468:37",
         "statements": [
           {
             "body": {
               "nodeType": "YulBlock",
-              "src": "51:45:36",
+              "src": "51:45:37",
               "statements": [
                 {
                   "nodeType": "YulAssignment",
-                  "src": "61:29:36",
+                  "src": "61:29:37",
                   "value": {
                     "arguments": [
                       {
                         "name": "value",
                         "nodeType": "YulIdentifier",
-                        "src": "76:5:36"
+                        "src": "76:5:37"
                       },
                       {
                         "kind": "number",
                         "nodeType": "YulLiteral",
-                        "src": "83:6:36",
+                        "src": "83:6:37",
                         "type": "",
                         "value": "0xffff"
                       }
@@ -72,16 +72,16 @@
                     "functionName": {
                       "name": "and",
                       "nodeType": "YulIdentifier",
-                      "src": "72:3:36"
+                      "src": "72:3:37"
                     },
                     "nodeType": "YulFunctionCall",
-                    "src": "72:18:36"
+                    "src": "72:18:37"
                   },
                   "variableNames": [
                     {
                       "name": "cleaned",
                       "nodeType": "YulIdentifier",
-                      "src": "61:7:36"
+                      "src": "61:7:37"
                     }
                   ]
                 }
@@ -93,7 +93,7 @@
               {
                 "name": "value",
                 "nodeType": "YulTypedName",
-                "src": "33:5:36",
+                "src": "33:5:37",
                 "type": ""
               }
             ],
@@ -101,16 +101,16 @@
               {
                 "name": "cleaned",
                 "nodeType": "YulTypedName",
-                "src": "43:7:36",
+                "src": "43:7:37",
                 "type": ""
               }
             ],
-            "src": "7:89:36"
+            "src": "7:89:37"
           },
           {
             "body": {
               "nodeType": "YulBlock",
-              "src": "173:52:36",
+              "src": "173:52:37",
               "statements": [
                 {
                   "expression": {
@@ -118,35 +118,35 @@
                       {
                         "name": "pos",
                         "nodeType": "YulIdentifier",
-                        "src": "190:3:36"
+                        "src": "190:3:37"
                       },
                       {
                         "arguments": [
                           {
                             "name": "value",
                             "nodeType": "YulIdentifier",
-                            "src": "212:5:36"
+                            "src": "212:5:37"
                           }
                         ],
                         "functionName": {
                           "name": "cleanup_t_uint16",
                           "nodeType": "YulIdentifier",
-                          "src": "195:16:36"
+                          "src": "195:16:37"
                         },
                         "nodeType": "YulFunctionCall",
-                        "src": "195:23:36"
+                        "src": "195:23:37"
                       }
                     ],
                     "functionName": {
                       "name": "mstore",
                       "nodeType": "YulIdentifier",
-                      "src": "183:6:36"
+                      "src": "183:6:37"
                     },
                     "nodeType": "YulFunctionCall",
-                    "src": "183:36:36"
+                    "src": "183:36:37"
                   },
                   "nodeType": "YulExpressionStatement",
-                  "src": "183:36:36"
+                  "src": "183:36:37"
                 }
               ]
             },
@@ -156,37 +156,37 @@
               {
                 "name": "value",
                 "nodeType": "YulTypedName",
-                "src": "161:5:36",
+                "src": "161:5:37",
                 "type": ""
               },
               {
                 "name": "pos",
                 "nodeType": "YulTypedName",
-                "src": "168:3:36",
+                "src": "168:3:37",
                 "type": ""
               }
             ],
-            "src": "102:123:36"
+            "src": "102:123:37"
           },
           {
             "body": {
               "nodeType": "YulBlock",
-              "src": "335:130:36",
+              "src": "335:130:37",
               "statements": [
                 {
                   "nodeType": "YulAssignment",
-                  "src": "345:26:36",
+                  "src": "345:26:37",
                   "value": {
                     "arguments": [
                       {
                         "name": "headStart",
                         "nodeType": "YulIdentifier",
-                        "src": "357:9:36"
+                        "src": "357:9:37"
                       },
                       {
                         "kind": "number",
                         "nodeType": "YulLiteral",
-                        "src": "368:2:36",
+                        "src": "368:2:37",
                         "type": "",
                         "value": "32"
                       }
@@ -194,16 +194,16 @@
                     "functionName": {
                       "name": "add",
                       "nodeType": "YulIdentifier",
-                      "src": "353:3:36"
+                      "src": "353:3:37"
                     },
                     "nodeType": "YulFunctionCall",
-                    "src": "353:18:36"
+                    "src": "353:18:37"
                   },
                   "variableNames": [
                     {
                       "name": "tail",
                       "nodeType": "YulIdentifier",
-                      "src": "345:4:36"
+                      "src": "345:4:37"
                     }
                   ]
                 },
@@ -213,19 +213,19 @@
                       {
                         "name": "value0",
                         "nodeType": "YulIdentifier",
-                        "src": "431:6:36"
+                        "src": "431:6:37"
                       },
                       {
                         "arguments": [
                           {
                             "name": "headStart",
                             "nodeType": "YulIdentifier",
-                            "src": "444:9:36"
+                            "src": "444:9:37"
                           },
                           {
                             "kind": "number",
                             "nodeType": "YulLiteral",
-                            "src": "455:1:36",
+                            "src": "455:1:37",
                             "type": "",
                             "value": "0"
                           }
@@ -233,22 +233,22 @@
                         "functionName": {
                           "name": "add",
                           "nodeType": "YulIdentifier",
-                          "src": "440:3:36"
+                          "src": "440:3:37"
                         },
                         "nodeType": "YulFunctionCall",
-                        "src": "440:17:36"
+                        "src": "440:17:37"
                       }
                     ],
                     "functionName": {
                       "name": "abi_encode_t_uint16_to_t_uint16_fromStack_library",
                       "nodeType": "YulIdentifier",
-                      "src": "381:49:36"
+                      "src": "381:49:37"
                     },
                     "nodeType": "YulFunctionCall",
-                    "src": "381:77:36"
+                    "src": "381:77:37"
                   },
                   "nodeType": "YulExpressionStatement",
-                  "src": "381:77:36"
+                  "src": "381:77:37"
                 }
               ]
             },
@@ -258,13 +258,13 @@
               {
                 "name": "headStart",
                 "nodeType": "YulTypedName",
-                "src": "307:9:36",
+                "src": "307:9:37",
                 "type": ""
               },
               {
                 "name": "value0",
                 "nodeType": "YulTypedName",
-                "src": "319:6:36",
+                "src": "319:6:37",
                 "type": ""
               }
             ],
@@ -272,22 +272,22 @@
               {
                 "name": "tail",
                 "nodeType": "YulTypedName",
-                "src": "330:4:36",
+                "src": "330:4:37",
                 "type": ""
               }
             ],
-            "src": "231:234:36"
+            "src": "231:234:37"
           }
         ]
       },
       "contents": "{\n\n    function cleanup_t_uint16(value) -> cleaned {\n        cleaned := and(value, 0xffff)\n    }\n\n    function abi_encode_t_uint16_to_t_uint16_fromStack_library(value, pos) {\n        mstore(pos, cleanup_t_uint16(value))\n    }\n\n    function abi_encode_tuple_t_uint16__to_t_uint16__fromStack_library_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_uint16_to_t_uint16_fromStack_library(value0,  add(headStart, 0))\n\n    }\n\n}\n",
-      "id": 36,
+      "id": 37,
       "language": "Yul",
       "name": "#utility.yul"
     }
   ],
   "sourceMap": "215:6086:8:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "215:6086:8:-:0;;;;;;;;;;;;;;;;;;;;;;;;279:47;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;;325:1;279:47;:::o;7:89:36:-;43:7;83:6;76:5;72:18;61:29;;7:89;;;:::o;102:123::-;195:23;212:5;195:23;:::i;:::-;190:3;183:36;102:123;;:::o;231:234::-;330:4;368:2;357:9;353:18;345:26;;381:77;455:1;444:9;440:17;431:6;381:77;:::i;:::-;231:234;;;;:::o",
+  "deployedSourceMap": "215:6086:8:-:0;;;;;;;;;;;;;;;;;;;;;;;;279:47;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;;325:1;279:47;:::o;7:89:37:-;43:7;83:6;76:5;72:18;61:29;;7:89;;;:::o;102:123::-;195:23;212:5;195:23;:::i;:::-;190:3;183:36;102:123;;:::o;231:234::-;330:4;368:2;357:9;353:18;345:26;;381:77;455:1;444:9;440:17;431:6;381:77;:::i;:::-;231:234;;;;:::o",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.19;\n\nimport {CBOR} from \"../../../../vendor/solidity-cborutils/v2.0.0/CBOR.sol\";\n\n/// @title Library for encoding the input data of a Functions request into CBOR\nlibrary FunctionsRequest {\n  using CBOR for CBOR.CBORBuffer;\n\n  uint16 public constant REQUEST_DATA_VERSION = 1;\n  uint256 internal constant DEFAULT_BUFFER_SIZE = 256;\n\n  enum Location {\n    Inline, // Provided within the Request\n    Remote, // Hosted through remote location that can be accessed through a provided URL\n    DONHosted // Hosted on the DON's storage\n  }\n\n  enum CodeLanguage {\n    JavaScript\n    // In future version we may add other languages\n  }\n\n  struct Request {\n    Location codeLocation; // ════════════╸ The location of the source code that will be executed on each node in the DON\n    Location secretsLocation; // ═════════╸ The location of secrets that will be passed into the source code. *Only Remote secrets are supported\n    CodeLanguage language; // ════════════╸ The coding language that the source code is written in\n    string source; // ════════════════════╸ Raw source code for Request.codeLocation of Location.Inline, URL for Request.codeLocation of Location.Remote, or slot decimal number for Request.codeLocation of Location.DONHosted\n    bytes encryptedSecretsReference; // ══╸ Encrypted URLs for Request.secretsLocation of Location.Remote (use addSecretsReference()), or CBOR encoded slotid+version for Request.secretsLocation of Location.DONHosted (use addDONHostedSecrets())\n    string[] args; // ════════════════════╸ String arguments that will be passed into the source code\n    bytes[] bytesArgs; // ════════════════╸ Bytes arguments that will be passed into the source code\n  }\n\n  error EmptySource();\n  error EmptySecrets();\n  error EmptyArgs();\n  error NoInlineSecrets();\n\n  /// @notice Encodes a Request to CBOR encoded bytes\n  /// @param self The request to encode\n  /// @return CBOR encoded bytes\n  function encodeCBOR(Request memory self) internal pure returns (bytes memory) {\n    CBOR.CBORBuffer memory buffer = CBOR.create(DEFAULT_BUFFER_SIZE);\n\n    buffer.writeString(\"codeLocation\");\n    buffer.writeUInt256(uint256(self.codeLocation));\n\n    buffer.writeString(\"language\");\n    buffer.writeUInt256(uint256(self.language));\n\n    buffer.writeString(\"source\");\n    buffer.writeString(self.source);\n\n    if (self.args.length > 0) {\n      buffer.writeString(\"args\");\n      buffer.startArray();\n      for (uint256 i = 0; i < self.args.length; ++i) {\n        buffer.writeString(self.args[i]);\n      }\n      buffer.endSequence();\n    }\n\n    if (self.encryptedSecretsReference.length > 0) {\n      if (self.secretsLocation == Location.Inline) {\n        revert NoInlineSecrets();\n      }\n      buffer.writeString(\"secretsLocation\");\n      buffer.writeUInt256(uint256(self.secretsLocation));\n      buffer.writeString(\"secrets\");\n      buffer.writeBytes(self.encryptedSecretsReference);\n    }\n\n    if (self.bytesArgs.length > 0) {\n      buffer.writeString(\"bytesArgs\");\n      buffer.startArray();\n      for (uint256 i = 0; i < self.bytesArgs.length; ++i) {\n        buffer.writeBytes(self.bytesArgs[i]);\n      }\n      buffer.endSequence();\n    }\n\n    return buffer.buf.buf;\n  }\n\n  /// @notice Initializes a Chainlink Functions Request\n  /// @dev Sets the codeLocation and code on the request\n  /// @param self The uninitialized request\n  /// @param codeLocation The user provided source code location\n  /// @param language The programming language of the user code\n  /// @param source The user provided source code or a url\n  function initializeRequest(\n    Request memory self,\n    Location codeLocation,\n    CodeLanguage language,\n    string memory source\n  ) internal pure {\n    if (bytes(source).length == 0) revert EmptySource();\n\n    self.codeLocation = codeLocation;\n    self.language = language;\n    self.source = source;\n  }\n\n  /// @notice Initializes a Chainlink Functions Request\n  /// @dev Simplified version of initializeRequest for PoC\n  /// @param self The uninitialized request\n  /// @param javaScriptSource The user provided JS code (must not be empty)\n  function initializeRequestForInlineJavaScript(Request memory self, string memory javaScriptSource) internal pure {\n    initializeRequest(self, Location.Inline, CodeLanguage.JavaScript, javaScriptSource);\n  }\n\n  /// @notice Adds Remote user encrypted secrets to a Request\n  /// @param self The initialized request\n  /// @param encryptedSecretsReference Encrypted comma-separated string of URLs pointing to off-chain secrets\n  function addSecretsReference(Request memory self, bytes memory encryptedSecretsReference) internal pure {\n    if (encryptedSecretsReference.length == 0) revert EmptySecrets();\n\n    self.secretsLocation = Location.Remote;\n    self.encryptedSecretsReference = encryptedSecretsReference;\n  }\n\n  /// @notice Adds DON-hosted secrets reference to a Request\n  /// @param self The initialized request\n  /// @param slotID Slot ID of the user's secrets hosted on DON\n  /// @param version User data version (for the slotID)\n  function addDONHostedSecrets(Request memory self, uint8 slotID, uint64 version) internal pure {\n    CBOR.CBORBuffer memory buffer = CBOR.create(DEFAULT_BUFFER_SIZE);\n\n    buffer.writeString(\"slotID\");\n    buffer.writeUInt64(slotID);\n    buffer.writeString(\"version\");\n    buffer.writeUInt64(version);\n\n    self.secretsLocation = Location.DONHosted;\n    self.encryptedSecretsReference = buffer.buf.buf;\n  }\n\n  /// @notice Sets args for the user run function\n  /// @param self The initialized request\n  /// @param args The array of string args (must not be empty)\n  function setArgs(Request memory self, string[] memory args) internal pure {\n    if (args.length == 0) revert EmptyArgs();\n\n    self.args = args;\n  }\n\n  /// @notice Sets bytes args for the user run function\n  /// @param self The initialized request\n  /// @param args The array of bytes args (must not be empty)\n  function setBytesArgs(Request memory self, bytes[] memory args) internal pure {\n    if (args.length == 0) revert EmptyArgs();\n\n    self.bytesArgs = args;\n  }\n}\n",
   "sourcePath": "@chainlink\\contracts\\src\\v0.8\\functions\\dev\\v1_0_0\\libraries\\FunctionsRequest.sol",
   "ast": {
@@ -5693,7 +5693,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-12-06T16:32:49.495Z",
+  "updatedAt": "2023-12-06T17:21:13.440Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

@@ -1,12 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
+import {Assets} from "../libraries/Assets.sol";
+
 interface IKanvasAvax {
-    event RequestSent(bytes32 requestId, address gameId);
-
-    event FulfullFailed(bytes32 requestId, bytes err);
-
-    event FulfullSuccess(bytes32 requestId, bytes response);
+    event GameEvent(
+        bytes32 requestId,
+        address gameId,
+        address playerId,
+        Assets.EventType eventType,
+        bytes data
+    );
 
     event PlanCreated(
         uint256 planId,

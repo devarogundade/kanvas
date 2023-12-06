@@ -114,6 +114,14 @@ contract KanvasInterop is
             playerId: playerId,
             fulfilled: false
         });
+
+        emit GameEvent(
+            requestId,
+            gameId,
+            playerId,
+            Assets.EventType.GENERATE_URI,
+            bytes(fields)
+        );
     }
 
     function updateInterop(
@@ -129,20 +137,32 @@ contract KanvasInterop is
         bytes memory response,
         bytes memory err
     ) internal override {
-        if (err.length > 0) {
-            emit FulfullFailed(requestId, err);
-            return;
-        }
-
         Assets.Request storage request = _requests[requestId];
         require(!request.fulfilled, "Already fulfilled");
+
+        if (err.length > 0) {
+            emit GameEvent(
+                requestId,
+                request.gameId,
+                request.playerId,
+                Assets.EventType.RECEIVE_URI,
+                err
+            );
+            return;
+        }
 
         request.fulfilled = true;
 
         IKanvasInteropGame game = IKanvasInteropGame(request.gameId);
         game._receiveUri(request.playerId, string(response));
 
-        emit FulfullSuccess(requestId, response);
+        emit GameEvent(
+            requestId,
+            request.gameId,
+            request.playerId,
+            Assets.EventType.RECEIVE_URI,
+            response
+        );
     }
 
     function _transferTo(
@@ -187,7 +207,10 @@ contract KanvasInterop is
         require(msg.value >= fees, "Insufficient fee");
 
         // Send the message through the router and store the returned message ID
-        _router.ccipSend{value: fees}(AVAX_SELECTOR, message);
+        bytes32 messageId = _router.ccipSend{value: fees}(
+            AVAX_SELECTOR,
+            message
+        );
 
         uint256 overspent = msg.value - fees;
 
@@ -195,6 +218,14 @@ contract KanvasInterop is
             address payable receiver = payable(gameId);
             receiver.transfer(overspent);
         }
+
+        emit GameEvent(
+            messageId,
+            gameId,
+            playerId,
+            Assets.EventType.TRANSFER_TO,
+            message.data
+        );
     }
 
     // handle a received message
@@ -216,5 +247,13 @@ contract KanvasInterop is
 
         IKanvasInteropGame game = IKanvasInteropGame(interopGameId);
         game._receiveFrom(AVAX_SELECTOR, gameId, playerId, tokenId, uri, data);
+
+        emit GameEvent(
+            message.messageId,
+            gameId,
+            playerId,
+            Assets.EventType.RECEIVE_FROM,
+            message.data
+        );
     }
 }

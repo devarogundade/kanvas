@@ -145,7 +145,13 @@ contract KanvasAvax is
             fulfilled: false
         });
 
-        emit RequestSent(requestId, gameId);
+        emit GameEvent(
+            requestId,
+            gameId,
+            playerId,
+            Assets.EventType.GENERATE_URI,
+            bytes(fields)
+        );
     }
 
     function updateInterop(
@@ -161,13 +167,19 @@ contract KanvasAvax is
         bytes memory response,
         bytes memory err
     ) internal override {
-        if (err.length > 0) {
-            emit FulfullFailed(requestId, err);
-            return;
-        }
-
         Assets.Request storage request = _requests[requestId];
         require(!request.fulfilled, "Already fulfilled");
+
+        if (err.length > 0) {
+            emit GameEvent(
+                requestId,
+                request.gameId,
+                request.playerId,
+                Assets.EventType.RECEIVE_URI,
+                err
+            );
+            return;
+        }
 
         request.fulfilled = true;
 
@@ -176,7 +188,13 @@ contract KanvasAvax is
         IKanvasGame game = IKanvasGame(request.gameId);
         game._receiveUri(request.playerId, string(response));
 
-        emit FulfullSuccess(requestId, response);
+        emit GameEvent(
+            requestId,
+            request.gameId,
+            request.playerId,
+            Assets.EventType.RECEIVE_URI,
+            response
+        );
     }
 
     function _transferTo(
@@ -211,7 +229,10 @@ contract KanvasAvax is
         require(msg.value >= fees, "Insufficient fee");
 
         // Send the message through the router and store the returned message ID
-        _router.ccipSend{value: fees}(chainSelector, message);
+        bytes32 messageId = _router.ccipSend{value: fees}(
+            chainSelector,
+            message
+        );
 
         uint256 overspent = msg.value - fees;
 
@@ -219,6 +240,14 @@ contract KanvasAvax is
             address payable receiver = payable(gameId);
             receiver.transfer(overspent);
         }
+
+        emit GameEvent(
+            messageId,
+            gameId,
+            playerId,
+            Assets.EventType.TRANSFER_TO,
+            message.data
+        );
     }
 
     // handle a received message
@@ -244,6 +273,14 @@ contract KanvasAvax is
             tokenId,
             uri,
             data
+        );
+
+        emit GameEvent(
+            message.messageId,
+            gameId,
+            playerId,
+            Assets.EventType.RECEIVE_FROM,
+            message.data
         );
     }
 
