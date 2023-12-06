@@ -97,17 +97,6 @@ contract('RockPaperScissors', async accounts => {
     })
 })
 
-
-// contract('RockPaperScissors', async accounts => {
-//     it('Upgrade Player', async () => {
-//         const rockPaperScissors = await RockPaperScissors.deployed()
-
-//         const trx = await rockPaperScissors.upgradePlayer(accounts[0])
-
-//         console.log(trx.tx)
-//     })
-// })
-
 contract('RockPaperScissors', async accounts => {
     it('Transfer To', async () => {
         const rockPaperScissors = await RockPaperScissors.deployed()
