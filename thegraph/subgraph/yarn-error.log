@@ -1,0 +1,44 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\DELL\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\Users\DELL\AppData\Local\cloud-code\installer\google-cloud-sdk\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\msys64\mingw64\bin;C:\Users\DELL\Documents\.vsconfig;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools;C:\Users\DELL\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Go\bin;C:\Users\DELL\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\DELL\AppData\Local\Programs\Python\Python311\;C:\Users\DELL\.cargo\bin;C:\Users\DELL\AppData\Local\Microsoft\WindowsApps;C:\Users\DELL\AppData\Local\Programs\Microsoft VS Code\bin;C:\msys64\mingw64\bin;C:\Users\DELL\Documents\.vsconfig;C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools;C:\Users\DELL\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\DELL\AppData\Roaming\npm;c:\users\dell\.local\bin;c:\users\dell\appdata\roaming\python\python312\scripts;c:\users\dell\appdata\roaming\python\python312\scripts;c:\users\dell\.local\bin;c:\users\dell\.local\bin;C:\Users\DELL\go\bin;C:\Users\DELL\.deno\bin;C:\Users\DELL\AppData\Local\Microsoft\WinGet\Packages\DenoLand.Deno_Microsoft.Winget.Source_8wekyb3d8bbwe;;;C:\Users\DELL\Apps\kubo_v0.19.0\kubo
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.18.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26)
+
+npm manifest: 
+  {
+    "name": "kanvas",
+    "license": "UNLICENSED",
+    "scripts": {
+      "codegen": "graph codegen",
+      "build": "graph build",
+      "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ kanvas",
+      "create-local": "graph create --node http://localhost:8020/ kanvas",
+      "remove-local": "graph remove --node http://localhost:8020/ kanvas",
+      "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 kanvas",
+      "test": "graph test"
+    },
+    "dependencies": {
+      "@graphprotocol/graph-cli": "0.55.0",
+      "@graphprotocol/graph-ts": "0.30.0"
+    },
+    "devDependencies": { "matchstick-as": "0.5.0" }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
