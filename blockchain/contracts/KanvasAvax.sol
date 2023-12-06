@@ -161,8 +161,6 @@ contract KanvasAvax is
         bytes memory response,
         bytes memory err
     ) internal override {
-        emit OCRResponse(requestId, response, err);
-
         if (err.length > 0) {
             emit FulfullFailed(requestId, err);
             return;

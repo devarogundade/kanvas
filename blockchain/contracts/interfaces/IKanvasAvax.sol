@@ -8,8 +8,6 @@ interface IKanvasAvax {
 
     event FulfullSuccess(bytes32 requestId, bytes response);
 
-    event OCRResponse(bytes32 indexed requestId, bytes result, bytes err);
-
     event PlanCreated(
         uint256 planId,
         string name,

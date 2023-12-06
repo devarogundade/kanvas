@@ -13,7 +13,7 @@ library Params {
     }
 
     struct InteropGame {
-        address gameId;
+        address sourceGameId;
     }
 
     struct Plan {

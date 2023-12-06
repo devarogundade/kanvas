@@ -5,8 +5,7 @@ import {IKanvasAvax} from "./IKanvasAvax.sol";
 import {Params} from "../libraries/Params.sol";
 
 interface IKanvasInterop is IKanvasAvax {
-    function _transferTo(
-        uint64 chainSelector,
+    function _withdrawTo(
         address gameId,
         address playerId,
         uint256 tokenId,
@@ -14,8 +13,5 @@ interface IKanvasInterop is IKanvasAvax {
         bytes memory data
     ) external payable;
 
-    function _createGame(
-        uint64 chainSelector,
-        Params.InteropGame memory params
-    ) external;
+    function _createGame(Params.InteropGame memory params) external;
 }

@@ -5,7 +5,6 @@ import {Assets} from "./libraries/Assets.sol";
 import {Params} from "./libraries/Params.sol";
 import {IKanvasInterop} from "./interfaces/IKanvasInterop.sol";
 import {IKanvasInteropGame} from "./interfaces/IKanvasInteropGame.sol";
-import {IKanvasInteropGame} from "./interfaces/IKanvasInteropGame.sol";
 import {StringJoiner} from "./libraries/StringJoiner.sol";
 
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
@@ -30,6 +29,7 @@ contract KanvasInterop is
     Ownable
 {
     using FunctionsRequest for FunctionsRequest.Request;
+    uint64 private constant AVAX_SELECTOR = 14767482510784806043;
 
     uint256 public constant MAX_PROPERTIES_LEN = 20;
     uint256 public constant MAX_TEMPLATES_LEN = 5;
@@ -40,7 +40,7 @@ contract KanvasInterop is
     bytes32 private _donId =
         0x66756e2d706f6c79676f6e2d6d756d6261692d31000000000000000000000000;
 
-    mapping(address => address) private _games;
+    mapping(address => mapping(uint64 => address)) private _games;
 
     mapping(bytes32 => Assets.Request) private _requests;
 
@@ -71,11 +71,8 @@ contract KanvasInterop is
         _subscriptionId = newSubscriptionId;
     }
 
-    function _createGame(
-        uint64 /* chainSelector */,
-        Params.InteropGame memory params
-    ) external override {
-        _games[_msgSender()] = params.gameId;
+    function _createGame(Params.InteropGame memory params) external override {
+        _games[params.sourceGameId][AVAX_SELECTOR] = _msgSender();
     }
 
     function _generateUri(
@@ -86,8 +83,8 @@ contract KanvasInterop is
     ) external override {
         require(props.length <= MAX_PROPERTIES_LEN, "Too many attributes");
 
-        address gameId = _games[_msgSender()];
-        require(_games[gameId] != address(0), "Game Not Found");
+        address gameId = _games[_msgSender()][AVAX_SELECTOR];
+        require(gameId != address(0), "Game Not Found");
 
         string[] memory args = new string[](5);
         args[0] = StringJoiner.joinStrings(props, ",");
@@ -132,8 +129,6 @@ contract KanvasInterop is
         bytes memory response,
         bytes memory err
     ) internal override {
-        emit OCRResponse(requestId, response, err);
-
         if (err.length > 0) {
             emit FulfullFailed(requestId, err);
             return;
@@ -144,8 +139,6 @@ contract KanvasInterop is
 
         request.fulfilled = true;
 
-        require(_games[request.gameId] != address(0), "Game Not Found");
-
         IKanvasInteropGame game = IKanvasInteropGame(request.gameId);
         game._receiveUri(request.playerId, string(response));
 
@@ -153,19 +146,29 @@ contract KanvasInterop is
     }
 
     function _transferTo(
-        uint64 chainSelector,
+        uint64 /* chainSelector */,
+        address /* gameId */,
+        address /* playerId */,
+        uint256 /* tokenId */,
+        string memory /* uri*/,
+        bytes memory /* data*/
+    ) external payable {
+        revert("Method not available, use _withdrawTo");
+    }
+
+    function _withdrawTo(
         address gameId,
         address playerId,
         uint256 tokenId,
         string memory uri,
         bytes memory data
     ) external payable {
-        require(_interops[chainSelector] != address(0), "Chain not supported");
+        require(_interops[AVAX_SELECTOR] != address(0), "Chain not supported");
 
         // Create an EVM2AnyMessage struct in memory with necessary information for sending a cross-chain message
         Client.EVM2AnyMessage memory message = Client.EVM2AnyMessage({
             // ABI-encoded receiver address
-            receiver: abi.encode(_interops[chainSelector]),
+            receiver: abi.encode(_interops[AVAX_SELECTOR]),
             // ABI-encoded string message
             data: abi.encode(gameId, playerId, tokenId, uri, data),
             // Empty array indicating no tokens are being sent
@@ -179,12 +182,12 @@ contract KanvasInterop is
         });
 
         // Get the fee required to send the message
-        uint256 fees = _router.getFee(chainSelector, message);
+        uint256 fees = _router.getFee(AVAX_SELECTOR, message);
 
         require(msg.value >= fees, "Insufficient fee");
 
         // Send the message through the router and store the returned message ID
-        _router.ccipSend{value: fees}(chainSelector, message);
+        _router.ccipSend{value: fees}(AVAX_SELECTOR, message);
 
         uint256 overspent = msg.value - fees;
 
@@ -209,14 +212,9 @@ contract KanvasInterop is
                 (address, address, uint256, string, bytes)
             );
 
-        IKanvasInteropGame game = IKanvasInteropGame(gameId);
-        game._receiveFrom(
-            message.sourceChainSelector,
-            gameId,
-            playerId,
-            tokenId,
-            uri,
-            data
-        );
+        address interopGameId = _games[gameId][AVAX_SELECTOR];
+
+        IKanvasInteropGame game = IKanvasInteropGame(interopGameId);
+        game._receiveFrom(AVAX_SELECTOR, gameId, playerId, tokenId, uri, data);
     }
 }

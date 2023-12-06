@@ -10,7 +10,6 @@ import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
 contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721, Ownable {
-    uint64 private constant AVAX_SELECTOR = 14767482510784806043;
     uint256 public constant MAX_PROPERTIES_LEN = 20;
 
     uint8 private constant WIN_NFT_TEMPLATE = 0;
@@ -39,10 +38,7 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721, Ownable {
         address sourceGameId
     ) ERC721("RockPaperScissors", "RPS") IKanvasInteropGame() Ownable() {
         kanvas = IKanvasInterop(kanvasRouter);
-        kanvas._createGame(
-            AVAX_SELECTOR,
-            Params.InteropGame({gameId: sourceGameId})
-        );
+        kanvas._createGame(Params.InteropGame({sourceGameId: sourceGameId}));
     }
 
     function _transfer(
@@ -101,8 +97,8 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721, Ownable {
         kanvas._generateUri(playerId, props, fields, LOST_NFT_TEMPLATE);
     }
 
-    /** Bridge game Nft function */
-    function transferTo(uint64 chainSelector) external payable {
+    /** Bridge back game Nft function */
+    function withdrawTo() external payable {
         address playerId = _msgSender();
         Player memory player = _players[playerId];
         require(player.created, "Player does not exists");
@@ -113,8 +109,7 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721, Ownable {
         bytes memory data = abi.encode(player.name, player.points);
 
         /** Cross chain transfer function */
-        kanvas._transferTo{value: msg.value}(
-            chainSelector,
+        kanvas._withdrawTo{value: msg.value}(
             gameId,
             playerId,
             player.tokenId,
