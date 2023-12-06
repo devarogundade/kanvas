@@ -18,6 +18,15 @@ module.exports = {
       timeoutBlocks: 9999999,
       skipDryRun: false,
       networkCheckTimeout: 999999999
+    },
+
+    mumbai: {
+      provider: () => new HDWalletProvider(MNEMONIC, 'https://polygon-testnet.public.blastapi.io'),
+      network_id: 80001,
+      confirmations: 2,
+      timeoutBlocks: 9999999,
+      skipDryRun: false,
+      networkCheckTimeout: 999999999
     }
   },
 

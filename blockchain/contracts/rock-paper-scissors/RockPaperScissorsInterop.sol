@@ -30,6 +30,8 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721, Ownable {
         bool created;
     }
 
+    receive() external payable {}
+
     mapping(address => Player) private _players;
 
     constructor(
@@ -147,6 +149,7 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721, Ownable {
         // player will be created when they receive the game NFT
         _players[playerId].name = name;
         _players[playerId].points = points;
+        _players[playerId].created = true;
 
         _players[playerId].tokenId = tokenId;
     }

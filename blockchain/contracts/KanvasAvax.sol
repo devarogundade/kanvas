@@ -28,7 +28,6 @@ contract KanvasAvax is
 {
     using FunctionsRequest for FunctionsRequest.Request;
 
-    uint64 private constant AVAX_SELECTOR = 14767482510784806043;
     uint256 public constant MAX_PROPERTIES_LEN = 20;
     uint256 public constant MAX_TEMPLATES_LEN = 5;
 
@@ -202,19 +201,26 @@ contract KanvasAvax is
             tokenAmounts: new Client.EVMTokenAmount[](0),
             // Additional arguments, setting gas limit and non-strict sequency mode
             extraArgs: Client._argsToBytes(
-                Client.EVMExtraArgsV1({gasLimit: 400_000, strict: false})
+                Client.EVMExtraArgsV1({gasLimit: 2_000_000, strict: false})
             ),
             // Setting feeToken to zero address, indicating native asset will be used for fees
             feeToken: address(0)
         });
 
         // Get the fee required to send the message
-        uint256 fees = _router.getFee(AVAX_SELECTOR, message);
+        uint256 fees = _router.getFee(chainSelector, message);
 
         require(msg.value >= fees, "Insufficient fee");
 
         // Send the message through the router and store the returned message ID
-        _router.ccipSend{value: fees}(AVAX_SELECTOR, message);
+        _router.ccipSend{value: fees}(chainSelector, message);
+
+        uint256 overspent = msg.value - fees;
+
+        if (overspent > 0) {
+            address payable receiver = payable(gameId);
+            receiver.transfer(overspent);
+        }
     }
 
     // handle a received message

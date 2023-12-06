@@ -28,6 +28,8 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
         bool created;
     }
 
+    receive() external payable {}
+
     mapping(address => Player) private _players;
 
     constructor(
@@ -62,7 +64,8 @@ contract RockPaperScissors is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
         player.points = 5;
         player.created = true;
 
-        uint256 tokenId = _tokenId++;
+        _tokenId++;
+        uint256 tokenId = _tokenId;
 
         _mint(playerId, tokenId);
         player.tokenId = tokenId;

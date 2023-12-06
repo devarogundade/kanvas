@@ -19,6 +19,9 @@ import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.s
 import {CCIPReceiver} from "@chainlink/contracts-ccip/src/v0.8/ccip/applications/CCIPReceiver.sol";
 import {IRouterClient} from "@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol";
 
+// For Polygon Mumbai - Alone
+// @dev Hardcoded vaolues for Mumbai
+
 contract KanvasInterop is
     IKanvasInterop,
     Context,
@@ -28,15 +31,14 @@ contract KanvasInterop is
 {
     using FunctionsRequest for FunctionsRequest.Request;
 
-    uint64 private immutable _chainSelector;
-
     uint256 public constant MAX_PROPERTIES_LEN = 20;
     uint256 public constant MAX_TEMPLATES_LEN = 5;
 
     string private _sourceCode;
-    uint64 private _subscriptionId;
+    uint64 private _subscriptionId = 1066;
     uint32 private _gasLimit = 300_000;
-    bytes32 private _donId;
+    bytes32 private _donId =
+        0x66756e2d706f6c79676f6e2d6d756d6261692d31000000000000000000000000;
 
     mapping(address => address) private _games;
 
@@ -48,11 +50,9 @@ contract KanvasInterop is
 
     constructor(
         address ccipReceiver,
-        address functionOracle,
-        uint64 chainSelector
+        address functionOracle
     ) CCIPReceiver(ccipReceiver) Ownable() FunctionsClient(functionOracle) {
         _router = IRouterClient(getRouter());
-        _chainSelector = chainSelector;
     }
 
     function updateDonId(bytes32 newDonId) external onlyOwner {
@@ -172,19 +172,26 @@ contract KanvasInterop is
             tokenAmounts: new Client.EVMTokenAmount[](0),
             // Additional arguments, setting gas limit and non-strict sequency mode
             extraArgs: Client._argsToBytes(
-                Client.EVMExtraArgsV1({gasLimit: 400_000, strict: false})
+                Client.EVMExtraArgsV1({gasLimit: 2_000_000, strict: false})
             ),
             // Setting feeToken to zero address, indicating native asset will be used for fees
             feeToken: address(0)
         });
 
         // Get the fee required to send the message
-        uint256 fees = _router.getFee(_chainSelector, message);
+        uint256 fees = _router.getFee(chainSelector, message);
 
         require(msg.value >= fees, "Insufficient fee");
 
         // Send the message through the router and store the returned message ID
-        _router.ccipSend{value: fees}(_chainSelector, message);
+        _router.ccipSend{value: fees}(chainSelector, message);
+
+        uint256 overspent = msg.value - fees;
+
+        if (overspent > 0) {
+            address payable receiver = payable(gameId);
+            receiver.transfer(overspent);
+        }
     }
 
     // handle a received message
