@@ -57,64 +57,79 @@ contract Ticket is IKanvasGame, ERC721, Ownable {
 }
 ```
 
+## Generate NFT
+```solidity
+// After whitelisting the contract admin can mint a NFT for
+// the EOA
+function issueTicket(address holder) external payable onlyOwner {
+    require(_holders[holder].whiteListed, "Not WhiteListed");
+
+    _tokenId++;
+    uint256 tokenId = _tokenId;
+
+    // ERC721 mint function
+    _mint(holder, tokenId);
+
+    _holders[holder].tokenId = tokenId;
+
+    string[] memory props = new string[](1);
+    props[0] = _holders[holder].name;
+
+    string memory fields = "$name$";
+
+    // get URI generating fee
+    uint256 fee = kanvas._generateFee();
+
+    // Calling the Kanvas generate function with properties
+    // an aligned fields on the designed template on the Kanvas dApp
+
+    // This will generate a NFT with the holder name using the
+    // <before use template>
+    kanvas._generateUri{value: fee}(
+        holder,
+        props,
+        fields,
+        BEFORE_NFT_TEMPLATE
+    );
+}
+```
+
 ## Include the YourGame for a cross-chain game
 ```solidity
-contract YourGame is IKanvasGame, YourGame {
+contract Ticket is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
    constructor(address kanvasRouter) IKanvasGame() {
         kanvas = IKanvasAvax(kanvasRouter);
     }
 }
 ```
 
-## Generate NFT
-```solidity
-    // After whitelisting the contract admin can mint a NFT for
-    // the EOA
-    function issueTicket(address holder) external payable onlyOwner {
-        require(_holders[holder].whiteListed, "Not WhiteListed");
-
-        _tokenId++;
-        uint256 tokenId = _tokenId;
-
-        // ERC721 mint function
-        _mint(holder, tokenId);
-
-        _holders[holder].tokenId = tokenId;
-
-        string[] memory props = new string[](1);
-        props[0] = _holders[holder].name;
-
-        string memory fields = "$name$";
-
-        // get URI generating fee
-        uint256 fee = kanvas._generateFee();
-
-        // Calling the Kanvas generate function with properties
-        // an aligned fields on the designed template on the Kanvas dApp
-
-        // This will generate a NFT with the holder name using the
-        // <before use template>
-        kanvas._generateUri{value: fee}(
-            holder,
-            props,
-            fields,
-            BEFORE_NFT_TEMPLATE
-        );
-    }
-```
-
 ## Bridge NFT
 ```solidity
- bytes memory data = abi.encode(player.name, player.points);
+/** Bridge game Nft function */
+function transferTo(uint64 chainSelector) external payable {
+    bytes memory data = abi.encode(player.name, player.points);
 
- kanvas._transferTo{value: msg.value}(
-      chainSelector,
-      gameId,
-      playerId,
-      tokenId,
-      uri,
-      data
-  );
+    kanvas._transferTo{value: msg.value}(
+        chainSelector,
+        gameId,
+        playerId,
+        tokenId,
+        uri,
+        data
+    );
+}
+
+/** Cross chain receiver callback function */
+function _receiveFrom(
+    uint64 chainSelector,
+    address gameId,
+    address playerId,
+    uint256 tokenId,
+    string memory uri,
+    bytes memory data
+) external override {
+    // Your implementation..
+}
 ```
 
 See full example [here](https://github.com/devarogundade/kanvas/tree/main/blockchain/contracts/rock-paper-scissors)
