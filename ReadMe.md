@@ -66,38 +66,41 @@ contract YourGame is IKanvasGame, YourGame {
 }
 ```
 
-## IKanvasGame
-```solidity
-interface IKanvasGame {
-    function _receiveUri(address playerId, string memory uri) external;
-}
-```
-
-## IKanvasInteropGame
-```solidity
-interface IKanvasInteropGame {
-    function _receiveFrom(
-        uint64 chainSelector,
-        address gameId,
-        address playerId,
-        uint256 tokenId,
-        string memory uri,
-        bytes memory data
-    ) external;
-}
-```
-
 ## Generate NFT
 ```solidity
-uint8 NFT_TEMPLATE = 0;
+    // After whitelisting the contract admin can mint a NFT for
+    // the EOA
+    function issueTicket(address holder) external payable onlyOwner {
+        require(_holders[holder].whiteListed, "Not WhiteListed");
 
-string[] memory properties = new string[](MAX_PROPERTIES_LEN);
-properties[0] = player.name;
-properties[1] = player.points;
+        _tokenId++;
+        uint256 tokenId = _tokenId;
 
-string memory fields = "$name$ $points$";
+        // ERC721 mint function
+        _mint(holder, tokenId);
 
-kanvas._generateUri(playerId, properties, fields, NFT_TEMPLATE);
+        _holders[holder].tokenId = tokenId;
+
+        string[] memory props = new string[](1);
+        props[0] = _holders[holder].name;
+
+        string memory fields = "$name$";
+
+        // get URI generating fee
+        uint256 fee = kanvas._generateFee();
+
+        // Calling the Kanvas generate function with properties
+        // an aligned fields on the designed template on the Kanvas dApp
+
+        // This will generate a NFT with the holder name using the
+        // <before use template>
+        kanvas._generateUri{value: fee}(
+            holder,
+            props,
+            fields,
+            BEFORE_NFT_TEMPLATE
+        );
+    }
 ```
 
 ## Bridge NFT
