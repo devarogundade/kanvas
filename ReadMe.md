@@ -6,6 +6,10 @@ Learn more at [Devpost](https://devpost.com/software/kanvas-in-game-dynamic-nfts
 
 ## Extend the IKanvasGame
 ```solidity
+// This smart contract is used to showcase how a Ticketting Platform
+// can integrate Kanvas into their smart contract to mint personalized NFT
+// for their users at the smart contract level
+
 contract Ticket is IKanvasGame, ERC721, Ownable {
     // Template Ids from Kanvas dApp
 
