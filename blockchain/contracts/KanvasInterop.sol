@@ -32,13 +32,25 @@ contract KanvasInterop is
     uint64 private constant AVAX_SELECTOR = 14767482510784806043;
 
     uint256 public constant MAX_PROPERTIES_LEN = 20;
-    uint256 public constant MAX_TEMPLATES_LEN = 5;
 
+    // Javascript Chainlink functions source code
     string private _sourceCode;
+
+    // Chainlink Polygon Subscription Id
     uint64 private _subscriptionId = 1066;
+
+    // Chainlink functions fulfill callback gas limit
     uint32 private _gasLimit = 300_000;
+
+    // Chainlink Polygon DON Id
     bytes32 private _donId =
         0x66756e2d706f6c79676f6e2d6d756d6261692d31000000000000000000000000;
+
+    // for testing purpose the generation fee is free
+    uint256 private _kanvasGenerateFee = 0;
+
+    // for testing purpose the bridge fee is free
+    uint256 private _kanvasBridgeFee = 0;
 
     mapping(address => mapping(uint64 => address)) private _games;
 
@@ -80,7 +92,8 @@ contract KanvasInterop is
         string[] memory props,
         string memory fields,
         uint8 templateId
-    ) external override {
+    ) external payable override {
+        require(msg.value == _kanvasGenerateFee, "invalid Kanvas fee");
         require(props.length <= MAX_PROPERTIES_LEN, "Too many attributes");
 
         address gameId = _games[_msgSender()][AVAX_SELECTOR];
@@ -183,6 +196,7 @@ contract KanvasInterop is
         string memory uri,
         bytes memory data
     ) external payable {
+        require(msg.value == _kanvasBridgeFee, "invalid Kanvas fee");
         require(_interops[AVAX_SELECTOR] != address(0), "Chain not supported");
 
         // Create an EVM2AnyMessage struct in memory with necessary information for sending a cross-chain message
@@ -226,6 +240,14 @@ contract KanvasInterop is
             Assets.EventType.TRANSFER_TO,
             message.data
         );
+    }
+
+    function _generateFee() external view override returns (uint256) {
+        return _kanvasGenerateFee;
+    }
+
+    function _bridgeFee() external view override returns (uint256) {
+        return _kanvasBridgeFee;
     }
 
     // handle a received message

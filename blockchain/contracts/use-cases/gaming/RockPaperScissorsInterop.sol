@@ -77,7 +77,15 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721, Ownable {
 
         string memory fields = "$name$ $points$";
 
-        kanvas._generateUri(playerId, props, fields, WIN_NFT_TEMPLATE);
+        // get URI generating fee
+        uint256 fee = kanvas._generateFee();
+
+        kanvas._generateUri{value: fee}(
+            playerId,
+            props,
+            fields,
+            WIN_NFT_TEMPLATE
+        );
     }
 
     /** Reduce player points */
@@ -94,7 +102,15 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721, Ownable {
 
         string memory fields = "$name$ $points$";
 
-        kanvas._generateUri(playerId, props, fields, LOST_NFT_TEMPLATE);
+        // get URI generating fee
+        uint256 fee = kanvas._generateFee();
+
+        kanvas._generateUri{value: fee}(
+            playerId,
+            props,
+            fields,
+            LOST_NFT_TEMPLATE
+        );
     }
 
     /** Bridge back game Nft function */
@@ -108,8 +124,11 @@ contract RockPaperScissorsInterop is IKanvasInteropGame, ERC721, Ownable {
 
         bytes memory data = abi.encode(player.name, player.points);
 
+        // get URI generating fee
+        uint256 fee = kanvas._bridgeFee();
+
         /** Cross chain transfer function */
-        kanvas._withdrawTo{value: msg.value}(
+        kanvas._withdrawTo{value: fee}(
             gameId,
             playerId,
             player.tokenId,

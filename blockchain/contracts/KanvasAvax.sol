@@ -29,13 +29,25 @@ contract KanvasAvax is
     using FunctionsRequest for FunctionsRequest.Request;
 
     uint256 public constant MAX_PROPERTIES_LEN = 20;
-    uint256 public constant MAX_TEMPLATES_LEN = 5;
 
+    // Javascript Chainlink functions source code
     string private _sourceCode;
+
+    // Chainlink functions fulfill callback gas limit
     uint32 private _gasLimit = 300_000;
+
+    // Chainlink Avalanche Subscription Id
     uint64 private _subscriptionId = 1580;
+
+    // Chainlink Avalache DON Id
     bytes32 private _donId =
         0x66756e2d6176616c616e6368652d66756a692d31000000000000000000000000;
+
+    // for testing purpose the generation fee is free
+    uint256 private _kanvasGenerateFee = 0;
+
+    // for testing purpose the bridge fee is free
+    uint256 private _kanvasBridgeFee = 0;
 
     uint256 private _planId;
     mapping(uint256 => Assets.Plan) private _plans;
@@ -110,7 +122,8 @@ contract KanvasAvax is
         string[] memory props,
         string memory fields,
         uint8 templateId
-    ) external override {
+    ) external payable override {
+        require(msg.value == _kanvasGenerateFee, "invalid Kanvas fee");
         require(props.length <= MAX_PROPERTIES_LEN, "Too many attributes");
 
         address gameId = _msgSender();
@@ -205,6 +218,7 @@ contract KanvasAvax is
         string memory uri,
         bytes memory data
     ) external payable {
+        require(msg.value == _kanvasBridgeFee, "invalid Kanvas fee");
         require(_interops[chainSelector] != address(0), "Chain not supported");
 
         // Create an EVM2AnyMessage struct in memory with necessary information for sending a cross-chain message
@@ -282,6 +296,14 @@ contract KanvasAvax is
             Assets.EventType.RECEIVE_FROM,
             message.data
         );
+    }
+
+    function _generateFee() external view override returns (uint256) {
+        return _kanvasGenerateFee;
+    }
+
+    function _bridgeFee() external view override returns (uint256) {
+        return _kanvasBridgeFee;
     }
 
     /** Create plans */

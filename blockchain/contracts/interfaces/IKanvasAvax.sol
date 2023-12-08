@@ -47,5 +47,9 @@ interface IKanvasAvax {
         string[] memory props,
         string memory fields,
         uint8 templateId
-    ) external;
+    ) external payable;
+
+    function _generateFee() external view returns (uint256);
+
+    function _bridgeFee() external view returns (uint256);
 }

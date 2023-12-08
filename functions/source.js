@@ -20,12 +20,9 @@ const apiResponse = await Functions.makeHttpRequest({
 })
 
 if (apiResponse.error) {
-    console.log(apiResponse.error)
     throw Error("Request failed")
 }
 
 const { data } = apiResponse
-
-console.log('API response data:', data.uri)
 
 return Functions.encodeString(data.uri)
