@@ -132,4 +132,5 @@ function _receiveFrom(
 }
 ```
 
-See full example [here](https://github.com/devarogundade/kanvas/tree/main/blockchain/contracts/rock-paper-scissors)
+## Create NFT Template
+[Kanvas dApp](https://kanvas-constellation.netlify.app)
