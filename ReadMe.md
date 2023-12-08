@@ -6,10 +6,48 @@ Learn more at [Devpost](https://devpost.com/software/kanvas-in-game-dynamic-nfts
 
 ## Extend the IKanvasGame
 ```solidity
-contract YourGame is IKanvasGame {
-   IKanvasAvax private kanvas;
+contract Ticket is IKanvasGame, ERC721, Ownable {
+    // Template Ids from Kanvas dApp
 
-   constructor(address kanvasRouter) IKanvasGame() {
+    // Template before the Ticket was used
+    uint8 private constant BEFORE_NFT_TEMPLATE = 0;
+
+    // Template after the Ticket has been used
+    uint8 private constant AFTER_NFT_TEMPLATE = 1;
+
+    // Tracking NFT tokenId
+    uint256 private _tokenId;
+
+    // EOA to <holder object>
+    mapping(address => Holder) private _holders;
+
+    // holder object
+    struct Holder {
+        string name;
+        uint256 tokenId;
+        bool whiteListed;
+    }
+
+    // Associating a NFT metadata URI to each <tokenId>
+    mapping(uint256 => string) private _tokenURIs;
+
+    // Associating each <tokenId> to a used boolean
+    // to determine if the NFT has been used
+    mapping(uint256 => bool) private _usedTokens;
+
+    // This function is necessary for an IKanvasGame
+    // Incase this smart contract is overpaying for a service
+    // it will be able to receive the overspent native funds
+    receive() external payable {}
+
+    // The Kanvas smart contract
+    IKanvasAvax private kanvas;
+
+    constructor(
+        address kanvasRouter
+    ) ERC721("Ticket", "TKT") IKanvasGame() Ownable() {
+        // Passing the kanvas deployed address to
+        // initialize the kanvas global variable
         kanvas = IKanvasAvax(kanvasRouter);
     }
 }
