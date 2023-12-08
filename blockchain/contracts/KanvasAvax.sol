@@ -12,7 +12,7 @@ import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Context} from "@openzeppelin/contracts/utils/Context.sol";
 
-import {FunctionsClient} from "./FunctionsClient.sol";
+import {FunctionsClient} from "./chainlink/FunctionsClient.sol";
 import {FunctionsRequest} from "@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/libraries/FunctionsRequest.sol";
 
 import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
@@ -44,10 +44,10 @@ contract KanvasAvax is
         0x66756e2d6176616c616e6368652d66756a692d31000000000000000000000000;
 
     // for testing purpose the generation fee is free
-    uint256 private _kanvasGenerateFee = 0;
+    uint256 private _kanvasGenerateFee = 0; // 3000000000000000
 
     // for testing purpose the bridge fee is free
-    uint256 private _kanvasBridgeFee = 0;
+    uint256 private _kanvasBridgeFee = 0; // 8000000000000000
 
     uint256 private _planId;
     mapping(uint256 => Assets.Plan) private _plans;
