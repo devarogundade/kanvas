@@ -1,6 +1,6 @@
 # Kanvas | Create Runtime Customizable NFTs
 
-Unlock boundless creativity in blockchain gaming with Kanvas. Craft dynamic, cross-chain NFTs effortlessly for immersive gaming experiences.
+Unlock boundless creativity in blockchain gaming with Kanvas. Craft dynamic, customizable, cross-chain NFTs effortlessly for gamified blockchain applications.
 
 Learn more at [Devpost](https://devpost.com/software/kanvas-in-game-dynamic-nfts)
 
