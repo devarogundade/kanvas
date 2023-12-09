@@ -39,7 +39,9 @@
                             <ul>
                                 <li>{{ limits[index].players }} Players</li>
                                 <li>{{ limits[index].templates }} NFT Templates</li>
+                                <li>O.OO3AVAX per request</li>
                             </ul>
+                            <p></p>
                             <div class="cost">{{ $fromWei(plan.cost) }} Avax</div>
                         </div>
                     </div>

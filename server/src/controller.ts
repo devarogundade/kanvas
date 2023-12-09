@@ -15,7 +15,7 @@ initializeApp({
 
 const bucket = getStorage().bucket();
 
-const NULL: string = "https://firebasestorage.googleapis.com/v0/b/kanvas-73a90.appspot.com/o/generated%2F0xb352fd34b747dadbf37cd57ef74dd1950b6f1c91%2F0x909d21bae8be0ad4d35d89129b2a4f2925da7877.png?alt=media&token=8b87a0dd-015b-44ae-9938-432958";
+const NULL: string = "";
 
 const graph = new Graph();
 
@@ -58,6 +58,7 @@ export class Controller {
             }
 
             const { buffer, attributes } = await this.getImageNftUri(game, properties, fields, playerId, templateId);
+
             if (buffer == null) {
                 this.sendEmail(
                     `${game.name} Failed to generate NFT URI`,
@@ -183,8 +184,10 @@ export class Controller {
                 return { buffer: null, attributes: [] };
             }
 
-
+            console.log('before readFile', 'svgBuffer');
             const svgBuffer: Buffer = await this.readFile(game.templates[templateId].templateUri);
+            console.log('after readFile', 'svgBuffer');
+
             let svgContents: string = new TextDecoder('utf-8').decode(svgBuffer);
 
             for (let index = 0; index < fields.length; index++) {
@@ -230,7 +233,7 @@ export class Controller {
 
         return new Promise((resolve, reject) => {
             https.get(uri, {
-                rejectUnauthorized: false
+                rejectUnauthorized: false,
             }, (response) => {
                 if (response.statusCode !== 200) {
                     reject(`Failed to download file. Status code: ${response.statusCode}`);

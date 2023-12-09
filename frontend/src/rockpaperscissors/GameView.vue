@@ -32,7 +32,7 @@
                             <OutIcon />
                         </a>
                         <p style="cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 14px; border: 1px solid #ccc; border-radius: 6px; padding: 4px 10px;"
-                            @click="bridgeToPolygon">{{ bridging ? 'Briding..' : 'Bridge To Mumbai' }}
+                            @click="bridgeToPolygon">{{ bridging ? 'Bridging..' : 'Bridge To Mumbai' }}
                             <OutIcon />
                         </p>
                     </div>

@@ -21,7 +21,7 @@ export async function tryCreatePlayer(wallet, name) {
 
         return await waitForTransaction({ hash: hash });
     } catch (error) {
-        console.error(error);
+        console.log(error);
         return null;
     }
 }
@@ -45,7 +45,7 @@ const POLYGON_SELECTOR = '12532609583862916517';
 
 export async function tryTransferToPolygon() {
     try {
-        return readContract({
+        const config = await prepareWriteContract({
             address: RockPaperScissors.networks[avalancheFuji.id].address,
             abi: RockPaperScissors.abi,
             functionName: 'transferTo',
@@ -53,8 +53,12 @@ export async function tryTransferToPolygon() {
             chainId: avalancheFuji.id,
             value: 0
         })
+
+        const { hash } = await writeContract(config);
+
+        return await waitForTransaction({ hash: hash });
     } catch (error) {
-        console.error(error);
+        console.log(error);
         return null;
     }
 }

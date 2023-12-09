@@ -49,6 +49,8 @@ export default {
             fontSize: 32,
             croppedImage: false,
             history: [],
+            canvasWidth: 600,
+            canvasHeight: 600
         }
 
     },

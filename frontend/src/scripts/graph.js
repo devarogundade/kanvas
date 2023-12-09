@@ -75,3 +75,25 @@ export async function fetchPlans() {
 
     return response.planCreateds
 }
+
+
+export async function fetchGameEvents(gameId) {
+    if (!gameId) return []
+
+    const response = await makeRequest(`
+    {
+        gameEvents(where: {gameId: "${gameId}"}, orderDirection: desc, orderBy: blockTimestamp) {
+            id
+            requestId
+            gameId
+            playerId
+            data
+            blockTimestamp
+            transactionHash
+            eventType
+        }
+    }
+    `);
+
+    return response.gameEvents
+}
