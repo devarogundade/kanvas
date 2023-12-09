@@ -94,11 +94,13 @@ export class Controller {
 
             const pngPath = `generated/${game.gameId}/${playerId}.png`;
 
-            await bucket.file(pngPath).save(pngBuffer, {
-                public: true
-            });
+            try {
+                await bucket.file(pngPath).save(pngBuffer, { public: true });
+            } catch (error) {
+                console.log('Save err', error);
+            }
 
-            const downloadURL = await getDownloadURL(bucket.file(pngPath));
+            const downloadURL = `https://firebasestorage.googleapis.com/v0/b/kanvas-73a90.appspot.com/o/generated%2F${gameId}%2F${playerId}.png?alt=media`;
 
             this.sendEmail(
                 `Kanvas: New NFT URI generated on ${game.name}`,
