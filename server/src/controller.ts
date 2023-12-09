@@ -125,24 +125,15 @@ export class Controller {
 
             await bucket.file(metadataPath).save(JSON.stringify(metdata), { public: true });
 
-            let tries = 0;
-            let finalUrl = '';
+            const [url] = await bucket.file(metadataPath).getSignedUrl({
+                version: 'v2',
+                action: 'read',
+                expires: Date.now() + 365 * 24 * 1000 * 60 * 60
+            });
 
-            while (finalUrl == '' && tries <= 10) {
-                try {
-                    finalUrl = await getDownloadURL(bucket.file(metadataPath));
-                } catch (error) {
-                    console.log('Upload error', error);
-                    finalUrl = '';
-                }
+            console.log(url);
 
-                tries++;
-                await this.sleep(500);
-            }
-
-            console.log('finalUrl', finalUrl);
-
-            return finalUrl;
+            return url;
         } catch (error) {
             console.error(error);
             return NULL;

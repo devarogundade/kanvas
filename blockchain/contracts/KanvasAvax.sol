@@ -83,6 +83,8 @@ contract KanvasAvax is
         _subscriptionId = newSubscriptionId;
     }
 
+    function depositEth() external payable {}
+
     function createGame(Params.Game memory params) external payable {
         require(_plans[params.plan].limit != 0, "Invalid plan");
         require(msg.value == _plans[params.plan].cost, "Insufficient funds");

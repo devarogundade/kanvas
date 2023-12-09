@@ -83,6 +83,8 @@ contract KanvasInterop is
         _subscriptionId = newSubscriptionId;
     }
 
+    function depositEth() external payable {}
+
     function _createGame(Params.InteropGame memory params) external override {
         _games[params.sourceGameId][AVAX_SELECTOR] = _msgSender();
     }

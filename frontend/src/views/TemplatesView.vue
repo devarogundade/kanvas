@@ -50,7 +50,7 @@
                                 <tr>
                                     <td>{{ $fineAddress(event.requestId) }}</td>
                                     <td>{{ eventTypes[event.eventType] }}</td>
-                                    <td>{{ $fineAddress(event.data) }}</td>
+                                    <td>{{ $fineAddress(hexToString(event.data.replace('0x', ''))) }}</td>
                                     <td>{{ $toDate(event.blockTimestamp * 1000) }}</td>
                                     <td>{{ $fineAddress(event.playerId) }}</td>
                                     <td>{{ $fineAddress(event.transactionHash) }}</td>
@@ -99,6 +99,16 @@ export default {
 
         getGameEvents: async function () {
             this.events = await fetchGameEvents(this.$route.params.id)
+        },
+
+        hexToString: function (hex) {
+            let str = '';
+            for (let i = 0; i < hex.length; i += 2) {
+                const hexValue = hex.substr(i, 2);
+                const decimalValue = parseInt(hexValue, 16);
+                str += String.fromCharCode(decimalValue);
+            }
+            return str;
         }
     }
 }
