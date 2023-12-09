@@ -125,15 +125,10 @@ export class Controller {
 
             await bucket.file(metadataPath).save(JSON.stringify(metdata), { public: true });
 
-            const [url] = await bucket.file(metadataPath).getSignedUrl({
-                version: 'v2',
-                action: 'read',
-                expires: Date.now() + 365 * 24 * 1000 * 60 * 60
-            });
+            await this.sleep(2000);
 
-            console.log(url);
+            return await getDownloadURL(bucket.file(metadataPath));
 
-            return url;
         } catch (error) {
             console.error(error);
             return NULL;
