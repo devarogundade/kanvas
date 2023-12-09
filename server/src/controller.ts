@@ -129,9 +129,14 @@ export class Controller {
             let finalUrl = '';
 
             while (finalUrl == '' && tries <= 10) {
-                finalUrl = await getDownloadURL(bucket.file(metadataPath));
-                tries++;
+                try {
+                    finalUrl = await getDownloadURL(bucket.file(metadataPath));
+                } catch (error) {
+                    console.log('Upload error', error);
+                    finalUrl = '';
+                }
 
+                tries++;
                 await this.sleep(500);
             }
 
