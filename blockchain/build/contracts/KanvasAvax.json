@@ -252,7 +252,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -317,7 +318,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -353,7 +355,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -379,7 +382,8 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -494,7 +498,8 @@
       "name": "createGame",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -540,7 +545,8 @@
       "name": "_generateUri",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -596,7 +602,8 @@
       "name": "_transferTo",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [],
@@ -609,7 +616,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -622,7 +630,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -45845,9 +45854,213 @@
     "name": "solc",
     "version": "0.8.19+commit.7dd6d404.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "43113": {
+      "events": {
+        "0xea35bbd4aeddb611341e5394e07bd5ac7513bd56730a40e7e3e3eb761e155c05": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "gameId",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "avatar",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "plan",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "creator",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "email",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "website",
+              "type": "string"
+            }
+          ],
+          "name": "GameCreated",
+          "type": "event"
+        },
+        "0xe6dae862185d88c4597f4745a00933ea5be511621dcacc28511fa6029c050ccd": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "bytes32",
+              "name": "requestId",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "gameId",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "playerId",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum Assets.EventType",
+              "name": "eventType",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "name": "GameEvent",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0x33c5bd102a4d38690a8d7d236985d20c88e66b73bca9de5ae6cc29376d2206fd": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "planId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "cost",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "color",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "limit",
+              "type": "uint256"
+            }
+          ],
+          "name": "PlanCreated",
+          "type": "event"
+        },
+        "0x85e1543bf2f84fe80c6badbce3648c8539ad1df4d2b3d822938ca0538be727e6": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "id",
+              "type": "bytes32"
+            }
+          ],
+          "name": "RequestFulfilled",
+          "type": "event"
+        },
+        "0x1131472297a800fee664d1d89cfa8f7676ff07189ecc53f80bbb5f4969099db8": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "id",
+              "type": "bytes32"
+            }
+          ],
+          "name": "RequestSent",
+          "type": "event"
+        },
+        "0xd7219b2d0e6067644335c8f4f82ee77c59a90a22e2916f1dce8683af8e8b07fa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "gameId",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "templateUri",
+              "type": "string"
+            }
+          ],
+          "name": "TemplateAdded",
+          "type": "event"
+        }
+      },
+      "links": {
+        "StringJoiner": "0x345fE07C786D469a235ADbB0872C6D038C593357"
+      },
+      "address": "0xF520150Be3e5D196D89DE32d108fc0DA14FdC9fF",
+      "transactionHash": "0x9bdf66fb517e355a5339e9450bb5e72b2bea1eaae45bb924d7cca8d0a188eae1"
+    }
+  },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-12-08T18:05:42.868Z",
+  "updatedAt": "2023-12-09T03:42:03.496Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {

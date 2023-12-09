@@ -41,6 +41,24 @@ export async function tryGetPlayerOnAvax(wallet) {
     }
 }
 
+const POLYGON_SELECTOR = '12532609583862916517';
+
+export async function tryTransferToPolygon() {
+    try {
+        return readContract({
+            address: RockPaperScissors.networks[avalancheFuji.id].address,
+            abi: RockPaperScissors.abi,
+            functionName: 'transferTo',
+            args: [POLYGON_SELECTOR],
+            chainId: avalancheFuji.id,
+            value: 0
+        })
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
 export async function tryGetPlayerOnPolygon(wallet) {
     try {
         return readContract({

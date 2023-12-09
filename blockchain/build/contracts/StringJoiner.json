@@ -23,7 +23,8 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string[]\",\"name\":\"strings\",\"type\":\"string[]\"},{\"internalType\":\"string\",\"name\":\"delimiter\",\"type\":\"string\"}],\"name\":\"joinStrings\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/libraries/StringJoiner.sol\":\"StringJoiner\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/libraries/StringJoiner.sol\":{\"keccak256\":\"0xc642524a8f2f554672bc05006e92d6b59450386a48083e943d8c4f5d1a7123ab\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://375438de3335eb6e592b634a50aa9f0df23b18d09ea8358cd5fe222066926f46\",\"dweb:/ipfs/QmfQWLWWTknZhNMWVux9Nr8UHAocXpAXZ3dPvCzCsHGJ4e\"]}},\"version\":1}",
@@ -6811,9 +6812,23 @@
     "name": "solc",
     "version": "0.8.19+commit.7dd6d404.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "43113": {
+      "events": {},
+      "links": {},
+      "address": "0x345fE07C786D469a235ADbB0872C6D038C593357",
+      "transactionHash": "0x46a0dd0402781d39c92a06b6f488f1aed7c8add58ada23a679696bc4b6c9a5dd"
+    },
+    "80001": {
+      "events": {},
+      "links": {},
+      "address": "0x8183aC349964A4E20F60534150CAdFFbbB253e44",
+      "transactionHash": "0x45085cb3c6972c235af7ff7d96897907dbafe089867d6f5048212d49409aa484"
+    }
+  },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-12-08T18:05:42.932Z",
+  "updatedAt": "2023-12-09T03:43:04.672Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},

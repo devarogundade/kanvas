@@ -252,7 +252,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -317,7 +318,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -353,7 +355,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -379,7 +382,8 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -492,7 +496,8 @@
       "name": "_generateUri",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -548,7 +553,8 @@
       "name": "_transferTo",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -581,7 +587,8 @@
       "name": "_withdrawTo",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [],
@@ -594,7 +601,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -607,7 +615,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"ccipReceiver\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"functionOracle\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"EmptyArgs\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"EmptySource\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"router\",\"type\":\"address\"}],\"name\":\"InvalidRouter\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"NoInlineSecrets\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"OnlyRouterCanFulfill\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"gameId\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"avatar\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"plan\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"email\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"website\",\"type\":\"string\"}],\"name\":\"GameCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"requestId\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"gameId\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"playerId\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum Assets.EventType\",\"name\":\"eventType\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"GameEvent\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"planId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"color\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"limit\",\"type\":\"uint256\"}],\"name\":\"PlanCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"RequestFulfilled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"RequestSent\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"gameId\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"templateUri\",\"type\":\"string\"}],\"name\":\"TemplateAdded\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_PROPERTIES_LEN\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"_bridgeFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"sourceGameId\",\"type\":\"address\"}],\"internalType\":\"struct Params.InteropGame\",\"name\":\"params\",\"type\":\"tuple\"}],\"name\":\"_createGame\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"_generateFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"playerId\",\"type\":\"address\"},{\"internalType\":\"string[]\",\"name\":\"props\",\"type\":\"string[]\"},{\"internalType\":\"string\",\"name\":\"fields\",\"type\":\"string\"},{\"internalType\":\"uint8\",\"name\":\"templateId\",\"type\":\"uint8\"}],\"name\":\"_generateUri\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"_transferTo\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"gameId\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"playerId\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"uri\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"_withdrawTo\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"messageId\",\"type\":\"bytes32\"},{\"internalType\":\"uint64\",\"name\":\"sourceChainSelector\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"sender\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"internalType\":\"struct Client.EVMTokenAmount[]\",\"name\":\"destTokenAmounts\",\"type\":\"tuple[]\"}],\"internalType\":\"struct Client.Any2EVMMessage\",\"name\":\"message\",\"type\":\"tuple\"}],\"name\":\"ccipReceive\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRouter\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"requestId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"response\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"err\",\"type\":\"bytes\"}],\"name\":\"handleOracleFulfillment\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"newDonId\",\"type\":\"bytes32\"}],\"name\":\"updateDonId\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"newLimit\",\"type\":\"uint32\"}],\"name\":\"updateGasLimit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"chainSelector\",\"type\":\"uint64\"},{\"internalType\":\"address\",\"name\":\"kanvasRouter\",\"type\":\"address\"}],\"name\":\"updateInterop\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"newSourceCode\",\"type\":\"string\"}],\"name\":\"updateSourceCode\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"newSubscriptionId\",\"type\":\"uint64\"}],\"name\":\"updateSubscriptionId\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"ccipReceive((bytes32,uint64,bytes,bytes,(address,uint256)[]))\":{\"details\":\"Note ensure you check the msg.sender is the OffRampRouter\",\"params\":{\"message\":\"CCIP Message\"}},\"getRouter()\":{\"returns\":{\"_0\":\"i_router address\"}},\"handleOracleFulfillment(bytes32,bytes,bytes)\":{\"details\":\"Either response or error parameter will be set, but never both.\",\"params\":{\"err\":\"Aggregated error either from the request's source code or from the execution pipeline.\",\"requestId\":\"The requestId returned by FunctionsClient.sendRequest().\",\"response\":\"Aggregated response from the request's source code.\"}},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner.\"},\"supportsInterface(bytes4)\":{\"params\":{\"interfaceId\":\"The interfaceId to check\"},\"returns\":{\"_0\":\"true if the interfaceId is supported\"}},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"ccipReceive((bytes32,uint64,bytes,bytes,(address,uint256)[]))\":{\"notice\":\"Called by the Router to deliver a message. If this reverts, any token transfers also revert. The message will move to a FAILED state and become available for manual execution.\"},\"getRouter()\":{\"notice\":\"Return the current router\"},\"handleOracleFulfillment(bytes32,bytes,bytes)\":{\"notice\":\"Chainlink Functions response handler called by the Functions Router during fullilment from the designated transmitter node in an OCR round.\"},\"supportsInterface(bytes4)\":{\"notice\":\"IERC165 supports an interfaceId\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/KanvasInterop.sol\":\"KanvasInterop\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@chainlink/contracts-ccip/src/v0.8/ccip/applications/CCIPReceiver.sol\":{\"keccak256\":\"0xcf5d0a5cd6ed0f6a9ed721b3e532c0504ed1ba3ab6d3567165876ceb4f23b084\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5f3b616ed867effae4f3dcf0ebd35cf8af547c1a399cc26507db1bae6c5af66c\",\"dweb:/ipfs/QmWugZNWcRZeLUxdRcJjktrhFfErKBBtuzDwYMhaLWS3p7\"]},\"@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IAny2EVMMessageReceiver.sol\":{\"keccak256\":\"0xd2a05a4f58a453cbf8cfa6aa78f58cb8e42091b3a025f711a0aa51f584e16b48\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e3bb4ca50612b0150a29b9ea7c82f6228914ff54716584541bad5c0259e8fa33\",\"dweb:/ipfs/QmTnqhNtBD9bUmqVaR4YHkWrBUdSGHV3DXAgrTM193PGkH\"]},\"@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol\":{\"keccak256\":\"0x9899fab6a40f68408ddf153612c553f2441ea27770176bf71ccce22c40393286\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://00fbdb19d1dc68983c972644b68bff9f2a277d088841444675b3448dc01edbb7\",\"dweb:/ipfs/Qma2PN1vYgDrou5ZN72NfvN5YbdHyxWyeBqM67AuRnvDRs\"]},\"@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol\":{\"keccak256\":\"0x2fb8e11d517fa5ee213aaab3f4d416155cd2b72d61ba443dbeff6b41d29e9523\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fcdf688dc96619a256fdbddce1a6ceff0f6c57963be267148abdcfd57616725e\",\"dweb:/ipfs/QmVEF1ZER2V86L8CcMYTqt1VwQ4Xw2pa12pNZbb99UkqRT\"]},\"@chainlink/contracts-ccip/src/v0.8/vendor/openzeppelin-solidity/v4.8.0/utils/introspection/IERC165.sol\":{\"keccak256\":\"0xac7a4bfe791ee9fe125cac5cd25795b326433e5cf2bdd6b02ad6ad42c2d126a5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e49bdba6c6013040eb546db3bbceca7d2c8ac86a2c15ff2c85eacd0ed8541271\",\"dweb:/ipfs/QmYa5en1yth7SdJfq9M7mcwDJJvy3996PSEjiwzgH1HvJW\"]},\"@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/interfaces/IFunctionsClient.sol\":{\"keccak256\":\"0x6117b82e7c4eec44ce557b0fc8bc1ac5f49e5d160ac6d4485452d6aafdd762ff\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0e0828ef423afef9f6f709bb173a7e3991fe555bf9337a4941d65da525ac4ad3\",\"dweb:/ipfs/QmXz1jHRZFTqdnNxP2tffVQ9NnUE1xgtBMRWuyUrTVY4pm\"]},\"@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/interfaces/IFunctionsRouter.sol\":{\"keccak256\":\"0x44db41e8ff90c2828ca0ada125abc4b411921a86514a4a047fd9fd43ba9d7e08\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c4c3228edc2cff7c55301d3764e54cd7ada6af81ef9aadf8bc116a2c982523d6\",\"dweb:/ipfs/QmXjJQgCu2gvX6QQJ9GC1gEoy3vrmpf1PiRPLqWqKddwRe\"]},\"@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/interfaces/IFunctionsSubscriptions.sol\":{\"keccak256\":\"0xab83613f1bb1cbdbf15fdbb6382259e2b2678bfe5a3a6dab976cdf2337f1f94e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0775cd55699e89e5f3df452de2c2273e00e51d79feb2b0c2d36e856cfeb1bd4b\",\"dweb:/ipfs/QmQDoC1hJhYYEg8SZouhkZ5BgC7mhqn4Ymgo5tvV3iYUgg\"]},\"@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/libraries/FunctionsRequest.sol\":{\"keccak256\":\"0x149120505b75984b482bc93eb8a59a0ab0bf812a67d8b4e70c5ec989400a7890\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e61711ebf3e1d605171ddaf091932cf8ee261bc7c68b829e4b212995bec4527d\",\"dweb:/ipfs/QmY4nkBxKmgCPJjWMvLC2RYktPNHYaKvaa4XqewpToMvGa\"]},\"@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/libraries/FunctionsResponse.sol\":{\"keccak256\":\"0x219b5272fd44aeade22130bb9b57b748950febb2f406d5e813ddaa14cd98147c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a7b1d4d5fd839fb620c7f230a7d9d957bba6efbdec6964362c6603211b902ccc\",\"dweb:/ipfs/QmXAAGcbJP4GSpjBqc9Z8KA5wwdv6Q2FsYZt1LP2GM5AJT\"]},\"@chainlink/contracts/src/v0.8/vendor/@ensdomains/buffer/v0.1.0/Buffer.sol\":{\"keccak256\":\"0x0d86b367813922094e02594a406ba89f5e97d3d74ec2ce3c4032566840e302b0\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://2c65ceaef4ce70e8638275da75f4c384d4e404d588fcac404028da7e634c81a8\",\"dweb:/ipfs/QmV3vMmjseNombFaRGw7K4PgDj6rrWcEzNY9S5jtLAdJqG\"]},\"@chainlink/contracts/src/v0.8/vendor/solidity-cborutils/v2.0.0/CBOR.sol\":{\"keccak256\":\"0xdecf04203502670ac72ba466c75e4f87f4419907365005f0d73e7d07ee3e5715\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://39c9937cf45f840cf3a45a83dec3719dbd2f1d71198088db48b909ec656f77dd\",\"dweb:/ipfs/QmQx9mEREaFyJGC2KpqWBqBV712NY8vUBrcqTR4RdVNBiu\"]},\"@openzeppelin/contracts/access/Ownable.sol\":{\"keccak256\":\"0xba43b97fba0d32eb4254f6a5a297b39a19a247082a02d6e69349e071e2946218\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fc980984badf3984b6303b377711220e067722bbd6a135b24669ff5069ef9f32\",\"dweb:/ipfs/QmPHXMSXj99XjSVM21YsY6aNtLLjLVXDbyN76J5HQYvvrz\"]},\"@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92\",\"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3\"]},\"@openzeppelin/contracts/utils/Strings.sol\":{\"keccak256\":\"0x3088eb2868e8d13d89d16670b5f8612c4ab9ff8956272837d8e90106c59c14a0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b81d9ff6559ea5c47fc573e17ece6d9ba5d6839e213e6ebc3b4c5c8fe4199d7f\",\"dweb:/ipfs/QmPCW1bFisUzJkyjroY3yipwfism9RRCigCcK1hbXtVM8n\"]},\"@openzeppelin/contracts/utils/math/Math.sol\":{\"keccak256\":\"0xe4455ac1eb7fc497bb7402579e7b4d64d928b846fce7d2b6fde06d366f21c2b3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cc8841b3cd48ad125e2f46323c8bad3aa0e88e399ec62acb9e57efa7e7c8058c\",\"dweb:/ipfs/QmSqE4mXHA2BXW58deDbXE8MTcsL5JSKNDbm23sVQxRLPS\"]},\"@openzeppelin/contracts/utils/math/SignedMath.sol\":{\"keccak256\":\"0xf92515413956f529d95977adc9b0567d583c6203fc31ab1c23824c35187e3ddc\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c50fcc459e49a9858b6d8ad5f911295cb7c9ab57567845a250bf0153f84a95c7\",\"dweb:/ipfs/QmcEW85JRzvDkQggxiBBLVAasXWdkhEysqypj9EaB6H2g6\"]},\"project:/contracts/KanvasInterop.sol\":{\"keccak256\":\"0x9c84fdee0f4e1135f3ab1d7106f5a84d6256a519ce34ff54cbed055142cc81eb\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a06ea25052d7a86dcc0b7afa52576dacf0bd8bb922ec9e354e5f1c5f5baf6d59\",\"dweb:/ipfs/QmYEja5Jvo9ZMPwntAMoXN3MaKVDc9CJKXoZqveNbemPv6\"]},\"project:/contracts/chainlink/FunctionsClient.sol\":{\"keccak256\":\"0xfd70dfeae45bc9a852947586b3e4fa20822fd5d8e343c330f12b9897242eb421\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7e57fcbfbcefe60748ede4ffb4d79b0e86c07fa69f2d9dc478a0a8cd59f0fa33\",\"dweb:/ipfs/QmangBn5nzwSkAWuS4cgbrofe6sqFmytvg6G6VzptDuGXB\"]},\"project:/contracts/interfaces/IKanvasAvax.sol\":{\"keccak256\":\"0xbdea95ffa12c9f93778bb4f074a392abf760af1cdb411b59694e7c12e8af3d84\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6ce6542f78819372fe2d86049bfd214eba9649d39edeaf0428b55e5de429625b\",\"dweb:/ipfs/QmVLNb3pNAFYE7bgEM32HUvhLP2sioHUpHhLmgyHpFbTHY\"]},\"project:/contracts/interfaces/IKanvasGame.sol\":{\"keccak256\":\"0x1fb0bac40869448467c583b3045c09628040c5cec8048d1017f41d3885a4e559\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://21446a50ec42aedd98f7a4de1e9188312682c847d4aa5d702981f8c4989ad590\",\"dweb:/ipfs/QmTzs35JHiTVQySPJYde986eXUMXQCTZLTYbb5f8Sk98it\"]},\"project:/contracts/interfaces/IKanvasInterop.sol\":{\"keccak256\":\"0xab258e0ddb7df1edccfcca6c9d3a81eb8df8bc1a9a9cc651f49ef050171c9358\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://dba2aa09d682a44556bbf37ec5afe40e1fdd86f17dafabe043edf6dbd3cf5064\",\"dweb:/ipfs/QmXG8TPRbED1AkTdhCfrXnvac3tQvA6Gdw6S4bJ9xcK78U\"]},\"project:/contracts/interfaces/IKanvasInteropGame.sol\":{\"keccak256\":\"0x4798540dbc575e6ddb6b08a31f963c79e688229268cecb43ab076096abdcae11\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b0b5b85df5e0e49723e8b3dd1bbb7496550d3be25647903344ec84e88746c8fa\",\"dweb:/ipfs/QmSo8GTmVW6SJouncfufAGH5uCNJSGDzoy7kJqKPtARtnt\"]},\"project:/contracts/libraries/Assets.sol\":{\"keccak256\":\"0xe1dd25ee1c36952befc9070048381d73a5886e83c2e2e8544d2d79bf25f10649\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://441d4b582c4ea873dbd99c27e2dfe436b1adf737cf3112ca328a516a0e37a491\",\"dweb:/ipfs/QmcMTcsHHLgxbVvN4Lz2NJUg3hEVXynmVtUTH4o7Xva9TS\"]},\"project:/contracts/libraries/Params.sol\":{\"keccak256\":\"0xedbd63a2b62e25454ad26ce1e84ed9b35842915599d7454107f4a5c44feb60d2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://171d4b5db5c5cf1f05618d7a8fecd7ab14ee1ef92a0d2840ae136dd93d546a7f\",\"dweb:/ipfs/QmbiGtsFB3YsfxCMvLDaDS5z2QPqsWwbhTyb12AxR9bQ8q\"]},\"project:/contracts/libraries/StringJoiner.sol\":{\"keccak256\":\"0xc642524a8f2f554672bc05006e92d6b59450386a48083e943d8c4f5d1a7123ab\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://375438de3335eb6e592b634a50aa9f0df23b18d09ea8358cd5fe222066926f46\",\"dweb:/ipfs/QmfQWLWWTknZhNMWVux9Nr8UHAocXpAXZ3dPvCzCsHGJ4e\"]}},\"version\":1}",
@@ -40707,9 +40716,213 @@
     "name": "solc",
     "version": "0.8.19+commit.7dd6d404.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "80001": {
+      "events": {
+        "0xea35bbd4aeddb611341e5394e07bd5ac7513bd56730a40e7e3e3eb761e155c05": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "gameId",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "avatar",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "plan",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "creator",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "email",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "website",
+              "type": "string"
+            }
+          ],
+          "name": "GameCreated",
+          "type": "event"
+        },
+        "0xe6dae862185d88c4597f4745a00933ea5be511621dcacc28511fa6029c050ccd": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "bytes32",
+              "name": "requestId",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "gameId",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "playerId",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum Assets.EventType",
+              "name": "eventType",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "name": "GameEvent",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0x33c5bd102a4d38690a8d7d236985d20c88e66b73bca9de5ae6cc29376d2206fd": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "planId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "cost",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "color",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "limit",
+              "type": "uint256"
+            }
+          ],
+          "name": "PlanCreated",
+          "type": "event"
+        },
+        "0x85e1543bf2f84fe80c6badbce3648c8539ad1df4d2b3d822938ca0538be727e6": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "id",
+              "type": "bytes32"
+            }
+          ],
+          "name": "RequestFulfilled",
+          "type": "event"
+        },
+        "0x1131472297a800fee664d1d89cfa8f7676ff07189ecc53f80bbb5f4969099db8": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "id",
+              "type": "bytes32"
+            }
+          ],
+          "name": "RequestSent",
+          "type": "event"
+        },
+        "0xd7219b2d0e6067644335c8f4f82ee77c59a90a22e2916f1dce8683af8e8b07fa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "gameId",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "templateUri",
+              "type": "string"
+            }
+          ],
+          "name": "TemplateAdded",
+          "type": "event"
+        }
+      },
+      "links": {
+        "StringJoiner": "0x8183aC349964A4E20F60534150CAdFFbbB253e44"
+      },
+      "address": "0xE9D98eDC2E1fB309B9faf821BA156DC20bbC8aa8",
+      "transactionHash": "0xca1fd251a286393d33f0d015b28b332be52f2e69e31f3d431404a0aef1d79018"
+    }
+  },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-12-08T18:05:42.895Z",
+  "updatedAt": "2023-12-09T03:43:04.697Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {

@@ -56,7 +56,7 @@ import PrimaryButton from '../components/PrimaryButton.vue';
           <p>⚡</p>
           <img src="/images/avalanche.svg" alt="">
           <img src="/images/polygon.png" alt="">
-          <img src="/images/bsc.png" alt="">
+          <!-- <img src="/images/bsc.png" alt=""> -->
         </div>
 
         <div class="code_flex">

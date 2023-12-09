@@ -27,9 +27,14 @@
                         <span>{{ $store.state.player.points }} points</span>
                         <a style="display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 14px; border: 1px solid #ccc; border-radius: 6px; padding: 4px 10px;"
                             target="_blank"
-                            :href="`https://testnets.opensea.io/assets/avalanche-fuji/${gameId(43113)}`">View NFT
+                            :href="`https://testnets.opensea.io/assets/avalanche-fuji/${gameId(43113)}/${$store.state.player.tokenId}`">View
+                            NFT
                             <OutIcon />
                         </a>
+                        <p style="cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 14px; border: 1px solid #ccc; border-radius: 6px; padding: 4px 10px;"
+                            @click="bridgeToPolygon">{{ bridging ? 'Briding..' : 'Bridge To Mumbai' }}
+                            <OutIcon />
+                        </p>
                     </div>
                 </div>
 
@@ -51,7 +56,7 @@ import Choice from './components/Choice.vue';
 
 <script>
 import { mapMutations } from "vuex";
-import { tryGetPlayerOnAvax, tryCreatePlayer, gameId } from "../scripts/rockpaperscissors"
+import { tryGetPlayerOnAvax, tryCreatePlayer, gameId, tryTransferToPolygon } from "../scripts/rockpaperscissors"
 import { notify } from "../reactives/notify"
 import { watchAccount } from '@wagmi/core'
 export default {
@@ -59,6 +64,7 @@ export default {
         return {
             cooldown: false,
             creating: false,
+            bridging: false,
             playerName: ""
         }
     },
@@ -117,6 +123,33 @@ export default {
             if (!this.$store.state.wallet) return
             const player = await tryGetPlayerOnAvax(this.$store.state.wallet)
             this.$store.commit('setPlayer', player)
+        },
+
+        bridgeToPolygon: async function () {
+            if (this.bridging) return
+            this.bridging = true
+
+            const transaction = await tryTransferToPolygon();
+            if (transaction) {
+                notify.push({
+                    title: "Transaction sent ✔️",
+                    description: "Bridge was initiated successfully!",
+                    category: "success",
+                    linkTitle: "View Tnx",
+                    linkUrl: `https://testnet.snowtrace.io/tx/${transaction.transactionHash}`
+                });
+
+                this.getPlayer()
+            }
+            else {
+                notify.push({
+                    title: "Transaction failed ❌",
+                    description: "Please try again!",
+                    category: "error",
+                });
+            }
+
+            this.bridging = false
         }
     }
 }
