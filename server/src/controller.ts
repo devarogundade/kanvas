@@ -125,8 +125,8 @@ export class Controller {
 
             await bucket.file(metadataPath).save(JSON.stringify(metdata), { public: true });
 
+            let tries = 0;
             let finalUrl = '';
-            let tries = 10;
 
             while (finalUrl == '' && tries <= 10) {
                 finalUrl = await getDownloadURL(bucket.file(metadataPath));
