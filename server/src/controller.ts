@@ -100,8 +100,6 @@ export class Controller {
 
             const downloadURL = await getDownloadURL(bucket.file(pngPath));
 
-            console.log('downloadURL ' + downloadURL);
-
             this.sendEmail(
                 `Kanvas: New NFT URI generated on ${game.name}`,
                 `
@@ -127,11 +125,28 @@ export class Controller {
 
             await bucket.file(metadataPath).save(JSON.stringify(metdata), { public: true });
 
-            return await getDownloadURL(bucket.file(metadataPath));
+            let finalUrl = '';
+            let tries = 10;
+
+            while (finalUrl == '' && tries <= 10) {
+                finalUrl = await getDownloadURL(bucket.file(metadataPath));
+                tries++;
+
+                await this.sleep(500);
+            }
+
+            console.log('finalUrl', finalUrl);
+
+            return finalUrl;
         } catch (error) {
             console.error(error);
             return NULL;
         }
+    }
+
+
+    private async sleep(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     private async getGame(gameId: string): Promise<Game | null> {
