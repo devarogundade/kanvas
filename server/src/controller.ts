@@ -123,8 +123,11 @@ export class Controller {
 
             const metadataPath = `metadatas/${game.gameId}/${playerId}.json`;
 
-            await bucket.file(metadataPath).save(JSON.stringify(metdata), { public: true });
-
+            try {
+                await bucket.file(metadataPath).save(JSON.stringify(metdata), { public: true });
+            } catch (error) {
+                console.log('Save err', error);
+            }
 
             return `https://firebasestorage.googleapis.com/v0/b/kanvas-73a90.appspot.com/o/metadatas%2F${gameId}%2F${playerId}.json?alt=media`;
 
