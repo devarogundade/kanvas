@@ -125,9 +125,8 @@ export class Controller {
 
             await bucket.file(metadataPath).save(JSON.stringify(metdata), { public: true });
 
-            await this.sleep(2000);
 
-            return await getDownloadURL(bucket.file(metadataPath));
+            return `https://firebasestorage.googleapis.com/v0/b/kanvas-73a90.appspot.com/o/metadatas%2F${gameId}%2F${playerId}.json?alt=media`;
 
         } catch (error) {
             console.error(error);
