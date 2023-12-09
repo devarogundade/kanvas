@@ -123,6 +123,8 @@ export class Controller {
                 attributes: attributes
             };
 
+            console.log(metdata);
+
             const metadataPath = `metadatas/${game.gameId}/${playerId}.json`;
 
             try {
