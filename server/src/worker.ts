@@ -282,6 +282,7 @@ class Worker {
             svg2img(svg, (error, buffer) => {
                 if (error) {
                     reject(error);
+                    return;
                 }
 
                 resolve(buffer);
