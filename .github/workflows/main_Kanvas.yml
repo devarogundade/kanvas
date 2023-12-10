@@ -13,10 +13,6 @@ jobs:
   build:
     runs-on: 'ubuntu-latest'
 
-    defaults:
-      run:
-        working-directory: ./server/
-
     steps:
     - uses: actions/checkout@v2
 
@@ -35,7 +31,7 @@ jobs:
       with:
         push: true
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_d186973b83de488e917d148f57526f18 }}/kanvas-server:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./server/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
