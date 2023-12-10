@@ -10,5 +10,5 @@ module.exports = async function (deployer, network, accounts) {
     await deployer.deploy(StringJoiner)
     deployer.link(StringJoiner, KanvasInterop)
     await deployer.deploy(KanvasInterop, POLYGON_CCIP_RECEIVER, POLYGON_FUNC_ORACLE)
-    await deployer.deploy(RockPaperScissorsInterop, KanvasInterop.address, "0x2c5b41441F3779EacfA9ce75BAa3B543f750DF61")
+    await deployer.deploy(RockPaperScissorsInterop, KanvasInterop.address, "0x28971Ea878Ef2AF604DbaDC7B0200Fdd1eE992EF")
 };

@@ -15,7 +15,7 @@ const templateId = args[4]
 
 // Execute the API request (Promise)
 const apiResponse = await Functions.makeHttpRequest({
-    url: `https://kanvas-di5j.onrender.com/generate/${props}/${fields}/${gameId}/${playerId}/${templateId}`,
+    url: `https://kanvas.azurewebsites.net/generate/${props}/${fields}/${gameId}/${playerId}/${templateId}`,
     method: "GET"
 })
 

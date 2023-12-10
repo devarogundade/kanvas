@@ -252,7 +252,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -317,7 +318,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -353,7 +355,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -379,7 +382,8 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -451,7 +455,8 @@
       "name": "depositEth",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -501,7 +506,8 @@
       "name": "createGame",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -547,7 +553,8 @@
       "name": "_generateUri",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -603,7 +610,8 @@
       "name": "_transferTo",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [],
@@ -616,7 +624,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -629,7 +638,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -46128,14 +46138,15 @@
         }
       },
       "links": {
-        "StringJoiner": "0x345fE07C786D469a235ADbB0872C6D038C593357"
+        "StringJoiner": "0x989D0aE383D7857d2a0a406cc84D7F82D5eD5dA9"
       },
-      "address": "0xF520150Be3e5D196D89DE32d108fc0DA14FdC9fF",
-      "transactionHash": "0x9bdf66fb517e355a5339e9450bb5e72b2bea1eaae45bb924d7cca8d0a188eae1"
+      "address": "0x5569051493F073e0cb2d4680DA26750C730B704b",
+      "transactionHash": "0xa7b849b2401fdbe267f39b9c53ba451f82681cf03f88e22561e00752c9516543"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-12-10T08:00:00.107Z",
+  "updatedAt": "2023-12-10T08:21:02.686Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {
