@@ -95,6 +95,6 @@ jobs:
       with:
         app-name: 'Kanvas'
         slot-name: 'production'
-        package: ./dist
+        package: .
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C8CEBC15E7484D119FF7E59D39578388 }}
       
