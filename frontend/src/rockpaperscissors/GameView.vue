@@ -120,7 +120,10 @@ export default {
         },
 
         getPlayer: async function () {
-            if (!this.$store.state.wallet) return
+            if (!this.$store.state.wallet) {
+                this.$store.commit('setPlayer', { name: '', points: 0 })
+                return
+            }
             const player = await tryGetPlayerOnAvax(this.$store.state.wallet)
             this.$store.commit('setPlayer', player)
         },

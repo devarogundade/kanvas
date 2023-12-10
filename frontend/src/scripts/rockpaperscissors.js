@@ -80,7 +80,7 @@ export async function tryGetPlayerOnPolygon(wallet) {
 
 export async function tryUpgradePlayer(chainId, wallet) {
     try {
-        const response = await axios.get(`https://kanvas-di5j.onrender.com/rockpaperscissors/upgrade/${chainId}/${wallet}`)
+        const response = await axios.get(`https://kanvas.azurewebsites.net/rockpaperscissors/upgrade/${chainId}/${wallet}`)
         return response.data.txId
     } catch (error) {
         console.error(error);
@@ -90,7 +90,7 @@ export async function tryUpgradePlayer(chainId, wallet) {
 
 export async function tryDowngradePlayer(chainId, wallet) {
     try {
-        const response = await axios.get(`https://kanvas-di5j.onrender.com/rockpaperscissors/downgrade/${chainId}/${wallet}`)
+        const response = await axios.get(`https://kanvas.azurewebsites.net/rockpaperscissors/downgrade/${chainId}/${wallet}`)
         return response.data.txId
     } catch (error) {
         console.error(error);

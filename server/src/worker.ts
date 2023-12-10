@@ -140,11 +140,6 @@ class Worker {
         }
     }
 
-
-    private async sleep(ms: number) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
     private async getGame(gameId: string): Promise<Game | null> {
         try {
             const response = await graph.makeRequest(`
