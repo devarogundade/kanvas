@@ -81,4 +81,4 @@ jobs:
         app-name: 'Kanvas'
         slot-name: 'production'
         package: .
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_a9ba8f93bb484b1aad1e6159074c8dac }}
+        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C8CEBC15E7484D119FF7E59D39578388 }}
