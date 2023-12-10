@@ -242,7 +242,7 @@ contract KanvasAvax is
         // Get the fee required to send the message
         uint256 fees = _router.getFee(chainSelector, message);
 
-        require(msg.value >= fees, "Insufficient fee");
+        require(address(this).balance >= fees, "Insufficient fee");
 
         // Send the message through the router and store the returned message ID
         bytes32 messageId = _router.ccipSend{value: fees}(
