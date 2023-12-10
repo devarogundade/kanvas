@@ -14,13 +14,19 @@ jobs:
         run:
           working-directory: ./server/
 
+    strategy:
+      matrix:
+        node-version: [18.x]
+
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '14' # Adjust the Node.js version as needed
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: './server/package-lock.json'
 
       - name: Change directory to /server
         run: cd server
