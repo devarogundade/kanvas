@@ -1,0 +1,7 @@
+services:
+  server:
+    image: devarogundade/server:latest
+    container_name: kanvas-server
+    restart: always
+    ports:
+      - "3000:3000"
