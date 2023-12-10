@@ -5,7 +5,7 @@ import { Client, Message } from "postmark";
 import svg2img from 'svg2img';
 
 import { initializeApp, cert, ServiceAccount } from 'firebase-admin/app';
-import { getStorage } from 'firebase-admin/storage';
+import { getStorage, getDownloadURL } from 'firebase-admin/storage';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -105,7 +105,7 @@ class Worker {
                 console.log('Save err', error);
             }
 
-            const downloadURL = `https://firebasestorage.googleapis.com/v0/b/kanvas-73a90.appspot.com/o/generated%2F${gameId}%2F${playerId}.png?alt=media`;
+            const downloadURL = await getDownloadURL(bucket.file((pngPath)));
 
             this.sendEmail(
                 `Kanvas: New NFT URI generated on ${game.name}`,
@@ -136,8 +136,7 @@ class Worker {
                 console.log('Save err', error);
             }
 
-            return `https://firebasestorage.googleapis.com/v0/b/kanvas-73a90.appspot.com/o/metadatas%2F${gameId}%2F${playerId}.json?alt=media`;
-
+            return await getDownloadURL(bucket.file(metadataPath));
         } catch (error) {
             console.error(error);
             return NULL;
