@@ -7,9 +7,7 @@ import { Route } from "./src/route";
 
 const app = Express();
 
-const corsOptions = {
-    // origin: "https://notification-panel.santabrowser.com",
-};
+const corsOptions = {};
 
 app.use(cors(corsOptions));
 
