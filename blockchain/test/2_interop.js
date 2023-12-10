@@ -29,3 +29,16 @@ const path = require("path");
 //         console.log(trx.tx)
 //     })
 // })
+
+// contract('KanvasAvax', async accounts => {
+//     it('Deposit AVAX', async () => {
+//         const kanvas = await KanvasInterop.deployed()
+
+//         const trx = await kanvas.depositEth({ value: '100000000000000000' })
+
+//         console.log(trx.tx)
+//     })
+// })
+
+
+

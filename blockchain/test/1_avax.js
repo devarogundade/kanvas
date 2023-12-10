@@ -70,6 +70,17 @@ const path = require("path");
 // })
 
 
+// contract('KanvasAvax', async accounts => {
+//     it('Deposit AVAX', async () => {
+//         const kanvas = await KanvasAvax.deployed()
+
+//         const trx = await kanvas.depositEth({ value: '500000000000000000' })
+
+//         console.log(trx.tx)
+//     })
+// })
+
+
 
 
 
