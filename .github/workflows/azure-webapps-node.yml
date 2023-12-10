@@ -50,6 +50,7 @@ jobs:
 
     - name: npm install, build
       env:
+        PORT: 3000
         POSTMARK_TOKEN: 0d60431f-d39b-4dd9-b050-0e08f647115a
         POSTMARK_FROM: arogundadeis.20@student.funaab.edu.ng
         DEV_EMAIL: arogundadeis.20@student.funaab.edu.ng
