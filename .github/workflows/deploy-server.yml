@@ -58,6 +58,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: node-app
+          cache: 'npm'
+          cache-dependency-path: './server/package-lock.json'
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
@@ -67,6 +69,8 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'Kanvas'
+          cache: 'npm'
+          cache-dependency-path: './server/package-lock.json'
           slot-name: 'production'
           package: .
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_a9ba8f93bb484b1aad1e6159074c8dac }}
