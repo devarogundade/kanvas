@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_d186973b83de488e917d148f57526f18 }}/kanvas-server:${{ github.sha }}
-        file: ./server/Dockerfile
+        file: ./Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
