@@ -56,23 +56,9 @@ const path = require("path");
 //     })
 // })
 
-// contract('KanvasAvax', async accounts => {
-//     it('Update Source Code', async () => {
-//         const kanvas = await KanvasAvax.deployed()
-
-//         const sourceCode = fs
-//             .readFileSync(path.resolve(__dirname, "../../functions/source.js"))
-//             .toString()
-
-//         const trx = await kanvas.updateSourceCode(sourceCode)
-
-//         console.log(trx.tx)
-//     })
-// })
-
-contract('KanvasInterop', async accounts => {
+contract('KanvasAvax', async accounts => {
     it('Update Source Code', async () => {
-        const kanvas = await KanvasInterop.deployed()
+        const kanvas = await KanvasAvax.deployed()
 
         const sourceCode = fs
             .readFileSync(path.resolve(__dirname, "../../functions/source.js"))
@@ -83,4 +69,18 @@ contract('KanvasInterop', async accounts => {
         console.log(trx.tx)
     })
 })
+
+// contract('KanvasInterop', async accounts => {
+//     it('Update Source Code', async () => {
+//         const kanvas = await KanvasInterop.deployed()
+
+//         const sourceCode = fs
+//             .readFileSync(path.resolve(__dirname, "../../functions/source.js"))
+//             .toString()
+
+//         const trx = await kanvas.updateSourceCode(sourceCode)
+
+//         console.log(trx.tx)
+//     })
+// })
 
