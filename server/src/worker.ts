@@ -2,7 +2,7 @@ import { parentPort, workerData } from "worker_threads";
 import https from 'https';
 import { Graph } from './graph';
 import { Client, Message } from "postmark";
-import sharp from 'sharp';
+import svg2img from 'svg2img';
 
 import { initializeApp, cert, ServiceAccount } from 'firebase-admin/app';
 import { getStorage, getDownloadURL } from 'firebase-admin/storage';
@@ -58,9 +58,9 @@ class Worker {
                 return NULL;
             }
 
-            const { buffer, attributes } = await this.getImageNftUri(game, properties, fields, playerId, templateId);
+            const { svg, attributes } = await this.getImageNftUri(game, properties, fields, playerId, templateId);
 
-            if (buffer == null) {
+            if (svg == null) {
                 this.sendEmail(
                     `${game.name} Failed to generate NFT URI`,
                     `
@@ -76,7 +76,7 @@ class Worker {
                 return NULL;
             };
 
-            const pngBuffer = await this.convertSvgToPng(buffer);
+            const pngBuffer = await this.convertSvgToPng(svg);
             if (pngBuffer == null) {
                 this.sendEmail(
                     `${game.name} Failed to generate NFT URI`,
@@ -167,7 +167,7 @@ class Worker {
         }
     }
 
-    private async getImageNftUri(game: Game, data: string, data2: string, playerId: string, templateId: number): Promise<{ buffer: Buffer | null, attributes: Attribute[]; }> {
+    private async getImageNftUri(game: Game, data: string, data2: string, playerId: string, templateId: number): Promise<{ svg: string | null, attributes: Attribute[]; }> {
         const properties: string[] = this.parseProperties(data);
         const fields: string[] = this.parseFields(data2);
 
@@ -187,7 +187,7 @@ class Worker {
                     game.email,
                     process.env.POSTMARK_FROM
                 );
-                return { buffer: null, attributes: [] };
+                return { svg: null, attributes: [] };
             }
 
             console.log('before readFile', 'svgBuffer');
@@ -210,11 +210,10 @@ class Worker {
                 });
             }
 
-            const buffer: Buffer = Buffer.from(svgContents, 'utf-8');
-            return { buffer, attributes };
+            return { svg: svgContents, attributes };
         } catch (error) {
             console.error(error);
-            return { buffer: null, attributes: [] };
+            return { svg: null, attributes: [] };
         }
     }
 
@@ -278,17 +277,16 @@ class Worker {
     };
 
     // Function to convert SVG string to PNG buffer
-    private async convertSvgToPng(buffer: Buffer): Promise<Buffer | null> {
-        try {
-            // Use sharp to convert SVG string to PNG buffer
-            const pngBuffer = await sharp(buffer, { density: 300 })
-                .png().toBuffer();
+    private async convertSvgToPng(svg: string): Promise<Buffer> {
+        return new Promise((resolve, reject) => {
+            svg2img(svg, (error, buffer) => {
+                if (error) {
+                    reject(error);
+                }
 
-            return pngBuffer;
-        } catch (error) {
-            console.error(error);
-            return null;
-        }
+                resolve(buffer);
+            });
+        });
     }
 }
 
