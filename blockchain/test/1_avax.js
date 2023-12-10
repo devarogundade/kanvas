@@ -1,5 +1,4 @@
 const KanvasAvax = artifacts.require("KanvasAvax")
-const KanvasInterop = artifacts.require("KanvasInterop")
 const RockPaperScissors = artifacts.require("RockPaperScissors")
 
 const fs = require("fs");
@@ -50,29 +49,15 @@ const path = require("path");
 //     it('Update Interop', async () => {
 //         const kanvas = await KanvasAvax.deployed()
 
-//         const trx = await kanvas.updateInterop("12532609583862916517", "0x4a6ab0d0beD088Ca615590F19A01632813697c98")
+//         const trx = await kanvas.updateInterop("12532609583862916517", "0x6DbE734eAD4A25c2d48554df6d4c7196255cE251")
 
 //         console.log(trx.tx)
 //     })
 // })
 
-contract('KanvasAvax', async accounts => {
-    it('Update Source Code', async () => {
-        const kanvas = await KanvasAvax.deployed()
-
-        const sourceCode = fs
-            .readFileSync(path.resolve(__dirname, "../../functions/source.js"))
-            .toString()
-
-        const trx = await kanvas.updateSourceCode(sourceCode)
-
-        console.log(trx.tx)
-    })
-})
-
-// contract('KanvasInterop', async accounts => {
+// contract('KanvasAvax', async accounts => {
 //     it('Update Source Code', async () => {
-//         const kanvas = await KanvasInterop.deployed()
+//         const kanvas = await KanvasAvax.deployed()
 
 //         const sourceCode = fs
 //             .readFileSync(path.resolve(__dirname, "../../functions/source.js"))
@@ -83,4 +68,9 @@ contract('KanvasAvax', async accounts => {
 //         console.log(trx.tx)
 //     })
 // })
+
+
+
+
+
 

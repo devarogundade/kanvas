@@ -250,12 +250,12 @@ contract KanvasAvax is
             message
         );
 
-        uint256 overspent = msg.value - fees;
+        // uint256 overspent = msg.value - fees;
 
-        if (overspent > 0) {
-            address payable receiver = payable(gameId);
-            receiver.transfer(overspent);
-        }
+        // if (overspent > 0) {
+        //     address payable receiver = payable(gameId);
+        //     receiver.transfer(overspent);
+        // }
 
         emit GameEvent(
             messageId,
