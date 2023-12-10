@@ -5,7 +5,9 @@ import { Client, Message } from "postmark";
 import svg2img from 'svg2img';
 
 import { initializeApp, cert, ServiceAccount } from 'firebase-admin/app';
-import { getStorage, getDownloadURL } from 'firebase-admin/storage';
+import { getStorage } from 'firebase-admin/storage';
+import { v4 as uuidv4 } from 'uuid';
+
 
 import serviceAccount from '../kanvas-creds.json';
 
@@ -96,7 +98,9 @@ class Worker {
             const pngPath = `generated/${game.gameId}/${playerId}.png`;
 
             try {
-                await bucket.file(pngPath).save(pngBuffer, { public: true });
+                const uuid = uuidv4();
+
+                await bucket.file(pngPath).save(pngBuffer, { public: true, metadata: { firebaseStorageDownloadTokens: uuid } });
             } catch (error) {
                 console.log('Save err', error);
             }
