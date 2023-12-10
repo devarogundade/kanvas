@@ -1,9 +1,9 @@
 # Base image
 FROM node:18
 # Create app directory
-WORKDIR /server
+WORKDIR /
 # Install app dependencies
-COPY package*.json ./server
+COPY package*.json ./
 RUN npm install
 # Bundle app source
 COPY . .
