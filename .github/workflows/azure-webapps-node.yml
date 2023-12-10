@@ -48,12 +48,6 @@ jobs:
         cache-dependency-path: './server/package-lock.json'
 
     - name: npm install, build
-      env:
-        PORT: 3000
-        POSTMARK_TOKEN: 0d60431f-d39b-4dd9-b050-0e08f647115a
-        POSTMARK_FROM: arogundadeis.20@student.funaab.edu.ng
-        DEV_EMAIL: arogundadeis.20@student.funaab.edu.ng
-        EVM_PRIVATE_KEY: "0xd1b57a68b42273252769c2466c6698eb376976033b9dd143cc3c7ebc894a3c9c"
 
       run: |
         npm install
