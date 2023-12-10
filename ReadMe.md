@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3a5b3855-181f-4fa8-89f6-66638db01c4f/deploy-status)](https://app.netlify.com/sites/kanvas-constellation/deploys)
+
 # Kanvas | Create Run-Time Customizable NFTs
 
 Unlock boundless creativity in blockchain gaming with Kanvas. Craft dynamic, customizable, cross-chain NFTs effortlessly for gamified blockchain applications.
@@ -5,6 +7,7 @@ Unlock boundless creativity in blockchain gaming with Kanvas. Craft dynamic, cus
 Learn more at [Devpost](https://devpost.com/software/kanvas-in-game-dynamic-nfts)
 
 ## Extend the IKanvasGame
+
 ```solidity
 // This smart contract is used to showcase how a Ticketting Platform
 // can integrate Kanvas into their smart contract to mint personalized NFT
@@ -58,6 +61,7 @@ contract Ticket is IKanvasGame, ERC721, Ownable {
 ```
 
 ## Generate NFT
+
 ```solidity
 // After whitelisting the contract admin can mint a NFT for
 // the EOA
@@ -95,6 +99,7 @@ function issueTicket(address holder) external payable onlyOwner {
 ```
 
 ## Include the YourGame for a cross-chain game
+
 ```solidity
 contract Ticket is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
    constructor(address kanvasRouter) IKanvasGame() {
@@ -104,6 +109,7 @@ contract Ticket is IKanvasGame, IKanvasInteropGame, ERC721, Ownable {
 ```
 
 ## Bridge NFT
+
 ```solidity
 /** Bridge game Nft function */
 function transferTo(uint64 chainSelector) external payable {
@@ -133,4 +139,5 @@ function _receiveFrom(
 ```
 
 ## Create NFT Template
+
 [Kanvas dApp](https://kanvas-constellation.netlify.app)
